@@ -9,7 +9,7 @@ import './offline.css';
 function App() {
 
   const { t } = useTranslation();
-  document.title = t('Mangla Pumps');
+  document.title = t('SC-ST Department, Orissa');
 
   useEffect(() => {
     i18next.changeLanguage(localStorage.getItem('selectedLanguage'));
