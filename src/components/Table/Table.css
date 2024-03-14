@@ -1,0 +1,110 @@
+.MuiTableRow-root>* {
+  padding: 10px;
+}
+
+.MuiTableRow-root.MuiTableRow-head>* {
+  font-weight: bold !important;
+}
+
+.Table td,
+th {
+  border: none !important;
+}
+
+.Table:first-child {
+  border-radius: 0.7rem !important;
+}
+
+.status {
+  padding: 8px;
+  border-radius: 9px;
+}
+
+.action {
+  padding: 3px 15px;
+  margin: 0px 20px;
+}
+
+
+.Details {
+  color: #00b5ff !important;
+}
+
+.scrollTable {
+  margin-left: 0px !important;
+}
+
+.scrollTable2 {
+  margin-left: 0px !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .Table {
+    width: 170%;
+    /* margin-top: 2rem; */
+  }
+}
+
+.scrollTable {
+  margin-left: 0px !important;
+}
+
+.scrollTable2 {
+  margin-left: 0px !important;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .scrollTable {
+    margin-left: 300px !important;
+  }
+
+  .scrollTable2 {
+    margin-left: 20px !important;
+  }
+
+  .Table {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 23rem;
+
+  }
+
+  .ctable {
+    width: 50%;
+  }
+
+
+}
+
+/* For Verification Page Table */
+.three-dots::after {
+  cursor: pointer;
+  color: #444;
+  content: '\2807';
+  font-size: 20px;
+  padding: 0 5px;
+}
+
+.dropdown {
+  position: absolute;
+  right: 10px;
+  background-color: white;
+
+  outline: black;
+  opacity: 0;
+  z-index: -1;
+  max-height: 0;
+  transition: opacity 0.1s, z-index 0.1s, max-height 5s;
+}
+
+
+.dropdown-container:hover .dropdown {
+  opacity: 1;
+  z-index: 100;
+  max-height: 100vh;
+  transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
+}

@@ -1,0 +1,227 @@
+.btn .badge {
+  position: relative;
+  top: 10px;
+}
+
+#btn {
+    background-color: #102a83;
+    color: white;
+}
+
+#btn:hover {
+    background-color: #102b8384;
+}
+
+.vl {
+    border-right: 2px solid #e2e2e2;
+}
+
+.vb {
+    border-bottom: 1px solid #0f0f0f;
+}
+
+.validation {
+    color: #EF3737;
+    display: none;
+}
+
+.error-text {
+    color: #EF3737;
+    font-weight: 500;
+}
+
+.MainDash {
+    /* padding-top: 1rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-size: cover;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+
+.card {
+    border: 0 !important;
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+.card-img-top {
+    height: 230px;
+}
+
+span.star {
+    color: rgb(189, 8, 8)
+}
+
+.modal-footer {
+    border-top: 0px;
+}
+
+.spinner {
+    height: 70vh;
+}
+
+.show-on-print {
+    display: none;
+}
+
+.myform {
+    width: 20rem
+}
+
+.tg-list {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.tg-list-item {
+  margin: 0 2em;
+}
+
+h4 {
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  color: #000;
+}
+
+.tgl {
+  display: none;
+}
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+  box-sizing: border-box;
+}
+.tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+  background: none;
+}
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+  background: none;
+}
+.tgl + .tgl-btn {
+  outline: 0;
+  display: block;
+  width: 3.5em;
+  height: 1.8em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.tgl + .tgl-btn:after {
+  left: 0;
+}
+.tgl + .tgl-btn:before {
+  display: none;
+}
+.tgl:checked + .tgl-btn:after {
+  left: 50%;
+}
+
+
+.tgl-ios + .tgl-btn {
+  background: #cc1e1efb;
+  border-radius: 2em;
+  padding: 2px;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  border: 1px solid #ddd;
+}
+.tgl-ios + .tgl-btn:after {
+  border-radius: 2em;
+  background: #fbfbfb;
+  -webkit-transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+  transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+.tgl-ios + .tgl-btn:hover:after {
+  will-change: padding;
+}
+.tgl-ios + .tgl-btn:active {
+  box-shadow: inset 0 0 0 2em #e8eae9;
+}
+.tgl-ios + .tgl-btn:active:after {
+  padding-right: .8em;
+}
+.tgl-ios:checked + .tgl-btn {
+  background: #4CD964;
+}
+.tgl-ios:checked + .tgl-btn:active {
+  box-shadow: none;
+}
+.tgl-ios:checked + .tgl-btn:active:after {
+  margin-left: -.8em;
+}
+
+
+@media print {
+    .hide-on-print {
+        display: none !important;
+    }
+
+    .show-on-print {
+        display: block !important;
+    }
+
+    /* For WebKit-based browsers (Chrome, Safari) */
+    ::-webkit-scrollbar {
+        width: 12px;
+        display: none;
+        /* width of the vertical scrollbar */
+    }
+
+    .MainDash {
+        width: 72vh !important;
+    }
+
+    .MuiPaper-root {
+        box-shadow: none !important;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .vl {
+        border-right: 0px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .MainDash {
+        justify-content: flex-start;
+        /* margin-top: 1rem; */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .MainDash {
+        align-items: center;
+
+    }
+
+    .query {
+        z-index: 0 !important;
+        position: unset !important;
+        /* padding: 10px 25px 30px 25px !important; */
+    }
+
+    .myform {
+        width: 100%
+    }
+
+}

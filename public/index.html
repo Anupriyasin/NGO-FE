@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="icon" type="image/x-icon" href="./favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+    }
+
+    ul,
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .tg-list {
+      text-align: center;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .tg-list-item {
+      margin: 0 2em;
+    }
+
+    h4 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .tgl {
+      display: none;
+    }
+
+    .tgl,
+    .tgl:after,
+    .tgl:before,
+    .tgl *,
+    .tgl *:after,
+    .tgl *:before,
+    .tgl+.tgl-btn {
+      box-sizing: border-box;
+    }
+
+    .tgl::-moz-selection,
+    .tgl:after::-moz-selection,
+    .tgl:before::-moz-selection,
+    .tgl *::-moz-selection,
+    .tgl *:after::-moz-selection,
+    .tgl *:before::-moz-selection,
+    .tgl+.tgl-btn::-moz-selection {
+      background: none;
+    }
+
+    .tgl::selection,
+    .tgl:after::selection,
+    .tgl:before::selection,
+    .tgl *::selection,
+    .tgl *:after::selection,
+    .tgl *:before::selection,
+    .tgl+.tgl-btn::selection {
+      background: none;
+    }
+
+    .tgl+.tgl-btn {
+      outline: 0;
+      display: block;
+      width: 3.5em;
+      height: 1.8em;
+      position: relative;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .tgl+.tgl-btn:after,
+    .tgl+.tgl-btn:before {
+      position: relative;
+      display: block;
+      content: "";
+      width: 50%;
+      height: 100%;
+    }
+
+    .tgl+.tgl-btn:after {
+      left: 0;
+    }
+
+    .tgl+.tgl-btn:before {
+      display: none;
+    }
+
+    .tgl:checked+.tgl-btn:after {
+      left: 50%;
+    }
+
+    .tgl-light+.tgl-btn {
+      background: #eee;
+      border-radius: 2em;
+      padding: 2px;
+      -webkit-transition: all .4s ease;
+      transition: all .4s ease;
+      border: 1px solid #ddd;
+    }
+
+    .tgl-light+.tgl-btn:after {
+      border-radius: 50px;
+      background: #fff;
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+    }
+
+    .tgl-light:checked+.tgl-btn {
+      background: #A4E786;
+    }
+
+    .tgl-ios+.tgl-btn {
+      background: #eee;
+      border-radius: 2em;
+      padding: 2px;
+      -webkit-transition: all .4s ease;
+      transition: all .4s ease;
+      border: 1px solid #ddd;
+    }
+
+    .tgl-ios+.tgl-btn:after {
+      border-radius: 2em;
+      background: #fbfbfb;
+      -webkit-transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+      transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .tgl-ios+.tgl-btn:hover:after {
+      will-change: padding;
+    }
+
+    .tgl-ios+.tgl-btn:active {
+      box-shadow: inset 0 0 0 2em #e8eae9;
+    }
+
+    .tgl-ios+.tgl-btn:active:after {
+      padding-right: .8em;
+    }
+
+    .tgl-ios:checked+.tgl-btn {
+      background: #4CD964;
+    }
+
+    .tgl-ios:checked+.tgl-btn:active {
+      box-shadow: none;
+    }
+
+    .tgl-ios:checked+.tgl-btn:active:after {
+      margin-left: -.8em;
+    }
+
+    .tgl-flat+.tgl-btn {
+      padding: 2px;
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 2em;
+    }
+
+    .tgl-flat+.tgl-btn:after {
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      background: #ddd;
+      content: "";
+      border-radius: 1em;
+    }
+
+    .tgl-flat:checked+.tgl-btn {
+      border: 2px solid #4CD964;
+    }
+
+    .tgl-flat:checked+.tgl-btn:after {
+      left: 50%;
+      background: #4CD964;
+    }
+  </style>
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+  <title></title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
+<script>
+
+</script>

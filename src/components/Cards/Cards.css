@@ -1,0 +1,81 @@
+.Cards {
+  display: flex;
+  gap: 15px;
+}
+
+.parentContainer {
+  width: 100%;
+}
+
+.card, .card-body {
+  border-radius: 15px;
+  /* max-height: 160px; */
+}
+
+.larger-text {
+ font-size: x-large;
+}
+
+.smaller-text {
+  font-size: unset !important;
+ }
+
+.hello1 {
+  background: linear-gradient(180deg, #bb67ff 0%, #c484f3 100%);
+}
+
+.card1:hover {
+  box-shadow: 0px 10px 20px 0px #e0c6f5;
+}
+
+.hello2 {
+  background: linear-gradient(180deg, #ff919d 0%, #fc929d 100%);
+}
+
+.card2:hover {
+  box-shadow: 0px 10px 20px 0px #fdc0c7;
+}
+
+.hello3 {
+  background: linear-gradient(
+    146.42deg,
+    rgb(248, 212, 154) -146.42%,
+    rgb(255, 202, 113) -46.42%
+  );
+}
+
+.hello4 {
+  background-color: #ff0a0aad
+}
+
+.card3:hover {
+  box-shadow: 0px 10px 20px 0px #f9d59b;
+}
+
+.card4:hover {
+  box-shadow: 0px 10px 20px 0px #ff0a0a59;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .Cards {
+    flex-direction: column;
+  }
+  .parentContainer {
+    height: 9rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Cards {
+    width: 100%;
+  }
+}
