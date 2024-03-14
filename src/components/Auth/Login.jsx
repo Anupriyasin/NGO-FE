@@ -89,7 +89,7 @@ const Login = ({ onChildData, role }) => {
                 <h2>{t('SC-ST Department, Orissa')}</h2>
                 <h5>{t('(Hostel Management)')}</h5>
               </div>
-              <form className='align-items-center myform'>
+              <form className='mx-5 myform'>
                 {/* <div className="form-outline">
 
                   <label className="form-label mt-3" htmlFor="form2Example11">{t('Choose your preferred language')}</label>
