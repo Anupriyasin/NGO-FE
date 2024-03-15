@@ -86,7 +86,7 @@ const Login = ({ onChildData, role }) => {
                 <img className='text-center' src={logo} alt="logo" />
               </div>
               <div className='text-center mt-4'>
-                <h2>{t('SC-ST Department, Orissa')}</h2>
+                <h2>{t('SC-ST Department, Odisha')}</h2>
                 <h5>{t('(Hostel Management)')}</h5>
               </div>
               <form className='mx-5 myform'>

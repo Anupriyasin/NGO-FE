@@ -17,18 +17,18 @@ const Dashboard = (props) => {
       <div className="px-2 px-md-3">
         <h4 className="my-4">{t('Dashboard')}</h4>
 
-        {props.role && (props.role === 1 || props.role === 2 || props.role === 3 || props.role === 4) &&
+        {props.role && (props.role === 5 || props.role === 2 || props.role === 3 || props.role === 4) &&
           <>
             {/* <AdminCards /> */}
-            <AdminCharts />
+            {/* <AdminCharts /> */}
             {/* <TodaysOrderTable /> */}
           </>
         }
 
-        {props.role && props.role === 5 &&
+        {props.role && props.role === 1 &&
           <>
-            <DealerCards />
-            <DealerCharts />
+            {/* <DealerCards />
+            <DealerCharts /> */}
           </>
         }
 

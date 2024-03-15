@@ -36,7 +36,7 @@ const Navbar = ({ totalItems, role, userData }) => {
         showCartIcon(true);
       }
       else {
-        setFullName(userData.data.first_name + " " + userData.data.last_name);
+        setFullName(userData.data.name);
         if (userData.data.img_path) {
           setImgPath(baseUrl() + userData.data.img_path);
         }
