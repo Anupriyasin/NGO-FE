@@ -56,6 +56,11 @@ const Sidebar = (props) => {
             heading: "Dashboard",
             url: "/dashboard",
           },
+          {
+            icon: UilPackage,
+            heading: "Requirements",
+            url: "/requirements",
+          },
         ]
       )
     } else if (props.role && (props.role === 2)) {

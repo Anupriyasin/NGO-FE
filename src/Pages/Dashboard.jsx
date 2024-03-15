@@ -15,7 +15,7 @@ const Dashboard = (props) => {
   return (
     <>
       <div className="px-2 px-md-3">
-        <h4 className="my-4">{t('Dashboard')}</h4>
+        <h3 className="my-4">{t('Dashboard')}</h3>
 
         {props.role && (props.role === 5 || props.role === 2 || props.role === 3 || props.role === 4) &&
           <>

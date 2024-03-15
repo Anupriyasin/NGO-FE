@@ -9,6 +9,7 @@ import FullPageSpinner from '../components/Loader/FullPageSpinner'
 import { get_cart_items } from '../api/Products'
 
 import ProtectedRoute from './ProtectedRoute'
+import Requirements from '../Pages/Requirements'
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
@@ -58,7 +59,12 @@ const AppRoutes = () => {
         {
             path: '/dashboard',
             component: Dashboard,
-            allowedRoles: [1, 2, 3, 4, 5]
+            allowedRoles: [1]
+        },
+        {
+            path: '/requirements',
+            component: Requirements,
+            allowedRoles: [1]
         },
     ];
 
