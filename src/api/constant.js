@@ -7,7 +7,8 @@ let domain = "http://localhost:5000/";
 // let domain = "http://192.168.18.56:5000/";
 
 const instance = axios.create({
-  baseURL: domain + "manglacrm/api",
+  // baseURL: domain + "manglacrm/api",
+  baseURL: domain + "hostel/api",
   // withCredentials: true // send cookies with requests
 });
 

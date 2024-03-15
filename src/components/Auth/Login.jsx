@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 
 // import Cookies from 'js-cookie';
 
-const Login = ({ onChildData, role }) => {
+const Login = ({ onChildData}) => {
 
   const { t } = useTranslation();
   const handleClick = (e) => {
@@ -30,6 +30,7 @@ const Login = ({ onChildData, role }) => {
   }, [msg]);
 
   const [mobile, setMobile] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(0);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -48,12 +49,19 @@ const Login = ({ onChildData, role }) => {
 
   let data = {
     mobile: mobile,
-    password: password
+    password: password,
+    role: role
   }
+  console.log("role",role)
 
   let navigate = useNavigate();
-
+function myfunction (e){
+  debugger
+  setRole(e.target.value)
+  console.log("role",role)
+}
   function submitForm() {
+    debugger
     loginApi(data).then(res => {
       if (res.status === 'failed') {
         toast.error(t(res.message));
@@ -97,12 +105,11 @@ const Login = ({ onChildData, role }) => {
               <form className='align-items-center myform'>
                 <div className="form-outline">
 
-                  <label htmlFor="role" className="form-label">{t('Role')} *</label>
-                  <select name="role" className='form-select' {...register("role", { required: true })}>
-                    <option value="" disabled={true} selected={true}>{t('Select role')}</option>
-                    <option value="0">Select Role</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Hostel</option>
+                  <label className="form-label">{t('Role')} *</label>
+                  <select name="role" onClick={myfunction}  className='form-select' {...register("role", { required: true })}>
+                    <option value=""  selected={true}>{t('Select Role')} </option>
+                    <option value="admin">Admin</option>
+                    <option value="hostel">Hostel</option>
                   </select>
                   <span className='error-text'>
                     {errors.role?.type === "required" && t("Role is required")}
