@@ -121,15 +121,15 @@ export const updateMOMText = async (id, data) =>
     });
 
 
-export const alldealers = async (data) =>
-  await axios
-    .get("/get_all_dealers", data)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return "Error - " + error;
-    });
+// export const alldealers = async (data) =>
+//   await axios
+//     .get("/get_all_dealers", data)
+//     .then((response) => {
+//       return response.data;
+//     })
+//     .catch((error) => {
+//       return "Error - " + error;
+//     });
 
 export const assigneddealerreport = async (data) =>
   await axios
