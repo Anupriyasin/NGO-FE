@@ -48,7 +48,7 @@ const Sidebar = (props) => {
   }, [location]);
 
   useEffect(() => {
-    if (props.role && (props.role === 1 || props.role === 3)) {
+    if (props.role && (props.role === 1 )) {
       setSidebarData(
         [
           {
@@ -58,7 +58,7 @@ const Sidebar = (props) => {
           },
           {
             icon: UilPackage,
-            heading: "Requirements",
+            heading: "New Requirements",
             url: "/requirements",
           },
         ]
