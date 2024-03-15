@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import Languageoption from '../Language-Dropdown';
 import { useTranslation } from 'react-i18next';
 import i18next from "i18next";
+import { useForm } from 'react-hook-form';
+
 // import Cookies from 'js-cookie';
 
 const Login = ({ onChildData, role }) => {
@@ -31,6 +33,9 @@ const Login = ({ onChildData, role }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(0);
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
+
 
   const togglePassword = () => {
     if (!passwordVisible) {
@@ -89,12 +94,20 @@ const Login = ({ onChildData, role }) => {
                 <h2>{t('SC-ST Department, Odisha')}</h2>
                 <h5>{t('(Hostel Management)')}</h5>
               </div>
-              <form className='mx-5 myform'>
-                {/* <div className="form-outline">
+              <form className='align-items-center myform'>
+                <div className="form-outline">
 
-                  <label className="form-label mt-3" htmlFor="form2Example11">{t('Choose your preferred language')}</label>
-                  <Languageoption onChange={(e) => handleClick(e)}></Languageoption>
-                </div> */}
+                  <label htmlFor="role" className="form-label">{t('Role')} *</label>
+                  <select name="role" className='form-select' {...register("role", { required: true })}>
+                    <option value="" disabled={true} selected={true}>{t('Select role')}</option>
+                    <option value="0">Select Role</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Hostel</option>
+                  </select>
+                  <span className='error-text'>
+                    {errors.role?.type === "required" && t("Role is required")}
+                  </span>
+                </div>
                 <div className="form-outline">
 
                   <label className="form-label mt-3" htmlFor="form2Example11">{t('Email or Mobile number')}</label>
