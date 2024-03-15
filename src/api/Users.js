@@ -337,3 +337,14 @@ export const insertDealer = async (id, data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+
+
+export const getRequirements = async (data) =>
+  await axios
+    .get("/requirements", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });

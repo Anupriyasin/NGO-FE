@@ -10,7 +10,7 @@ import "../components/Table/Table.css";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import TopLoader from "../components/Loader/TopLoader";
-import { allUsers, updateBlockStatus } from "../api/Users";
+import { getRequirements } from "../api/Users";
 import { toast } from "react-toastify";
 import { TextField, TablePagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -27,9 +27,9 @@ const Requirements = ({ role, mainId }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const getAllUsers = () => {
+  const getAllrequirements = () => {
     setIsLoading(true);
-    allUsers().then((res) => {
+    getRequirements().then((res) => {
       if (res.status === "success") {
         console.log(res);
         setRows(res.data);
@@ -43,23 +43,17 @@ const Requirements = ({ role, mainId }) => {
   };
 
   useEffect(() => {
-    getAllUsers();
+    getAllrequirements();
   }, []);
 
   // Update filteredData whenever searchQuery changes
   useEffect(() => {
     const filtered = rows.filter(
       (item) =>
-        (item?.user_id &&
-          item.user_id.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (item?.user_name &&
-          item.user_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (item?.primary_contact &&
-          item.primary_contact
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())) ||
-        (item?.created_date &&
-          item.created_date.toLowerCase().includes(searchQuery.toLowerCase()))
+        (item?.requirement_name &&
+          item.requirement_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (item?.hostel_id &&
+          item.hostel_id.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
     setFilteredData(filtered);
@@ -80,28 +74,12 @@ const Requirements = ({ role, mainId }) => {
     navigate(`/${role !== 5 ? "admin" : "dealer"}/admindetails/${id}`);
   };
 
-  const setBlockStatus = async (id, status) => {
-    const data = {
-      user_id: id,
-      status,
-    };
-    await updateBlockStatus(data).then((res) => {
-      if (res.status === "success") {
-        console.log(res);
-        toast.success(t(res.message));
-        getAllUsers();
-      } else {
-        toast.error(t("Something went wrong"));
-      }
-    });
-  };
-
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-          <h3 className="">{t("New Requirements")}</h3>
+          <h3 className="">{t("Requirements")}</h3>
           <TextField
             label={t("Search")}
             variant="outlined"
@@ -115,7 +93,7 @@ const Requirements = ({ role, mainId }) => {
         <div className="Table mb-6">
           <TableContainer
             component={Paper}
-            style={{ boxShadow: "0px 13px 20px 0px #80808029", border: "1px solid gray" }}
+            style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
             className="my-4"
           >
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -143,75 +121,15 @@ const Requirements = ({ role, mainId }) => {
                         <TableCell component="th" scope="row">
                           {index + 1}
                         </TableCell>
-                        <TableCell align="left">{row.user_id}</TableCell>
-                        <TableCell align="left" style={{ width: "15%" }}>
-                          {row.user_name}
-                        </TableCell>
                         <TableCell align="left">
-                          {row.primary_contact}
+                          {row.requirement_name}
                         </TableCell>
-                        <TableCell align="left">{row.created_date}</TableCell>
-
-                        {row.user_id === mainId ? (
-                          <TableCell align="left">
-                            {role === 1 ? (
-                              <button
-                                className="btn btn-success btn-sm m-sm-1 m-md-0 mx-md-1"
-                                onClick={() => view(row.user_id)}
-                              >
-                                {t("View / Update")}
-                              </button>
-                            ) : (
-                              <button
-                                className="btn btn-success btn-sm m-sm-1 m-md-0 mx-md-1"
-                                onClick={() => view(row.user_id)}
-                              >
-                                {t("View")}
-                              </button>
-                            )}
-                          </TableCell>
-                        ) : (
-                          <TableCell align="left">
-                            {role === 1 ? (
-                              <button
-                                className="btn btn-success btn-sm m-sm-1 m-md-0 mx-md-1"
-                                onClick={() => view(row.user_id)}
-                              >
-                                {t("View / Update")}
-                              </button>
-                            ) : (
-                              <button
-                                className="btn btn-success btn-sm m-sm-1 m-md-0 mx-md-1"
-                                onClick={() => view(row.user_id)}
-                              >
-                                {t("View")}
-                              </button>
-                            )}
-                            {role === 1 ? (
-                              row.is_blocked === 0 ? (
-                                <button
-                                  className="btn btn-danger btn-sm m-sm-1 m-md-0"
-                                  onClick={() =>
-                                    setBlockStatus(row.user_id, row.is_blocked)
-                                  }
-                                >
-                                  {t("Block")}
-                                </button>
-                              ) : (
-                                <button
-                                  className="btn btn-secondary btn-sm m-sm-1 m-md-0"
-                                  onClick={() =>
-                                    setBlockStatus(row.user_id, row.is_blocked)
-                                  }
-                                >
-                                  {t("Unblock")}
-                                </button>
-                              )
-                            ) : (
-                              ""
-                            )}
-                          </TableCell>
-                        )}
+                        <TableCell align="left" style={{ width: "15%" }}>
+                          {row.hostel_id}
+                        </TableCell>
+                        <TableCell align="left">{}</TableCell>
+                        <TableCell align="left">{row.quantity}</TableCell>
+                        <TableCell align="left">{}</TableCell>
                       </TableRow>
                     ))}
                 </TableBody>
