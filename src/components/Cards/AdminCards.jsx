@@ -8,32 +8,50 @@ import { toast } from "react-toastify";
 import { FiShoppingBag } from "react-icons/fi";
 import { FaCreditCard } from "react-icons/fa";
 import { BiMoney } from "react-icons/bi";
+import { getAllHostels, getAllStaff, getAllStudents } from "../../api/Users";
 // import i18next from "i18next";
 
 const AdminCards = () => {
   const { t } = useTranslation();
   const [rows, setRows] = useState([]);
-  const [currentOrders, setCurrentOrders] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [staff, setStaff] = useState([])
+  const [hostels, setHostels] = useState([])
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // dealer_data_count()
-    //   .then((res) => {
-    //     if (res.status === "success") {
-    //       setRows(res.data.dealer_cards_Data);
-    //       setCurrentOrders(res.data.current_orders)
-    //     } else if (res.status === "failed") {
-    //       toast.error(t(res.message));
-    //     } else {
-    //       toast.error(t("Something went wrong"));
-    //     }
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     toast.error(t("Something went wrong"));
-    //     setIsLoading(false);
-    //   });
+    getAllStudents()
+      .then((res) => {
+        setStudents(res.data[0].students)
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+      getAllStaff()
+      .then((res) => {
+        setStaff(res.data[0].staff)
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+      getAllHostels()
+      .then((res) => {
+        setHostels(res.data[0].hostel)
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
   }, []);
 
   return (
@@ -143,14 +161,16 @@ const AdminCards = () => {
       </div>
 
       <div className="row justify-content-between mb-3">
-
         <div className="col-md-4 mt-1 ">
           <div className="card ">
-            <div className="card-body border" style={{backgroundColor: "white"}}>
+            <div
+              className="card-body border"
+              style={{ backgroundColor: "white" }}
+            >
               <h3 className="card-title text-dark">{t("Total Students")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-dark fs-2">{0}</span>
+                  <span className="text-dark fs-2">{students}</span>
                 </div>
               </motion.div>
             </div>
@@ -159,33 +179,36 @@ const AdminCards = () => {
 
         <div className="col-md-4 mt-1 ">
           <div className="card ">
-            <div className="card-body border" style={{backgroundColor: "white"}}>
+            <div
+              className="card-body border"
+              style={{ backgroundColor: "white" }}
+            >
               <h3 className="card-title text-dark">{t("Staff Members")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-dark fs-2">{0}</span>
+                  <span className="text-dark fs-2">{staff}</span>
                 </div>
               </motion.div>
             </div>
           </div>
         </div>
 
-        
         <div className="col-md-4 mt-1 ">
           <div className="card">
-            <div className="card-body border" style={{backgroundColor: "white"}}>
+            <div
+              className="card-body border"
+              style={{ backgroundColor: "white" }}
+            >
               <h3 className="card-title text-dark">{t("Total Hostels")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-dark fs-2">{0}</span>
+                  <span className="text-dark fs-2">{hostels}</span>
                 </div>
               </motion.div>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   );
 };
