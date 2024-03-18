@@ -91,20 +91,27 @@ const Requirements = ({ role, mainId }) => {
   const handleAccept = () => {
     debugger
     const postData = {
-      requirement_name:selectedRow.requirement_name,
-      quantity:selectedRow.quantity,
+      requirement_name: selectedRow.requirement_name,
+      quantity: selectedRow.quantity,
       hostel_id: selectedRow.id,
       user_id: "",
-      role_id:"",
+      role_id: "",
       requirement_id: selectedRow.requirement_id,
-      admin_flag :""
-    }
+      admin_flag: ""
+    };
+
     updateRequirement(postData)
-    getAllrequirements();
-    setModalOpen(false);
+    .then(response => {
+        setModalOpen(false);
+        getAllrequirements();
+        toast.success(response.message || "Update successful");
+    })
+    .catch(error => {
+        console.error("Error updating requirement:", error);
+        toast.error(error.response.data.message);
+    });
+};
 
-
-  };
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
