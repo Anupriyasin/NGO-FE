@@ -125,11 +125,11 @@ const Requirements = ({ role, mainId }) => {
                           {row.requirement_name}
                         </TableCell>
                         <TableCell align="left" style={{ width: "15%" }}>
-                          {row.hostel_id}
+                          {row.hostel_name}
                         </TableCell>
-                        <TableCell align="left">{}</TableCell>
+                        <TableCell align="left">{row.address}</TableCell>
                         <TableCell align="left">{row.quantity}</TableCell>
-                        <TableCell align="left">{}</TableCell>
+                        <TableCell align="left">{row.status}</TableCell>
                       </TableRow>
                     ))}
                 </TableBody>

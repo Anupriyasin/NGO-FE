@@ -43,6 +43,7 @@ const AdminCards = () => {
           <div className="card card1">
             <div className="card-body hello1">
               <h3 className="card-title text-white">{t("New")}</h3>
+              <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar">
                   <span>
@@ -59,6 +60,7 @@ const AdminCards = () => {
           <div className="card card2">
             <div className="card-body hello2">
               <h3 className="card-title text-white">{t("Pending")}</h3>
+              <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar">
                   <span>
@@ -75,6 +77,7 @@ const AdminCards = () => {
           <div className="card card3">
             <div className="card-body hello3">
               <h3 className="card-title text-white">{t("Completed")}</h3>
+              <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar">
                   <span>
@@ -91,6 +94,7 @@ const AdminCards = () => {
           <div className="card card3">
             <div className="card-body hello3">
               <h3 className="card-title text-white">{t("All")}</h3>
+              <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar">
                   <span>
@@ -138,11 +142,11 @@ const AdminCards = () => {
           </div> */}
       </div>
 
-      <div className="justify-content-between mb-3">
+      <div className="row justify-content-between mb-3">
 
         <div className="col-md-4 mt-1 ">
-          <div className="card card1 ">
-            <div className="card-body bg-white border">
+          <div className="card ">
+            <div className="card-body border" style={{backgroundColor: "white"}}>
               <h3 className="card-title text-dark">{t("Total Students")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
@@ -154,8 +158,8 @@ const AdminCards = () => {
         </div>
 
         <div className="col-md-4 mt-1 ">
-          <div className="card card1 ">
-            <div className="card-body bg-white border">
+          <div className="card ">
+            <div className="card-body border" style={{backgroundColor: "white"}}>
               <h3 className="card-title text-dark">{t("Staff Members")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
@@ -168,8 +172,8 @@ const AdminCards = () => {
 
         
         <div className="col-md-4 mt-1 ">
-          <div className="card card1">
-            <div className="card-body bg-white border">
+          <div className="card">
+            <div className="card-body border" style={{backgroundColor: "white"}}>
               <h3 className="card-title text-dark">{t("Total Hostels")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">

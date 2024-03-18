@@ -500,6 +500,10 @@ const AdminCharts = ({ data1, title }) => {
                     </div>
                 </div>
             </div> */}
+            
+            <div className="bg-white rounded col-sm-12 col-md-5 m-3">
+                <Charts />
+            </div>
 
             <div className="col-sm-12 col-md-12 mb-4">
                 {renderChart(monthlySalesOptions, salesEmpty)}
@@ -514,13 +518,6 @@ const AdminCharts = ({ data1, title }) => {
             <div className="col-sm-12 col-md-6 mb-4">
                 {renderChart(stateOptions, stateEmpty)}
             </div>
-            <div className="card col-sm-12 col-md-6 mb-4 d-flex justify-content-center align-items-center">
-                <Charts />
-            </div>
-
-
-
-
         </div>
     )
 }
