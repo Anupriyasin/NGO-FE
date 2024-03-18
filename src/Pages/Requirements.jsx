@@ -10,11 +10,12 @@ import "../components/Table/Table.css";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import TopLoader from "../components/Loader/TopLoader";
-import { getRequirements } from "../api/Users";
+import { getRequirements, updateRequirement } from "../api/Users";
 import { toast } from "react-toastify";
 import { TextField, TablePagination, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Modal, Button } from "@mui/material";
+import axios from "axios";
 const Requirements = ({ role, mainId }) => {
   const { t } = useTranslation();
 
@@ -87,7 +88,23 @@ const Requirements = ({ role, mainId }) => {
     // Logic to close modal
     setModalOpen(false);
   };
+  const handleAccept = () => {
+    debugger
+    const postData = {
+      requirement_name:selectedRow.requirement_name,
+      quantity:selectedRow.quantity,
+      hostel_id: selectedRow.id,
+      user_id: "",
+      role_id:"",
+      requirement_id: selectedRow.requirement_id,
+      admin_flag :""
+    }
+    updateRequirement(postData)
+    getAllrequirements();
+    setModalOpen(false);
 
+
+  };
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
@@ -248,7 +265,12 @@ const Requirements = ({ role, mainId }) => {
                     name="quantity"
                     defaultValue={selectedRow.quantity}
                     className="form-control"
-                    readOnly
+                    onChange={(e) => {
+                      setSelectedRow(prevRow => ({
+                          ...prevRow,
+                          quantity: e.target.value
+                      }));
+                    }}
                     required
                   />
                 </div>
@@ -258,6 +280,7 @@ const Requirements = ({ role, mainId }) => {
                   variant="contained"
                   color="primary"
                   style={{ marginRight: 8 }}
+                  onClick={handleAccept}
                 >
                   Accept
                 </Button>

@@ -25,9 +25,9 @@ export const assign_dealer = async (data) =>
       return "Error - " + error;
     });
 
-export const checkinNewDealer = async (data) =>
+export const updateRequirement = async (data) =>
   await axios
-    .post("/visit_check_in", data, {
+    .post("/update_req", data, {
       headers: {
         "Content-Type": "application/json",
       },
