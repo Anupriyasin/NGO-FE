@@ -52,7 +52,6 @@ export const visitcheckout = async (data) =>
       return "Error - " + error;
     });
 
-
 export const insertUserDetails = async (data) =>
   await axios
     .post("/insert_crm_user", data, {
@@ -69,7 +68,10 @@ export const insertUserDetails = async (data) =>
 
 export const updateAssignedDealer = async (dealerId, data) => {
   try {
-    const response = await axios.post(`/update_assigned_dealers/${dealerId}`, data);
+    const response = await axios.post(
+      `/update_assigned_dealers/${dealerId}`,
+      data
+    );
     return response.data;
   } catch (error) {
     return "Error - " + error;
@@ -120,7 +122,6 @@ export const updateMOMText = async (id, data) =>
       return "Error - " + error;
     });
 
-
 // export const alldealers = async (data) =>
 //   await axios
 //     .get("/get_all_dealers", data)
@@ -140,7 +141,6 @@ export const assigneddealerreport = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
-
 
 export const newdealers = async (data) =>
   await axios
@@ -167,7 +167,7 @@ export const checkIn = async (data) => {
     const response = await axios.post("/check_in", data);
     return response.data;
   } catch (error) {
-    console.error('Error checking in:', error);
+    console.error("Error checking in:", error);
     return "Error - " + error;
   }
 };
@@ -177,7 +177,7 @@ export const insertMom = async (formData) => {
     const response = await axios.post("/insert_mom", formData);
     return response.data;
   } catch (error) {
-    console.error('Error inserting mom:', error);
+    console.error("Error inserting mom:", error);
     return "Error - " + error;
   }
 };
@@ -187,7 +187,7 @@ export const checkOut = async (data) => {
     const response = await axios.post("/check_out", data);
     return response.data;
   } catch (error) {
-    console.error('Error checking out:', error);
+    console.error("Error checking out:", error);
     return "Error - " + error;
   }
 };
@@ -241,7 +241,6 @@ export const dailycheckin = async () =>
       return "Error - " + error;
     });
 
-
 export const allsalepersons = async (data) =>
   await axios
     .get("/get_all_sales_person", data)
@@ -254,14 +253,15 @@ export const allsalepersons = async (data) =>
 
 export const fetchIframe = async (dealer_user_id) => {
   try {
-    const response = await axios.get(`/view_best_route_to_reach_dealer/${dealer_user_id}`);
+    const response = await axios.get(
+      `/view_best_route_to_reach_dealer/${dealer_user_id}`
+    );
     return response.data; // Assuming the response directly contains iframeURL
   } catch (error) {
-    console.error('Error fetching dealer details:', error);
+    console.error("Error fetching dealer details:", error);
     return null; // Return null or handle error as needed
   }
 };
-
 
 export const dealerdetails = async (id) =>
   await axios
@@ -292,7 +292,6 @@ export const getMomText = async (momId) =>
     .catch((error) => {
       return "Error - " + error;
     });
-
 
 export const allUsers = async (data) =>
   await axios
@@ -338,10 +337,38 @@ export const insertDealer = async (id, data) =>
       return "Error - " + error;
     });
 
-
 export const getRequirements = async (data) =>
   await axios
     .get("/requirements", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getAllStudents = async (data) =>
+  await axios
+    .get("/all_students", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+export const getAllStaff = async (data) =>
+  await axios
+    .get("/all_staff", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getAllHostels = async (data) =>
+  await axios
+    .get("/get_all_hostels", data)
     .then((response) => {
       return response.data;
     })
