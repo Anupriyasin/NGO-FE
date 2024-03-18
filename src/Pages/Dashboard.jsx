@@ -19,7 +19,7 @@ const Dashboard = (props) => {
 
         {props.role && props.role === 1 && (
           <>
-            <AdminCards />
+            {/* <AdminCards /> */}
             <AdminCharts />
             <TodaysOrderTable />
           </>
