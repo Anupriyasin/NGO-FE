@@ -12,9 +12,9 @@ import { useTranslation } from "react-i18next";
 import TopLoader from "../components/Loader/TopLoader";
 import { getRequirements } from "../api/Users";
 import { toast } from "react-toastify";
-import { TextField, TablePagination } from "@mui/material";
+import { TextField, TablePagination, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { Modal, Button } from "@mui/material";
 const Requirements = ({ role, mainId }) => {
   const { t } = useTranslation();
 
@@ -26,6 +26,8 @@ const Requirements = ({ role, mainId }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   const getAllrequirements = () => {
     setIsLoading(true);
@@ -51,7 +53,9 @@ const Requirements = ({ role, mainId }) => {
     const filtered = rows.filter(
       (item) =>
         (item?.requirement_name &&
-          item.requirement_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          item.requirement_name
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())) ||
         (item?.hostel_id &&
           item.hostel_id.toLowerCase().includes(searchQuery.toLowerCase()))
     );
@@ -72,6 +76,16 @@ const Requirements = ({ role, mainId }) => {
   let navigate = useNavigate();
   const view = (id) => {
     navigate(`/${role !== 5 ? "admin" : "dealer"}/admindetails/${id}`);
+  };
+  const handleUpdateClick = (row) => {
+    setSelectedRow(row);
+    console.log("selectedRow", selectedRow);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    // Logic to close modal
+    setModalOpen(false);
   };
 
   return (
@@ -129,7 +143,17 @@ const Requirements = ({ role, mainId }) => {
                         </TableCell>
                         <TableCell align="left">{row.address}</TableCell>
                         <TableCell align="left">{row.quantity}</TableCell>
-                        <TableCell align="left">{row.status}</TableCell>
+                        <TableCell align="left">
+                          {" "}
+                          <Typography
+                            variant="button"
+                            className="primary-btn btn"
+                            id="btn"
+                            onClick={() => handleUpdateClick(row)}
+                          >
+                            Update Status
+                          </Typography>
+                        </TableCell>
                       </TableRow>
                     ))}
                 </TableBody>
@@ -157,6 +181,100 @@ const Requirements = ({ role, mainId }) => {
           />
         </div>
       </div>
+      {selectedRow && (
+      <Modal
+        open={modalOpen}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+     
+            <div
+              style={{
+                position: "absolute",
+                top: "30%",
+                left: "58%",
+                transform: "translate(-50%, -50%)",
+                width: 900,
+                backgroundColor: "#ffffff",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                borderRadius: 8,
+                padding: 20,
+              }}
+            >
+              <Typography variant="h6" gutterBottom>
+                {t("Update Status")}
+              </Typography>
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <label className="form-label">{t("Requirement")}</label>
+                  <input
+                    type="text"
+                    name="requirement"
+                    defaultValue={selectedRow.requirement_name}
+                    className="form-control"
+                    readOnly
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label className="form-label">{t("Hostel Name")}</label>
+                  <input
+                    type="text"
+                    name="hostel-name"
+                    defaultValue={selectedRow.hostel_name}
+                    className="form-control"
+                    readOnly
+                    required
+                  />
+                </div>
+              </div>
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <label className="form-label">{t("Hostel Address")}</label>
+                  <input
+                    type="text"
+                    name="hostel-address"
+                    defaultValue={selectedRow.address}
+                    className="form-control"
+                    readOnly
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label className="form-label">{t("Quantity")}</label>
+                  <input
+                    type="text"
+                    name="quantity"
+                    defaultValue={selectedRow.quantity}
+                    className="form-control"
+                    readOnly
+                    required
+                  />
+                </div>
+              </div>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginRight: 8 }}
+                >
+                  Accept
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  style={{ marginRight: 8 }}
+                >
+                  Reject
+                </Button>
+                <Button variant="contained" onClick={handleCloseModal}>
+                  Cancel
+                </Button>
+              </div>
+            </div>
+      </Modal>
+          )}
     </>
   );
 };
