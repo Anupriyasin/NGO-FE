@@ -337,9 +337,13 @@ export const insertDealer = async (id, data) =>
       return "Error - " + error;
     });
 
-export const getRequirements = async (data) =>
+
+
+//new apis
+
+export const getRequirements = async () =>
   await axios
-    .get("/requirements", data)
+    .get("/requirements")
     .then((response) => {
       return response.data;
     })
@@ -347,18 +351,30 @@ export const getRequirements = async (data) =>
       return "Error - " + error;
     });
 
-export const getAllStudents = async (data) =>
+export const getRejectedRequirements = async () => 
   await axios
-    .get("/all_students", data)
+    .get('/rejected_req')
+    .then(response => {
+      return response.data
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+
+export const getAllStudents = async () =>
+  await axios
+    .get("/all_students")
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
       return "Error - " + error;
     });
-export const getAllStaff = async (data) =>
+    
+export const getAllStaff = async () =>
   await axios
-    .get("/all_staff", data)
+    .get("/all_staff")
     .then((response) => {
       return response.data;
     })
@@ -366,9 +382,9 @@ export const getAllStaff = async (data) =>
       return "Error - " + error;
     });
 
-export const getAllHostels = async (data) =>
+export const getAllHostels = async () =>
   await axios
-    .get("/get_all_hostels", data)
+    .get("/get_all_hostels")
     .then((response) => {
       return response.data;
     })

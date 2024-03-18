@@ -41,10 +41,10 @@ const AdminCharts = ({ data1, title }) => {
     endDate: "",
   });
 
-  const [students, setStudents] = useState([]);
-  const [staff, setStaff] = useState([]);
-  const [hostels, setHostels] = useState([]);
-  const [hostelNames, setHostelNames] = useState([]);
+  const [students, setStudents] = useState(0);
+  const [staff, setStaff] = useState(0);
+  const [hostels, setHostels] = useState(0);
+  const allHostels = [];
 
   const animatedComponents = makeAnimated();
 
@@ -112,7 +112,15 @@ const AdminCharts = ({ data1, title }) => {
 
     getAllHostels()
       .then((res) => {
+        console.log(res)
         setHostels(res.data[0].hostel);
+        for (let i = 0; i <= res.data.length; i++) {
+          allHostels.push({
+            value: res.data[i].hostel_id,
+            label: res.data[i].hostel_name,
+          });
+          console.log(allHostels);
+        }
         setIsLoading(false);
       })
       .catch((error) => {
@@ -128,10 +136,10 @@ const AdminCharts = ({ data1, title }) => {
     getCardsData();
 
     if (selectedHostels !== "") {
-      data.state = [];
+      data.hostels = [];
       for (let i = 0; i < selectedHostels.length; i++) {
-        data.state.push(selectedHostels[i].value);
-        console.log(data.state);
+        data.hostels.push(selectedHostels[i].value);
+        console.log(data.hostels);
       }
     }
 
@@ -434,7 +442,7 @@ const AdminCharts = ({ data1, title }) => {
                 id="hostels"
                 name="hostels"
                 isMulti
-                options={hostelNames}
+                options={allHostels}
                 value={selectedHostels}
                 onChange={handleHostelChange}
                 placeholder="Select Hostels"

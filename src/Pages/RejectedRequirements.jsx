@@ -10,12 +10,12 @@ import "../components/Table/Table.css";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import TopLoader from "../components/Loader/TopLoader";
-import { getRequirements } from "../api/Users";
+import { getRejectedRequirements, getRequirements } from "../api/Users";
 import { toast } from "react-toastify";
 import { TextField, TablePagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Requirements = ({ role, mainId }) => {
+const RejectedRequirements = ({ role, mainId }) => {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +29,7 @@ const Requirements = ({ role, mainId }) => {
 
   const getAllrequirements = () => {
     setIsLoading(true);
-    getRequirements().then((res) => {
+    getRejectedRequirements().then((res) => {
       if (res.status === "success") {
         console.log(res);
         setRows(res.data);
@@ -79,7 +79,7 @@ const Requirements = ({ role, mainId }) => {
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-          <h3 className="">{t("New Requirements")}</h3>
+          <h3 className="">{t("Rejected Requirements")}</h3>
           <TextField
             label={t("Search")}
             variant="outlined"
@@ -161,4 +161,4 @@ const Requirements = ({ role, mainId }) => {
   );
 };
 
-export default Requirements;
+export default RejectedRequirements;

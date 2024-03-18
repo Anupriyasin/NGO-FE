@@ -21,7 +21,7 @@ const Dashboard = (props) => {
           <>
             {/* <AdminCards /> */}
             <AdminCharts />
-            <TodaysOrderTable />
+            {/* <TodaysOrderTable /> */}
           </>
         )}
 
