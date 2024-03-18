@@ -10,6 +10,7 @@ import { get_cart_items } from '../api/Products'
 
 import ProtectedRoute from './ProtectedRoute'
 import Requirements from '../Pages/Requirements'
+import TrackRequirements from '../Pages/TrackRequirements'
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
@@ -66,6 +67,11 @@ const AppRoutes = () => {
             component: Requirements,
             allowedRoles: [1]
         },
+        {
+            path: '/trackrequirements',
+            component: TrackRequirements,
+            allowedRoles: [1]
+        }
     ];
 
     return (

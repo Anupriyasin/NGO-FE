@@ -61,6 +61,11 @@ const Sidebar = (props) => {
             heading: "New Requirements",
             url: "/requirements",
           },
+          {
+            icon: UilPackage,
+            heading: "Track Requirements",
+            url: "/trackrequirements",
+          },
         ]
       )
     } else if (props.role && (props.role === 2)) {
