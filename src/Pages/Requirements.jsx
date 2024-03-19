@@ -240,25 +240,26 @@ const handleClearRejectReason = () => {
         </div>
       </div>
       {selectedRow && (
-     <Modal
-     open={modalOpen}
-     onClose={handleCloseModal}
-     aria-labelledby="modal-modal-title"
-     aria-describedby="modal-modal-description"
-   >
-     <div
-       style={{
-         position: "absolute",
-         top: "30%",
-         left: "58%",
-         transform: "translate(-50%, -50%)",
-         width: 900,
-         backgroundColor: "#ffffff",
-         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-         borderRadius: 8,
-         padding: 20,
-       }}
-     >
+    <Modal
+    open={modalOpen}
+    onClose={handleCloseModal}
+    aria-labelledby="modal-modal-title"
+    aria-describedby="modal-modal-description"
+  >
+    <div
+      style={{
+        position: "absolute",
+        top: "30%",
+        left: "52%",
+        transform: "translate(-50%, -50%)",
+        maxWidth: "90vw", 
+        width: "70%", 
+        backgroundColor: "#ffffff",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+        borderRadius: 8,
+        padding: 20,
+      }}
+    >
        <Typography variant="h6" gutterBottom>
          Update Status
        </Typography>

@@ -13,6 +13,7 @@ import Requirements from '../Pages/Requirements'
 import TrackRequirements from '../Pages/TrackRequirements'
 import RejectedRequirements from '../Pages/RejectedRequirements'
 import AddAssetType from '../Pages/AddAssetType'
+import AddAssets from '../Pages/AddAssets'
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
@@ -80,7 +81,12 @@ const AppRoutes = () => {
             allowedRoles: [1]
         },
         {
-            path: '/addassettype',
+            path: '/add-assets',
+            component: AddAssets,
+            allowedRoles: [1]
+        },
+        {
+            path: '/add-asset-type',
             component: AddAssetType,
             allowedRoles: [1]
         },

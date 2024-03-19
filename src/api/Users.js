@@ -25,6 +25,19 @@ export const assign_dealer = async (data) =>
       return "Error - " + error;
     });
 
+export const AddAssetsType = async (data) =>
+  await axios 
+    .post("/new_asset", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 export const updateRequirement = async (data) =>
   await axios 
     .post("/update_req", data, {
