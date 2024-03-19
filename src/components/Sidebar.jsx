@@ -73,8 +73,13 @@ const Sidebar = (props) => {
           },
           {
             icon: UilPackage,
+            heading: "Add Asset ",
+            url: "/add-assets",
+          },
+          {
+            icon: UilPackage,
             heading: "Add Asset Type",
-            url: "/addassettype",
+            url: "/add-asset-type",
           },
         ]
       )
