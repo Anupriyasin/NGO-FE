@@ -319,7 +319,7 @@ const handleClearRejectReason = () => {
         <div className="mb-3">
         <label className="form-label">Reject Reason</label>
         <input
-          type="text"
+          type="text" 
           name="rejectreason"
           value={rejectReason}
           className={`form-control ${rejectReasonError ? 'border-danger' : ''}`}
