@@ -109,7 +109,12 @@ const AddAssetType = () => {
             toast.error(error.response?.data?.message || "Failed to reject requirement");
           });
     };  
-
+    const clearAssetsFields = () => {
+        window.location.reload();
+    }
+    const clearAssetsSubFields = () => {
+        window.location.reload();
+    }
    
     return (
         <>
@@ -117,7 +122,7 @@ const AddAssetType = () => {
             <div className="px-2 px-md-4">
 
                 <h3 className='my-4'>{t('Add Asset Type')}</h3>
-                <button className={type === 'assign' ? 'btn btn-outline-secondary' : 'btn btn-secondary'} style={{fontSize:"14px"}} onClick={(e) => switchButton('view')}>{t('Create Asset Type')} </button>
+                <button className={type === 'assign' ? 'btn btn-outline-success' : 'btn btn-success'} style={{fontSize:"14px"}} onClick={(e) => switchButton('view')}>{t('Create Asset Type')} </button>
                 <span className='mx-2 d-inline-block'></span>
                 <button className={type === 'view' ? 'btn btn-outline-success' : 'btn btn-success'} style={{fontSize:"14px"}} onClick={(e) => switchButton('assign')}>{t('Create Asset Sub Type')} </button>
 
@@ -150,7 +155,7 @@ const AddAssetType = () => {
                     <div className="row mt-3">
                         <div className="col-md-12">
                             <button type="submit" className="btn btn-primary me-2">Submit</button>
-                            <button type="button" className="btn btn-secondary" >Clear</button>
+                            <button type="button" className="btn btn-secondary" onClick={clearAssetsFields}>Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -199,7 +204,7 @@ const AddAssetType = () => {
                     <div className="row mt-3">
                         <div className="col-md-12">
                             <button type="submit" className="btn btn-primary me-2">Submit</button>
-                            <button type="button" className="btn btn-secondary" >Clear</button>
+                            <button type="button" className="btn btn-secondary" onClick={clearAssetsSubFields}>Clear</button>
                         </div>
                     </div>
                 </form>
