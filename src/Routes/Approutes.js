@@ -65,17 +65,17 @@ const AppRoutes = () => {
             allowedRoles: [1]
         },
         {
-            path: '/new-requirements',
+            path: '/newrequirements',
             component: Requirements,
             allowedRoles: [1]
         },
         {
-            path: '/track-requirements',
+            path: '/trackrequirements',
             component: TrackRequirements,
             allowedRoles: [1]
         },
         {
-            path: '/rejected-requirements',
+            path: '/rejectedrequirements',
             component: RejectedRequirements,
             allowedRoles: [1]
         },
@@ -85,7 +85,7 @@ const AppRoutes = () => {
             allowedRoles: [1]
         },
         {
-            path: '/rejected-requirements',
+            path: '/rejectedrequirements',
             component: RejectedRequirements,
             allowedRoles: [1]
         }
