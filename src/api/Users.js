@@ -2,6 +2,15 @@ import axios from "./constant";
 
 axios.defaults.withCredentials = true;
 
+export const getAssetsName = async (data) =>
+  await axios
+    .get("/assets_name")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 export const getUserDetails = async (data) =>
   await axios
     .get("/get_user_details")
@@ -11,6 +20,7 @@ export const getUserDetails = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+
 export const assign_dealer = async (data) =>
   await axios
     .post("/assign_dealers", data, {
@@ -28,6 +38,19 @@ export const assign_dealer = async (data) =>
 export const AddAssetsType = async (data) =>
   await axios 
     .post("/new_asset", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+export const AddAssetsSubType = async (data) =>
+  await axios 
+    .post("/new_asset_sub_type", data, {
       headers: {
         "Content-Type": "application/json",
       },
