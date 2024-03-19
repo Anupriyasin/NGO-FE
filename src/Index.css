@@ -169,6 +169,15 @@ h4 {
   margin-left: -.8em;
 }
 
+.userImage {
+  height: 9rem;
+  width: 9rem;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 1px solid black;
+}
 
 @media print {
     .hide-on-print {

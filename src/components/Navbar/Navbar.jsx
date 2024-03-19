@@ -74,9 +74,9 @@ const Navbar = ({ totalItems, role, userData }) => {
         <div className='d-flex align-items-center col-gap'>
           {/* <div>
             <Languageoption onChange={(e) => handleClick(e)} />
-          </div> */}
+          </div> 
 
-          {cartIcon ?
+           {cartIcon ?
             <motion.div className="notification" animate={totalItems ? { x: [-5, 5, -5, 5, 0], rotate: [0, 5, -5, 5, 0] } : ""} >
               <button class="btn position-relative cart p-2 pt-1 pb-1" onClick={cartView}>
                 <UilShoppingCart />
@@ -89,9 +89,9 @@ const Navbar = ({ totalItems, role, userData }) => {
               </button>
             </motion.div>
             : ""
-          }
+          } */}
 
-          <Link >
+          <Link to={'/profile'}>
             <img src={imgPath} alt="User" className='img-42' style={{ cursor: "pointer" }} />
           </Link>
 

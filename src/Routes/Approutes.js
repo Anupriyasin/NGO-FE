@@ -14,6 +14,7 @@ import TrackRequirements from '../Pages/TrackRequirements'
 import RejectedRequirements from '../Pages/RejectedRequirements'
 import AddAssetType from '../Pages/AddAssetType'
 import AddAssets from '../Pages/AddAssets'
+import AdminDetails from '../Pages/AdminDetails'
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
@@ -63,6 +64,11 @@ const AppRoutes = () => {
         {
             path: '/dashboard',
             component: Dashboard,
+            allowedRoles: [1]
+        },
+        {
+            path: '/profile',
+            component: AdminDetails,
             allowedRoles: [1]
         },
         {
