@@ -71,6 +71,11 @@ const Sidebar = (props) => {
             heading: "Rejected Requirements",
             url: "/rejected_requirements",
           },
+          {
+            icon: UilPackage,
+            heading: "Add Asset Type",
+            url: "/addassettype",
+          },
         ]
       )
     } else if (props.role && (props.role === 2)) {

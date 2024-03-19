@@ -38,6 +38,19 @@ export const updateRequirement = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const RejectRequirement = async (data) =>
+  await axios
+    .post("/update_reject_req", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 export const visitcheckout = async (data) =>
   await axios
     .post("/visit_check_out", data, {

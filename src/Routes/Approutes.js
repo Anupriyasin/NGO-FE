@@ -12,6 +12,7 @@ import ProtectedRoute from './ProtectedRoute'
 import Requirements from '../Pages/Requirements'
 import TrackRequirements from '../Pages/TrackRequirements'
 import RejectedRequirements from '../Pages/RejectedRequirements'
+import AddAssetType from '../Pages/AddAssetType'
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
@@ -71,6 +72,11 @@ const AppRoutes = () => {
         {
             path: '/track_requirements',
             component: TrackRequirements,
+            allowedRoles: [1]
+        },
+        {
+            path: '/addassettype',
+            component: AddAssetType,
             allowedRoles: [1]
         },
         {
