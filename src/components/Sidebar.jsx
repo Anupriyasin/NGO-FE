@@ -59,17 +59,17 @@ const Sidebar = (props) => {
           {
             icon: UilPackage,
             heading: "New Requirements",
-            url: "/new-requirements",
+            url: "/requirements",
           },
           {
             icon: UilPackage,
             heading: "Track Requirements",
-            url: "/track-requirements",
+            url: "/track_requirements",
           },
           {
             icon: UilPackage,
             heading: "Rejected Requirements",
-            url: "/rejected-requirements",
+            url: "/rejected_requirements",
           },
           {
             icon: UilPackage,

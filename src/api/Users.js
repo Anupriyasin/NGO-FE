@@ -26,7 +26,7 @@ export const assign_dealer = async (data) =>
     });
 
 export const updateRequirement = async (data) =>
-  await axios 
+  await axios
     .post("/update_req", data, {
       headers: {
         "Content-Type": "application/json",
