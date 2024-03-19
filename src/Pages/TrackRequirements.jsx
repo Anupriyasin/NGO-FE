@@ -18,6 +18,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Modal, Button } from "@mui/material";
 // import { Typography } from '@material-ui/core';
 import { Assignment, LocalShipping, Home } from '@material-ui/icons';
+import { trackreq } from '../api/Users';
+
 import RedeemIcon from '@mui/icons-material/Redeem';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import {
@@ -44,6 +46,7 @@ const TrackRequirements = ({ role, mainId }) => {
 
     // Search and pagination
     const [filteredData, setFilteredData] = useState([]);
+    const [track, settrack] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -53,45 +56,66 @@ const TrackRequirements = ({ role, mainId }) => {
 
     const toggleShow = () => setBasicModal(!basicModal);
 
+    const [selectedRow, setSelectedRow] = useState(null);
 
-    const getAllUsers = () => {
-        setIsLoading(true);
-        allUsers().then((res) => {
-            if (res.status === "success") {
-                console.log(res);
-                setRows(res.data);
-                setFilteredData(res.data);
-            } else {
-                setRows([]);
-                // toast.error(t("Something went wrong"));s
-            }
-        });
-        setIsLoading(false);
-    };
 
     useEffect(() => {
-        getAllUsers();
+        trackreq()
+            .then(res => {
+                if (res.status === "success") {
+                    settrack(res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }, []);
 
     // Update filteredData whenever searchQuery changes
     useEffect(() => {
+        debugger
         const filtered = rows.filter(
             (item) =>
-                (item?.user_id &&
-                    item.user_id.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                (item?.user_name &&
-                    item.user_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                (item?.primary_contact &&
-                    item.primary_contact
-                        .toLowerCase()
-                        .includes(searchQuery.toLowerCase())) ||
-                (item?.created_date &&
-                    item.created_date.toLowerCase().includes(searchQuery.toLowerCase()))
+                (item?.requirement_name &&
+                    item.requirement_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                (item?.requirement_id &&
+                    item.requirement_id.toLowerCase().includes(searchQuery.toLowerCase()))
         );
 
         setFilteredData(filtered);
         setPage(0);
     }, [searchQuery, rows]);
+
+
+
+    const [activeStep, setActiveStep] = useState(1); // Assuming step 1 is the default active step
+    const [approveStep, setapproveStep] = useState(1); // Assuming step 1 is the default active step
+
+    // Fetch hostel data and update progress bar based on hostel ID
+    const fetchAndSetActiveStep = async () => {
+        try {
+            const res = await trackreq();
+            if (res.status === "success" && res.data.length > 0) {
+                const hostelId = res.data[0].hostel_id;
+                const approved = res.data[0].is_approve;
+                setActiveStep(hostelId); // Update active step based on hostel ID
+                setapproveStep(approved); // Update active step based on hostel ID
+            }
+        } catch (error) {
+            console.error('Error fetching track requirements data: ', error);
+        }
+    };
+
+    // Fetch hostel data and set active step when the component mounts
+    useEffect(() => {
+        fetchAndSetActiveStep();
+    }, []);
+
+
+
+
+
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -107,26 +131,12 @@ const TrackRequirements = ({ role, mainId }) => {
         navigate(`/${role !== 5 ? "admin" : "dealer"}/admindetails/${id}`);
     };
 
-    const setBlockStatus = async (id, status) => {
-        const data = {
-            user_id: id,
-            status,
-        };
-        await updateBlockStatus(data).then((res) => {
-            if (res.status === "success") {
-                console.log(res);
-                toast.success(t(res.message));
-                getAllUsers();
-            } else {
-                toast.error(t("Something went wrong"));
-            }
-        });
-    };
-
-    const handleUpdateClick = () => {
-        // Logic to open modal
+    const handleUpdateClick = (row) => {
+        setSelectedRow(row);
+        console.log("selectedRow", selectedRow);
         setModalOpen(true);
     };
+
 
     const handleCloseModal = () => {
         // Logic to close modal
@@ -188,141 +198,51 @@ const TrackRequirements = ({ role, mainId }) => {
                             </TableHead>
                             {/* {!isLoading && filteredData && filteredData.length > 0 && ( */}
                             <TableBody style={{ color: "white" }}>
-                                <TableRow
-                                    // key={index}
-                                    sx={{
-                                        "&:last-child td, &:last-child th": { border: 0 },
-                                    }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        1
-                                    </TableCell>
-                                    <TableCell align="left">uyt</TableCell>
-                                    <TableCell align="left" style={{ width: "15%" }}>
-                                        test
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        876543
-                                    </TableCell>
-                                    <TableCell align="left">65</TableCell>
-                                    <TableCell align="left">
+                                {track
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((row, index) => (
+                                        <TableRow
+                                            key={index}
+                                            sx={{
+                                                "&:last-child td, &:last-child th": { border: 0 },
+                                            }}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                {index + 1}
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {row.requirement_name}
+                                            </TableCell>
+                                            <TableCell align="left" style={{ width: "15%" }}>
+                                                {row.hostel_name}
+                                            </TableCell>
+                                            <TableCell align="left">{row.address}</TableCell>
+                                            <TableCell align="left">{row.quantity}</TableCell>
+                                            <TableCell align="">
+                                                <Typography
+                                                    variant="button"
+                                                    className="primary-btn btn"
+                                                    id="btn"
+                                                    onClick={() => handleUpdateClick(row)}
+                                                >
+                                                    Track
+                                                </Typography>
+                                            </TableCell>
 
-                                        <section>
-                                            <MDBContainer className="">
-                                                <MDBRow className="justify-content-center align-items-center text-center">
-                                                    <MDBCol>
-                                                        <MDBBtn size="" onClick={toggleShow}>
-                                                            Track your order
-                                                        </MDBBtn>
-                                                        <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
-                                                            <MDBModalDialog size="lg">
-                                                                <MDBModalContent
-                                                                    className="text-white"
-                                                                    style={{ backgroundColor: "#6d5b98", borderRadius: "10px" }}
-                                                                >
-
-                                                                    <MDBCard
-
-                                                                        className="card-stepper text-black"
-                                                                        style={{ borderRadius: "16px" }}
-                                                                    >
-                                                                        <MDBModalHeader className="border-bottom-0">
-                                                                            <MDBBtn
-                                                                                className="btn-close btn-close-white"
-                                                                                color="none"
-                                                                                onClick={toggleShow}
-                                                                            ></MDBBtn>
-                                                                        </MDBModalHeader>
-                                                                        <MDBCardBody className="p-5">
-                                                                            <div className="d-flex justify-content-between align-items-center mb-5">
-                                                                                <div>
-                                                                                    <MDBTypography tag="h5" className="mb-0">
-                                                                                        INVOICE{" "}
-                                                                                        <span className="text-primary font-weight-bold">
-                                                                                            #Y34XDHR
-                                                                                        </span>
-                                                                                    </MDBTypography>
-                                                                                </div>
-                                                                                <div className="text-end">
-                                                                                    <p className="mb-0">
-                                                                                        Expected Arrival <span>01/12/19</span>
-                                                                                    </p>
-                                                                                    <p className="mb-0">
-                                                                                        USPS{" "}
-                                                                                        <span className="font-weight-bold">
-                                                                                            234094567242423422898
-                                                                                        </span>
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <ul
-                                                                                id="progressbar-2"
-                                                                                className="d-flex justify-content-between mx-0 mt-0 mb-5 px-0 pt-0 pb-2"
-                                                                            >
-                                                                                <li className="step0 active text-center" id="step1">
-                                                                                </li>
-                                                                                <li className="step0 active text-center" id="step2">
-                                                                                </li>
-                                                                                <li className="step0 active text-center" id="step3">
-                                                                                </li>
-                                                                                <li className="step0 text-muted text-end" id="step4"></li>
-                                                                            </ul>
-
-                                                                            <div className="d-flex justify-content-between">
-                                                                                <div className="d-lg-flex align-items-center">
-                                                                                    <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
-                                                                                    <div>
-                                                                                        <p className="fw-bold mb-1">Order</p>
-                                                                                        <p className="fw-bold mb-0">Processed</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="d-lg-flex align-items-center">
-                                                                                    <RedeemIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
-                                                                                    <div className="ms-3">
-                                                                                        <p className="fw-bold mb-1">Order</p>
-                                                                                        <p className="fw-bold mb-0">Shipped</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="d-lg-flex align-items-center">
-                                                                                    <LocalShippingIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
-                                                                                    <div className="ms-3">
-                                                                                        <p className="fw-bold mb-1">Order</p>
-                                                                                        <p className="fw-bold mb-0">En Route</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="d-lg-flex align-items-center">
-                                                                                    <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
-                                                                                    <div className="ms-3">
-                                                                                        <p className="fw-bold mb-1">Order</p>
-                                                                                        <p className="fw-bold mb-0">Arrived</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </MDBCardBody>
-                                                                    </MDBCard>
-                                                                </MDBModalContent>
-                                                            </MDBModalDialog>
-                                                        </MDBModal>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                            </MDBContainer>
-                                        </section>
-
-                                    </TableCell>
-
-                                </TableRow>
+                                        </TableRow>
+                                    ))}
                             </TableBody>
                             {/* )} */}
-                            {/* {!isLoading && (!filteredData || filteredData.length === 0) && ( */}
-                            <TableRow>
-                                <TableCell align="center" colSpan={7}>
-                                    <h4>
-                                        {" "}
-                                        <i>{t("No data available")}</i>{" "}
-                                    </h4>
-                                </TableCell>
-                            </TableRow>
-                            {/* )} */}
+                            {!isLoading && (!filteredData || filteredData.length === 0) && (
+                                <TableRow>
+                                    <TableCell align="center" colSpan={7}>
+                                        <h4>
+                                            {" "}
+                                            <i>{t("No data available")}</i>{" "}
+                                        </h4>
+                                    </TableCell>
+                                </TableRow>
+                            )}
                         </Table>
                     </TableContainer>
                     <TablePagination
@@ -337,44 +257,75 @@ const TrackRequirements = ({ role, mainId }) => {
                 </div>
             </div>
 
+            {selectedRow && (
+                <Modal
+                    open={modalOpen}
+                    onClose={handleCloseModal}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div style={{ position: "absolute", top: "30%", left: "58%", transform: "translate(-50%, -50%)", width: 900, backgroundColor: '#ffffff', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: 8, padding: 20 }}>
+                        <div className="d-flex justify-content-between align-items-center mb-5">
+                            <div>
+                                <MDBTypography tag="h5" className="mb-0">
+                                    INVOICE{" "}
+                                    <span className="text-primary font-weight-bold">
+                                        #Y34XDHR
+                                    </span>
+                                </MDBTypography>
+                            </div>
+                            {/* <div className="text-end">
+                            <p className="mb-0">
+                                Expected Arrival <span>01/12/19</span>
+                            </p>
+                            <p className="mb-0">
+                                USPS{" "}
+                                <span className="font-weight-bold">
+                                    234094567242423422898
+                                </span>
+                            </p>
+                        </div> */}
+                        </div>
+                        <ul id="progressbar-2" class="d-flex justify-content-between mx-0 mt-0 mb-3 px-0 pt-0 pb-2">
+                            <li className={`step0 text-center ${activeStep == 1 ? 'active' : ''}`} id="step1"></li>
+                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step2"></li>
+                            
+                        </ul>
 
-            <Modal
-                open={modalOpen}
-                onClose={handleCloseModal}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <div style={{ position: "absolute", top: "30%", left: "58%", transform: "translate(-50%, -50%)", width: 900, backgroundColor: '#ffffff', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: 8, padding: 20 }}>
-                    <Typography variant="h6" gutterBottom>
-                        {t("Update Status")}
-                    </Typography>
-                    <div className="row mb-3">
-                        <div className="col-md-6">
-                            <label className="form-label">{t('Requirement')}</label>
-                            <input type="text" name="requirement" defaultValue="uyt" className="form-control" readOnly required />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">{t('Hostel Name')}</label>
-                            <input type="text" name="hostel-name" defaultValue="test" className="form-control" readOnly required />
+
+                        <div className="d-flex justify-content-between mb-5">
+                            <div className="d-lg-flex align-items-center">
+                                <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <div>
+                                    <p className="fw-bold mb-1">Order</p>
+                                    <p className="fw-bold mb-0">Request</p>
+                                </div>
+                            </div>
+                            <div className="d-lg-flex align-items-center " style={{marginLeft:"-20px"}}>
+                                <RedeemIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
+                                <div className="ms-3">
+                                    <p className="fw-bold mb-1">Order</p>
+                                    <p className="fw-bold mb-0">Approved</p>
+                                </div>
+                            </div>
+                            {/* <div className="d-lg-flex align-items-center">
+                            <LocalShippingIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                            <div className="ms-3">
+                                <p className="fw-bold mb-1">Order</p>
+                                <p className="fw-bold mb-0">En Route</p>
+                            </div>
+                        </div> */}
+                            {/* <div className="d-lg-flex align-items-center">
+                                <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <div className="ms-3">
+                                    <p className="fw-bold mb-1">Order</p>
+                                    <p className="fw-bold mb-0">Arrived</p>
+                                </div>
+                            </div> */}
                         </div>
                     </div>
-                    <div className="row mb-3">
-                        <div className="col-md-6">
-                            <label className="form-label">{t('Hostel Address')}</label>
-                            <input type="text" name="hostel-address" defaultValue="876543" className="form-control" readOnly required />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">{t('Quantity')}</label>
-                            <input type="text" name="quantity" defaultValue="65" className="form-control" readOnly required />
-                        </div>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button variant="contained" color="primary" style={{ marginRight: 8 }}>Accept</Button>
-                        <Button variant="contained" color="secondary" style={{ marginRight: 8 }}>Reject</Button>
-                        <Button variant="contained" onClick={handleCloseModal}>Cancel</Button>
-                    </div>
-                </div>
-            </Modal>
+                </Modal>
+            )}
 
 
         </>

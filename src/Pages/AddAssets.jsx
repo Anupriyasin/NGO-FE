@@ -6,6 +6,8 @@ import "../components/Table/Table.css";
 import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
 import { Modal, Button } from "@mui/material";
+import { assettype, getAssetsName } from '../api/Users';
+
 
 const AddAssets = () => {
   const { t } = useTranslation();
@@ -14,7 +16,23 @@ const AddAssets = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [type, setType] = useState("view");
+  const [assetOptions, setAssetOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  const [AssetsTypes, setAssetsTypes] = useState([]);
+
+  useEffect(() => {
+    debugger
+    getAssetsName().then(res => {
+        if (res.status === "success") {
+            console.log("Assets data:", res.data); 
+            setAssetsTypes(res.data);
+        }
+    }).catch(err => {
+        console.error("Error fetching assets:", err);
+    });
+}, []);
+console.log("AssetsTypes.////",AssetsTypes)
   const switchButton = (type) => {
     if (type === "assign") {
       setType("assign");
@@ -35,12 +53,14 @@ const AddAssets = () => {
     register: registerForm2,
     formState: { errors: errorsForm2 },
   } = form2;
+  
+
 
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-2 px-md-4">
-        <h3 className="my-4">{t("Add Asset Type")}</h3>
+        <h3 className="my-4">{t("Add Asset")}</h3>
         <button
           className={
             type === "assign"
@@ -74,6 +94,8 @@ const AddAssets = () => {
                   className="common-input form-select"
                 >
                   <option value="">Select Intake Time</option>
+                  <option value="Purchased">Purchased</option>
+                  <option value="Donated">Donated</option>
                 </select>
               </div>
               <div className="col-md-4">
@@ -93,11 +115,15 @@ const AddAssets = () => {
                 <label className="form-label">Asset Type</label>
                 <select
                   name="asset_type"
-                  id=""
                   className="common-input form-select"
                   required
                 >
                   <option value="">Select Asset Type</option>
+                  {/* Map assetOptions to generate option elements */}
+                  {AssetsTypes.assets_name && AssetsTypes.assets_name.map((row) => (
+  <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
+))}
+
                 </select>
               </div>
             </div>
@@ -112,7 +138,7 @@ const AddAssets = () => {
                   <option value="">Select Asset Sub Type</option>
                 </select>
               </div>
-              <div className="col-md-4">
+              {/* <div className="col-md-4">
                 <label className="form-label">Asset ID</label>
                 <select
                   name="newassets"
@@ -122,13 +148,25 @@ const AddAssets = () => {
                 >
                   <option value="">Select Asset ID</option>
                 </select>
-              </div>
+              </div> */}
+
               <div className="col-md-4">
                 <label className="form-label">Asset Name</label>
                 <input
                   type="text"
                   value=""
                   name="asset_name"
+                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <div className="col-md-4">
+                <label className="form-label">Asset Quantity</label>
+                <input
+                  type="text"
+                  value=""
+                  name="asset_quantity"
                   // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                   className="form-control"
                   required
@@ -145,17 +183,7 @@ const AddAssets = () => {
                   required
                 ></textarea>
               </div>
-              <div className="col-md-4">
-                <label className="form-label">Asset quantity</label>
-                <input
-                  type="text"
-                  value=""
-                  name="asset_quantity"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
-                  className="form-control"
-                  required
-                />
-              </div>
+
               <div className="col-md-4">
                 <label className="form-label">Asset Added Date </label>
                 <input
@@ -167,8 +195,6 @@ const AddAssets = () => {
                   required
                 />
               </div>
-            </div>
-            <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
                 <label className="form-label">Amount Unit</label>
                 <input
@@ -180,6 +206,9 @@ const AddAssets = () => {
                   required
                 />
               </div>
+            </div>
+            <div className="row" style={{ marginTop: "12px" }}>
+
               <div className="col-md-4">
                 <label className="form-label">GST(%)</label>
                 <input

@@ -21,6 +21,18 @@ export const getUserDetails = async (data) =>
       return "Error - " + error;
     });
 
+
+
+export const trackreq = async (data) =>
+  await axios
+    .get("/track_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
 export const assign_dealer = async (data) =>
   await axios
     .post("/assign_dealers", data, {
@@ -36,7 +48,7 @@ export const assign_dealer = async (data) =>
     });
 
 export const AddAssetsType = async (data) =>
-  await axios 
+  await axios
     .post("/new_asset", data, {
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +74,7 @@ export const AddAssetsSubType = async (data) =>
       return "Error - " + error;
     });
 export const updateRequirement = async (data) =>
-  await axios 
+  await axios
     .post("/update_req", data, {
       headers: {
         "Content-Type": "application/json",
@@ -400,7 +412,7 @@ export const getRequirements = async () =>
       return "Error - " + error;
     });
 
-export const getRejectedRequirements = async () => 
+export const getRejectedRequirements = async () =>
   await axios
     .get('/rejected_req')
     .then(response => {
@@ -420,7 +432,7 @@ export const getAllStudents = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
-    
+
 export const getAllStaff = async () =>
   await axios
     .get("/all_staff")
