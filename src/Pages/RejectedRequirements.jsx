@@ -129,7 +129,7 @@ const RejectedRequirements = ({ role, mainId }) => {
                         </TableCell>
                         <TableCell align="left">{row.address}</TableCell>
                         <TableCell align="left">{row.quantity}</TableCell>
-                        <TableCell align="left">{row.status}</TableCell>
+                        <TableCell align="left text-danger">{"Rejected"}</TableCell>
                       </TableRow>
                     ))}
                 </TableBody>

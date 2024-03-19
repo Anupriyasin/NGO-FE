@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
-// import RightSide from '../components/RigtSide/RightSide';
-import AdminCards from "../components/Cards/AdminCards";
 import DealerCards from "../components/Cards/DealerCards";
 import TodaysOrderTable from "../components/Table/TodaysOrderTable";
 import "./Dashboard.css";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
 import AdminCharts from "../components/Charts/AdminCharts";
 import DealerCharts from "../components/Charts/DealerCharts";
 
@@ -19,7 +15,6 @@ const Dashboard = (props) => {
 
         {props.role && props.role === 1 && (
           <>
-            {/* <AdminCards /> */}
             <AdminCharts />
             {/* <TodaysOrderTable /> */}
           </>
