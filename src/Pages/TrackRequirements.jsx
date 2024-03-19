@@ -16,6 +16,25 @@ import { toast } from "react-toastify";
 import { TextField, TablePagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Modal, Button } from "@mui/material";
+// import { Typography } from '@material-ui/core';
+import { Assignment, LocalShipping, Home } from '@material-ui/icons';
+import RedeemIcon from '@mui/icons-material/Redeem';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import {
+    MDBBtn,
+    MDBCol,
+    MDBContainer,
+    MDBIcon,
+    MDBCard,
+    MDBModal,
+    MDBModalContent,
+    MDBModalDialog,
+    MDBModalHeader,
+    MDBCardBody,
+    MDBModalBody,
+    MDBRow,
+    MDBTypography,
+} from "mdb-react-ui-kit";
 
 const TrackRequirements = ({ role, mainId }) => {
     const { t } = useTranslation();
@@ -29,6 +48,10 @@ const TrackRequirements = ({ role, mainId }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [modalOpen, setModalOpen] = useState(false);
+
+    const [basicModal, setBasicModal] = useState(false);
+
+    const toggleShow = () => setBasicModal(!basicModal);
 
 
     const getAllUsers = () => {
@@ -114,12 +137,12 @@ const TrackRequirements = ({ role, mainId }) => {
         <>
             <TopLoader loading={isLoading ? "50" : "100"} />
             <div className="px-0 px-md-3">
-            <h3 className=" mt-2">{t("Track Requirements")}</h3>
+                <h3 className=" mt-2">{t("Track Requirements")}</h3>
 
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <div className='col-md-2' style={{ marginRight: "12px" }}>
                         <label htmlfor="title" className="form-label mt-4">{t('Status')}</label>
-                        <select name="saleperson" id=""  className="common-input form-select" >
+                        <select name="saleperson" id="" className="common-input form-select" >
                             <option value="0" selected="selected" >All</option>
                             {/* {salepersons.map((saleperson) => (
                                 <>
@@ -159,7 +182,8 @@ const TrackRequirements = ({ role, mainId }) => {
                                     <TableCell align="left">{t("Hostel Name")}</TableCell>
                                     <TableCell align="left">{t("Hostel Address")}</TableCell>
                                     <TableCell align="left">{t("Quantity")}</TableCell>
-                                    <TableCell align="left">{t("Status")}</TableCell>
+                                    <TableCell align="left">{t("Action")}</TableCell>
+
                                 </TableRow>
                             </TableHead>
                             {/* {!isLoading && filteredData && filteredData.length > 0 && ( */}
@@ -182,7 +206,108 @@ const TrackRequirements = ({ role, mainId }) => {
                                     </TableCell>
                                     <TableCell align="left">65</TableCell>
                                     <TableCell align="left">
-                                     Pending
+
+                                        <section>
+                                            <MDBContainer className="">
+                                                <MDBRow className="justify-content-center align-items-center text-center">
+                                                    <MDBCol>
+                                                        <MDBBtn size="" onClick={toggleShow}>
+                                                            Track your order
+                                                        </MDBBtn>
+                                                        <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
+                                                            <MDBModalDialog size="lg">
+                                                                <MDBModalContent
+                                                                    className="text-white"
+                                                                    style={{ backgroundColor: "#6d5b98", borderRadius: "10px" }}
+                                                                >
+
+                                                                    <MDBCard
+
+                                                                        className="card-stepper text-black"
+                                                                        style={{ borderRadius: "16px" }}
+                                                                    >
+                                                                        <MDBModalHeader className="border-bottom-0">
+                                                                            <MDBBtn
+                                                                                className="btn-close btn-close-white"
+                                                                                color="none"
+                                                                                onClick={toggleShow}
+                                                                            ></MDBBtn>
+                                                                        </MDBModalHeader>
+                                                                        <MDBCardBody className="p-5">
+                                                                            <div className="d-flex justify-content-between align-items-center mb-5">
+                                                                                <div>
+                                                                                    <MDBTypography tag="h5" className="mb-0">
+                                                                                        INVOICE{" "}
+                                                                                        <span className="text-primary font-weight-bold">
+                                                                                            #Y34XDHR
+                                                                                        </span>
+                                                                                    </MDBTypography>
+                                                                                </div>
+                                                                                <div className="text-end">
+                                                                                    <p className="mb-0">
+                                                                                        Expected Arrival <span>01/12/19</span>
+                                                                                    </p>
+                                                                                    <p className="mb-0">
+                                                                                        USPS{" "}
+                                                                                        <span className="font-weight-bold">
+                                                                                            234094567242423422898
+                                                                                        </span>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <ul
+                                                                                id="progressbar-2"
+                                                                                className="d-flex justify-content-between mx-0 mt-0 mb-5 px-0 pt-0 pb-2"
+                                                                            >
+                                                                                <li className="step0 active text-center" id="step1">
+                                                                                </li>
+                                                                                <li className="step0 active text-center" id="step2">
+                                                                                </li>
+                                                                                <li className="step0 active text-center" id="step3">
+                                                                                </li>
+                                                                                <li className="step0 text-muted text-end" id="step4"></li>
+                                                                            </ul>
+
+                                                                            <div className="d-flex justify-content-between">
+                                                                                <div className="d-lg-flex align-items-center">
+                                                                                    <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                                                                    <div>
+                                                                                        <p className="fw-bold mb-1">Order</p>
+                                                                                        <p className="fw-bold mb-0">Processed</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="d-lg-flex align-items-center">
+                                                                                    <RedeemIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
+                                                                                    <div className="ms-3">
+                                                                                        <p className="fw-bold mb-1">Order</p>
+                                                                                        <p className="fw-bold mb-0">Shipped</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="d-lg-flex align-items-center">
+                                                                                    <LocalShippingIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                                                                    <div className="ms-3">
+                                                                                        <p className="fw-bold mb-1">Order</p>
+                                                                                        <p className="fw-bold mb-0">En Route</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="d-lg-flex align-items-center">
+                                                                                    <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                                                                    <div className="ms-3">
+                                                                                        <p className="fw-bold mb-1">Order</p>
+                                                                                        <p className="fw-bold mb-0">Arrived</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </MDBCardBody>
+                                                                    </MDBCard>
+                                                                </MDBModalContent>
+                                                            </MDBModalDialog>
+                                                        </MDBModal>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </MDBContainer>
+                                        </section>
+
                                     </TableCell>
 
                                 </TableRow>
