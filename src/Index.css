@@ -233,7 +233,9 @@ h4 {
 }
 
 @media screen and (max-width: 768px) {
+  
     .MainDash {
+      margin-left: 0px;
         align-items: center;
 
     }

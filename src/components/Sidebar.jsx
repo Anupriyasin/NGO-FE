@@ -56,7 +56,7 @@ const App = () => {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh" ,overflow:"none"}}>
+    <div className='maindiv' style={{ display: "flex" ,overflow:"none"}}>
         <div className="bars" style={{ left: '1%', top: '1%' }} onClick={() => setExpaned(!expanded)}>
         <UilBars />
       </div>
