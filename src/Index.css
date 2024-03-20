@@ -12,6 +12,15 @@
     background-color: #102b8384;
 }
 
+#btn1 {
+  background-color: #f9a908;
+  color: white;
+}
+
+#btn1:hover {
+  background-color: #f9a908;
+}
+
 .vl {
     border-right: 2px solid #e2e2e2;
 }

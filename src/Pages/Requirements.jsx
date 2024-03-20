@@ -103,49 +103,49 @@ const Requirements = ({ role, mainId }) => {
     };
 
     updateRequirement(postData)
-    .then(response => {
+      .then(response => {
         setModalOpen(false);
         getAllrequirements();
         toast.success(response.message || "Update successful");
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.error("Error updating requirement:", error);
         toast.error(error.response.data.message);
-    });
-};
-
-
-const handleRejectWithReason = () => {
-  debugger
-  setShowRejectReason(true);
-  if (rejectReason.trim() === '') {
-    setRejectReasonError(true); // Show error message if reject reason is empty
-    return;
-  }
-
-  const postData = {
-    hostel_id: selectedRow.id,
-    requirement_id: selectedRow.requirement_id,
-    is_reject: true, // Set to true to indicate rejection
-    remarks: rejectReason // Pass the reject reason
+      });
   };
 
-  RejectRequirement(postData)
-    .then(response => {
-      setModalOpen(false);
-      getAllrequirements();
-      toast.success(response.message || "Update successful");
-    })
-    .catch(error => {
-      console.error("Error rejecting requirement:", error);
-      toast.error(error.response?.data?.message || "Failed to reject requirement");
-    });
-};
 
-const handleClearRejectReason = () => {
-  setRejectReason(''); // Clear the reject reason field
-  setRejectReasonError(false); // Reset the error state
-};
+  const handleRejectWithReason = () => {
+    debugger
+    setShowRejectReason(true);
+    if (rejectReason.trim() === '') {
+      setRejectReasonError(true); // Show error message if reject reason is empty
+      return;
+    }
+
+    const postData = {
+      hostel_id: selectedRow.id,
+      requirement_id: selectedRow.requirement_id,
+      is_reject: true, // Set to true to indicate rejection
+      remarks: rejectReason // Pass the reject reason
+    };
+
+    RejectRequirement(postData)
+      .then(response => {
+        setModalOpen(false);
+        getAllrequirements();
+        toast.success(response.message || "Update successful");
+      })
+      .catch(error => {
+        console.error("Error rejecting requirement:", error);
+        toast.error(error.response?.data?.message || "Failed to reject requirement");
+      });
+  };
+
+  const handleClearRejectReason = () => {
+    setRejectReason(''); // Clear the reject reason field
+    setRejectReasonError(false); // Reset the error state
+  };
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
@@ -205,14 +205,35 @@ const handleClearRejectReason = () => {
                         <TableCell align="left">{row.date}</TableCell>
                         <TableCell align="left">
                           {" "}
+                          <Button
+                            variant="contained"
+                            color="success"
+                            style={{ marginLeft: 8 }}
+                            onClick={handleAccept}
+                          >
+                            Accept
+                          </Button>
                           <Typography
                             variant="button"
                             className="primary-btn btn"
-                            id="btn"
+                            style={{ marginLeft: 8,marginRight: 8  }}
+                            id="btn1"
                             onClick={() => handleUpdateClick(row)}
                           >
-                            Update Status
+                            Modified
                           </Typography>
+
+                       
+                          <Button
+                            variant="contained"
+                            // color="secondary"
+                            style={{ marginRight: 8, backgroundColor: "red" }}
+                            onClick={() => { handleRejectWithReason(); handleUpdateClick(row); }}
+                          
+                          >
+                            Reject
+                          </Button>
+
                         </TableCell>
                       </TableRow>
                     ))}
@@ -242,103 +263,103 @@ const handleClearRejectReason = () => {
         </div>
       </div>
       {selectedRow && (
-    <Modal
-    open={modalOpen}
-    onClose={handleCloseModal}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
-  >
-    <div
-      style={{
-        position: "absolute",
-        top: "30%",
-        left: "52%",
-        transform: "translate(-50%, -50%)",
-        maxWidth: "90vw", 
-        width: "70%", 
-        backgroundColor: "#ffffff",
-        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-        borderRadius: 8,
-        padding: 20,
-      }}
-    >
-       <Typography variant="h6" gutterBottom>
-         Update Status
-       </Typography>
-       <div className="row mb-3">
-         <div className="col-md-6">
-           <label className="form-label">Requirement</label>
-           <input
-             type="text"
-             name="requirement"
-             defaultValue={selectedRow.requirement_name}
-             className="form-control"
-             readOnly
-             required
-           />
-         </div>
-         <div className="col-md-6">
-           <label className="form-label">Hostel Name</label>
-           <input
-             type="text"
-             name="hostel-name"
-             defaultValue={selectedRow.hostel_name}
-             className="form-control"
-             readOnly
-             required
-           />
-         </div>
-       </div>
-       <div className="row mb-3">
-         <div className="col-md-6">
-           <label className="form-label">Hostel Address</label>
-           <input
-             type="text"
-             name="hostel-address"
-             defaultValue={selectedRow.address}
-             className="form-control"
-             readOnly
-             required
-           />
-         </div>
-         <div className="col-md-6">
-           <label className="form-label">Quantity</label>
-           <input
-             type="text"
-             name="quantity"
-             defaultValue={selectedRow.quantity}
-             className="form-control"
-             onChange={(e) => {
-               setSelectedRow((prevRow) => ({
-                 ...prevRow,
-                 quantity: e.target.value,
-               }));
-             }}
-             required
-           />
-         </div>
-       </div>
-       {showRejectReason && (
-        <div className="mb-3">
-        <label className="form-label">Reject Reason</label>
-        <input
-          type="text"
-          name="rejectreason"
-          value={rejectReason}
-          className={`form-control ${rejectReasonError ? 'border-danger' : ''}`}
-          onChange={(e) => setRejectReason(e.target.value)}
-          onKeyUp={(e) => {
-            if (e.target.value.length >= 5) {
-              setRejectReasonError(false);
-            }
-          }}
-          required
-        />
-        {rejectReasonError && <small className="text-danger">Reject reason is required.</small>}
-      </div>
-       )}
-       <div style={{ display: "flex", justifyContent: "center" }}>
-         <Button
+        <Modal
+          open={modalOpen}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "30%",
+              left: "52%",
+              transform: "translate(-50%, -50%)",
+              maxWidth: "90vw",
+              width: "70%",
+              backgroundColor: "#ffffff",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+              borderRadius: 8,
+              padding: 20,
+            }}
+          >
+            <Typography variant="h6" gutterBottom>
+              Update Status
+            </Typography>
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label className="form-label">Requirement</label>
+                <input
+                  type="text"
+                  name="requirement"
+                  defaultValue={selectedRow.requirement_name}
+                  className="form-control"
+                  readOnly
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <label className="form-label">Hostel Name</label>
+                <input
+                  type="text"
+                  name="hostel-name"
+                  defaultValue={selectedRow.hostel_name}
+                  className="form-control"
+                  readOnly
+                  required
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label className="form-label">Hostel Address</label>
+                <input
+                  type="text"
+                  name="hostel-address"
+                  defaultValue={selectedRow.address}
+                  className="form-control"
+                  readOnly
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <label className="form-label">Quantity</label>
+                <input
+                  type="text"
+                  name="quantity"
+                  defaultValue={selectedRow.quantity}
+                  className="form-control"
+                  onChange={(e) => {
+                    setSelectedRow((prevRow) => ({
+                      ...prevRow,
+                      quantity: e.target.value,
+                    }));
+                  }}
+                  required
+                />
+              </div>
+            </div>
+            {showRejectReason && (
+              <div className="mb-3">
+                <label className="form-label">Reason for Rejection</label>
+                <input
+                  type="text"
+                  name="rejectreason"
+                  value={rejectReason}
+                  className={`form-control ${rejectReasonError ? 'border-danger' : ''}`}
+                  onChange={(e) => setRejectReason(e.target.value)}
+                  onKeyUp={(e) => {
+                    if (e.target.value.length >= 5) {
+                      setRejectReasonError(false);
+                    }
+                  }}
+                  required
+                />
+                {rejectReasonError && <small className="text-danger">Reason for Rejection is required.</small>}
+              </div>
+            )}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              {/* <Button
            variant="contained"
            color="primary"
            style={{ marginRight: 8 }}
@@ -353,14 +374,22 @@ const handleClearRejectReason = () => {
            onClick={handleRejectWithReason}
          >
            Reject
+         </Button> */}
+              {/* <Button variant="contained" onClick={handleCloseModal}>
+                Cancel
+              </Button> */}
+              <Button
+           variant="contained"
+           color="primary"
+           style={{ marginRight: 8 }}
+           onClick={handleAccept}
+         >
+           Save
          </Button>
-         <Button variant="contained" onClick={handleCloseModal}>
-           Cancel
-         </Button>
-       </div>
-     </div>
-   </Modal>
-          )}
+            </div>
+          </div>
+        </Modal>
+      )}
     </>
   );
 };
