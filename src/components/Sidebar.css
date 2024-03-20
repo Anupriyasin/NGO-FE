@@ -146,7 +146,9 @@
     display: none;
   }
 }
-
+.maindiv{
+  height: 100vh;
+}
 @media screen and (max-width: 768px) {
   .sidebar{
     position: fixed;
@@ -161,6 +163,9 @@
     padding-bottom: 1rem;
 
   }
+  .maindiv{
+    height: 0vh;
+  }
   .menuItem>span{
     display: block;
   }
@@ -170,7 +175,7 @@
 
   /* .menuItem {
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 600;me
     margin-left: 25px;
 
   } */
