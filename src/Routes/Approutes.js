@@ -15,6 +15,7 @@ import RejectedRequirements from '../Pages/RejectedRequirements'
 import AddAssetType from '../Pages/AddAssetType'
 import AddAssets from '../Pages/AddAssets'
 import AdminDetails from '../Pages/AdminDetails'
+import HostelLogin from '../Pages/HostelLogin'
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
@@ -99,6 +100,12 @@ const AppRoutes = () => {
         {
             path: '/rejectedrequirements',
             component: RejectedRequirements,
+            allowedRoles: [1]
+        }
+        ,
+        {
+            path: '/create-hostel-login',
+            component: HostelLogin,
             allowedRoles: [1]
         }
     ];

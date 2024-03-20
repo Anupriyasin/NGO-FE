@@ -42,7 +42,7 @@ const Navbar = ({ totalItems, role, userData }) => {
         }
         // set roles
         if (userData.data.role_id === 1) {
-          setRoleName("Administration");
+          setRoleName("Head Office");
         }
         else if (userData.data.role_id === 2) {
           setRoleName("Sales");

@@ -149,19 +149,8 @@ const TrackRequirements = ({ role, mainId }) => {
             <div className="px-0 px-md-3">
                 <h3 className=" mt-2">{t("Track Requirements")}</h3>
 
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <div className='col-md-2' style={{ marginRight: "12px" }}>
-                        <label htmlfor="title" className="form-label mt-4">{t('Status')}</label>
-                        <select name="saleperson" id="" className="common-input form-select" >
-                            <option value="0" selected="selected" >All</option>
-                            {/* {salepersons.map((saleperson) => (
-                                <>
-                                    <option value={saleperson.user_id}>{saleperson.first_name}</option>
-                                </>
-                            ))} */}
-                        </select>
-
-                    </div>
+                <div style={{ display: "flex", justifyContent: "end" }}>
+    
 
                     <div className=''>
                         <TextField
