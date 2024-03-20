@@ -45,24 +45,20 @@ const App = () => {
     }, 500);
   }
 
-  const [expanded, setExpaned] = useState(false);
-  const sidebarVariants = {
-    true: {
-      left: '0'
-    },
-    false: {
-      left: '-60%'
-    }
+  const [expanded, setExpaned] = useState(true);
+ 
+  function toggleSidebar() {
+    setExpaned(!expanded);
   }
-
   return (
     <div className='maindiv' style={{ display: "flex" ,overflow:"none"}}>
-        <div className="bars" style={{ left: '1%', top: '1%' }} onClick={() => setExpaned(!expanded)}>
+     <div className="bars" style={{ left: '1%', top: '1%' }} onClick={toggleSidebar}>
         <UilBars />
       </div>
+
       <Sidebar className="sidebar hide-on-print"
-       variants={sidebarVariants}
-       animate={window.innerWidth <= 768 ? `${expanded}` : ''}
+        collapsed={!expanded} // Ensure the sidebar collapses when not expanded
+        style={{ left: expanded ? '0' : '-250px' }} // Adjust the position based on 'expanded' state
       >
         <Menu>
         {/* <MenuItem className="menu1" icon={<MenuRoundedIcon />}> */}
@@ -83,7 +79,7 @@ const App = () => {
             <MenuItem icon={<CancelIcon   />} className={activeMenu === '/rejectedrequirements' ? 'menuItem active ' : 'menuItem'}><Link to="/rejectedrequirements">Rejected Requirements</Link></MenuItem>
           </SubMenu>
           <SubMenu label="Manage Asset" className='SubMenu' icon={<BusinessIcon  />}>
-            <MenuItem icon={<AddCircleOutlineIcon  />} className={activeMenu === '/add-asset-type' ? 'menuItem active ' : 'menuItem'}> <Link to="/add-asset-type">Add Asset Master </Link></MenuItem>
+            <MenuItem icon={<AddCircleOutlineIcon  />} className={activeMenu === '/add-asset-type' ? 'menuItem active ' : 'menuItem'}> <Link to="/add-asset-type">Create Asset Master </Link></MenuItem>
             <MenuItem icon={<BusinessCenterIcon  ndedIcon />} className={activeMenu === '/add-assets' ? 'menuItem active ' : 'menuItem'}> <Link to="/add-assets">Add Asset-Inverntory</Link></MenuItem>
           </SubMenu>
           <SubMenu label="Report" icon={<EqualizerIcon   />} className='SubMenu'>
