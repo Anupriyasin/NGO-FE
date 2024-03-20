@@ -44,7 +44,7 @@ const AdminCharts = ({ data1, title }) => {
   const [students, setStudents] = useState(0);
   const [staff, setStaff] = useState(0);
   const [hostels, setHostels] = useState(0);
-  const allHostels = [];
+  const [allHostels, setAllHostels] = useState([]);
 
   const animatedComponents = makeAnimated();
 
@@ -65,20 +65,7 @@ const AdminCharts = ({ data1, title }) => {
 
   useEffect(() => {
     getDashboardData();
-    //     // check === false ? setCheck(true) : setCheck(false)
-    //     console.log(check)
-    //     alldealers()
-    //         .then(res => {
-    //             setDealers(res.data)
-    //         })
-    //     let productData = {
-    //         categoryID: 0,
-    //         searchKey: ""
-    //     }
-    //     get_products(productData)
-    //         .then(res => {
-    //             setAllProducts(res.data)
-    //         })
+    // check === false ? setCheck(true) : setCheck(false)
   }, []);
 
   // const handleCheck = (e) => {
@@ -114,13 +101,14 @@ const AdminCharts = ({ data1, title }) => {
       .then((res) => {
         console.log(res)
         setHostels(res.data[0].hostel);
-        for (let i = 0; i <= res.data.length; i++) {
-          allHostels.push({
+        let hostelData = []
+        for (let i = 0; i < res.data.length; i++) {
+          hostelData.push({
             value: res.data[i].hostel_id,
             label: res.data[i].hostel_name,
           });
-          console.log(allHostels);
         }
+        setAllHostels(hostelData)
         setIsLoading(false);
       })
       .catch((error) => {
@@ -473,9 +461,9 @@ const AdminCharts = ({ data1, title }) => {
 
       <AdminCards students={students} staff={staff} hostels={hostels} />
 
-      <div className="bg-white rounded col-sm-12 col-md-5 m-3">
+      {/* <div className="bg-white rounded col-sm-12 col-md-5 m-3">
         <Charts />
-      </div>
+      </div> */}
 
       {/* <div className="col-sm-12 col-md-12 mb-4">
                 {renderChart(monthlySalesOptions, salesEmpty)}
