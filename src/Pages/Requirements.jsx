@@ -220,7 +220,7 @@ const Requirements = ({ role, mainId }) => {
                             id="btn1"
                             onClick={() => handleUpdateClick(row)}
                           >
-                            Modified
+                            Modify
                           </Typography>
 
                        
