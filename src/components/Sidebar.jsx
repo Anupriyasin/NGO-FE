@@ -16,6 +16,11 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import ShieldRoundedIcon from "@mui/icons-material/ShieldRounded";
 import MonetizationOnRoundedIcon from "@mui/icons-material/MonetizationOnRounded";
 import { logoutApi } from "../api/Users";
+import { UilBars } from "@iconscout/react-unicons";
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+
+
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -37,27 +42,51 @@ const App = () => {
     }, 500);
   }
 
+  const [expanded, setExpaned] = useState(false);
+  const sidebarVariants = {
+    true: {
+      left: '0'
+    },
+    false: {
+      left: '-60%'
+    }
+  }
+
   return (
     <div style={{ display: "flex", height: "100vh" ,overflow:"none"}}>
-      <Sidebar className="app">
+        <div className="bars" style={{ left: '1%', top: '1%' }} onClick={() => setExpaned(!expanded)}>
+        <UilBars />
+      </div>
+      <Sidebar className="sidebar hide-on-print"
+       variants={sidebarVariants}
+       animate={window.innerWidth <= 768 ? `${expanded}` : ''}
+      >
         <Menu>
+        {/* <MenuItem className="menu1" icon={<MenuRoundedIcon />}> */}
+      
           <div className="logo">
             <span>
               <img src={title} alt="title" />
             </span>
           </div>
+          {/* </MenuItem> */}
           <MenuItem icon={<GridViewRoundedIcon />} className={activeMenu === '/dashboard' ? 'menuItem active ' : 'menuItem'}><Link to="/dashboard">Dashboard</Link></MenuItem>
-          <SubMenu label="Requirement" icon={<WalletRoundedIcon />}>
+          <SubMenu label="Manage Login" icon={<WalletRoundedIcon  />} className='SubMenu'>
+            <MenuItem icon={<AccountBalanceRoundedIcon />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">Create Hostel Login</Link></MenuItem>
+          </SubMenu>
+          <SubMenu label="Requirement" icon={<PlaylistAddCheckIcon  />} className='SubMenu'>
             <MenuItem icon={<AccountBalanceRoundedIcon />} className={activeMenu === '/newrequirements' ? 'menuItem active ' : 'menuItem'}><Link to="/newrequirements">New Requirement</Link></MenuItem>
             <MenuItem icon={<SavingsRoundedIcon />} className={activeMenu === '/trackrequirements' ? 'menuItem active ' : 'menuItem'}><Link to="/trackrequirements">Track Requirements</Link></MenuItem>
             <MenuItem icon={<SavingsRoundedIcon />} className={activeMenu === '/rejectedrequirements' ? 'menuItem active ' : 'menuItem'}><Link to="/rejectedrequirements">Rejected Requirements</Link></MenuItem>
           </SubMenu>
-          <SubMenu label="Manage Asset Master" icon={<SettingsApplicationsRoundedIcon />}>
-            <MenuItem icon={<AccountCircleRoundedIcon />} className={activeMenu === '/add-assets' ? 'menuItem active ' : 'menuItem'}> <Link to="/add-assets">Add Asset</Link></MenuItem>
+          <SubMenu label="Manage Asset Master" className='SubMenu' icon={<SettingsApplicationsRoundedIcon />}>
             <MenuItem icon={<ShieldRoundedIcon />} className={activeMenu === '/add-asset-type' ? 'menuItem active ' : 'menuItem'}> <Link to="/add-asset-type">Add Asset Type</Link></MenuItem>
+            <MenuItem icon={<AccountCircleRoundedIcon />} className={activeMenu === '/add-assets' ? 'menuItem active ' : 'menuItem'}> <Link to="/add-assets">Add Asset-Inverntory</Link></MenuItem>
           </SubMenu>
-          <MenuItem icon={<MonetizationOnRoundedIcon />} className={activeMenu === '/' ? 'menuItem active ' : 'menuItem'}><Link to="/">Report</Link></MenuItem>
-          <MenuItem icon={<MonetizationOnRoundedIcon />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">Create Hostel Login</Link></MenuItem>
+          <SubMenu label="Report" icon={<WalletRoundedIcon  />} className='SubMenu'>
+          <MenuItem icon={<MonetizationOnRoundedIcon />} className={activeMenu === '//hostel-report' ? 'menuItem active ' : 'menuItem'}><Link to="/hostel-report">Hostel Wise Report</Link></MenuItem>
+          </SubMenu>
+          
           <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}> Logout </MenuItem>
         </Menu>
       </Sidebar>
