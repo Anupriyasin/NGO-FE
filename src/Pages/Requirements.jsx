@@ -209,27 +209,27 @@ const Requirements = ({ role, mainId }) => {
                             variant="contained"
                             color="success"
                             style={{ marginLeft: 8 }}
-                            onClick={handleAccept(row)}
+                            onClick={() => handleAccept(row)} 
                           >
                             Accept
                           </Button>
                           <Typography
                             variant="button"
                             className="primary-btn btn"
-                            style={{ marginLeft: 8,marginRight: 8  }}
+                            style={{ marginLeft: 8, marginRight: 8 }}
                             id="btn1"
                             onClick={() => handleUpdateClick(row)}
                           >
                             Modify
                           </Typography>
 
-                       
+
                           <Button
                             variant="contained"
                             // color="secondary"
                             style={{ marginRight: 8, backgroundColor: "red" }}
                             onClick={() => { handleRejectWithReason(); handleUpdateClick(row); }}
-                          
+
                           >
                             Reject
                           </Button>
@@ -379,13 +379,13 @@ const Requirements = ({ role, mainId }) => {
                 Cancel
               </Button> */}
               <Button
-           variant="contained"
-           color="primary"
-           style={{ marginRight: 8 }}
-           onClick={handleAccept}
-         >
-           Save
-         </Button>
+                variant="contained"
+                color="primary"
+                style={{ marginRight: 8 }}
+              //  onClick={handleAccept}
+              >
+                Save
+              </Button>
             </div>
           </div>
         </Modal>
