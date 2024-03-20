@@ -6,7 +6,7 @@ import "../components/Table/Table.css";
 import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
 import { Modal, Button } from "@mui/material";
-import { subassets, getAssetsName } from '../api/Users';
+import { getAssetsName } from '../api/Users';
 
 
 const HostelLogin = () => {
@@ -55,34 +55,34 @@ const HostelLogin = () => {
 
     //   fetchData();
     // }, []);
-    const AssetTypehandle = async (e) => {
-        debugger;
-        const newAssetType = e.target.value;
-        setAssetsTypes((prevRow) => ({
-            ...prevRow,
-            asset_type: newAssetType,
-        }));
+    // const AssetTypehandle = async (e) => {
+    //     debugger;
+    //     const newAssetType = e.target.value;
+    //     setAssetsTypes((prevRow) => ({
+    //         ...prevRow,
+    //         asset_type: newAssetType,
+    //     }));
 
-        try {
-            const response = await subassets({ asset_id: newAssetType });
-            if (Array.isArray(response)) {
-                setAssetsSubTypes(response);
-            } else {
-                console.error("Invalid response format for subassets:", response);
-            }
-        } catch (error) {
-            console.error("Error fetching subassets:", error);
-        }
-    };
+    //     try {
+    //         const response = await subassets({ asset_id: newAssetType });
+    //         if (Array.isArray(response)) {
+    //             setAssetsSubTypes(response);
+    //         } else {
+    //             console.error("Invalid response format for subassets:", response);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error fetching subassets:", error);
+    //     }
+    // };
 
 
-    const switchButton = (type) => {
-        if (type === "assign") {
-            setType("assign");
-        } else {
-            setType("view");
-        }
-    };
+    // const switchButton = (type) => {
+    //     if (type === "assign") {
+    //         setType("assign");
+    //     } else {
+    //         setType("view");
+    //     }
+    // };
 
     const form1 = useForm();
     const form2 = useForm();
