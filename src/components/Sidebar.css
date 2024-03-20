@@ -12,12 +12,7 @@
 
 /* Sidebar.css */
 
-.active {
-  background-color: #102a83;
-  color: white !important; /* Set text color to white */
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
+
 .menuItem.active {
   background-color: #102a83; 
   color: white; 
