@@ -176,6 +176,7 @@ const handleClearRejectReason = () => {
                   <TableCell align="left">{t("Hostel Name")}</TableCell>
                   <TableCell align="left">{t("Hostel Address")}</TableCell>
                   <TableCell align="left">{t("Quantity")}</TableCell>
+                  <TableCell align="left">{t("Raised On")}</TableCell>
                   <TableCell align="left">{t("Status")}</TableCell>
                 </TableRow>
               </TableHead>
@@ -201,6 +202,7 @@ const handleClearRejectReason = () => {
                         </TableCell>
                         <TableCell align="left">{row.address}</TableCell>
                         <TableCell align="left">{row.quantity}</TableCell>
+                        <TableCell align="left">{row.date}</TableCell>
                         <TableCell align="left">
                           {" "}
                           <Typography

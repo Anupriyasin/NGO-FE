@@ -131,6 +131,7 @@ th {
 .card-stepper {
   z-index: 0
 }
+
 #progressbar-2 {
   color: #455A64;
 }
@@ -138,17 +139,43 @@ th {
 #progressbar-2 li {
   list-style-type: none;
   font-size: 13px;
-  width: 50%; /* Adjusted width for two items */
+  width: 33.33%;
   float: left;
   position: relative;
 }
 
-#progressbar-2 #step1:before,
-#progressbar-2 #step2:before {
-  content: '\2713';
+#progressbar-2 #step1:before {
+  content: "\2713";
   font-family: "Font Awesome 5 Free";
   color: #fff;
   width: 37px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+#progressbar-2 #step2:before {
+  content: "\2713";
+  font-family: "Font Awesome 5 Free";
+  color: #fff;
+  width: 37px;
+}
+
+#progressbar-2 #step3:before {
+  content: "\2713";
+  font-family: "Font Awesome 5 Free";
+  color: #fff;
+  width: 37px;
+  margin-right: 0;
+  text-align: center;
+}
+
+#progressbar-2 #step4:before {
+  content: "\2713";
+  font-family: "Font Awesome 5 Free";
+  color: #fff;
+  width: 37px;
+  margin-right: 0;
+  text-align: center;
 }
 
 #progressbar-2 li:before {
@@ -170,13 +197,31 @@ th {
   top: 15px;
   z-index: -1;
 }
-#progressbar-2 li:nth-child(2):after {
-  left: 0;
-  width: 0;
+
+#progressbar-2 li:nth-child(1):after {
+  left: 1%;
+  width: 100%
 }
-#progressbar-2 li:nth-child(1):after{
+
+#progressbar-2 li:nth-child(2):after {
   left: 1%;
   width: 100%;
+}
+
+#progressbar-2 li:nth-child(3):after {
+  left: 1%;
+  width: 100%;
+  background: #c5cae9 !important;
+}
+
+#progressbar-2 li:nth-child(4) {
+  left: 0;
+  width: 37px;
+}
+
+#progressbar-2 li:nth-child(4):after {
+  left: 0;
+  width: 0;
 }
 
 #progressbar-2 li.active:before,

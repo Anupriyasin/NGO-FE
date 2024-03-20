@@ -108,7 +108,7 @@ function myfunction (e){
                   <label className="form-label">{t('Role')} *</label>
                   <select name="role" onClick={myfunction}  className='form-select' {...register("role", { required: true })}>
                     <option value=""  selected={true}>{t('Select Role')} </option>
-                    <option value="admin">Admin</option>
+                    <option value="admin">Head Office</option>
                     <option value="hostel">Hostel</option>
                   </select>
                   <span className='error-text'>

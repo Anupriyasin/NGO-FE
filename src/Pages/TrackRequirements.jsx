@@ -287,49 +287,84 @@ const TrackRequirements = ({ role, mainId }) => {
                         </div> */}
                         </div>
                         <ul id="progressbar-2" class="d-flex justify-content-between mx-0 mt-0 mb-3 px-0 pt-0 pb-2">
+                            {/* <li className={`step0 text-center ${activeStep == 1 ? 'active' : ''}`} id="step1"></li>
                             <li className={`step0 text-center ${activeStep == 1 ? 'active' : ''}`} id="step1"></li>
-                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step2"></li>
-                            
+                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step2"></li> */}
+                            <li className={`step0 text-center ${activeStep == 1 ? 'active' : ''}`} id="step1"></li>
+                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`}  id="step2"></li>
+                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`}  id="step3"></li>
+                            <li className={`step0 text-center ${approveStep == 2 ? 'active' : ''}`}  id="step4"></li>
                         </ul>
 
-
                         <div className="d-flex justify-content-between mb-5">
+                            <div className="d-lg-flex align-items-center">
+                            <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <div>
+                                    <p className="fw-bold mb-1">Request</p>
+                                    <p className="fw-bold mb-0">Raised</p>
+                                </div>
+                            </div>
+                            <div className="d-lg-flex align-items-center">
+                            <RedeemIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <div className="ms-3">
+                                    <p className="fw-bold mb-1">Request</p>
+                                    <p className="fw-bold mb-0">Approved</p>
+                                </div>
+                            </div>
+                            <div className="d-lg-flex align-items-center">
+                            <LocalShippingIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
+                                <div className="ms-3">
+                                    <p className="fw-bold mb-1">Under</p>
+                                    <p className="fw-bold mb-0">Processing</p>
+                                </div>
+                            </div>
+                            <div className="d-lg-flex align-items-center">
+                            <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <div className="ms-3">
+                                    {/* <p className="fw-bold mb-1">Request</p> */}
+                                    <p className="fw-bold mb-0">Delivered</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {/* <div className="d-flex justify-content-between mb-5">
                             <div className="d-lg-flex align-items-center">
                                 <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                                 <div>
                                     <p className="fw-bold mb-1">Requirement</p>
-                                    <p className="fw-bold mb-0">Request</p>
+                                    <p className="fw-bold mb-0">Raised</p>
                                 </div>
                             </div>
-                             <div className="d-lg-flex align-items-center">
-                            <LocalShippingIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
-                            <div className="ms-3">
-                                <p className="fw-bold mb-1">Request</p>
-                                <p className="fw-bold mb-0">Processing</p>
+                            <div className="d-lg-flex align-items-center">
+                                <LocalShippingIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <div className="ms-3">
+                                    <p className="fw-bold mb-1">Request</p>
+                                    <p className="fw-bold mb-0">Processing</p>
+                                </div>
                             </div>
-                        </div>
-                            <div className="d-lg-flex align-items-center " style={{marginLeft:"-20px"}}>
+                            <div className="d-lg-flex align-items-center " >
                                 <RedeemIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
                                 <div className="ms-3">
                                     <p className="fw-bold mb-1">Requirement</p>
                                     <p className="fw-bold mb-0">Approved</p>
                                 </div>
                             </div>
-                            {/* <div className="d-lg-flex align-items-center">
+                            <div className="d-lg-flex align-items-center">
                             <LocalShippingIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                             <div className="ms-3">
                                 <p className="fw-bold mb-1">Order</p>
                                 <p className="fw-bold mb-0">En Route</p>
                             </div>
-                        </div> */}
-                            {/* <div className="d-lg-flex align-items-center">
+                        </div>
+                            <div className="d-lg-flex align-items-center">
                                 <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                                 <div className="ms-3">
                                     <p className="fw-bold mb-1">Order</p>
                                     <p className="fw-bold mb-0">Arrived</p>
                                 </div>
-                            </div> */}
-                        </div>
+                            </div>
+                        </div> */}
                     </div>
                 </Modal>
             )}
