@@ -75,6 +75,19 @@ export const AddAssetsSubType = async (data) =>
       return "Error - " + error;
     });
 
+export const AddAsset = async (data) =>
+  await axios
+    .post("/new_inventory", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 
 export const subassets = async (data) =>
   await axios
