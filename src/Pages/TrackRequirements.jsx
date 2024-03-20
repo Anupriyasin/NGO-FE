@@ -64,6 +64,7 @@ const TrackRequirements = ({ role, mainId }) => {
             .then(res => {
                 if (res.status === "success") {
                     settrack(res.data);
+                    setIsLoading(false)
                 }
             })
             .catch(err => {
