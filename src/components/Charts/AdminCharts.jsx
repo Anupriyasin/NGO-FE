@@ -26,6 +26,7 @@ import { AgChartsReact } from "ag-charts-react";
 import AdminCards from "../Cards/AdminCards";
 
 import { getAllHostels, getAllStaff, getAllStudents } from "../../api/Users";
+import Map from "../Map/Map";
 
 const AdminCharts = ({ data1, title }) => {
   const { t } = useTranslation();
@@ -460,6 +461,7 @@ const AdminCharts = ({ data1, title }) => {
       </div>
 
       <AdminCards students={students} staff={staff} hostels={hostels} />
+      <Map />
 
       {/* <div className="bg-white rounded col-sm-12 col-md-5 m-3">
         <Charts />
