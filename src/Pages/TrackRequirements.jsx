@@ -268,10 +268,10 @@ const TrackRequirements = ({ role, mainId }) => {
                         <div className="d-flex justify-content-between align-items-center mb-5">
                             <div>
                                 <MDBTypography tag="h5" className="mb-0">
-                                    INVOICE{" "}
-                                    <span className="text-primary font-weight-bold">
+                                    Tracker{" "}
+                                    {/* <span className="text-primary font-weight-bold">
                                         #Y34XDHR
-                                    </span>
+                                    </span> */}
                                 </MDBTypography>
                             </div>
                             {/* <div className="text-end">
@@ -297,14 +297,21 @@ const TrackRequirements = ({ role, mainId }) => {
                             <div className="d-lg-flex align-items-center">
                                 <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                                 <div>
-                                    <p className="fw-bold mb-1">Order</p>
+                                    <p className="fw-bold mb-1">Requirement</p>
                                     <p className="fw-bold mb-0">Request</p>
                                 </div>
                             </div>
+                             <div className="d-lg-flex align-items-center">
+                            <LocalShippingIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                            <div className="ms-3">
+                                <p className="fw-bold mb-1">Request</p>
+                                <p className="fw-bold mb-0">Processing</p>
+                            </div>
+                        </div>
                             <div className="d-lg-flex align-items-center " style={{marginLeft:"-20px"}}>
                                 <RedeemIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
                                 <div className="ms-3">
-                                    <p className="fw-bold mb-1">Order</p>
+                                    <p className="fw-bold mb-1">Requirement</p>
                                     <p className="fw-bold mb-0">Approved</p>
                                 </div>
                             </div>
