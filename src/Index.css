@@ -46,6 +46,7 @@
 
 .MainDash {
     /* padding-top: 1rem; */
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: start;

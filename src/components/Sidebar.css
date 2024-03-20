@@ -16,6 +16,7 @@
 .menuItem.active {
   background-color: #102a83; 
   color: white; 
+  font-size: 13px;
   /* display: flex; */
   /* align-items: center;
   gap: 1rem;
@@ -24,7 +25,6 @@
   /* position: relative;
   /* transition: all 300ms ease; */
   border-radius: 0.7rem;
-  font-size: 14px;
 }
 .css-1tqrhto >.ps-menu-button:hover {
   background-color:#8e95ae !important;
@@ -43,6 +43,13 @@
 }
  a:hover {
   color: white; 
+}
+.menuItem{
+  font-size: 13px;
+}
+
+.SubMenu {
+  font-size: 13px;
 }
 
 
@@ -190,4 +197,28 @@ a{
 
 a:active{
   color: white !important;
+}
+.css-wx7wi4{
+  margin-right:0px !important;
+}
+
+.css-1tqrhto >.ps-menu-button {
+    padding-right: 10px !important;
+    padding-left: 20px !important;
+    height:35px !important;
+    margin-top: 10px !important;
+}
+
+.css-1t8x7v1 >.ps-menu-button{
+  padding-right: 10px !important;
+    padding-left: 20px !important;
+    height:35px !important;
+    margin-top: 10px !important;
+}
+
+.css-16jesut >.ps-menu-button{
+  padding-right: 10px !important;
+  padding-left: 20px !important;
+  height:35px !important;
+  margin-top: 10px !important;
 }
