@@ -31,7 +31,7 @@ function App() {
             <div className="d-flex row">
               <h5 className="fw-bold">{"Hostel Name"}</h5>
               <span className="d-flex">
-                <p><span className="fw-bold">Requirement:</span> {"requiremnet name"}</p>
+                <p><span className="fw-bold">Requirement:</span> {"Requirement name"}</p>
               </span>
               <span className="d-flex" style={{ marginTop: "-20px" }}>
                 <p><span className="fw-bold">Quantity:</span> {"Total Quantity"}</p>
