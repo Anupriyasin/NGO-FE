@@ -60,8 +60,9 @@ export const AddAssetsType = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+
 export const AddAssetsSubType = async (data) =>
-  await axios 
+  await axios
     .post("/new_asset_sub_type", data, {
       headers: {
         "Content-Type": "application/json",
@@ -73,6 +74,22 @@ export const AddAssetsSubType = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+
+
+export const subassets = async (data) =>
+  await axios
+    .post("/get_asset_sub_type", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
 export const updateRequirement = async (data) =>
   await axios
     .post("/update_req", data, {

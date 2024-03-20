@@ -16,7 +16,7 @@ import { TextField, TablePagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Modal, Button, Typography } from "@mui/material";
 
-const Requirements = ({ role, mainId }) => {
+const HostelReport = ({ role, mainId }) => {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -151,7 +151,7 @@ const Requirements = ({ role, mainId }) => {
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-          <h3 className="">{t("New Requirements")}</h3>
+          <h3 className="">{t("Hostel Wise Report")}</h3>
           <TextField
             label={t("Search")}
             variant="outlined"
@@ -172,12 +172,14 @@ const Requirements = ({ role, mainId }) => {
               <TableHead>
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
-                  <TableCell align="left">{t("Requirement")}</TableCell>
                   <TableCell align="left">{t("Hostel Name")}</TableCell>
-                  <TableCell align="left">{t("Hostel Address")}</TableCell>
-                  <TableCell align="left">{t("Quantity")}</TableCell>
-                  <TableCell align="left">{t("Raised On")}</TableCell>
-                  <TableCell align="left">{t("Status")}</TableCell>
+                  <TableCell align="left">{t("Email ID")}</TableCell>
+                  <TableCell align="left">{t("Registration No")}</TableCell>
+                  <TableCell align="left">{t("Address 1")}</TableCell>
+                  <TableCell align="left">{t("Address 2")}</TableCell>
+                  <TableCell align="left">{t("Distric")}</TableCell>
+                  <TableCell align="left">{t("Block")}</TableCell>
+
                 </TableRow>
               </TableHead>
               {!isLoading && filteredData && filteredData.length > 0 && (
@@ -394,4 +396,4 @@ const Requirements = ({ role, mainId }) => {
   );
 };
 
-export default Requirements;
+export default HostelReport;
