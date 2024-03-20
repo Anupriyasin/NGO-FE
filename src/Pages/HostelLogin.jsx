@@ -27,13 +27,13 @@ const HostelLogin = () => {
 
 
 
-    const switchButton = (type) => {
-        if (type === "assign") {
-            setType("assign");
-        } else {
-            setType("view");
-        }
-    };
+    // const switchButton = (type) => {
+    //     if (type === "assign") {
+    //         setType("assign");
+    //     } else {
+    //         setType("view");
+    //     }
+    // };
 
     const form1 = useForm();
     const form2 = useForm();
