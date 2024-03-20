@@ -6,7 +6,6 @@ import "../components/Table/Table.css";
 import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
 import { Modal, Button } from "@mui/material";
-import { subassets, getAssetsName } from '../api/Users';
 
 
 const HostelLogin = () => {
@@ -23,57 +22,9 @@ const HostelLogin = () => {
     const [AssetsSubTypes, setAssetsSubTypes] = useState([]);
 
 
-    useEffect(() => {
-        debugger
-        getAssetsName().then(res => {
-            if (res.status === "success") {
-                console.log("Assets data:", res.data);
-                setAssetsTypes(res.data);
-            }
-        }).catch(err => {
-            console.error("Error fetching assets:", err);
-        });
-    }, []);
-    console.log("AssetsTypes.////", AssetsTypes)
+ 
 
 
-
-    // useEffect(() => {
-    //   const asset_id =AssetsTypes.assets_name.asset_id
-    //   const fetchData = async () => {
-    //     try {
-    //       const response = await subassets({ subasset_id: asset_id }); // Pass the asset id here
-    //       if (Array.isArray(response)) {
-    //         setAssetsSubTypes(response);
-    //       } else {
-    //         console.error("Invalid response format for subassets:", response);
-    //       }
-    //     } catch (error) {
-    //       console.error("Error fetching subassets:", error);
-    //     }
-    //   };
-
-    //   fetchData();
-    // }, []);
-    const AssetTypehandle = async (e) => {
-        debugger;
-        const newAssetType = e.target.value;
-        setAssetsTypes((prevRow) => ({
-            ...prevRow,
-            asset_type: newAssetType,
-        }));
-
-        try {
-            const response = await subassets({ asset_id: newAssetType });
-            if (Array.isArray(response)) {
-                setAssetsSubTypes(response);
-            } else {
-                console.error("Invalid response format for subassets:", response);
-            }
-        } catch (error) {
-            console.error("Error fetching subassets:", error);
-        }
-    };
 
 
     const switchButton = (type) => {
