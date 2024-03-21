@@ -28,6 +28,7 @@ const Requirements = ({ role, mainId }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen1, setModalOpen1] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [rejectReason, setRejectReason] = useState('');
   const [showRejectReason, setShowRejectReason] = useState(false);
@@ -84,11 +85,22 @@ const Requirements = ({ role, mainId }) => {
     console.log("selectedRow", selectedRow);
     setModalOpen(true);
   };
+  const handlerejectClick = (row) => {
+    setSelectedRow(row);
+    console.log("selectedRow", selectedRow);
+    
+    setModalOpen1(true);
+  };
 
   const handleCloseModal = () => {
     // Logic to close modal
     setShowRejectReason(false);
     setModalOpen(false);
+  };
+  const handleCloseModal1 = () => {
+    // Logic to close modal
+    setShowRejectReason(false);
+    setModalOpen1(false);
   };
   const handleAccept = (selectedRow) => {
     // debugger
@@ -154,7 +166,7 @@ const Requirements = ({ role, mainId }) => {
 
     RejectRequirement(postData)
       .then(response => {
-        setModalOpen(false);
+        setModalOpen1(false);
         getAllrequirements();
         toast.success(response.message || "Update successful");
       })
@@ -250,7 +262,7 @@ const Requirements = ({ role, mainId }) => {
                             variant="contained"
                             // color="secondary"
                             style={{ marginRight: 8, backgroundColor: "red" }}
-                            onClick={() => { handleRejectWithReason(); handleUpdateClick(row); }}
+                            onClick={() => { handleRejectWithReason(); handlerejectClick(row);}}
 
                           >
                             Reject
@@ -404,6 +416,131 @@ const Requirements = ({ role, mainId }) => {
                onClick={()=>handlesave(selectedRow)}
               >
                 Save
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {selectedRow && (
+        <Modal
+          open={modalOpen1}
+          onClose={handleCloseModal1}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "30%",
+              left: "52%",
+              transform: "translate(-50%, -50%)",
+              maxWidth: "90vw",
+              width: "70%",
+              backgroundColor: "#ffffff",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+              borderRadius: 8,
+              padding: 20,
+            }}
+          >
+            <Typography variant="h6" gutterBottom>
+              Update Status
+            </Typography>
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label className="form-label">Requirement</label>
+                <input
+                  type="text"
+                  name="requirement"
+                  defaultValue={selectedRow.requirement_name}
+                  className="form-control"
+                  readOnly
+                />
+              </div>
+              <div className="col-md-6">
+                <label className="form-label">Hostel Name</label>
+                <input
+                  type="text"
+                  name="hostel-name"
+                  defaultValue={selectedRow.hostel_name}
+                  className="form-control"
+                  readOnly
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label className="form-label">Hostel Address</label>
+                <input
+                  type="text"
+                  name="hostel-address"
+                  defaultValue={selectedRow.address}
+                  className="form-control"
+                  readOnly
+                />
+              </div>
+              <div className="col-md-6">
+                <label className="form-label">Quantity</label>
+                <input
+                  type="text"
+                  name="quantity"
+                  defaultValue={selectedRow.quantity}
+                  className="form-control"
+                  onChange={(e) => {
+                    setSelectedRow((prevRow) => ({
+                      ...prevRow,
+                      quantity: e.target.value,
+                    }));
+                  }}
+                  required
+                />
+              </div>
+            </div>
+            {showRejectReason && (
+              <div className="mb-3">
+                <label className="form-label">Reason for Rejection</label>
+                <input
+                  type="text"
+                  name="rejectreason"
+                  value={rejectReason}
+                  className={`form-control ${rejectReasonError ? 'border-danger' : ''}`}
+                  onChange={(e) => setRejectReason(e.target.value)}
+                  onKeyUp={(e) => {
+                    if (e.target.value.length >= 5) {
+                      setRejectReasonError(false);
+                    }
+                  }}
+                  required
+                />
+                {rejectReasonError && <small className="text-danger">Reason for Rejection is required.</small>}
+              </div>
+            )}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              {/* <Button
+           variant="contained"
+           color="primary"
+           style={{ marginRight: 8 }}
+           onClick={handleAccept}
+         >
+           Accept
+         </Button>
+         <Button
+           variant="contained"
+           color="secondary"
+           style={{ marginRight: 8 }}
+           onClick={handleRejectWithReason}
+         >
+           Reject
+         </Button> */}
+              {/* <Button variant="contained" onClick={handleCloseModal}>
+                Cancel
+              </Button> */}
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginRight: 8 }}
+               onClick={()=>handleRejectWithReason(selectedRow)}
+              >
+                Reject
               </Button>
             </div>
           </div>

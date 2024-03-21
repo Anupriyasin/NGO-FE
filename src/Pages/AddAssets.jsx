@@ -58,7 +58,7 @@ const AddAssets = () => {
       ...prevRow,
       asset_type: newAssetType,
     }));
-
+console.log("AssetsType",AssetsType)
     try {
       const response = await subassets({ asset_id: newAssetType });
       if (response) {
@@ -138,7 +138,7 @@ const AddAssets = () => {
     {
       intake_type: IntakeHandle,
       category: CategoryHandle,
-      asset_type: AssetsType,
+      asset_type: AssetsType.asset_type,
       asset_sub_type: AssetSubtype,
       asset_name: NameHandle,
       asset_quantity: QuantityHandle,
