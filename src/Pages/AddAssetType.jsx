@@ -40,12 +40,14 @@ const AddAssetType = () => {
     const switchButton = (type) => {
         if (type === 'assign') {
             setType('assign');
-        }
-        else {
+            setCategoryHandle(''); 
+            console.log("CategoryHandle",CategoryHandle)
+        } else {
             setType('view');
-           
+            setCategorySubHandle(''); 
         }
     }
+    
   
   
     const form1 = useForm();
@@ -135,7 +137,7 @@ const AddAssetType = () => {
                     <div className='row'>
                         <div className="col-md-4">
                             <label className="form-label">Category {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                            <select name="createassets" id="" onChange={categoryHandle} className="common-input form-select" required>
+                            <select name="createassets"  value={CategoryHandle}  onChange={categoryHandle} className="common-input form-select" required>
                             <option value="">Select Category</option>
                             <option value="consumable" >Consumable</option>
                                 <option value="non-consumable">Non Consumable</option>
@@ -168,7 +170,7 @@ const AddAssetType = () => {
                     <div className='row'>
                         <div className="col-md-3">
                             <label className="form-label">Category {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                            <select name="category" onChange={categorySubHandle} id="" className="common-input form-select" required>
+                            <select name="category"   value={CategorySubHandle}   onChange={categorySubHandle} className="common-input form-select" required>
                                 <option value="" >Select Category</option>
                                 <option value="consumable" >Consumable</option>
                                 <option value="non-consumable" >Non Consumable</option>

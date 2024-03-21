@@ -20,15 +20,27 @@ const AddAssets = () => {
   const [assetOptions, setAssetOptions] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [ExistAssetsType, setExistAssetsType] = useState([]);
   const [AssetsType, setAssetsType] = useState([]);
   const [AssetsTypes, setAssetsTypes] = useState([]);
+  const [ExistAssetsSubTypes, setExistAssetsSubTypes] = useState([]);
   const [AssetsSubTypes, setAssetsSubTypes] = useState([]);
+  const [ExistCategory, setExistCategory] = useState([]);
   const [CategoryHandle, setCategoryHandle] = useState([]);
   const [AssetSubtype, setAssetSubtype] = useState([]);
   const [IntakeHandle, setIntakeHandle] = useState([]);
   const [IntakeExitHandle, setIntakeExitHandle] = useState([]);
   const [NameHandle, setNameHandle] = useState('');
+  const [ExistNameHandle, setExistNameHandle] = useState('');
   const [QuantityHandle, setQuantityHandle] = useState('');
+  const [ExistQuantity, setExistQuantity] = useState('');
+  const [ExistDonatedDate, setExistDonatedDate] = useState('');
+  const [PurchaseDate, setPurchaseDate] = useState('');
+  const [Amountperunit, setAmountperunit] = useState('');
+  const [ExistGST, setExistGST] = useState('');
+  const [ExistTotalAmount, setExistTotalAmount] = useState('');
+  const [ExistDisHandle, setExistDisHandle] = useState('');
+  const [ExistCurrentQuantity, setExistCurrentQuantity] = useState('');
   const [DisHandle, setDisHandle] = useState('');
   const [DateHandle, setDateHandle] = useState('');
   const [UnitsHandle, setUnitsHandle] = useState('');
@@ -70,6 +82,25 @@ console.log("AssetsType",AssetsType)
       console.error("Error fetching subassets:", error);
     }
   };
+  const ExistAssetTypehandle = async (e) => {
+    debugger;
+    const newAssetType = e.target.value;
+    setExistAssetsType((prevRow) => ({
+      ...prevRow,
+      asset_type: newAssetType,
+    }));
+console.log("AssetsType",AssetsType)
+    try {
+      const response = await subassets({ asset_id: newAssetType });
+      if (response) {
+        setExistAssetsSubTypes(response.data);
+      } else {
+        console.error("Invalid response format for subassets:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching subassets:", error);
+    }
+  };
 
   const switchButton = (type) => {
     if (type === "assign") {
@@ -100,14 +131,44 @@ console.log("AssetsType",AssetsType)
   const categoryHandle = (event) => {
     setCategoryHandle(event.target.value);
   };
+  const ExistcategoryHandle = (event) => {
+    setExistCategory(event.target.value);
+  };
   const nameHandle = (event) => {
     setNameHandle(event.target.value);
+  };
+  const ExistnameHandle = (event) => {
+    setExistNameHandle(event.target.value);
   };
   const quantityHandle = (event) => {
     setQuantityHandle(event.target.value);
   };
+  const ExistquantityHandle = (event) => {
+    setExistQuantity(event.target.value);
+  };
+  const ExistDonatedDateHandle = (event) => {
+    setExistDonatedDate(event.target.value);
+  };
+  const PurchaseDateHandle = (event) => {
+    setPurchaseDate(event.target.value);
+  };
+  const AmountperunitHandle = (event) => {
+    setAmountperunit(event.target.value);
+  };
+  const ExistGSTHandle = (event) => {
+    setExistGST(event.target.value);
+  };
+  const ExistTotalAmountHandle = (event) => {
+    setExistTotalAmount(event.target.value);
+  };
   const disHandle = (event) => {
     setDisHandle(event.target.value);
+  };
+  const ExistdisHandle = (event) => {
+    setExistDisHandle(event.target.value);
+  };
+  const ExistCurrentQuantityHandle = (event) => {
+    setExistCurrentQuantity(event.target.value);
   };
   const dateHandle = (event) => {
     setDateHandle(event.target.value);
@@ -128,6 +189,9 @@ console.log("AssetsType",AssetsType)
 
   const AssetSubtypehandle = (event) => {
     setAssetSubtype(event.target.value);
+  };
+  const ExistAssetSubtypehandle = (event) => {
+    setExistAssetsSubTypes(event.target.value);
   };
 
   const handleSubmitForm = async (event) => {
@@ -194,7 +258,7 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Intake Time {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="intake_type"
-                  id=""
+                  value={IntakeHandle}
                   onChange={intakeHandle}
                   required
                   className="common-input form-select"
@@ -206,7 +270,7 @@ console.log("AssetsType",AssetsType)
               </div>
               <div className="col-md-4">
                 <label className="form-label">Category {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                <select name="category" onChange={categoryHandle} id="" className="common-input form-select" required>
+                <select name="category" onChange={categoryHandle} value={CategoryHandle} className="common-input form-select" required>
                   <option value="" >Select Category</option>
                   <option value="consumable" >Consumable</option>
                   <option value="non-consumable" >Non Consumable</option>
@@ -216,6 +280,7 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_type"
+                  value={AssetsType}
                   className="common-input form-select"
                   onChange={AssetTypehandle}
                   required
@@ -234,7 +299,7 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
-                  id=""
+                  value={AssetSubtype}
                   onChange={AssetSubtypehandle}
                   className="common-input form-select"
                   required
@@ -252,7 +317,7 @@ console.log("AssetsType",AssetsType)
                 <input
                   type="text"
                   name="asset_name"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                  value={NameHandle}
                   className="form-control"
                   onChange={nameHandle}
                   required
@@ -263,7 +328,7 @@ console.log("AssetsType",AssetsType)
                 <input
                   type="text"
                   name="asset_quantity"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                  value={QuantityHandle}
                   className="form-control"
                   onChange={quantityHandle}
                   required
@@ -277,6 +342,7 @@ console.log("AssetsType",AssetsType)
                   style={{ height: "100px", resize: "none" }}
                   className="form-control"
                   name="description"
+                  value={DisHandle}
                   onChange={disHandle}
                 ></textarea>
               </div>
@@ -286,7 +352,7 @@ console.log("AssetsType",AssetsType)
                 <input
                   type="Date"
                   name="asset_add_date"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                  value={DateHandle}
                   className="form-control"
                   onChange={dateHandle}
                   required
@@ -302,7 +368,7 @@ console.log("AssetsType",AssetsType)
                   <input
                     type="text"
                     name="amount_per_unit"
-                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                    value={UnitsHandle}
                     className="form-control"
                     onChange={unitsHandle}
                     required
@@ -313,6 +379,7 @@ console.log("AssetsType",AssetsType)
                   <input
                     type="text"
                     name="gst"
+                    value={GstHandle}
                     onChange={gstHandle}
 
                     // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
@@ -325,6 +392,7 @@ console.log("AssetsType",AssetsType)
                   <input
                     type="text"
                     name="total_amount"
+                    value={TotalAmountHandle}
                     onChange={totalAmountHandle}
 
                     // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
@@ -352,7 +420,7 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Intake Time</label>
                 <select
                   name="intake_type"
-                  id=""
+                 value={IntakeExitHandle}
                   onChange={intakeexitHandle}
                   className="common-input form-select"
                 >
@@ -365,7 +433,8 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Category</label>
                 <select
                   name="category"
-                  id=""
+                  value={ExistCategory}
+                  onChange={ExistcategoryHandle}
                   className="common-input form-select"
                   required
                 >
@@ -379,7 +448,8 @@ console.log("AssetsType",AssetsType)
                 <select
                   name="asset_type"
                   className="common-input form-select"
-                  onChange={AssetTypehandle}
+                  value={ExistAssetsType}
+                  onChange={ExistAssetTypehandle}
                   required
                 >
                   <option value="">Select Asset Type</option>
@@ -396,7 +466,8 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Sub Type</label>
                 <select
                   name="asset_sub_type"
-                  id=""
+                  value={ExistAssetsSubTypes}
+                  onChange={ExistAssetSubtypehandle}
                   className="common-input form-select"
                 >
                   <option value="">Select Asset Sub Type</option>
@@ -408,7 +479,8 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Name</label>
                 <select
                   name="asset_sub_type"
-                  id=""
+                  value={ExistNameHandle}
+                  onChange={ExistnameHandle}
                   className="common-input form-select"
                 >
                   <option value="">Select Asset Name</option>
@@ -423,6 +495,8 @@ console.log("AssetsType",AssetsType)
                   style={{ height: "100px", resize: "none" }}
                   className="form-control"
                   name="description"
+                  value={ExistDisHandle}
+                  onChange={ExistdisHandle}
                   required
                 ></textarea>
               </div>
@@ -434,8 +508,9 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Current Quantity</label>
                 <input
                   type="text"
-                  value=""
+                  value={ExistCurrentQuantity}
                   name="asset_quantity"
+                  onChange={ExistCurrentQuantityHandle}
                   // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                   className="form-control"
                   required
@@ -446,9 +521,9 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Quantity</label>
                 <input
                   type="text"
-                  value=""
+                  value={ExistQuantity}
+                  onChange={ExistquantityHandle}
                   name="asset_quantity"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                   className="form-control"
                   required
                 />
@@ -459,10 +534,10 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Donated Date </label>
                 <input
                   type="Date"
-                  value=""
                   name="asset_add_date"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                  value={ExistDonatedDate}
                   className="form-control"
+                  onChange={ExistDonatedDateHandle}
                   required
                 />
               </div>
@@ -477,7 +552,7 @@ console.log("AssetsType",AssetsType)
                     type="Date"
                     value=""
                     name="asset_add_date"
-                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                    onChange={PurchaseDateHandle}
                     className="form-control"
                     required
                   />
@@ -486,9 +561,9 @@ console.log("AssetsType",AssetsType)
                   <label className="form-label">Amount Per Unit</label>
                   <input
                     type="text"
-                    value=""
+                    value={Amountperunit}
                     name="gst"
-                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                    onChange={AmountperunitHandle}
                     className="form-control"
                     required
                   />
@@ -497,9 +572,9 @@ console.log("AssetsType",AssetsType)
                   <label className="form-label">GST(%)</label>
                   <input
                     type="text"
-                    value=""
+                    value={ExistGST}
                     name="total_amount"
-                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                    onChange={ExistGSTHandle}
                     className="form-control"
                     readOnly
                   />
@@ -515,9 +590,9 @@ console.log("AssetsType",AssetsType)
                   <label className="form-label">Total Amount</label>
                   <input
                     type="text"
-                    value=""
+                    value={ExistTotalAmount}
                     name="total_amount"
-                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                    onChange={ExistTotalAmountHandle}
                     className="form-control"
                     readOnly
                   />
