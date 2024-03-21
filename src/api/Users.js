@@ -158,7 +158,7 @@ export const updateAssignedDealer = async (dealerId, data) => {
 
 export const updateUserDetails = async (data) =>
   await axios
-    .put("/update_crm_user", data, {
+    .post("/update_profile", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
