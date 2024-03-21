@@ -9,10 +9,12 @@ export default function TopLoader(props) {
     }, [loading]);
 
     return (
-        <LoadingBar
-            progress={progress}
-            color='#f11946'
-            height={4}
-        />
+        <>
+        </>
+        // <LoadingBar
+        //     progress={progress}
+        //     color='#f11946'
+        //     height={4}
+        // />
     );
 }
