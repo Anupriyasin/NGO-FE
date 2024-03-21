@@ -236,6 +236,8 @@ h4 {
   
     .MainDash {
       margin-left: 0px;
+      height: 100vh;
+      position: fixed;
         align-items: center;
 
     }

@@ -115,7 +115,8 @@ const AddAssetType = () => {
     const clearAssetsSubFields = () => {
         window.location.reload();
     }
-   
+    const [markRequired, setMarkRequired] = useState(true);
+
     return (
         <>
             <TopLoader loading={isLoading ? '50' : '100'} />
@@ -133,15 +134,15 @@ const AddAssetType = () => {
                     <form  onSubmit={(e) => handleSubmitForm(e)} id='myform1' style={{ marginTop: "12px" }}>
                     <div className='row'>
                         <div className="col-md-4">
-                            <label className="form-label">Category</label>
-                            <select name="createassets" id="" onChange={categoryHandle} className="common-input form-select">
+                            <label className="form-label">Category {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <select name="createassets" id="" onChange={categoryHandle} className="common-input form-select" required>
                             <option value="">Select Category</option>
                             <option value="consumable" >Consumable</option>
                                 <option value="non-consumable">Non Consumable</option>
                             </select>
                         </div>
                         <div className="col-md-4">
-                            <label className="form-label">Asset Type</label>
+                            <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
                                 type="text"
                                 name="asset_type"
@@ -166,7 +167,7 @@ const AddAssetType = () => {
                         <form onSubmit={(e) => handleSubmitForm1(e)} id='myform2' style={{ marginTop: "12px" }}>
                     <div className='row'>
                         <div className="col-md-3">
-                            <label className="form-label">Category</label>
+                            <label className="form-label">Category {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <select name="category" onChange={categorySubHandle} id="" className="common-input form-select" required>
                                 <option value="" >Select Category</option>
                                 <option value="consumable" >Consumable</option>
@@ -174,8 +175,8 @@ const AddAssetType = () => {
                             </select>
                         </div>
                         <div className="col-md-3">
-                        <label className="form-label">Asset Type</label>
-                            <select name="asset_id"  onChange={newAssettypehandle} id="" className="common-input form-select">
+                        <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <select name="asset_id"  onChange={newAssettypehandle} id="" className="common-input form-select" required>
                                 <option value="" selected={true}>Asset Type</option>
                                 {AssetsTypes.assets_name.map((row) => (
                                             <>
@@ -185,7 +186,7 @@ const AddAssetType = () => {
                             </select>
                         </div>
                         <div className="col-md-3">
-                                <label className="form-label">Asset Sub Type</label>
+                                <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                                     <div  className="input-group mb-3">
                                     <input
                                 type="text"
