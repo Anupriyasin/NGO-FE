@@ -19,7 +19,7 @@ function App() {
       <MapContainer
         center={position}
         zoom={7}
-        style={{ height: "550px", width: "75%", borderRadius: "20px" }}
+        style={{ height: "550px", width: "75%", borderRadius: "20px",}}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
