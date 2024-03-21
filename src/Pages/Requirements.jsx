@@ -10,7 +10,7 @@ import "../components/Table/Table.css";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import TopLoader from "../components/Loader/TopLoader";
-import { RejectRequirement, getRequirements, updateRequirement } from "../api/Users";
+import { RejectRequirement, getRequirements, updateRequirement, modifydetails } from "../api/Users";
 import { toast } from "react-toastify";
 import { TextField, TablePagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -91,7 +91,7 @@ const Requirements = ({ role, mainId }) => {
     setModalOpen(false);
   };
   const handleAccept = (selectedRow) => {
-    debugger
+    // debugger
     const postData = {
       requirement_name: selectedRow.requirement_name,
       quantity: selectedRow.quantity,
@@ -107,6 +107,28 @@ const Requirements = ({ role, mainId }) => {
         setModalOpen(false);
         getAllrequirements();
         toast.success(response.message || "Update successful");
+      })
+      .catch(error => {
+        console.error("Error updating requirement:", error);
+        toast.error(error.response.data.message);
+      });
+  };
+  const handlesave = (selectedRow) => {
+    debugger
+    const postData = {
+      requirement_name: selectedRow.requirement_name,
+      quantity: selectedRow.quantity,
+      hostel_id: selectedRow.id,
+      user_id: "",
+      role_id: "",
+      requirement_id: selectedRow.requirement_id,
+    };
+
+    modifydetails(postData)
+      .then(response => {
+        setModalOpen(false);
+        getAllrequirements();
+        toast.success(response.message );
       })
       .catch(error => {
         console.error("Error updating requirement:", error);
@@ -151,7 +173,7 @@ const Requirements = ({ role, mainId }) => {
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-          <h3 className="">{t("New Requirements")}</h3>
+          <h5 className="">{t("New Requirements")}</h5>
           <TextField
             label={t("Search")}
             variant="outlined"
@@ -295,7 +317,6 @@ const Requirements = ({ role, mainId }) => {
                   defaultValue={selectedRow.requirement_name}
                   className="form-control"
                   readOnly
-                  required
                 />
               </div>
               <div className="col-md-6">
@@ -306,7 +327,6 @@ const Requirements = ({ role, mainId }) => {
                   defaultValue={selectedRow.hostel_name}
                   className="form-control"
                   readOnly
-                  required
                 />
               </div>
             </div>
@@ -319,7 +339,6 @@ const Requirements = ({ role, mainId }) => {
                   defaultValue={selectedRow.address}
                   className="form-control"
                   readOnly
-                  required
                 />
               </div>
               <div className="col-md-6">
@@ -382,7 +401,7 @@ const Requirements = ({ role, mainId }) => {
                 variant="contained"
                 color="primary"
                 style={{ marginRight: 8 }}
-              //  onClick={handleAccept}
+               onClick={()=>handlesave(selectedRow)}
               >
                 Save
               </Button>

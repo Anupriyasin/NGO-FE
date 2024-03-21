@@ -148,11 +148,8 @@ const TrackRequirements = ({ role, mainId }) => {
         <>
             <TopLoader loading={isLoading ? "50" : "100"} />
             <div className="px-0 px-md-3">
-                <h3 className=" mt-2">{t("Track Requirements")}</h3>
-
-                <div style={{ display: "flex", justifyContent: "end" }}>
-    
-
+                <div className="my-4 col-12 d-flex justify-content-between align-items-center">
+                    <h5 className=" mt-2">{t("Track Requirements")}</h5>
                     <div className=''>
                         <TextField
                             label={t('Search')}
@@ -168,6 +165,9 @@ const TrackRequirements = ({ role, mainId }) => {
                     </div>
 
                 </div>
+
+
+
                 <div className="Table mb-6">
                     <TableContainer
                         component={Paper}
@@ -223,7 +223,7 @@ const TrackRequirements = ({ role, mainId }) => {
                                     ))}
                             </TableBody>
                             {/* )} */}
-                            {!isLoading && (!filteredData || filteredData.length === 0) && (
+                            {!isLoading && (!track || track.length === 0) && (
                                 <TableRow>
                                     <TableCell align="center" colSpan={7}>
                                         <h4>
@@ -281,35 +281,35 @@ const TrackRequirements = ({ role, mainId }) => {
                             <li className={`step0 text-center ${activeStep == 1 ? 'active' : ''}`} id="step1"></li>
                             <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step2"></li> */}
                             <li className={`step0 text-center ${activeStep == 1 ? 'active' : ''}`} id="step1"></li>
-                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`}  id="step2"></li>
-                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`}  id="step3"></li>
-                            <li className={`step0 text-center ${approveStep == 2 ? 'active' : ''}`}  id="step4"></li>
+                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step2"></li>
+                            <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step3"></li>
+                            <li className={`step0 text-center ${approveStep == 2 ? 'active' : ''}`} id="step4"></li>
                         </ul>
 
                         <div className="d-flex justify-content-between mb-5">
                             <div className="d-lg-flex align-items-center">
-                            <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <Assignment fas icon="clipboard-list" className="me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                                 <div>
                                     <p className="fw-bold mb-1">Request</p>
                                     <p className="fw-bold mb-0">Raised</p>
                                 </div>
                             </div>
                             <div className="d-lg-flex align-items-center">
-                            <RedeemIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <RedeemIcon fas icon="shipping-fast me-lg-10 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                                 <div className="ms-3">
                                     <p className="fw-bold mb-1">Request</p>
                                     <p className="fw-bold mb-0">Approved</p>
                                 </div>
                             </div>
                             <div className="d-lg-flex align-items-center">
-                            <LocalShippingIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
+                                <LocalShippingIcon fas icon="box-open me-lg-4 mb-3 mb-lg-0 ml-3" style={{ fontSize: "2.5rem" }} />
                                 <div className="ms-3">
                                     <p className="fw-bold mb-1">Under</p>
                                     <p className="fw-bold mb-0">Processing</p>
                                 </div>
                             </div>
                             <div className="d-lg-flex align-items-center">
-                            <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
+                                <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                                 <div className="ms-3">
                                     {/* <p className="fw-bold mb-1">Request</p> */}
                                     <p className="fw-bold mb-0">Delivered</p>

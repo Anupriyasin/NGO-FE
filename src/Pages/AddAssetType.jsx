@@ -122,7 +122,7 @@ const AddAssetType = () => {
             <TopLoader loading={isLoading ? '50' : '100'} />
             <div className="px-2 px-md-4">
 
-                <h3 className='my-4'>{t('Add Asset Type')}</h3>
+                <h5 className='my-4'>{t('Add Asset Type')}</h5>
                 <button className={type === 'assign' ? 'btn btn-outline-success' : 'btn btn-success'} style={{fontSize:"14px"}} onClick={(e) => switchButton('view')}>{t('Create Asset Type')} </button>
                 <span className='mx-2 d-inline-block'></span>
                 <button className={type === 'view' ? 'btn btn-outline-success' : 'btn btn-success'} style={{fontSize:"14px"}} onClick={(e) => switchButton('assign')}>{t('Create Asset Sub Type')} </button>

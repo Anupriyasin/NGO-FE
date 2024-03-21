@@ -151,7 +151,7 @@ const HostelReport = ({ role, mainId }) => {
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-          <h3 className="">{t("Hostel Wise Report")}</h3>
+          <h5 className="">{t("Hostel Wise Report")}</h5>
           <TextField
             label={t("Search")}
             variant="outlined"
