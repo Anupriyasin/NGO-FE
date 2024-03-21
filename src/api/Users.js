@@ -102,6 +102,19 @@ export const subassets = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const Assetnameinfo = async (data) =>
+  await axios
+    .post("/asset_name_nfo", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 
 export const updateRequirement = async (data) =>
   await axios

@@ -7,7 +7,7 @@ import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
 import { Modal, Button } from "@mui/material";
 import { toast } from 'react-toastify';
-import { subassets, getAssetsName, AddAsset } from '../api/Users';
+import { subassets, getAssetsName, AddAsset, Assetnameinfo } from '../api/Users';
 
 
 const AddAssets = () => {
@@ -21,6 +21,7 @@ const AddAssets = () => {
   const [loading, setLoading] = useState(true);
 
   const [ExistAssetsType, setExistAssetsType] = useState([]);
+  const [storeExistAssetsType, setstoreExistAssetsType] = useState([]);
   const [AssetsType, setAssetsType] = useState([]);
   const [AssetsTypes, setAssetsTypes] = useState([]);
   const [ExistAssetsSubTypes, setExistAssetsSubTypes] = useState([]);
@@ -55,12 +56,14 @@ const AddAssets = () => {
       if (res.status === "success") {
         console.log("Assets data:", res.data);
         setAssetsTypes(res.data);
+        setExistAssetsType(res.data);
       }
     }).catch(err => {
       console.error("Error fetching assets:", err);
     });
   }, []);
   console.log("AssetsTypes.////", AssetsTypes)
+  console.log("ExistAssetsType.////", ExistAssetsType)
 
 
   const AssetTypehandle = async (e) => {
@@ -84,12 +87,13 @@ console.log("AssetsType",AssetsType)
   };
   const ExistAssetTypehandle = async (e) => {
     debugger;
+    setstoreExistAssetsType(e.target.value)
     const newAssetType = e.target.value;
     setExistAssetsType((prevRow) => ({
       ...prevRow,
       asset_type: newAssetType,
     }));
-console.log("AssetsType",AssetsType)
+console.log("AssetsType",ExistAssetsType)
     try {
       const response = await subassets({ asset_id: newAssetType });
       if (response) {
@@ -101,14 +105,36 @@ console.log("AssetsType",AssetsType)
       console.error("Error fetching subassets:", error);
     }
   };
+//   const ExistnameHandle = async (e) => {
+//     debugger;
+//     const newAssetType = e.target.value;
+//     setExistAssetsType((prevRow) => ({
+//       ...prevRow,
+//       asset_type: newAssetType,
+//     }));
+// console.log("AssetsType",AssetsType)
+//     try {
+//       const response = await subassets({ asset_id: newAssetType });
+//       if (response) {
+//         setExistAssetsSubTypes(response.data);
+//       } else {
+//         console.error("Invalid response format for subassets:", response);
+//       }
+//     } catch (error) {
+//       console.error("Error fetching subassets:", error);
+//     }
+//   };
 
   const switchButton = (type) => {
-    if (type === "assign") {
-      setType("assign");
+    if (type === 'assign') {
+        setType('assign');
+        setAssetsType(''); 
+        console.log("CategoryHandle",CategoryHandle)
     } else {
-      setType("view");
+        setType('view');
+        setExistAssetsType(''); 
     }
-  };
+}
 
   const form1 = useForm();
   const form2 = useForm();
@@ -190,8 +216,26 @@ console.log("AssetsType",AssetsType)
   const AssetSubtypehandle = (event) => {
     setAssetSubtype(event.target.value);
   };
-  const ExistAssetSubtypehandle = (event) => {
-    setExistAssetsSubTypes(event.target.value);
+  const ExistAssetSubtypehandle = async(e) => {
+    debugger
+    // setExistAssetsSubTypes(e.target.value);
+    const ExistAssetType = e.target.value;
+    setExistAssetsSubTypes((prevRow) => ({
+      ...prevRow,
+      asset_sub_type: ExistAssetType,
+    }));
+    const Assetstype = storeExistAssetsType
+
+    try {
+      const response = await Assetnameinfo({ asset_id: Assetstype,asset_sub_type_id:ExistAssetType });
+      if (response) {
+        setExistAssetsSubTypes(response.data);
+      } else {
+        console.error("Invalid response format for subassets:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching subassets:", error);
+    }
   };
 
   const handleSubmitForm = async (event) => {
@@ -280,7 +324,7 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_type"
-                  value={AssetsType}
+                  // value={AssetsType}
                   className="common-input form-select"
                   onChange={AssetTypehandle}
                   required
@@ -299,7 +343,7 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
-                  value={AssetSubtype}
+                  // value={AssetSubtype}
                   onChange={AssetSubtypehandle}
                   className="common-input form-select"
                   required
@@ -307,7 +351,7 @@ console.log("AssetsType",AssetsType)
                   <option value="">Select Asset Sub Type</option>
 
                   {AssetsSubTypes.new_asset_query && AssetsSubTypes.new_asset_query.map((row) => (
-                    <option key={row.asset_sub_type_name} value={row.asset_sub_type_name}>{row.asset_sub_type_name}</option>
+                    <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
                   ))}
                 </select>
               </div>
@@ -448,13 +492,13 @@ console.log("AssetsType",AssetsType)
                 <select
                   name="asset_type"
                   className="common-input form-select"
-                  value={ExistAssetsType}
+                  // value={ExistAssetsType}
                   onChange={ExistAssetTypehandle}
                   required
                 >
                   <option value="">Select Asset Type</option>
                   {/* Map assetOptions to generate option elements */}
-                  {AssetsTypes.assets_name && AssetsTypes.assets_name.map((row) => (
+                  {ExistAssetsType.assets_name && ExistAssetsType.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
                   ))}
 
@@ -466,11 +510,14 @@ console.log("AssetsType",AssetsType)
                 <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
-                  value={ExistAssetsSubTypes}
+                  // value={ExistAssetsSubTypes}
                   onChange={ExistAssetSubtypehandle}
                   className="common-input form-select"
                 >
                   <option value="">Select Asset Sub Type</option>
+                   {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
+                    <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
+                  ))}
 
                 </select>
               </div>
