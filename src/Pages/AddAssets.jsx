@@ -417,7 +417,7 @@ console.log("AssetsType",AssetsType)
           <form id="myform2" style={{ marginTop: "12px" }}>
             <div className="row">
               <div className="col-md-4">
-                <label className="form-label">Intake Time</label>
+                <label className="form-label">Intake Time {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="intake_type"
                  value={IntakeExitHandle}
@@ -430,7 +430,7 @@ console.log("AssetsType",AssetsType)
                 </select>
               </div>
               <div className="col-md-4">
-                <label className="form-label">Category</label>
+                <label className="form-label">Category {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="category"
                   value={ExistCategory}
@@ -444,7 +444,7 @@ console.log("AssetsType",AssetsType)
                 </select>
               </div>
               <div className="col-md-4">
-                <label className="form-label">Asset Type</label>
+                <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_type"
                   className="common-input form-select"
@@ -463,7 +463,7 @@ console.log("AssetsType",AssetsType)
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
-                <label className="form-label">Asset Sub Type</label>
+                <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
                   value={ExistAssetsSubTypes}
@@ -476,7 +476,7 @@ console.log("AssetsType",AssetsType)
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Asset Name</label>
+                <label className="form-label">Asset Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
                   value={ExistNameHandle}
@@ -490,14 +490,13 @@ console.log("AssetsType",AssetsType)
 
 
               <div className="col-md-4">
-                <label className="form-label">Description</label>
+                <label className="form-label">Description </label>
                 <textarea
                   style={{ height: "100px", resize: "none" }}
                   className="form-control"
                   name="description"
                   value={ExistDisHandle}
                   onChange={ExistdisHandle}
-                  required
                 ></textarea>
               </div>
 
@@ -505,7 +504,7 @@ console.log("AssetsType",AssetsType)
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
-                <label className="form-label">Current Quantity</label>
+                <label className="form-label">Current Quantity {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
                   type="text"
                   value={ExistCurrentQuantity}
@@ -518,7 +517,7 @@ console.log("AssetsType",AssetsType)
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Asset Quantity</label>
+                <label className="form-label">Asset Quantity {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
                   type="text"
                   value={ExistQuantity}
@@ -531,7 +530,7 @@ console.log("AssetsType",AssetsType)
 
 
               <div className="col-md-4">
-                <label className="form-label">Donated Date </label>
+                <label className="form-label">Donated Date {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
                   type="Date"
                   name="asset_add_date"
@@ -547,7 +546,7 @@ console.log("AssetsType",AssetsType)
               <div className="row" style={{ marginTop: "12px" }}>
 
                 <div className="col-md-4">
-                  <label className="form-label">Purchase Date </label>
+                  <label className="form-label">Purchase Date {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="Date"
                     value=""
@@ -558,7 +557,7 @@ console.log("AssetsType",AssetsType)
                   />
                 </div>
                 <div className="col-md-4">
-                  <label className="form-label">Amount Per Unit</label>
+                  <label className="form-label">Amount Per Unit {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="text"
                     value={Amountperunit}
@@ -569,7 +568,7 @@ console.log("AssetsType",AssetsType)
                   />
                 </div>
                 <div className="col-md-4">
-                  <label className="form-label">GST(%)</label>
+                  <label className="form-label">GST(%) {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="text"
                     value={ExistGST}
@@ -587,7 +586,7 @@ console.log("AssetsType",AssetsType)
               <div className="row" style={{ marginTop: "12px" }}>
 
                 <div className="col-md-4">
-                  <label className="form-label">Total Amount</label>
+                  <label className="form-label">Total Amount {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="text"
                     value={ExistTotalAmount}
