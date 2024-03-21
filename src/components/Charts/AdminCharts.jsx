@@ -20,9 +20,6 @@ import makeAnimated from "react-select/animated";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
-import { IoSearch } from "react-icons/io5";
-import { createRoot } from "react-dom/client";
-import { AgChartsReact } from "ag-charts-react";
 import AdminCards from "../Cards/AdminCards";
 
 import { getAllHostels, getAllStaff, getAllStudents } from "../../api/Users";

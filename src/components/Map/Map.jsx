@@ -1,7 +1,6 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import { orissaBoundary } from "./OrissaGeoJson";
-import Requirements from "../../Pages/Requirements";
 
 function App() {
   const position = [20.2376, 84.27];
@@ -19,7 +18,7 @@ function App() {
       <MapContainer
         center={position}
         zoom={7}
-        style={{ height: "550px", width: "75%", borderRadius: "20px",}}
+        style={{ height: "550px", width: "75%", borderRadius: "20px", zIndex: 1}}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
