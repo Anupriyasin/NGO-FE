@@ -349,10 +349,11 @@ console.log("AssetsType",AssetsType)
           <form id="myform2" style={{ marginTop: "12px" }}>
             <div className="row">
               <div className="col-md-4">
-                <label className="form-label">Intake Time</label>
+                <label className="form-label">Intake Time {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="intake_type"
                   id=""
+                  required
                   onChange={intakeexitHandle}
                   className="common-input form-select"
                 >
@@ -362,7 +363,7 @@ console.log("AssetsType",AssetsType)
                 </select>
               </div>
               <div className="col-md-4">
-                <label className="form-label">Category</label>
+                <label className="form-label">Category {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="category"
                   id=""
@@ -375,14 +376,14 @@ console.log("AssetsType",AssetsType)
                 </select>
               </div>
               <div className="col-md-4">
-                <label className="form-label">Asset Type</label>
+                <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_type"
                   className="common-input form-select"
                   onChange={AssetTypehandle}
                   required
                 >
-                  <option value="">Select Asset Type</option>
+                  <option value="">Select Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</option>
                   {/* Map assetOptions to generate option elements */}
                   {AssetsTypes.assets_name && AssetsTypes.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
@@ -393,10 +394,11 @@ console.log("AssetsType",AssetsType)
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
-                <label className="form-label">Asset Sub Type</label>
+                <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
                   id=""
+                  required
                   className="common-input form-select"
                 >
                   <option value="">Select Asset Sub Type</option>
@@ -405,10 +407,11 @@ console.log("AssetsType",AssetsType)
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Asset Name</label>
+                <label className="form-label">Asset Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
                   id=""
+                  required
                   className="common-input form-select"
                 >
                   <option value="">Select Asset Name</option>
@@ -423,7 +426,6 @@ console.log("AssetsType",AssetsType)
                   style={{ height: "100px", resize: "none" }}
                   className="form-control"
                   name="description"
-                  required
                 ></textarea>
               </div>
 
@@ -431,7 +433,19 @@ console.log("AssetsType",AssetsType)
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
-                <label className="form-label">Current Quantity</label>
+                <label className="form-label">Current Quantity </label>
+                <input
+                  type="text"
+                  value=""
+                  name="asset_quantity"
+                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
+                  className="form-control"
+                  readOnly
+                />
+              </div>
+
+              <div className="col-md-4">
+                <label className="form-label">Asset Quantity {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
                   type="text"
                   value=""
@@ -442,21 +456,9 @@ console.log("AssetsType",AssetsType)
                 />
               </div>
 
+              {IntakeExitHandle === "Donated" && (
               <div className="col-md-4">
-                <label className="form-label">Asset Quantity</label>
-                <input
-                  type="text"
-                  value=""
-                  name="asset_quantity"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
-                  className="form-control"
-                  required
-                />
-              </div>
-
-
-              <div className="col-md-4">
-                <label className="form-label">Donated Date </label>
+                <label className="form-label">Donated Date {markRequired && <span style={{ color: 'red' }}>*</span>} </label>
                 <input
                   type="Date"
                   value=""
@@ -466,13 +468,13 @@ console.log("AssetsType",AssetsType)
                   required
                 />
               </div>
-
+ )}
             </div>
             {IntakeExitHandle === "Purchased" && (
               <div className="row" style={{ marginTop: "12px" }}>
 
                 <div className="col-md-4">
-                  <label className="form-label">Purchase Date </label>
+                  <label className="form-label">Purchase Date {markRequired && <span style={{ color: 'red' }}>*</span>} </label>
                   <input
                     type="Date"
                     value=""
@@ -483,7 +485,7 @@ console.log("AssetsType",AssetsType)
                   />
                 </div>
                 <div className="col-md-4">
-                  <label className="form-label">Amount Per Unit</label>
+                  <label className="form-label">Amount Per Unit {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="text"
                     value=""
@@ -494,14 +496,14 @@ console.log("AssetsType",AssetsType)
                   />
                 </div>
                 <div className="col-md-4">
-                  <label className="form-label">GST(%)</label>
+                  <label className="form-label">GST(%) {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="text"
                     value=""
                     name="total_amount"
                     // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                     className="form-control"
-                    readOnly
+                    required
                   />
                 </div>
               </div>
@@ -512,7 +514,7 @@ console.log("AssetsType",AssetsType)
               <div className="row" style={{ marginTop: "12px" }}>
 
                 <div className="col-md-4">
-                  <label className="form-label">Total Amount</label>
+                  <label className="form-label">Total Amount {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="text"
                     value=""
@@ -525,7 +527,7 @@ console.log("AssetsType",AssetsType)
               </div>
             )}
 
-            <div className="row mt-3">
+            <div className="row mt-5">
               <div className="col-md-12">
                 <button type="submit" className="btn btn-primary me-2">
                   Submit
