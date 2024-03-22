@@ -83,9 +83,16 @@ console.log("userData",userData)
             <MenuItem icon={<BusinessCenterIcon  ndedIcon />} className={activeMenu === '/add-assets' ? 'menuItem active ' : 'menuItem'}> <Link to="/add-assets">Add Asset-Inverntory</Link></MenuItem>
           </SubMenu>
           <SubMenu label="Report" icon={<EqualizerIcon   />} className='SubMenu'>
-          <MenuItem icon={<PieChartIcon  />} className={activeMenu === '//hostel-report' ? 'menuItem active ' : 'menuItem'}><Link to="/hostel-report">Hostel Wise Report</Link></MenuItem>
+          <MenuItem icon={<PieChartIcon  />} className={activeMenu === '/hostel-report' ? 'menuItem active ' : 'menuItem'}><Link to="/hostel-report">Hostel Wise Report</Link></MenuItem>
           </SubMenu>
-          
+          <MenuItem icon={<PieChartIcon  />} className={activeMenu === '/completereq' ? 'menuItem active ' : 'menuItem'}><Link to="/completereq">Completed Requirments</Link></MenuItem>
+          <MenuItem icon={<PieChartIcon  />} className={activeMenu === '/rejectreq' ? 'menuItem active ' : 'menuItem'}><Link to="/rejectreq">Rejected Requirments</Link></MenuItem>
+          <MenuItem icon={<PieChartIcon  />} className={activeMenu === '/confirmdelivery' ? 'menuItem active ' : 'menuItem'}><Link to="/confirmdelivery">Confirm Delivery</Link></MenuItem>
+
+          <SubMenu label="Staff Info" icon={<EqualizerIcon   />} className='SubMenu'>
+          <MenuItem icon={<PieChartIcon  />} className={activeMenu === '/staffdetails' ? 'menuItem active ' : 'menuItem'}><Link to="/staffdetails">Staff Details</Link></MenuItem>
+          </SubMenu>
+
           <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}> Logout </MenuItem>
         </Menu>
       </Sidebar>

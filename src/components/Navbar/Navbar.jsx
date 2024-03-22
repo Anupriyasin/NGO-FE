@@ -71,7 +71,7 @@ const Navbar = ({ totalItems, role, userData }) => {
           <p><strong id='fullName'>{fullName}</strong></p>
           <p className='smallText'>{roleName}</p>
         </div>
-        <div className='d-flex align-items-center col-gap'>
+        {/* <div className='d-flex align-items-center col-gap'> */}
           {/* <div>
             <Languageoption onChange={(e) => handleClick(e)} />
           </div> 
@@ -96,7 +96,7 @@ const Navbar = ({ totalItems, role, userData }) => {
           </Link>
 
         </div>
-      </div>
+      {/* </div> */}
     </>
   )
 }

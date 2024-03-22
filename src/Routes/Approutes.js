@@ -17,6 +17,11 @@ import AddAssets from '../Pages/AddAssets'
 import AdminDetails from '../Pages/AdminDetails'
 import HostelLogin from '../Pages/HostelLogin'
 import HostelReport from '../Pages/HostelReport'
+import CompleteRequirement from '../Pages/HostelCompleteRequirment'
+import HostelRejectRequirement from '../Pages/HostelRejectedRequirment'
+import ConfirmDelivery from '../Pages/ConfirmDelivery'
+import StaffDetails from '../Pages/StaffDetails'
+import AddStaff from '../Pages/AddStaff'
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
@@ -113,7 +118,48 @@ const AppRoutes = () => {
             path: '/hostel-report',
             component: HostelReport,
             allowedRoles: [1]
+        },
+        {
+            path: '/completereq',
+            component: CompleteRequirement,
+            allowedRoles: [1]
         }
+        ,
+        {
+            path: '/rejectreq',
+            component: HostelRejectRequirement,
+            allowedRoles: [1]
+        },
+        {
+            path: '/confirmdelivery',
+            component: ConfirmDelivery,
+            allowedRoles: [1]
+        },
+        {
+            path: '/staffdetails',
+            component: StaffDetails,
+            allowedRoles: [1]
+        },
+        {
+            path: '/addstaff',
+            component: AddStaff,
+            allowedRoles: [1]
+        },
+        {
+            path: '/hostel-requirement',
+            component: HostelRequirement,
+            allowedRoles: [1]
+        },
+        {
+            path: '/student-details',
+            component: StudentDetails,
+            allowedRoles: [1]
+        },
+        {
+            path: '/add-student-details',
+            component: AddStudent,
+            allowedRoles: [1]
+        },
     ];
 
     return (

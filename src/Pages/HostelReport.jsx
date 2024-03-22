@@ -48,9 +48,7 @@ const HostelReport = ({ role, mainId }) => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    getAllrequirements();
-  }, []);
+
 
   // Update filteredData whenever searchQuery changes
   useEffect(() => {
