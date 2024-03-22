@@ -481,6 +481,15 @@ export const getRejectedRequirements = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const getstudentinfo = async () =>
+  await axios
+    .post('/get_student_info')
+    .then(response => {
+      return response.data
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 
 
 export const getAllStudents = async () =>

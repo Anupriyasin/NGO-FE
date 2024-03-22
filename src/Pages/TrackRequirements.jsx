@@ -75,12 +75,12 @@ const TrackRequirements = ({ role, mainId }) => {
     // Update filteredData whenever searchQuery changes
     useEffect(() => {
         debugger
-        const filtered = rows.filter(
+        const filtered = track.filter(
             (item) =>
                 (item?.requirement_name &&
                     item.requirement_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                (item?.requirement_id &&
-                    item.requirement_id.toLowerCase().includes(searchQuery.toLowerCase()))
+                (item?.id &&
+                    item.id.toLowerCase().includes(searchQuery.toLowerCase()))
         );
 
         setFilteredData(filtered);
@@ -186,7 +186,7 @@ const TrackRequirements = ({ role, mainId }) => {
 
                                 </TableRow>
                             </TableHead>
-                            {/* {!isLoading && filteredData && filteredData.length > 0 && ( */}
+                            {!isLoading && track && track.length > 0 && (
                             <TableBody style={{ color: "white" }}>
                                 {track
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -222,7 +222,7 @@ const TrackRequirements = ({ role, mainId }) => {
                                         </TableRow>
                                     ))}
                             </TableBody>
-                            {/* )} */}
+                        )} 
                             {!isLoading && (!track || track.length === 0) && (
                                 <TableRow>
                                     <TableCell align="center" colSpan={7}>
@@ -238,7 +238,7 @@ const TrackRequirements = ({ role, mainId }) => {
                     <TablePagination
                         rowsPerPageOptions={[10, 25, 50]}
                         component="div"
-                        count={filteredData.length}
+                        count={track.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

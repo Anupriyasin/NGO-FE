@@ -163,8 +163,12 @@ console.log("AssetsType",ExistAssetsType)
   const nameHandle = (event) => {
     setNameHandle(event.target.value);
   };
-  const ExistnameHandle = (event) => {
-    setExistNameHandle(event.target.value);
+  const ExistnameHandle = (e) => {
+    const ExistAssetname = e.target.value;
+    setExistNameHandle((prevRow) => ({
+      ...prevRow,
+      asset_sub_type: ExistAssetname,
+    }));
   };
   const quantityHandle = (event) => {
     setQuantityHandle(event.target.value);
@@ -531,6 +535,9 @@ console.log("AssetsType",ExistAssetsType)
                   className="common-input form-select"
                 >
                   <option value="">Select Asset Name</option>
+                  {ExistNameHandle.asset_name && ExistNameHandle.asset_name.map((row) => (
+                    <option key={row.asset_name} value={row.asset_name}>{row.asset_name}</option>
+                  ))}
 
                 </select>
               </div>
