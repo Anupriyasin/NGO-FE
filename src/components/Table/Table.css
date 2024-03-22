@@ -10,7 +10,19 @@
 th {
   border: none !important;
 }
-
+.css-1ygcj2i-MuiTableCell-root {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 14px !important;
+  line-height: 1rem !important;
+  /* letter-spacing: 0.01071em; */
+  /* display: table-cell; */
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.87);
+}
 .Table:first-child {
   border-radius: 0.7rem !important;
 }

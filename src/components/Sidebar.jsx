@@ -25,11 +25,11 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 
 
-const App = () => {
+const App = ({userData}) => {
   const navigate = useNavigate();
   const location = useLocation(); // Get the current location
   const [activeMenu, setActiveMenu] = useState('');
-
+console.log("userData",userData)
   useEffect(() => {
     // Update active menu based on location change
     setActiveMenu(location.pathname);
