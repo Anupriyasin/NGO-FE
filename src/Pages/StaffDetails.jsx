@@ -14,6 +14,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { toast } from 'react-toastify';
 import { TextField, TablePagination } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { staffdetails} from '../api/Users';
+
 
 const StaffDetails = ({ role }) => {
 
@@ -28,34 +30,35 @@ const StaffDetails = ({ role }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
-    // useEffect(() => {
-    //     setIsLoading(true);
-    //     alldealers().then(res => {
-    //         if (res.status === "success") {
-    //             setRows(res.data);
-    //             setFilteredData(res.data);
-    //         }
-    //         else {
-    //             setRows([]);
-    //             toast.error(t("Something went wrong"));
-    //         }
+    const getstaffdeatils = () => {
+        debugger
+        setIsLoading(true);
+        staffdetails().then(res => {
+            if (res.status === "success") {
+                setFilteredData(res.data.staff_data);
+            }
+            else {
+                setRows([]);
+                toast.error(t("Something went wrong"));
+            }
 
-    //     });
-    //     setIsLoading(false);
-    // }, []);
+        });
+        setIsLoading(false);
+    }
 
     // Update filteredData whenever searchQuery changes
-    // useEffect(() => {
-    //     const filtered = rows.filter(item =>
-    //         item.dealer_person_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //         item.dealer_shop_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //         item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //         item.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //         item.dealer_contact.toLowerCase().includes(searchQuery.toLowerCase())
-    //     );
-    //     setFilteredData(filtered);
-    //     setPage(0);
-    // }, [searchQuery, rows]);
+    useEffect(() => {
+        debugger
+        getstaffdeatils();
+        // const filtered = filteredData.staff_data.filter(item =>
+        //     item.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        //     item.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        //     item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        //     item.department.toLowerCase().includes(searchQuery.toLowerCase())
+        // );
+        // setFilteredData(filtered);
+        // setPage(0);
+    }, []);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -71,7 +74,7 @@ const StaffDetails = ({ role }) => {
     const view = () => {
         navigate(`/addstaff`);
     }
-
+// console.log("filteredData.staff_data,",filteredData.staff_data)
     return (
         <>
             <TopLoader loading={isLoading ? '50' : '100'} />
@@ -118,11 +121,18 @@ const StaffDetails = ({ role }) => {
                                             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row">{index + 1}</TableCell>
-                                            <TableCell align="left">a</TableCell>
-                                            <TableCell align="left">b</TableCell>
-                                            <TableCell align="left">c</TableCell>
-                                            <TableCell align="left">d</TableCell>
-                                            <TableCell align="left">e</TableCell>
+                                            <TableCell align="left">{row.first_name}</TableCell>
+                                            <TableCell align="left">{row.last_name}</TableCell>
+                                            <TableCell align="left">{row.date_of_birth}</TableCell>
+                                            <TableCell align="left">1</TableCell>
+                                            <TableCell align="left">{row.gender}</TableCell>
+                                            <TableCell align="left">{row.address}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">1</TableCell>
+                                            <TableCell align="left">{row.job_title}</TableCell>
+                                            <TableCell align="left">{row.department}</TableCell>
+                                            <TableCell align="left">{row.phone_number}</TableCell>
+                                            <TableCell align="left">{row.hire_date}</TableCell>
                                             <TableCell align="left"><button className='btn btn-success btn-sm' onClick={() => view()}>{t('View')}</button></TableCell>
                                         </TableRow>
                                     ))}

@@ -25,6 +25,7 @@ import AddStaff from '../Pages/AddStaff'
 import HostelRequirement from '../Pages/HostelRequirement';
 import StudentDetails from '../Pages/StudentDetails';
 import AddStudent from '../Pages/AddStudent';
+import HostelDashboard from '../Pages/HostelDashboard';
 // import TrackRequirements from '../Pages/TrackRequirements';
 // import RejectedRequirements from '../Pages/RejectedRequirements';
 // import AddAssetType from '../Pages/AddAssetType';
@@ -133,8 +134,8 @@ const AppRoutes = () => {
        
     ] : [
         {
-            path: '/dashboard',
-            component: Dashboard,
+            path: '/hosteldashboard',
+            component: HostelDashboard,
             allowedRoles: [2]
         },
         {

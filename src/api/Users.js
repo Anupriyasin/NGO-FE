@@ -244,6 +244,17 @@ export const updateMOMText = async (id, data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const staffdetails = async (data) =>
+  await axios
+    .post("/get_staff_info", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+    
 
 // export const alldealers = async (data) =>
 //   await axios

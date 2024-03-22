@@ -67,9 +67,16 @@ function myfunction (e){
         toast.error(t(res.message));
       }
       else if (res.status === 'success') {
+        if(role=="admin"){
         setLoading(100);
         onChildData();
         navigate(`/dashboard`);
+        }
+        else{
+          setLoading(100);
+          onChildData();
+          navigate(`/hosteldashboard`);
+        }
       }
       else {
         toast.error(t("Something went wrong!"));

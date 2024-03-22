@@ -67,7 +67,7 @@ const AdminCards = (props) => {
 
         <div className="col-md-3 mt-1">
           <div className="card card3">
-            <div className="card-body hello3">
+            <div className="card-body hello4">
               <h3 className="card-title text-white">{t("All")}</h3>
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import AdminCharts from "../components/Charts/AdminCharts";
 import DealerCharts from "../components/Charts/DealerCharts";
 
-const Dashboard = (props) => {
+const HostelDashboard = (props) => {
   const { t } = useTranslation();
 
   return (
@@ -31,4 +31,4 @@ const Dashboard = (props) => {
   );
 };
 
-export default Dashboard;
+export default HostelDashboard;
