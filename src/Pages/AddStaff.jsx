@@ -216,13 +216,12 @@ console.log("AssetsType",AssetsType)
               <div className="col-md-4">
                 <label className="form-label">Photo {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
-                  type="text"
-                  name="asset_name"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
-                  className="form-control"
+                  type="file"
+                  name="photo_file"
                   accept="image/*"
-                  onChange={handlePhotoChange}
-                   required
+                  className="form-control"
+                  onChange={handlePhotoChange} 
+                  required
                 />
               </div>
             </div>
@@ -252,14 +251,11 @@ console.log("AssetsType",AssetsType)
               </div>
               <div className="col-md-4">
                 <label className="form-label">Gender {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                <input
-                  type="text"
-                  name="asset_quantity"
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
-                  className="form-control"
-                  onChange={quantityHandle}
-                  required
-                />
+                <select name="createassets"  value={CategoryHandle}  onChange={categoryHandle} className="common-input form-select" required>
+                            <option value="">Select Gender</option>
+                            <option value="male" >Male</option>
+                                <option value="female">Female</option>
+                            </select>
               </div>
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
@@ -348,7 +344,7 @@ console.log("AssetsType",AssetsType)
               </div>
               </div>
         
-            <div className="row mt-5">
+            <div className="row mt-5 mb-5">
               <div className="col-md-12 d-flex justify-content-end">
                 <button type="submit" className="btn btn-primary me-2">
                   Submit

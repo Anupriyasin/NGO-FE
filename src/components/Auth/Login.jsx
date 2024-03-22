@@ -102,7 +102,7 @@ function myfunction (e){
                 <h2>{t('SC-ST Department, Odisha')}</h2>
                 <h5>{t('(Hostel Management)')}</h5>
               </div>
-              <form className='mx-5 myform'>
+              <form className='myform'>
                 <div className="form-outline">
 
                   <label className="form-label">{t('Role')} *</label>

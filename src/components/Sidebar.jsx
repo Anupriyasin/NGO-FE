@@ -18,7 +18,10 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DescriptionIcon from "@mui/icons-material/Description";
 import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import BusinessIcon from "@mui/icons-material/Business";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const Sidebars = (props) => {
@@ -200,7 +203,7 @@ const Sidebars = (props) => {
                 <Link to="/hostel-requirement">Add Requirement</Link>
               </MenuItem>
               <MenuItem
-                icon={<DescriptionIcon />}
+                icon={<CheckCircleIcon/>}
                 className={
                   activeMenu === "/completereq"
                     ? "menuItem active "
@@ -220,7 +223,7 @@ const Sidebars = (props) => {
                 <Link to="/rejectreq">Rejected Requirements</Link>
               </MenuItem>
               <MenuItem
-                icon={<CancelIcon />}
+                icon={<DescriptionIcon />}
                 className={
                   activeMenu === "/confirmdelivery"
                     ? "menuItem active "
@@ -232,7 +235,7 @@ const Sidebars = (props) => {
             </SubMenu>
            
               <MenuItem
-                icon={<AddCircleOutlineIcon />}
+                icon={<SupervisedUserCircleIcon />}
                 className={
                   activeMenu === "/student-details"
                     ? "menuItem active "
@@ -243,7 +246,7 @@ const Sidebars = (props) => {
                 <Link to="/student-details">Student Details </Link>
               </MenuItem>
               <MenuItem
-                icon={<BusinessCenterIcon ndedIcon />}
+                icon={<AccountCircleIcon />}
                 className={
                   activeMenu === "/staffdetails" ? "menuItem active " : "menuItem"
                 }
