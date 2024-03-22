@@ -70,9 +70,10 @@ const AdminDetails = ({ role }) => {
     let { name, value } = e.target;
     setAdmin({ ...admin, [name]: value });
   };
-
+  
   const onSubmit = () => {
     setIsLoading(true);
+    console.log("User ID:", admin.name);
 
     const data = {
       "user_id": "",
@@ -85,7 +86,7 @@ const AdminDetails = ({ role }) => {
       "address": admin.address,
       "email": admin.email,
     };
-
+  
     updateUserDetails(data)
       .then((res) => {
         if (res.status === "success") {
@@ -101,6 +102,7 @@ const AdminDetails = ({ role }) => {
         console.log(err);
       });
   };
+  
 
   const getAdminDetails = () => {
     setIsLoading(true);
