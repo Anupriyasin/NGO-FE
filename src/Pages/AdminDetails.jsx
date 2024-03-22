@@ -70,23 +70,23 @@ const AdminDetails = ({ role }) => {
     let { name, value } = e.target;
     setAdmin({ ...admin, [name]: value });
   };
-  
+
   const onSubmit = () => {
     setIsLoading(true);
     console.log("User ID:", admin.name);
 
     const data = {
-      "user_id": "",
-      "role_id": "",
-      "first_name": admin.name,
-      "last_name": "",
-      "phone_number": admin.primary_contact,
-      "secondary_p_no": admin.secondary_contact,
-      "pin_no": admin.pin_no,
-      "address": admin.address,
-      "email": admin.email,
+      user_id: "",
+      role_id: "",
+      first_name: admin.name,
+      last_name: "",
+      phone_number: admin.primary_contact,
+      secondary_p_no: admin.secondary_contact,
+      pin_no: admin.pin_no,
+      address: admin.address,
+      email: admin.email,
     };
-  
+
     updateUserDetails(data)
       .then((res) => {
         if (res.status === "success") {
@@ -102,7 +102,6 @@ const AdminDetails = ({ role }) => {
         console.log(err);
       });
   };
-  
 
   const getAdminDetails = () => {
     setIsLoading(true);
@@ -191,10 +190,10 @@ const AdminDetails = ({ role }) => {
                                       name="role_id"
                                       className="form-control"
                                       required
-                                      defaultValue={
+                                      value={
                                         role_id === 1
                                           ? "Headquarter"
-                                          : "Hostel" || ""
+                                          : "Hostel"
                                       }
                                       disabled
                                     />
@@ -249,11 +248,13 @@ const AdminDetails = ({ role }) => {
                                     </label>
                                     <input
                                       onChange={handleChangeInput}
-                                      type="number"
+                                      type="text" // Change type to text
+                                      pattern="[0-9]*" // Use pattern to restrict input to numbers only
                                       name="primary_contact"
                                       className="form-control"
                                       required
-                                      defaultValue={primary_contact || ""}
+                                      maxLength={10}
+                                      value={primary_contact || ""}
                                     />
                                   </div>
                                   <div className="col-md-4 mb-3">
@@ -265,11 +266,13 @@ const AdminDetails = ({ role }) => {
                                     </label>
                                     <input
                                       onChange={handleChangeInput}
-                                      type="number"
+                                      type="text" // Change type to text
+                                      pattern="[0-9]*" // Use pattern to restrict input to numbers only
                                       name="secondary_contact"
                                       className="form-control"
                                       required
-                                      defaultValue={secondary_contact || ""}
+                                      maxLength={10}
+                                      value={secondary_contact || ""}
                                     />
                                   </div>
                                 </div>
