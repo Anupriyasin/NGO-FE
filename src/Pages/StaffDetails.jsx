@@ -15,7 +15,8 @@ import { toast } from 'react-toastify';
 import { TextField, TablePagination } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { staffdetails} from '../api/Users';
-
+import BorderColorOutlinedIcon from '@material-ui/icons/BorderColorOutlined';
+import { color } from 'highcharts';
 
 const StaffDetails = ({ role }) => {
 
@@ -133,7 +134,8 @@ const StaffDetails = ({ role }) => {
                                             <TableCell align="left">{row.department}</TableCell>
                                             <TableCell align="left">{row.phone_number}</TableCell>
                                             <TableCell align="left">{row.hire_date}</TableCell>
-                                            <TableCell align="left"><button className='btn btn-success btn-sm' onClick={() => view()}>{t('View')}</button></TableCell>
+                                            <TableCell align="left"><BorderColorOutlinedIcon style={{ color: "#4eb2e7" }} onClick={view} />
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
