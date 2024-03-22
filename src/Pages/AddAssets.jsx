@@ -229,7 +229,7 @@ console.log("AssetsType",ExistAssetsType)
     try {
       const response = await Assetnameinfo({ asset_id: Assetstype,asset_sub_type_id:ExistAssetType });
       if (response) {
-        setExistAssetsSubTypes(response.data);
+        setExistNameHandle(response.data);
       } else {
         console.error("Invalid response format for subassets:", response);
       }
@@ -526,7 +526,7 @@ console.log("AssetsType",ExistAssetsType)
                 <label className="form-label">Asset Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
-                  value={ExistNameHandle}
+                  // value={ExistNameHandle}
                   onChange={ExistnameHandle}
                   className="common-input form-select"
                 >
