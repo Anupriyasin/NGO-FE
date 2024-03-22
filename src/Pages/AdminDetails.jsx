@@ -318,7 +318,7 @@ const AdminDetails = ({ role }) => {
                                       htmlFor="address"
                                       className="form-label"
                                     >
-                                      {t("Adress")}{" "}
+                                      {t("Address")}{" "}
                                     </label>
                                     <input
                                       onChange={handleChangeInput}
