@@ -73,17 +73,18 @@ const AdminDetails = ({ role }) => {
 
   const onSubmit = () => {
     setIsLoading(true);
+    console.log("User ID:", admin.name);
 
     const data = {
-      "user_id": "",
-      "role_id": "",
-      "first_name": admin.name,
-      "last_name": "",
-      "phone_number": admin.primary_contact,
-      "secondary_p_no": admin.secondary_contact,
-      "pin_no": admin.pin_no,
-      "address": admin.address,
-      "email": admin.email,
+      user_id: "",
+      role_id: "",
+      first_name: admin.name,
+      last_name: "",
+      phone_number: admin.primary_contact,
+      secondary_p_no: admin.secondary_contact,
+      pin_no: admin.pin_no,
+      address: admin.address,
+      email: admin.email,
     };
 
     updateUserDetails(data)
@@ -189,10 +190,10 @@ const AdminDetails = ({ role }) => {
                                       name="role_id"
                                       className="form-control"
                                       required
-                                      defaultValue={
+                                      value={
                                         role_id === 1
                                           ? "Headquarter"
-                                          : "Hostel" || ""
+                                          : "Hostel"
                                       }
                                       disabled
                                     />
@@ -247,11 +248,13 @@ const AdminDetails = ({ role }) => {
                                     </label>
                                     <input
                                       onChange={handleChangeInput}
-                                      type="number"
+                                      type="text" // Change type to text
+                                      pattern="[0-9]*" // Use pattern to restrict input to numbers only
                                       name="primary_contact"
                                       className="form-control"
                                       required
-                                      defaultValue={primary_contact || ""}
+                                      maxLength={10}
+                                      value={primary_contact || ""}
                                     />
                                   </div>
                                   <div className="col-md-4 mb-3">
@@ -263,11 +266,13 @@ const AdminDetails = ({ role }) => {
                                     </label>
                                     <input
                                       onChange={handleChangeInput}
-                                      type="number"
+                                      type="text" // Change type to text
+                                      pattern="[0-9]*" // Use pattern to restrict input to numbers only
                                       name="secondary_contact"
                                       className="form-control"
                                       required
-                                      defaultValue={secondary_contact || ""}
+                                      maxLength={10}
+                                      value={secondary_contact || ""}
                                     />
                                   </div>
                                 </div>
@@ -313,7 +318,7 @@ const AdminDetails = ({ role }) => {
                                       htmlFor="address"
                                       className="form-label"
                                     >
-                                      {t("Adress")}{" "}
+                                      {t("Address")}{" "}
                                     </label>
                                     <input
                                       onChange={handleChangeInput}

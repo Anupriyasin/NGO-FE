@@ -28,11 +28,13 @@ const Sidebars = (props) => {
   const navigate = useNavigate();
   const location = useLocation(); // Get the current location
   const [activeMenu, setActiveMenu] = useState("/dashboard");
+  const [HostelActiveMenu, setHostelActiveMenu] = useState("/hosteldashboard");
   console.log("userData", props.role);
   useEffect(() => {
     debugger;
     // Update active menu based on location change
     setActiveMenu(location.pathname);
+    setHostelActiveMenu(location.pathname);
   }, [location.pathname]);
 
   function logout() {
@@ -83,6 +85,7 @@ const Sidebars = (props) => {
             >
               <Link to="/dashboard">Dashboard</Link>
             </MenuItem>
+            
             {/* <SubMenu label="Manage Login" icon={<WalletRoundedIcon  />} className='SubMenu'>
             <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">Create Hostel Login</Link></MenuItem>
           </SubMenu> */}
@@ -182,10 +185,10 @@ const Sidebars = (props) => {
             <MenuItem
               icon={<GridViewRoundedIcon />}
               className={
-                activeMenu === "/dashboard" ? "menuItem active " : "menuItem"
+                HostelActiveMenu === "/hosteldashboard" ? "menuItem active " : "menuItem"
               }
             >
-              <Link to="/dashboard">Hostel Dashboard</Link>
+              <Link to="/hosteldashboard">Dashboard</Link>
             </MenuItem>
             <SubMenu
               label="Requirement"
@@ -195,7 +198,7 @@ const Sidebars = (props) => {
               <MenuItem
                 icon={<AddCircleIcon />}
                 className={
-                  activeMenu === "/hostel-requirement"
+                  HostelActiveMenu === "/hostel-requirement"
                     ? "menuItem active "
                     : "menuItem"
                 }
@@ -205,7 +208,7 @@ const Sidebars = (props) => {
               <MenuItem
                 icon={<CheckCircleIcon/>}
                 className={
-                  activeMenu === "/completereq"
+                  HostelActiveMenu === "/completereq"
                     ? "menuItem active "
                     : "menuItem"
                 }
@@ -215,7 +218,7 @@ const Sidebars = (props) => {
               <MenuItem
                 icon={<CancelIcon />}
                 className={
-                  activeMenu === "/rejectreq"
+                  HostelActiveMenu === "/rejectreq"
                     ? "menuItem active "
                     : "menuItem"
                 }
@@ -225,7 +228,7 @@ const Sidebars = (props) => {
               <MenuItem
                 icon={<DescriptionIcon />}
                 className={
-                  activeMenu === "/confirmdelivery"
+                  HostelActiveMenu === "/confirmdelivery"
                     ? "menuItem active "
                     : "menuItem"
                 }
@@ -237,7 +240,7 @@ const Sidebars = (props) => {
               <MenuItem
                 icon={<SupervisedUserCircleIcon />}
                 className={
-                  activeMenu === "/student-details"
+                  HostelActiveMenu === "/student-details"
                     ? "menuItem active "
                     : "menuItem"
                 }
@@ -248,7 +251,7 @@ const Sidebars = (props) => {
               <MenuItem
                 icon={<AccountCircleIcon />}
                 className={
-                  activeMenu === "/staffdetails" ? "menuItem active " : "menuItem"
+                  HostelActiveMenu === "/staffdetails" ? "menuItem active " : "menuItem"
                 }
               >
                 {" "}

@@ -406,7 +406,6 @@ const AdminCharts = ({ data1, title }) => {
   return (
     <div className="row">
       <div className="col-12 d-flex row justify-content-start m-0">
-        <div className="col-12 col-md-8 d-flex row justify-content-center mb-3">
           {/* <RangeDatePicker
                         startDate={dateRange.startDate}
                         endDate={dateRange.endDate}
@@ -421,8 +420,10 @@ const AdminCharts = ({ data1, title }) => {
                         className="my-own-class-name"
                         startWeekDay="monday"
                     /> */}
-          <div className="col-12 m-2 d-flex row p-0">
-            <div className="col-12 col-md-4">
+          <div className="my-4 col-12 d-flex justify-content-between align-items-center">
+           <h3 className="my-4">{t("Dashboard")}</h3>
+
+            <div className="">
               <Select
                 // className='col-12 col-md-4'
                 id="hostels"
@@ -438,7 +439,6 @@ const AdminCharts = ({ data1, title }) => {
               />
             </div>
           </div>
-        </div>
         {/* <div className='col-12 row col-md-4 d-flex justify-content-center align-items-center p-4 p-md-0'>
                     <div className='col-7 col-md-12 d-flex justify-content-center align-items-center'>
                         <p className='fw-bold text-secondary'>Quantity</p>

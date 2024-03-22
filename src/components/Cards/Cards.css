@@ -21,39 +21,41 @@
  }
 
 .hello1 {
-  background: linear-gradient(180deg, #bb67ff 0%, #c484f3 100%);
+  background: linear-gradient(180deg, #e31e30 0%, #e31e30  100%);
 }
 
 .card1:hover {
-  box-shadow: 0px 10px 20px 0px #e0c6f5;
+  box-shadow: 0px 10px 20px 0px #e31e30;
 }
 
 .hello2 {
-  background: linear-gradient(180deg, #ff919d 0%, #fc929d 100%);
+  background: linear-gradient(180deg, #f9cd32 0%, #f9cd32 100%);
 }
 
 .card2:hover {
-  box-shadow: 0px 10px 20px 0px #fdc0c7;
+  box-shadow: 0px 10px 20px 0px #f9cd32;
 }
 
 .hello3 {
   background: linear-gradient(
     146.42deg,
-    rgb(248, 212, 154) -146.42%,
-    rgb(255, 202, 113) -46.42%
+    rgba(2,146,222,255) -146.42%,
+    rgba(2,146,222,255) -46.42%
   );
 }
 
-.hello4 {
-  background-color: #ff0a0aad
-}
+
 
 .card3:hover {
-  box-shadow: 0px 10px 20px 0px #f9d59b;
+  box-shadow: 0px 10px 20px 0px #0292de;
 }
 
-.card4:hover {
-  box-shadow: 0px 10px 20px 0px #ff0a0a59;
+.hello4 {
+  background-color: #1712b7;
+}
+
+.hello4:hover {
+  box-shadow: 0px 10px 20px 0px #1712b7;
 }
 
 .icon {

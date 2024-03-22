@@ -199,12 +199,13 @@ export const updateAssignedDealer = async (dealerId, data) => {
   }
 };
 
-export const updateUserDetails = async (data) =>
-  await axios
+export const updateUserDetails = async (data) => {
+  console.log("FormData:", data); // Add this line
+  return await axios
     .post("/update_profile", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
     })
     .then((response) => {
       return response.data;
@@ -212,6 +213,7 @@ export const updateUserDetails = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+};
 
 export const updateBlockStatus = async (data) =>
   await axios
@@ -242,6 +244,17 @@ export const updateMOMText = async (id, data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const staffdetails = async (data) =>
+  await axios
+    .post("/get_staff_info", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+    
 
 // export const alldealers = async (data) =>
 //   await axios

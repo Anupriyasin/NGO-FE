@@ -73,7 +73,7 @@ const AddAssets = () => {
       ...prevRow,
       asset_type: newAssetType,
     }));
-console.log("AssetsType",AssetsType)
+    console.log("AssetsType", AssetsType)
     try {
       const response = await subassets({ asset_id: newAssetType });
       if (response) {
@@ -93,7 +93,7 @@ console.log("AssetsType",AssetsType)
       ...prevRow,
       asset_type: newAssetType,
     }));
-console.log("AssetsType",ExistAssetsType)
+    console.log("AssetsType", ExistAssetsType)
     try {
       const response = await subassets({ asset_id: newAssetType });
       if (response) {
@@ -105,36 +105,36 @@ console.log("AssetsType",ExistAssetsType)
       console.error("Error fetching subassets:", error);
     }
   };
-//   const ExistnameHandle = async (e) => {
-//     debugger;
-//     const newAssetType = e.target.value;
-//     setExistAssetsType((prevRow) => ({
-//       ...prevRow,
-//       asset_type: newAssetType,
-//     }));
-// console.log("AssetsType",AssetsType)
-//     try {
-//       const response = await subassets({ asset_id: newAssetType });
-//       if (response) {
-//         setExistAssetsSubTypes(response.data);
-//       } else {
-//         console.error("Invalid response format for subassets:", response);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching subassets:", error);
-//     }
-//   };
+  //   const ExistnameHandle = async (e) => {
+  //     debugger;
+  //     const newAssetType = e.target.value;
+  //     setExistAssetsType((prevRow) => ({
+  //       ...prevRow,
+  //       asset_type: newAssetType,
+  //     }));
+  // console.log("AssetsType",AssetsType)
+  //     try {
+  //       const response = await subassets({ asset_id: newAssetType });
+  //       if (response) {
+  //         setExistAssetsSubTypes(response.data);
+  //       } else {
+  //         console.error("Invalid response format for subassets:", response);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching subassets:", error);
+  //     }
+  //   };
 
   const switchButton = (type) => {
     if (type === 'assign') {
-        setType('assign');
-        setAssetsType(''); 
-        console.log("CategoryHandle",CategoryHandle)
+      setType('assign');
+      setAssetsType('');
+      console.log("CategoryHandle", CategoryHandle)
     } else {
-        setType('view');
-        setExistAssetsType(''); 
+      setType('view');
+      setExistAssetsType('');
     }
-}
+  }
 
   const form1 = useForm();
   const form2 = useForm();
@@ -220,7 +220,7 @@ console.log("AssetsType",ExistAssetsType)
   const AssetSubtypehandle = (event) => {
     setAssetSubtype(event.target.value);
   };
-  const ExistAssetSubtypehandle = async(e) => {
+  const ExistAssetSubtypehandle = async (e) => {
     debugger
     // setExistAssetsSubTypes(e.target.value);
     const ExistAssetType = e.target.value;
@@ -231,7 +231,7 @@ console.log("AssetsType",ExistAssetsType)
     const Assetstype = storeExistAssetsType
 
     try {
-      const response = await Assetnameinfo({ asset_id: Assetstype,asset_sub_type_id:ExistAssetType });
+      const response = await Assetnameinfo({ asset_id: Assetstype, asset_sub_type_id: ExistAssetType });
       if (response) {
         setExistNameHandle(response.data);
       } else {
@@ -359,7 +359,7 @@ console.log("AssetsType",ExistAssetsType)
                   ))}
                 </select>
               </div>
-    
+
               <div className="col-md-4">
                 <label className="form-label">Asset Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
@@ -406,6 +406,20 @@ console.log("AssetsType",ExistAssetsType)
                   required
                 />
               </div>
+
+              {IntakeHandle === "Donated" && (
+                <div className="col-md-4">
+                  <label className="form-label">Donated Date {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                  <input
+                    type="Date"
+                    name="asset_add_date"
+                    value={ExistDonatedDate}
+                    className="form-control"
+                    onChange={ExistDonatedDateHandle}
+                    required
+                  />
+                </div>
+              )}
 
             </div>
             {IntakeHandle === "Purchased" && (
@@ -468,7 +482,7 @@ console.log("AssetsType",ExistAssetsType)
                 <label className="form-label">Intake Time {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="intake_type"
-                 value={IntakeExitHandle}
+                  value={IntakeExitHandle}
                   onChange={intakeexitHandle}
                   className="common-input form-select"
                 >
@@ -519,7 +533,7 @@ console.log("AssetsType",ExistAssetsType)
                   className="common-input form-select"
                 >
                   <option value="">Select Asset Sub Type</option>
-                   {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
+                  {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
                     <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
                   ))}
 
@@ -582,19 +596,19 @@ console.log("AssetsType",ExistAssetsType)
                 />
               </div>
 
-
-              <div className="col-md-4">
-                <label className="form-label">Donated Date {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                <input
-                  type="Date"
-                  name="asset_add_date"
-                  value={ExistDonatedDate}
-                  className="form-control"
-                  onChange={ExistDonatedDateHandle}
-                  required
-                />
-              </div>
-
+              {IntakeExitHandle === "Donated" && (
+                <div className="col-md-4">
+                  <label className="form-label">Donated Date {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                  <input
+                    type="Date"
+                    name="asset_add_date"
+                    value={ExistDonatedDate}
+                    className="form-control"
+                    onChange={ExistDonatedDateHandle}
+                    required
+                  />
+                </div>
+              )}
             </div>
             {IntakeExitHandle === "Purchased" && (
               <div className="row" style={{ marginTop: "12px" }}>
