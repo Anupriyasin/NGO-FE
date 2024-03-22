@@ -13,19 +13,19 @@ const Dashboard = (props) => {
       <div className="px-2 px-md-3">
         <h3 className="my-4">{t("Dashboard")}</h3>
 
-        {props.role && props.role === 1 && (
+        {/* {props.role && props.role === 1 && ( */}
           <>
             <AdminCharts />
             {/* <TodaysOrderTable /> */}
           </>
-        )}
+        {/* )}
 
-        {props.role && props.role === 2 && (
-          <>
+        {props.role && props.role === 2 && ( */}
+          {/* <>
             <DealerCards />
             <DealerCharts />
-          </>
-        )}
+          </> */}
+        {/* )} */}
       </div>
     </>
   );

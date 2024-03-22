@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import Login from '../components/Auth/Login'
-import Dashboard from '../Pages/Dashboard'
-import PageNotFound from '../Pages/PageNotFound'
-import ForgetPassword from '../Pages/ForgetPassword'
-import { getUserDetails } from '../api/Users'
-import FullPageSpinner from '../components/Loader/FullPageSpinner'
-import { get_cart_items } from '../api/Products'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from '../components/Auth/Login';
+import Dashboard from '../Pages/Dashboard';
+import PageNotFound from '../Pages/PageNotFound';
+import ForgetPassword from '../Pages/ForgetPassword';
+import { getUserDetails } from '../api/Users';
+import FullPageSpinner from '../components/Loader/FullPageSpinner';
+import { get_cart_items } from '../api/Products';
 
 import ProtectedRoute from './ProtectedRoute'
 import Requirements from '../Pages/Requirements'
@@ -22,13 +22,23 @@ import HostelRejectRequirement from '../Pages/HostelRejectedRequirment'
 import ConfirmDelivery from '../Pages/ConfirmDelivery'
 import StaffDetails from '../Pages/StaffDetails'
 import AddStaff from '../Pages/AddStaff'
+import HostelRequirement from '../Pages/HostelRequirement';
+import StudentDetails from '../Pages/StudentDetails';
+import AddStudent from '../Pages/AddStudent';
+// import TrackRequirements from '../Pages/TrackRequirements';
+// import RejectedRequirements from '../Pages/RejectedRequirements';
+// import AddAssetType from '../Pages/AddAssetType';
+// import AddAssets from '../Pages/AddAssets';
+// import AdminDetails from '../Pages/AdminDetails';
+// import HostelLogin from '../Pages/HostelLogin';
+// import HostelReport from '../Pages/HostelReport';
 
 const AppRoutes = () => {
     const [childData, setChildData] = useState(true);
     const [totalItems, setTotalItems] = useState(0);
     const [role, setRole] = useState("");
     const [userData, setUserData] = useState("");
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
     const [mainId, setMainId] = useState("");
 
     const handleChildData = (data) => {
@@ -59,7 +69,8 @@ const AppRoutes = () => {
 
     useEffect(() => {
         fetchRole();
-    }, [])
+    }, []);
+
     useEffect(() => {
         if (role === 5) {
             fetchCartItems();
@@ -67,7 +78,7 @@ const AppRoutes = () => {
         }
     }, [childData, role]);
 
-    const PrivateRoutesData = [
+    const PrivateRoutesData = role === 1 ? [
         {
             path: '/dashboard',
             component: Dashboard,
@@ -107,8 +118,7 @@ const AppRoutes = () => {
             path: '/rejectedrequirements',
             component: RejectedRequirements,
             allowedRoles: [1]
-        }
-        ,
+        },
         {
             path: '/create-hostel-login',
             component: HostelLogin,
@@ -119,47 +129,56 @@ const AppRoutes = () => {
             component: HostelReport,
             allowedRoles: [1]
         },
+      
+       
+    ] : [
+        {
+            path: '/dashboard',
+            component: Dashboard,
+            allowedRoles: [2]
+        },
+        {
+            path: '/hostel-requirement',
+            component: HostelRequirement,
+            allowedRoles: [2]
+        },
         {
             path: '/completereq',
             component: CompleteRequirement,
-            allowedRoles: [1]
+            allowedRoles: [2]
         }
         ,
         {
             path: '/rejectreq',
             component: HostelRejectRequirement,
-            allowedRoles: [1]
+            allowedRoles: [2]
         },
         {
             path: '/confirmdelivery',
             component: ConfirmDelivery,
-            allowedRoles: [1]
+            allowedRoles: [2]
         },
         {
             path: '/staffdetails',
             component: StaffDetails,
-            allowedRoles: [1]
+            allowedRoles: [2]
         },
         {
             path: '/addstaff',
             component: AddStaff,
-            allowedRoles: [1]
+            allowedRoles: [2]
         },
-        {
-            path: '/hostel-requirement',
-            component: HostelRequirement,
-            allowedRoles: [1]
-        },
+      
         {
             path: '/student-details',
             component: StudentDetails,
-            allowedRoles: [1]
+            allowedRoles: [2]
         },
         {
             path: '/add-student-details',
             component: AddStudent,
-            allowedRoles: [1]
-        },
+            allowedRoles: [2]
+        }
     ];
 
     return (
@@ -173,23 +192,19 @@ const AppRoutes = () => {
                         <Route path='/login' element={<Login onChildData={fetchRole} role={role} />} />
                         <Route path='/forgotpassword' element={<ForgetPassword />} />
                         <Route path='*' element={<PageNotFound role={role} />} />
-                        {
-                            PrivateRoutesData.map((data) => {
-                                return (
-                                    <Route key={data.path} path={data.path} element={
-                                        <ProtectedRoute
-                                            component={data.component}
-                                            totalItems={totalItems}
-                                            role={role}
-                                            userData={userData}
-                                            allowedRoles={data.allowedRoles}
-                                            onChildData={handleChildData}
-                                            mainId={mainId}
-                                        />
-                                    } />
-                                );
-                            })
-                        }
+                        {PrivateRoutesData&&PrivateRoutesData.map((data) => (
+                            <Route key={data.path} path={data.path} element={
+                                <ProtectedRoute
+                                    component={data.component}
+                                    totalItems={totalItems}
+                                    role={role}
+                                    userData={userData}
+                                    allowedRoles={data.allowedRoles}
+                                    onChildData={handleChildData}
+                                    mainId={mainId}
+                                />
+                            } />
+                        ))}
                     </Routes>
                 </Router>
             }
@@ -197,4 +212,4 @@ const AppRoutes = () => {
     )
 }
 
-export default AppRoutes
+export default AppRoutes;

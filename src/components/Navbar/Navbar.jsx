@@ -28,6 +28,7 @@ const Navbar = ({ totalItems, role, userData }) => {
   const [imgPath, setImgPath] = useState(user);
 
   useEffect(() => {
+    debugger
     if (userData.status === "success") {
 
       if (userData.data.role_id === 5) {
@@ -45,7 +46,7 @@ const Navbar = ({ totalItems, role, userData }) => {
           setRoleName("Head Office");
         }
         else if (userData.data.role_id === 2) {
-          setRoleName("Sales");
+          setRoleName("Hostel");
         }
         else if (userData.data.role_id === 3) {
           setRoleName("Management");

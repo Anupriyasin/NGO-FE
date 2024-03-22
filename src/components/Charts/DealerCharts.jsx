@@ -171,10 +171,10 @@ const DealerCharts = () => {
     }
 
 
-    const productsDrop = allproducts.map(product => ({
-        value: product.item_code,
-        label: product.item_description,
-    }));
+    // const productsDrop = allproducts.map(product => ({
+    //     value: product.item_code,
+    //     label: product.item_description,
+    // }));
 
     const handleProductChange = selectedOptions => {
         setSelectedProducts(selectedOptions);
@@ -249,7 +249,7 @@ const DealerCharts = () => {
                             name="products"
                             isMulti
                             placeholder="Select Products"
-                            options={productsDrop}
+                            // options={productsDrop}
                             value={selectedProducts}
                             onChange={handleProductChange}
                             isSearchable
