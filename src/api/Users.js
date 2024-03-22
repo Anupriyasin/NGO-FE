@@ -21,8 +21,6 @@ export const getUserDetails = async (data) =>
       return "Error - " + error;
     });
 
-
-
 export const trackreq = async (data) =>
   await axios
     .get("/track_requirement")
@@ -142,9 +140,6 @@ export const modifydetails = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
-
-
-
 
 export const RejectRequirement = async (data) =>
   await axios
@@ -471,8 +466,6 @@ export const insertDealer = async (id, data) =>
       return "Error - " + error;
     });
 
-
-
 //new apis
 
 export const getRequirements = async () =>
@@ -487,9 +480,9 @@ export const getRequirements = async () =>
 
 export const getRejectedRequirements = async () =>
   await axios
-    .get('/rejected_req')
-    .then(response => {
-      return response.data
+    .get("/rejected_req")
+    .then((response) => {
+      return response.data;
     })
     .catch((error) => {
       return "Error - " + error;
@@ -503,7 +496,6 @@ export const getstudentinfo = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
-
 
 export const getAllStudents = async () =>
   await axios
@@ -534,3 +526,17 @@ export const getAllHostels = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
+
+export const getPincode = async (data) => {
+  try {
+    const response = await axios.get(
+      "https://api.postalpincode.in/pincode/" + data,
+      {
+        withCredentials: false,
+      }
+    );
+    return response;
+  } catch (error) {
+    return "Error - " + error;
+  }
+};

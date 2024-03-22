@@ -5,7 +5,7 @@ import "../components/Card/Card.css";
 import "../Pages/Dashboard.css";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { getUserDetails, updateUserDetails } from "../api/Users";
+import { getPincode, getUserDetails, updateUserDetails } from "../api/Users";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { UilArrowLeft } from "@iconscout/react-unicons";
@@ -66,11 +66,29 @@ const AdminDetails = ({ role }) => {
     getAdminDetails();
   }, []);
 
-  const handleChangeInput = (e) => {
-    let { name, value } = e.target;
-    setAdmin({ ...admin, [name]: value });
+  const handleChangeInput = async (e) => {
+    const { name, value } = e.target;
+  
+    if (name === 'pin_no') {
+      try {
+        const response = await getPincode(value);
+        console.log(response.status);
+  
+        if (response[0].PostOffice !== []) {
+          console.log("success")
+          setAdmin((prevAdmin) => ({ ...prevAdmin, pin_no: value }));
+        } else {
+          toast.error("Please enter a valid pincode");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setAdmin((prevAdmin) => ({ ...prevAdmin, [name]: value }));
+    }
   };
-
+  
+  
   const onSubmit = () => {
     setIsLoading(true);
     console.log("User ID:", admin.name);
@@ -191,9 +209,7 @@ const AdminDetails = ({ role }) => {
                                       className="form-control"
                                       required
                                       value={
-                                        role_id === 1
-                                          ? "Headquarter"
-                                          : "Hostel"
+                                        role_id === 1 ? "Headquarter" : "Hostel"
                                       }
                                       disabled
                                     />
