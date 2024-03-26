@@ -535,7 +535,7 @@ export const getPincode = async (data) => {
         withCredentials: false,
       }
     );
-    return response;
+    return response.data;
   } catch (error) {
     return "Error - " + error;
   }

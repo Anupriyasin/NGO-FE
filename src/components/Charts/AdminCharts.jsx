@@ -25,7 +25,7 @@ import AdminCards from "../Cards/AdminCards";
 import { getAllHostels, getAllStaff, getAllStudents } from "../../api/Users";
 import Map from "../Map/Map";
 
-const AdminCharts = ({ data1, title }) => {
+const AdminCharts = ({ data1, title, role }) => {
   const { t } = useTranslation();
   const handleClick = (e) => {
     i18next.changeLanguage(e.target.value);
@@ -97,16 +97,16 @@ const AdminCharts = ({ data1, title }) => {
 
     getAllHostels()
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setHostels(res.data[0].hostel);
-        let hostelData = []
+        let hostelData = [];
         for (let i = 0; i < res.data.length; i++) {
           hostelData.push({
             value: res.data[i].hostel_id,
             label: res.data[i].hostel_name,
           });
         }
-        setAllHostels(hostelData)
+        setAllHostels(hostelData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -406,7 +406,7 @@ const AdminCharts = ({ data1, title }) => {
   return (
     <div className="row">
       <div className="col-12 d-flex row justify-content-start m-0">
-          {/* <RangeDatePicker
+        {/* <RangeDatePicker
                         startDate={dateRange.startDate}
                         endDate={dateRange.endDate}
                         onChange={(startDate, endDate) => onDateChange(startDate, endDate)}
@@ -420,25 +420,25 @@ const AdminCharts = ({ data1, title }) => {
                         className="my-own-class-name"
                         startWeekDay="monday"
                     /> */}
-          <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-           <h3 className="my-4">{t("Dashboard")}</h3>
+        <div className="my-4 col-12 d-flex justify-content-between align-items-center">
+          <h3 className="my-4">{t("Dashboard")}</h3>
 
-            <div className="">
-              <Select
-                // className='col-12 col-md-4'
-                id="hostels"
-                name="hostels"
-                isMulti
-                options={allHostels}
-                value={selectedHostels}
-                onChange={handleHostelChange}
-                placeholder="Select Hostels"
-                isSearchable
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-              />
-            </div>
+          <div className="">
+            <Select
+              // className='col-12 col-md-4'
+              id="hostels"
+              name="hostels"
+              isMulti
+              options={allHostels}
+              value={selectedHostels}
+              onChange={handleHostelChange}
+              placeholder="Select Hostels"
+              isSearchable
+              closeMenuOnSelect={false}
+              components={animatedComponents}
+            />
           </div>
+        </div>
         {/* <div className='col-12 row col-md-4 d-flex justify-content-center align-items-center p-4 p-md-0'>
                     <div className='col-7 col-md-12 d-flex justify-content-center align-items-center'>
                         <p className='fw-bold text-secondary'>Quantity</p>
@@ -457,8 +457,13 @@ const AdminCharts = ({ data1, title }) => {
                 </div> */}
       </div>
 
-      <AdminCards students={students} staff={staff} hostels={hostels} />
-      <Map />
+      <AdminCards
+        students={students}
+        staff={staff}
+        hostels={hostels}
+        role={role}
+      />
+      {role === 1 ? <Map /> : ""}
 
       {/* <div className="bg-white rounded col-sm-12 col-md-5 m-3">
         <Charts />

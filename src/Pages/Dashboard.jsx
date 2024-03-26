@@ -15,7 +15,7 @@ const Dashboard = (props) => {
 
         {/* {props.role && props.role === 1 && ( */}
           <>
-            <AdminCharts />
+            <AdminCharts role={props.role} />
             {/* <TodaysOrderTable /> */}
           </>
         {/* )}

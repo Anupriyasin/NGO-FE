@@ -115,22 +115,25 @@ const AdminCards = (props) => {
             </div>
           </div>
         </div>
-
-        <div className="col-md-4 mt-1 ">
-          <div className="card">
-            <div
-              className="card-body border"
-              style={{ backgroundColor: "white" }}
-            >
-              <h3 className="card-title text-dark">{t("Total Hostels")}</h3>
-              <motion.div>
-                <div className="radialBar d-flex justify-content-end">
-                  <span className="text-dark fs-2">{props.hostels}</span>
-                </div>
-              </motion.div>
+        {props.role === 1 ? (
+          <div className="col-md-4 mt-1 ">
+            <div className="card">
+              <div
+                className="card-body border"
+                style={{ backgroundColor: "white" }}
+              >
+                <h3 className="card-title text-dark">{t("Total Hostels")}</h3>
+                <motion.div>
+                  <div className="radialBar d-flex justify-content-end">
+                    <span className="text-dark fs-2">{props.hostels}</span>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

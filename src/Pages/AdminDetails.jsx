@@ -35,6 +35,7 @@ const AdminDetails = ({ role }) => {
   } = useForm();
   const [loading, setLoading] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [pinErr, setPinErr] = useState(false);
   const navigate = useNavigate();
 
   const [admin, setAdmin] = useState({
@@ -68,27 +69,28 @@ const AdminDetails = ({ role }) => {
 
   const handleChangeInput = async (e) => {
     const { name, value } = e.target;
-  
-    if (name === 'pin_no') {
+
+    if (name === "pin_no") {
       try {
+        console.log(value);
         const response = await getPincode(value);
-        console.log(response.status);
-  
-        if (response[0].PostOffice !== []) {
-          console.log("success")
+        console.log("API Response:", response);
+
+        if (response[0].Status === "Success") {
           setAdmin((prevAdmin) => ({ ...prevAdmin, pin_no: value }));
+          setPinErr(false);
         } else {
-          toast.error("Please enter a valid pincode");
+          setPinErr(true);
         }
       } catch (error) {
-        console.log(error);
+        console.log("API Error:", error);
+        toast.error("Error fetching pincode data. Please try again later.");
       }
     } else {
       setAdmin((prevAdmin) => ({ ...prevAdmin, [name]: value }));
     }
   };
-  
-  
+
   const onSubmit = () => {
     setIsLoading(true);
     console.log("User ID:", admin.name);
@@ -319,6 +321,11 @@ const AdminDetails = ({ role }) => {
                                       className="form-label"
                                     >
                                       {t("Pin no.")}{" "}
+                                      { pinErr === false ? "" :
+                                        <span className="text-danger fw-bold fs-6">
+                                          Please enter a valid Pincode!
+                                        </span>
+                                      }
                                     </label>
                                     <input
                                       onChange={handleChangeInput}
