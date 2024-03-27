@@ -142,8 +142,6 @@ const HostelRequirement = () => {
       gst: GstHandle,
       total_amount: TotalAmountHandle,
       description: DisHandle,
-      lat: latitude,
-      long: longitude
     };
     AddAsset(Postdata)
       .then((response) => {
@@ -178,7 +176,7 @@ const HostelRequirement = () => {
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-2 px-md-4">
-        <h5 className="my-4">{t("Add Requirement")}</h5>
+        <h5 className="my-4">{t("Raise Requirement")}</h5>
 
         <form
           onSubmit={(e) => handleSubmitForm(e)}

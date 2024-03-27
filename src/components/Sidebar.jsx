@@ -86,9 +86,9 @@ const Sidebars = (props) => {
               <Link to="/dashboard">Dashboard</Link>
             </MenuItem>
             
-            {/* <SubMenu label="Manage Login" icon={<WalletRoundedIcon  />} className='SubMenu'>
+            <SubMenu label="Manage Login" icon={<WalletRoundedIcon  />} className='SubMenu'>
             <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">Create Hostel Login</Link></MenuItem>
-          </SubMenu> */}
+          </SubMenu>
             <SubMenu
               label="Requirement"
               icon={<PlaylistAddCheckIcon />}
@@ -174,7 +174,17 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/assetreport">Asset Report</Link>
+                <Link to="/assetreport">Inventory Report</Link>
+              </MenuItem>
+              <MenuItem
+                icon={<PieChartIcon />}
+                className={
+                  activeMenu === "/requirementreport"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                <Link to="/requirementreport">Requirements Report</Link>
               </MenuItem>
             </SubMenu>
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>
@@ -213,7 +223,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/hostel-requirement">Add Requirement</Link>
+                <Link to="/hostel-requirement">Raise Requirement</Link>
               </MenuItem>
               <MenuItem
                 icon={<CheckCircleIcon/>}

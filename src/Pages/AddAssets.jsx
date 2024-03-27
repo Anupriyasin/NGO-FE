@@ -172,6 +172,49 @@ const AddAssets = () => {
   } = form2;
 
 
+
+
+  const quantityHandle = (event) => {
+    const newQuantity = event.target.value;
+    setQuantityHandle(newQuantity);
+    calculateTotalAmount(newQuantity, UnitsHandle );
+
+  };
+
+  const unitsHandle = (event) => {
+    const newAmountPerUnit = event.target.value ;
+    setUnitsHandle(newAmountPerUnit);
+    calculateTotalAmount(QuantityHandle, newAmountPerUnit);
+
+  };
+
+  const gstHandle = (event) => {
+    const newGst = event.target.value;
+    setGstHandle(newGst);
+    calculateTotalAmount(QuantityHandle, UnitsHandle, newGst);
+  };
+
+  // Function to calculate total amount
+
+  const calculateTotalAmount = (QuantityHandle, UnitsHandle,GstHandle) => {
+    // Replace empty strings with 1 for calculation
+    const parsedQuantity = QuantityHandle == '' ? 1 : parseFloat(QuantityHandle);
+    const parsedAmountPerUnit = UnitsHandle == '' ? 1 : parseFloat(UnitsHandle);
+    const parsedGst = GstHandle == ''||GstHandle == undefined ? 0 : parseFloat(GstHandle);
+
+    let total = parsedQuantity * parsedAmountPerUnit;
+    const gstAmount = (total * parsedGst) / 100;
+    total += gstAmount;
+
+    if(QuantityHandle != '' && UnitsHandle != '' ){
+    if (!isNaN(total)) {
+      setTotalAmountHandle(total.toFixed(2)); // Round to 2 decimal places
+    }
+  }else{
+    setTotalAmountHandle('');
+  }
+  };
+
   const intakeexitHandle = (event) => {
     setIntakeExitHandle(event.target.value);
   };
@@ -207,9 +250,7 @@ const AddAssets = () => {
       console.error("Error fetching subassets:", error);
     }
   };
-  const quantityHandle = (event) => {
-    setQuantityHandle(event.target.value);
-  };
+ 
   const ExistquantityHandle = (event) => {
     setExistQuantity(event.target.value);
   };
@@ -240,12 +281,8 @@ const AddAssets = () => {
   const dateHandle = (event) => {
     setDateHandle(event.target.value);
   };
-  const unitsHandle = (event) => {
-    setUnitsHandle(event.target.value);
-  };
-  const gstHandle = (event) => {
-    setGstHandle(event.target.value);
-  };
+
+  
   const totalAmountHandle = (event) => {
     setTotalAmountHandle(event.target.value);
   };
@@ -448,6 +485,7 @@ const clearAssetsFields = () => {
                   required
                 />
               </div>
+              
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
@@ -519,7 +557,9 @@ const clearAssetsFields = () => {
                     type="text"
                     name="total_amount"
                     value={TotalAmountHandle}
-                    onChange={totalAmountHandle}
+                    // onChange={totalAmountHandle}
+
+                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                     className="form-control"
 
                   />
