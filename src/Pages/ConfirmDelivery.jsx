@@ -149,7 +149,7 @@ const ConfirmDelivery = ({ role, mainId }) => {
             <TopLoader loading={isLoading ? "50" : "100"} />
             <div className="px-0 px-md-3">
                 <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-                    <h5 className=" mt-2">{t("Track Requirements")}</h5>
+                    <h5 className=" mt-2">{t("Confirm Delivery")}</h5>
                     <div className=''>
                         <TextField
                             label={t('Search')}
@@ -175,7 +175,7 @@ const ConfirmDelivery = ({ role, mainId }) => {
                         className="my-4"
                     >
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
+                            <TableHead >
                                 <TableRow>
                                     <TableCell>{t("Sr. No.")}</TableCell>
                                     <TableCell align="left">{t("Requirement")}</TableCell>
@@ -216,6 +216,15 @@ const ConfirmDelivery = ({ role, mainId }) => {
                                                     onClick={() => handleUpdateClick(row)}
                                                 >
                                                     Track
+                                                </Typography>
+                                                <Typography
+                                                    variant="button"
+                                                    className="primary-btn btn"
+                                                    id="btn"
+                                                    marginLeft={"12px"}
+                                                
+                                                >
+                                                Confirm Delivery
                                                 </Typography>
                                             </TableCell>
 
