@@ -21,7 +21,9 @@ const AdminCards = (props) => {
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-white larger-text fs-3">{props.newReq}</span>
+                  <span className="text-white larger-text fs-3">
+                    {props.newReq > 0 ? props.newReq : 0}
+                  </span>
                 </div>
               </motion.div>
             </div>
@@ -35,7 +37,9 @@ const AdminCards = (props) => {
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-white larger-text fs-3">{props.PendingReq}</span>
+                  <span className="text-white larger-text fs-3">
+                    {props.PendingReq > 0 ? props.PendingReq : 0}
+                  </span>
                 </div>
               </motion.div>
             </div>
@@ -49,7 +53,9 @@ const AdminCards = (props) => {
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-white larger-text fs-3">{props.completedReq}</span>
+                  <span className="text-white larger-text fs-3">
+                    {props.completedReq > 0 ? props.completedReq : 0}
+                  </span>
                 </div>
               </motion.div>
             </div>
@@ -63,7 +69,9 @@ const AdminCards = (props) => {
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-white larger-text fs-3">{props.allReq}</span>
+                  <span className="text-white larger-text fs-3">
+                    {props.allReq > 0 ? props.allReq : 0}
+                  </span>
                 </div>
               </motion.div>
             </div>
@@ -81,7 +89,7 @@ const AdminCards = (props) => {
               <h3 className="card-title text-dark">{t("Total Students")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-dark fs-2">{props.students}</span>
+                  <span className="text-dark fs-2">{props.students > 0 ? props.students : 0}</span>
                 </div>
               </motion.div>
             </div>
@@ -97,7 +105,7 @@ const AdminCards = (props) => {
               <h3 className="card-title text-dark">{t("Staff Members")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
-                  <span className="text-dark fs-2">{props.staff}</span>
+                  <span className="text-dark fs-2">{props.staff > 0 ? props.staff : 0}</span>
                 </div>
               </motion.div>
             </div>
@@ -113,7 +121,7 @@ const AdminCards = (props) => {
                 <h3 className="card-title text-dark">{t("Total Hostels")}</h3>
                 <motion.div>
                   <div className="radialBar d-flex justify-content-end">
-                    <span className="text-dark fs-2">{props.hostels}</span>
+                    <span className="text-dark fs-2">{props.hostels > 0 ? props.hostels : 0}</span>
                   </div>
                 </motion.div>
               </div>
