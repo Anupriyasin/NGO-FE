@@ -222,7 +222,6 @@ export const updateAssignedDealer = async (dealerId, data) => {
 };
 
 export const updateUserDetails = async (data) => {
-  console.log("FormData:", data); // Add this line
   return await axios
     .post("/update_profile", data, {
       // headers: {
@@ -275,8 +274,6 @@ export const staffdetails = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
-
-    
 
 // export const alldealers = async (data) =>
 //   await axios
@@ -516,9 +513,9 @@ export const getRejectedRequirements = async () =>
     });
 export const getstudentinfo = async () =>
   await axios
-    .post('/get_student_info')
-    .then(response => {
-      return response.data
+    .post("/get_student_info")
+    .then((response) => {
+      return response.data;
     })
     .catch((error) => {
       return "Error - " + error;
@@ -554,6 +551,46 @@ export const getAllHostels = async () =>
       return "Error - " + error;
     });
 
+export const getDashboardNewRequirements = async () =>
+  await axios
+    .get("/get_dashboard_new_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getDashboardPendingRequirements = async () =>
+  await axios
+    .get("/get_dashboard_pending_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getDashboardCompletedRequirements = async () =>
+  await axios
+    .get("/get_dashboard_completed_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getDashboardAllRequirements = async () =>
+  await axios
+    .get("/get_dashboard_all_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
 export const getPincode = async (data) => {
   try {
     const response = await axios.get(
@@ -566,4 +603,34 @@ export const getPincode = async (data) => {
   } catch (error) {
     return "Error - " + error;
   }
+};
+
+export const addStudent = async (data) => {
+  return await axios
+    .post("/new_student_info", data, {
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+};
+
+export const addStaff = async (data) => {
+  return await axios
+    .post("/new_staff_info", data, {
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 };

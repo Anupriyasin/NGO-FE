@@ -152,19 +152,29 @@ const Sidebars = (props) => {
               </MenuItem>
             </SubMenu>
             <SubMenu
-              label="Report"
+              label="Reports"
               icon={<EqualizerIcon />}
               className="SubMenu"
             >
               <MenuItem
                 icon={<PieChartIcon />}
                 className={
-                  activeMenu === "//hostel-report"
+                  activeMenu === "/hostel-report"
                     ? "menuItem active "
                     : "menuItem"
                 }
               >
                 <Link to="/hostel-report">Hostel Wise Report</Link>
+              </MenuItem>
+              <MenuItem
+                icon={<PieChartIcon />}
+                className={
+                  activeMenu === "/assetreport"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                <Link to="/assetreport">Asset Report</Link>
               </MenuItem>
             </SubMenu>
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>

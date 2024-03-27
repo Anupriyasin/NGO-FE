@@ -22,7 +22,15 @@ import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import AdminCards from "../Cards/AdminCards";
 
-import { getAllHostels, getAllStaff, getAllStudents } from "../../api/Users";
+import {
+  getAllHostels,
+  getAllStaff,
+  getAllStudents,
+  getDashboardAllRequirements,
+  getDashboardCompletedRequirements,
+  getDashboardNewRequirements,
+  getDashboardPendingRequirements,
+} from "../../api/Users";
 import Map from "../Map/Map";
 
 const AdminCharts = ({ data1, title, role }) => {
@@ -39,6 +47,10 @@ const AdminCharts = ({ data1, title, role }) => {
     endDate: "",
   });
 
+  const [newReq, setNewReq] = useState(0);
+  const [pendingReq, setPendingReq] = useState(0);
+  const [completedReq, setCompletedReq] = useState(0);
+  const [allReq, setAllReq] = useState(0);
   const [students, setStudents] = useState(0);
   const [staff, setStaff] = useState(0);
   const [hostels, setHostels] = useState(0);
@@ -73,6 +85,50 @@ const AdminCharts = ({ data1, title, role }) => {
   // }
 
   const getCardsData = () => {
+    getDashboardNewRequirements()
+      .then((res) => {
+        setNewReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+    getDashboardPendingRequirements()
+      .then((res) => {
+        setPendingReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+      getDashboardCompletedRequirements()
+      .then((res) => {
+        setCompletedReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+      getDashboardAllRequirements()
+      .then((res) => {
+        setAllReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
     getAllStudents()
       .then((res) => {
         setStudents(res.data[0].students);
@@ -458,10 +514,14 @@ const AdminCharts = ({ data1, title, role }) => {
       </div>
 
       <AdminCards
+        role={role}
+        newReq={newReq}
+        completedReq={completedReq}
+        pendingReq={pendingReq}
+        allReq={allReq}
         students={students}
         staff={staff}
         hostels={hostels}
-        role={role}
       />
       {role === 1 ? <Map /> : ""}
 
