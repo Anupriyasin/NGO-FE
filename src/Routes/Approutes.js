@@ -28,6 +28,7 @@ import AddStudent from '../Pages/AddStudent';
 import HostelDashboard from '../Pages/HostelDashboard';
 import AssetReport from '../Pages/AssetReport';
 import RequirementsReport from '../Pages/RequirementReport';
+import UserDetails from '../Pages/UserDetails';
 // import TrackRequirements from '../Pages/TrackRequirements';
 // import RejectedRequirements from '../Pages/RejectedRequirements';
 // import AddAssetType from '../Pages/AddAssetType';
@@ -149,6 +150,11 @@ const AppRoutes = () => {
         {
             path: '/hosteldashboard',
             component: HostelDashboard,
+            allowedRoles: [2]
+        },
+        {
+            path: '/profile',
+            component: UserDetails,
             allowedRoles: [2]
         },
         {
