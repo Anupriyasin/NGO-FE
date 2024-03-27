@@ -160,7 +160,6 @@ const ConfirmDelivery = ({ role, mainId }) => {
                             InputProps={{
                                 endAdornment: <SearchIcon />,
                             }}
-                            style={{ marginTop: '37px' }}
                         />
                     </div>
 
@@ -210,21 +209,24 @@ const ConfirmDelivery = ({ role, mainId }) => {
                                             <TableCell align="left">{row.quantity}</TableCell>
                                             <TableCell align="">
                                                 <Typography
-                                                    variant="button"
-                                                    className="primary-btn btn"
+                                                    variant="contained"
+                                                    className="primary-btn btn btn-sm"
                                                     id="btn"
                                                     onClick={() => handleUpdateClick(row)}
                                                 >
                                                     Track
                                                 </Typography>
                                                 <Typography
-                                                    variant="button"
-                                                    className="primary-btn btn"
-                                                    id="btn"
+                                                    // variant="button"
+                                                    className="success-btn btn btn-sm"
+                                                    // id="btn1"
                                                     marginLeft={"12px"}
-                                                
+                                                    variant="contained"
+                                                    // color="secondary"
+                                                    style={{ marginRight: 8, backgroundColor: "green", color: "white" }}
+
                                                 >
-                                                Confirm Delivery
+                                                    Confirm Delivery
                                                 </Typography>
                                             </TableCell>
 
