@@ -207,7 +207,7 @@ const AddAssetType = () => {
                     <div className="row mt-3">
                         <div className="col-md-12">
                             <button type="submit" className="btn btn-primary me-2">Submit</button>
-                            <button type="button" className="btn btn-secondary" onClick={clearAssetsSubFields}>Clear</button>
+                            <button type="button" className="btn btn-secondary" onClick={clearAssetsSubFields}>Cancel</button>
                         </div>
                     </div>
                 </form>

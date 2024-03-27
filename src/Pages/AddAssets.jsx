@@ -7,7 +7,7 @@ import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
 import { Modal, Button } from "@mui/material";
 import { toast } from 'react-toastify';
-import { subassets, getAssetsName, AddAsset, Assetnameinfo } from '../api/Users';
+import { subassets, getAssetsName, AddAsset, Assetnameinfo, AddExistingAsset, CurrentQuantity } from '../api/Users';
 
 
 const AddAssets = () => {
@@ -49,9 +49,7 @@ const AddAssets = () => {
   const [TotalAmountHandle, setTotalAmountHandle] = useState('');
 
   const [markRequired, setMarkRequired] = useState(true);
-
-  useEffect(() => {
-    debugger
+  const getAssetsNames =  () => {
     getAssetsName().then(res => {
       if (res.status === "success") {
         console.log("Assets data:", res.data);
@@ -61,6 +59,10 @@ const AddAssets = () => {
     }).catch(err => {
       console.error("Error fetching assets:", err);
     });
+  }
+  useEffect(() => {
+    getAssetsNames()
+  
   }, []);
   console.log("AssetsTypes.////", AssetsTypes)
   console.log("ExistAssetsType.////", ExistAssetsType)
@@ -105,33 +107,53 @@ const AddAssets = () => {
       console.error("Error fetching subassets:", error);
     }
   };
-  //   const ExistnameHandle = async (e) => {
-  //     debugger;
-  //     const newAssetType = e.target.value;
-  //     setExistAssetsType((prevRow) => ({
-  //       ...prevRow,
-  //       asset_type: newAssetType,
-  //     }));
-  // console.log("AssetsType",AssetsType)
-  //     try {
-  //       const response = await subassets({ asset_id: newAssetType });
-  //       if (response) {
-  //         setExistAssetsSubTypes(response.data);
-  //       } else {
-  //         console.error("Invalid response format for subassets:", response);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching subassets:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    resetFields();
+  }, [type]);
 
+  const resetFields = () => {
+    setExistAssetsType([]);
+    setAssetsType([]);
+    setAssetsTypes([]);
+    setExistAssetsSubTypes([]);
+    setAssetsSubTypes([]);
+    setExistCategory([]);
+    setCategoryHandle([]);
+    setAssetSubtype([]);
+    setIntakeHandle([]);
+    setIntakeExitHandle([]);
+    setNameHandle('');
+    setExistNameHandle('');
+    setQuantityHandle('');
+    setExistQuantity('');
+    setExistDonatedDate('');
+    setPurchaseDate('');
+    setAmountperunit('');
+    setExistGST('');
+    setExistTotalAmount('');
+    setExistDisHandle('');
+    setExistCurrentQuantity('');
+    setDisHandle('');
+    setDateHandle('');
+    setUnitsHandle('');
+    setGstHandle('');
+    setTotalAmountHandle('');
+    setMarkRequired(true);
+  };
+  
   const switchButton = (type) => {
+    debugger
     if (type === 'assign') {
       setType('assign');
+      
       setAssetsType('');
+      getAssetsNames();
       console.log("CategoryHandle", CategoryHandle)
     } else {
       setType('view');
+      getAssetsNames();
+      
+      setExistAssetsType('')
       setExistAssetsType('');
     }
   }
@@ -163,12 +185,27 @@ const AddAssets = () => {
   const nameHandle = (event) => {
     setNameHandle(event.target.value);
   };
-  const ExistnameHandle = (e) => {
+  const ExistnameHandle = async(e) => {
+    debugger
     const ExistAssetname = e.target.value;
     setExistNameHandle((prevRow) => ({
       ...prevRow,
       asset_sub_type: ExistAssetname,
     }));
+
+    const Assetstype = ExistAssetname
+
+    try {
+      const response = await CurrentQuantity({ asset_id: ExistAssetsType.asset_type, asset_sub_type_id: ExistAssetsSubTypes.asset_sub_type
+        ,asset_name:ExistAssetname});
+      if (response) {
+        setExistCurrentQuantity(response.data.asset_quantity[0].asset_quantity);
+      } else {
+        console.error("Invalid response format for subassets:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching subassets:", error);
+    }
   };
   const quantityHandle = (event) => {
     setQuantityHandle(event.target.value);
@@ -241,7 +278,10 @@ const AddAssets = () => {
       console.error("Error fetching subassets:", error);
     }
   };
-
+ 
+const clearAssetsFields = () => {
+    window.location.reload();
+}
   const handleSubmitForm = async (event) => {
     debugger
     event.preventDefault();
@@ -271,12 +311,39 @@ const AddAssets = () => {
         toast.error(error.response?.data?.message || "Failed to reject requirement");
       });
   };
+  const handleSubmitExistingassetForm = async (event) => {
+    debugger
+    event.preventDefault();
+
+    const Postdata =
+    {
+      asset_sub_type_id: ExistAssetsSubTypes.asset_sub_type,
+      asset_id: ExistAssetsType.asset_type,
+      asset_quantity: ExistQuantity,
+      amount_per_unit: Amountperunit,
+      gst: ExistGST,
+      total_amount: ExistTotalAmount,
+      donated_updated_date: ExistDonatedDate,
+      purchase_update_date: PurchaseDate,
+
+
+    }
+    AddExistingAsset(Postdata)
+      .then(response => {
+        toast.success(response.message);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error("Error rejecting requirement:", error);
+        toast.error(error.response?.data?.message || "Failed to reject requirement");
+      });
+  };
 
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-2 px-md-4">
-        <h5 className="my-4">{t("Add Asset")}</h5>
+        <h5 className="my-4">{t("Add Inventory Data")}</h5>
         <button
           className={
             type === "assign"
@@ -286,7 +353,7 @@ const AddAssets = () => {
           style={{ fontSize: "14px" }}
           onClick={(e) => switchButton("view")}
         >
-          {t("Create New Asset")}{" "}
+          {t("New Inventory")}{" "}
         </button>
         <span className="mx-2 d-inline-block"></span>
         <button
@@ -296,7 +363,7 @@ const AddAssets = () => {
           style={{ fontSize: "14px" }}
           onClick={(e) => switchButton("assign")}
         >
-          {t("Add In Existing Asset")}{" "}
+          {t("Add Existing Inventory")}{" "}
         </button>
 
         {type === "view" ? (
@@ -334,7 +401,6 @@ const AddAssets = () => {
                   required
                 >
                   <option value="">Select Asset Type</option>
-                  {/* Map assetOptions to generate option elements */}
                   {AssetsTypes.assets_name && AssetsTypes.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
                   ))}
@@ -443,8 +509,6 @@ const AddAssets = () => {
                     name="gst"
                     value={GstHandle}
                     onChange={gstHandle}
-
-                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                     className="form-control"
                     required
                   />
@@ -456,8 +520,6 @@ const AddAssets = () => {
                     name="total_amount"
                     value={TotalAmountHandle}
                     onChange={totalAmountHandle}
-
-                    // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                     className="form-control"
 
                   />
@@ -469,14 +531,14 @@ const AddAssets = () => {
                 <button type="submit" className="btn btn-primary me-2">
                   Submit
                 </button>
-                <button type="button" className="btn btn-secondary">
-                  Clear
+                <button type="button" className="btn btn-secondary" onClick={clearAssetsFields}>
+                  Cancel
                 </button>
               </div>
             </div>
           </form>
         ) : (
-          <form id="myform2" style={{ marginTop: "12px" }}>
+          <form id="myform2" onSubmit={(e) => handleSubmitExistingassetForm(e)} style={{ marginTop: "12px" }}>
             <div className="row">
               <div className="col-md-4">
                 <label className="form-label">Intake Time {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
@@ -510,12 +572,10 @@ const AddAssets = () => {
                 <select
                   name="asset_type"
                   className="common-input form-select"
-                  // value={ExistAssetsType}
                   onChange={ExistAssetTypehandle}
                   required
                 >
                   <option value="">Select Asset Type</option>
-                  {/* Map assetOptions to generate option elements */}
                   {ExistAssetsType.assets_name && ExistAssetsType.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
                   ))}
@@ -578,9 +638,9 @@ const AddAssets = () => {
                   value={ExistCurrentQuantity}
                   name="asset_quantity"
                   onChange={ExistCurrentQuantityHandle}
-                  // onChange={(e) => handleAssetSubTypeChange(index, e.target.value)}
                   className="form-control"
                   required
+                  readOnly
                 />
               </div>
 
@@ -617,7 +677,6 @@ const AddAssets = () => {
                   <label className="form-label">Purchase Date {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                   <input
                     type="Date"
-                    value=""
                     name="asset_add_date"
                     onChange={PurchaseDateHandle}
                     className="form-control"
@@ -643,7 +702,6 @@ const AddAssets = () => {
                     name="total_amount"
                     onChange={ExistGSTHandle}
                     className="form-control"
-                    readOnly
                   />
                 </div>
               </div>
@@ -661,7 +719,6 @@ const AddAssets = () => {
                     name="total_amount"
                     onChange={ExistTotalAmountHandle}
                     className="form-control"
-                    readOnly
                   />
                 </div>
               </div>
@@ -672,8 +729,8 @@ const AddAssets = () => {
                 <button type="submit" className="btn btn-primary me-2">
                   Submit
                 </button>
-                <button type="button" className="btn btn-secondary">
-                  Clear
+                <button type="button" className="btn btn-secondary" onClick={clearAssetsFields}>
+                  Cancel
                 </button>
               </div>
             </div>

@@ -87,6 +87,20 @@ export const AddAsset = async (data) =>
       return "Error - " + error;
     });
 
+export const AddExistingAsset = async (data) =>
+  await axios
+    .post("/update_inventory_asset", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
 export const subassets = async (data) =>
   await axios
     .post("/get_asset_sub_type", data, {
@@ -103,6 +117,19 @@ export const subassets = async (data) =>
 export const Assetnameinfo = async (data) =>
   await axios
     .post("/asset_name_nfo", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+export const CurrentQuantity = async (data) =>
+  await axios
+    .post("/get_asset_count", data, {
       headers: {
         "Content-Type": "application/json",
       },
