@@ -30,6 +30,12 @@ import {
   getDashboardCompletedRequirements,
   getDashboardNewRequirements,
   getDashboardPendingRequirements,
+  getUserAllStaff,
+  getUserAllStudents,
+  getUserDashboardAllRequirements,
+  getUserDashboardCompletedRequirements,
+  getUserDashboardNewRequirements,
+  getUserDashboardPendingRequirements,
 } from "../../api/Users";
 import Map from "../Map/Map";
 
@@ -84,7 +90,7 @@ const AdminCharts = ({ data1, title, role }) => {
   //     // getDashboardData(check)
   // }
 
-  const getCardsData = () => {
+  const getAdminCardsData = () => {
     getDashboardNewRequirements()
       .then((res) => {
         setNewReq(res.data[0].total);
@@ -172,10 +178,78 @@ const AdminCharts = ({ data1, title, role }) => {
       });
   };
 
+  const getUserCardsData = () => {
+    getUserDashboardNewRequirements()
+      .then((res) => {
+        setNewReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+    getUserDashboardPendingRequirements()
+      .then((res) => {
+        setPendingReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+      getUserDashboardCompletedRequirements()
+      .then((res) => {
+        setCompletedReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+      getUserDashboardAllRequirements()
+      .then((res) => {
+        setAllReq(res.data[0].total);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+    getUserAllStudents()
+      .then((res) => {
+        setStudents(res.data[0].students);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+    getUserAllStaff()
+      .then((res) => {
+        setStaff(res.data[0].staff);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+  };
+
   const getDashboardData = () => {
     setIsLoading(true);
 
-    getCardsData();
+    role === 1 ? getAdminCardsData() : getUserCardsData()
 
     if (selectedHostels !== "") {
       data.hostels = [];
