@@ -248,8 +248,6 @@ export const staffdetails = async (data) =>
       return "Error - " + error;
     });
 
-    
-
 // export const alldealers = async (data) =>
 //   await axios
 //     .get("/get_all_dealers", data)
@@ -488,9 +486,9 @@ export const getRejectedRequirements = async () =>
     });
 export const getstudentinfo = async () =>
   await axios
-    .post('/get_student_info')
-    .then(response => {
-      return response.data
+    .post("/get_student_info")
+    .then((response) => {
+      return response.data;
     })
     .catch((error) => {
       return "Error - " + error;
@@ -519,6 +517,46 @@ export const getAllStaff = async () =>
 export const getAllHostels = async () =>
   await axios
     .get("/get_all_hostels")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getDashboardNewRequirements = async () =>
+  await axios
+    .get("/get_dashboard_new_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getDashboardPendingRequirements = async () =>
+  await axios
+    .get("/get_dashboard_pending_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getDashboardCompletedRequirements = async () =>
+  await axios
+    .get("/get_dashboard_completed_requirement")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getDashboardAllRequirements = async () =>
+  await axios
+    .get("/get_dashboard_all_requirement")
     .then((response) => {
       return response.data;
     })

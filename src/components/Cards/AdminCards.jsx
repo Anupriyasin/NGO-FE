@@ -20,11 +20,8 @@ const AdminCards = (props) => {
               <h3 className="card-title text-white">{t("New")}</h3>
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
-                <div className="radialBar">
-                  <span>
-                    <FiShoppingBag className="icon mt-2 text-white" size={20} />
-                  </span>
-                  <span className="text-white larger-text">{0}</span>
+                <div className="radialBar d-flex justify-content-end">
+                  <span className="text-white larger-text fs-3">{props.newReq}</span>
                 </div>
               </motion.div>
             </div>
@@ -37,11 +34,8 @@ const AdminCards = (props) => {
               <h3 className="card-title text-white">{t("Pending")}</h3>
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
-                <div className="radialBar">
-                  <span>
-                    <FaCreditCard className="icon mt-2 text-white" size={20} />
-                  </span>
-                  <span className="text-white larger-text">{0}</span>
+                <div className="radialBar d-flex justify-content-end">
+                  <span className="text-white larger-text fs-3">{props.PendingReq}</span>
                 </div>
               </motion.div>
             </div>
@@ -54,11 +48,8 @@ const AdminCards = (props) => {
               <h3 className="card-title text-white">{t("Completed")}</h3>
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
-                <div className="radialBar">
-                  <span>
-                    <BiMoney className="icon mt-2 text-white" size={20} />
-                  </span>
-                  <span className="text-white larger-text">{0}</span>
+                <div className="radialBar d-flex justify-content-end">
+                  <span className="text-white larger-text fs-3">{props.completedReq}</span>
                 </div>
               </motion.div>
             </div>
@@ -71,11 +62,8 @@ const AdminCards = (props) => {
               <h3 className="card-title text-white">{t("All")}</h3>
               <h6 className="text-white">{t("Requirements")}</h6>
               <motion.div>
-                <div className="radialBar">
-                  <span>
-                    <BiMoney className="icon mt-2 text-white" size={20} />
-                  </span>
-                  <span className="text-white larger-text">{0}</span>
+                <div className="radialBar d-flex justify-content-end">
+                  <span className="text-white larger-text fs-3">{props.allReq}</span>
                 </div>
               </motion.div>
             </div>

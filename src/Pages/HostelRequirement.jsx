@@ -142,6 +142,8 @@ const HostelRequirement = () => {
       gst: GstHandle,
       total_amount: TotalAmountHandle,
       description: DisHandle,
+      lat: latitude,
+      long: longitude
     };
     AddAsset(Postdata)
       .then((response) => {
