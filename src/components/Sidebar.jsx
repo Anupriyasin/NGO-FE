@@ -186,7 +186,40 @@ const Sidebars = (props) => {
               >
                 <Link to="/requirementreport">Requirements Report</Link>
               </MenuItem>
+             
+            
             </SubMenu>
+
+            <MenuItem
+                icon={<SupervisedUserCircleIcon />}
+                className={
+                  HostelActiveMenu === "/student-details"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                {" "}
+                <Link to="/student-details">Student Details </Link>
+              </MenuItem>
+              <MenuItem
+                icon={<AccountCircleIcon />}
+                className={
+                  HostelActiveMenu === "/staffdetails" ? "menuItem active " : "menuItem"
+                }
+              >
+                {" "}
+                <Link to="/staffdetails">Staff Details</Link>
+              </MenuItem>
+              <MenuItem
+                icon={<AccountCircleIcon />}
+                className={
+                  HostelActiveMenu === "/hosteldetails" ? "menuItem active " : "menuItem"
+                }
+              >
+                {" "}
+                <Link to="/hosteldetails">Hostel Details</Link>
+              </MenuItem>
+
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>
               {" "}
               Logout{" "}
