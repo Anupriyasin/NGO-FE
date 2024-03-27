@@ -226,6 +226,16 @@ const Sidebars = (props) => {
                 <Link to="/hostel-requirement">Raise Requirement</Link>
               </MenuItem>
               <MenuItem
+                icon={<DescriptionIcon />}
+                className={
+                  HostelActiveMenu === "/confirmdelivery"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                <Link to="/confirmdelivery">Confirm Delivery</Link>
+              </MenuItem>
+              <MenuItem
                 icon={<CheckCircleIcon/>}
                 className={
                   HostelActiveMenu === "/completereq"
@@ -245,16 +255,7 @@ const Sidebars = (props) => {
               >
                 <Link to="/rejectreq">Rejected Requirements</Link>
               </MenuItem>
-              <MenuItem
-                icon={<DescriptionIcon />}
-                className={
-                  HostelActiveMenu === "/confirmdelivery"
-                    ? "menuItem active "
-                    : "menuItem"
-                }
-              >
-                <Link to="/confirmdelivery">Confirm Delivery</Link>
-              </MenuItem>
+             
             </SubMenu>
            
               <MenuItem
