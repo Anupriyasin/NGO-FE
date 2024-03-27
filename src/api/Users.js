@@ -195,7 +195,6 @@ export const updateAssignedDealer = async (dealerId, data) => {
 };
 
 export const updateUserDetails = async (data) => {
-  console.log("FormData:", data); // Add this line
   return await axios
     .post("/update_profile", data, {
       // headers: {
@@ -539,4 +538,34 @@ export const getPincode = async (data) => {
   } catch (error) {
     return "Error - " + error;
   }
+};
+
+export const addStudent = async (data) => {
+  return await axios
+    .post("/new_student_info", data, {
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+};
+
+export const addStaff = async (data) => {
+  return await axios
+    .post("/new_staff_info", data, {
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 };
