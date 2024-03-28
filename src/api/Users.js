@@ -514,6 +514,30 @@ export const getRequirements = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
+    export const getHostelWiseRequirements = async (requestData) => {
+      try {
+        const response = await axios.post("/hostel_wise_reqmnt_data", requestData);
+        return response.data;
+      } catch (error) {
+        throw new Error("Error - " + error);
+      }
+    };
+    // export const getAssetReport = async (requestData) => {
+    //   try {
+    //     const response = await axios.post("/get_asset_report", requestData);
+    //     return response.data;
+    //   } catch (error) {
+    //     throw new Error("Error - " + error);
+    //   }
+    // };
+    export const getAssetReport = async (requestData) => {
+      try {
+        const response = await axios.post("/get_asset_report", requestData);
+        return response.data;
+      } catch (error) {
+        throw new Error("Error - " + error);
+      }
+    };
 
 export const getRejectedRequirements = async () =>
   await axios

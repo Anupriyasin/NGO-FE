@@ -166,7 +166,7 @@ const Sidebars = (props) => {
               >
                 <Link to="/hostel-report">Hostel Wise Report</Link>
               </MenuItem>
-              <MenuItem
+              {/* <MenuItem
                 icon={<PieChartIcon />}
                 className={
                   activeMenu === "/assetreport"
@@ -175,7 +175,7 @@ const Sidebars = (props) => {
                 }
               >
                 <Link to="/assetreport">Inventory Report</Link>
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem
                 icon={<PieChartIcon />}
                 className={
@@ -190,7 +190,7 @@ const Sidebars = (props) => {
             
             </SubMenu>
 
-            <MenuItem
+            {/* <MenuItem
                 icon={<SupervisedUserCircleIcon />}
                 className={
                   HostelActiveMenu === "/student-details"
@@ -200,8 +200,8 @@ const Sidebars = (props) => {
               >
                 {" "}
                 <Link to="/student-details">Student Details </Link>
-              </MenuItem>
-              <MenuItem
+              </MenuItem> */}
+              {/* <MenuItem
                 icon={<AccountCircleIcon />}
                 className={
                   HostelActiveMenu === "/staffdetails" ? "menuItem active " : "menuItem"
@@ -209,8 +209,8 @@ const Sidebars = (props) => {
               >
                 {" "}
                 <Link to="/staffdetails">Staff Details</Link>
-              </MenuItem>
-              <MenuItem
+              </MenuItem> */}
+              {/* <MenuItem
                 icon={<AccountCircleIcon />}
                 className={
                   HostelActiveMenu === "/hosteldetails" ? "menuItem active " : "menuItem"
@@ -218,7 +218,7 @@ const Sidebars = (props) => {
               >
                 {" "}
                 <Link to="/hosteldetails">Hostel Details</Link>
-              </MenuItem>
+              </MenuItem> */}
 
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>
               {" "}

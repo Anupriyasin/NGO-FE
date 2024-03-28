@@ -51,8 +51,8 @@ const StudentDetails = ({ role, mainId }) => {
     setPage(newPage);
   };
   let navigate = useNavigate();
-  const view = () => {
-      navigate(`/add-student-details`);
+  const view = (row) => {
+    navigate(`/add-student-details`, { state: row });
   }
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -131,7 +131,7 @@ const StudentDetails = ({ role, mainId }) => {
                         <TableCell align="left">{row.gurardiancontact}</TableCell>
                         <TableCell align="left">{row.phone_number}</TableCell>
                         <TableCell align="left">{row.created_at}</TableCell>
-                        <TableCell align="left text-danger"><BorderColorOutlinedIcon style={{ color: "#4eb2e7" }} onClick={view} /></TableCell>
+                        <TableCell align="left text-danger"><BorderColorOutlinedIcon style={{ color: "#4eb2e7" }} onClick={()=>view(row)} /></TableCell>
 
 
                       </TableRow>
