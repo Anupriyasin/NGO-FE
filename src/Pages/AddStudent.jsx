@@ -244,6 +244,9 @@ const AddStudent = () => {
               </label>
               <input
                 type="text"
+                pattern="[0-9]*"
+                maxLength={10}
+                minLength={10}
                 name="emergency_contact"
                 className="form-control"
                 onChange={handleChangeInput}
@@ -257,6 +260,9 @@ const AddStudent = () => {
               </label>
               <input
                 type="text"
+                pattern="[0-9]*"
+                maxLength={10}
+                minLength={10}
                 name="guardian_ph_no"
                 className="form-control"
                 onChange={handleChangeInput}
@@ -275,6 +281,7 @@ const AddStudent = () => {
                 className="form-control"
                 required
                 maxLength={10}
+                minLength={10}
               />
             </div>
           </div>

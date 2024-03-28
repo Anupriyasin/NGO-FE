@@ -253,10 +253,11 @@ const AddStaff = () => {
                 onChange={handleChangeInput}
                 type="text"
                 pattern="[0-9]*"
+                maxLength={10}
+                minLength={10}
                 name="phone_number"
                 className="form-control"
                 required
-                maxLength={10}
               />
             </div>
           </div>
