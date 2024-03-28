@@ -86,6 +86,19 @@ export const AddAsset = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const AddHostelRequirement = async (data) =>
+  await axios
+    .post("/add_requirements", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 
 export const AddExistingAsset = async (data) =>
   await axios

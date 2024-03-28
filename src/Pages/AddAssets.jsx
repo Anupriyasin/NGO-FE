@@ -251,20 +251,45 @@ const AddAssets = () => {
     }
   };
  
-  const ExistquantityHandle = (event) => {
-    setExistQuantity(event.target.value);
-  };
   const ExistDonatedDateHandle = (event) => {
     setExistDonatedDate(event.target.value);
   };
   const PurchaseDateHandle = (event) => {
     setPurchaseDate(event.target.value);
   };
+  const ExistquantityHandle = (event) => {
+    const exitnewQuantity = event.target.value;
+    setExistQuantity(exitnewQuantity);
+    calculateExistTotalAmount(exitnewQuantity, Amountperunit );
+  };
   const AmountperunitHandle = (event) => {
-    setAmountperunit(event.target.value);
+    const existnewAmountPerUnit = event.target.value ;
+    setAmountperunit(existnewAmountPerUnit);
+    calculateExistTotalAmount(ExistQuantity, existnewAmountPerUnit);
   };
   const ExistGSTHandle = (event) => {
-    setExistGST(event.target.value);
+      const newGst = event.target.value;
+      setExistGST(newGst);
+      calculateExistTotalAmount(ExistQuantity, Amountperunit, newGst);
+  };
+  const calculateExistTotalAmount = (QuantityHandle, UnitsHandle,GstHandle) => {
+    debugger
+    // Replace empty strings with 1 for calculation
+    const parsedQuantity = QuantityHandle == '' ? 1 : parseFloat(QuantityHandle);
+    const parsedAmountPerUnit = UnitsHandle == '' ? 1 : parseFloat(UnitsHandle);
+    const parsedGst = GstHandle == ''||GstHandle == undefined ? 0 : parseFloat(GstHandle);
+
+    let total = parsedQuantity * parsedAmountPerUnit;
+    const gstAmount = (total * parsedGst) / 100;
+    total += gstAmount;
+
+    if(QuantityHandle != '' && UnitsHandle != '' ){
+    if (!isNaN(total)) {
+      setExistTotalAmount(total.toFixed(2)); // Round to 2 decimal places
+    }
+  }else{
+    setExistTotalAmount('');
+  }
   };
   const ExistTotalAmountHandle = (event) => {
     setExistTotalAmount(event.target.value);
@@ -757,7 +782,7 @@ const clearAssetsFields = () => {
                     type="text"
                     value={ExistTotalAmount}
                     name="total_amount"
-                    onChange={ExistTotalAmountHandle}
+                    // onChange={ExistTotalAmountHandle}
                     className="form-control"
                   />
                 </div>

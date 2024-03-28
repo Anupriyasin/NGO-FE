@@ -12,6 +12,7 @@ import {
   getAssetsName,
   AddAsset,
   Assetnameinfo,
+  AddHostelRequirement,
 } from "../api/Users";
 
 const HostelRequirement = () => {
@@ -37,6 +38,7 @@ const HostelRequirement = () => {
   const [GstHandle, setGstHandle] = useState("");
   const [TotalAmountHandle, setTotalAmountHandle] = useState("");
   const [markRequired, setMarkRequired] = useState(true);
+  const [ExistNameHandle, setExistNameHandle] = useState('');
   const [error, setError] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -94,9 +96,6 @@ const HostelRequirement = () => {
   const categoryHandle = (event) => {
     setCategoryHandle(event.target.value);
   };
-  const nameHandle = (event) => {
-    setNameHandle(event.target.value);
-  };
   const quantityHandle = (event) => {
     setQuantityHandle(event.target.value);
   };
@@ -105,48 +104,56 @@ const HostelRequirement = () => {
     setDisHandle(event.target.value);
   };
 
-  const dateHandle = (event) => {
-    setDateHandle(event.target.value);
-  };
-  const unitsHandle = (event) => {
-    setUnitsHandle(event.target.value);
-  };
-  const gstHandle = (event) => {
-    setGstHandle(event.target.value);
-  };
-  const totalAmountHandle = (event) => {
-    setTotalAmountHandle(event.target.value);
-  };
+ 
 
-  const intakeHandle = (event) => {
-    setIntakeHandle(event.target.value);
+  const AssetSubtypehandle = async(e) => {
+      debugger
+      // setExistAssetsSubTypes(e.target.value);
+      const ExistAssetType = e.target.value;
+      setAssetSubtype((prevRow) => ({
+        ...prevRow,
+        asset_sub_type: ExistAssetType,
+      }));
+      const Assetstype = ExistAssetType
+  
+      try {
+        const response = await Assetnameinfo({ asset_id: Assetstype, asset_sub_type_id: ExistAssetType });
+        if (response) {
+          setExistNameHandle(response.data);
+        } else {
+          console.error("Invalid response format for subassets:", response);
+        }
+      } catch (error) {
+        console.error("Error fetching subassets:", error);
+      }
   };
+  const ExistnameHandle = async(e) => {
+    debugger
+    const ExistAssetname = e.target.value;
+    setExistNameHandle((prevRow) => ({
+      ...prevRow,
+      asset_sub_type: ExistAssetname,
+    }));
 
-  const AssetSubtypehandle = (event) => {
-    setAssetSubtype(event.target.value);
+   
   };
-
   const handleSubmitForm = async (event) => {
     debugger;
     event.preventDefault();
 
     const Postdata = {
-      intake_type: IntakeHandle,
       category: CategoryHandle,
-      asset_type: AssetsType.asset_type,
-      asset_sub_type: AssetSubtype,
-      asset_name: NameHandle,
+      asset_type_id: AssetsType.asset_type,
+      asset_sub_type_id: AssetSubtype.asset_sub_type,
+      asset_name: ExistNameHandle.asset_sub_type,
       asset_quantity: QuantityHandle,
-      asset_add_date: DateHandle,
-      amount_per_unit: UnitsHandle,
-      gst: GstHandle,
-      total_amount: TotalAmountHandle,
       description: DisHandle,
+     
     };
-    AddAsset(Postdata)
+    AddHostelRequirement(Postdata)
       .then((response) => {
         toast.success(response.message);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error rejecting requirement:", error);
@@ -207,7 +214,7 @@ const HostelRequirement = () => {
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <select
-                name="asset_type"
+                name="asset_type_id"
                 // value={AssetsType}
                 className="common-input form-select"
                 onChange={AssetTypehandle}
@@ -229,7 +236,7 @@ const HostelRequirement = () => {
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <select
-                name="asset_sub_type"
+                name="asset_sub_type_id"
                 // value={AssetSubtype}
                 onChange={AssetSubtypehandle}
                 className="common-input form-select"
@@ -252,14 +259,18 @@ const HostelRequirement = () => {
                 Asset Name{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
-              <input
-                type="text"
-                name="asset_name"
-                value={NameHandle}
-                className="form-control"
-                onChange={nameHandle}
-                required
-              />
+              <select
+                  name="asset_name"
+                  // value={ExistNameHandle}
+                  onChange={ExistnameHandle}
+                  className="common-input form-select"
+                >
+                  <option value="">Select Asset Name</option>
+                  {ExistNameHandle.asset_name && ExistNameHandle.asset_name.map((row) => (
+                    <option key={row.asset_name} value={row.asset_name}>{row.asset_name}</option>
+                  ))}
+
+                </select>
             </div>
             <div className="col-md-4">
               <label className="form-label">
