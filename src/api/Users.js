@@ -624,9 +624,9 @@ export const getUserAllStaff = async () =>
       return "Error - " + error;
     });
 
-export const getUserDashboardNewRequirements = async () =>
+export const getUserDashboardNewRequirements = async (data) =>
   await axios
-    .post("/get_dashboard_new_requirement_hostel")
+    .post("/get_dashboard_new_requirement_hostel", data)
     .then((response) => {
       return response.data;
     })
@@ -634,9 +634,9 @@ export const getUserDashboardNewRequirements = async () =>
       return "Error - " + error;
     });
 
-export const getUserDashboardPendingRequirements = async () =>
+export const getUserDashboardPendingRequirements = async (data) =>
   await axios
-    .post("/get_dashboard_pending_requirement_hostel")
+    .post("/get_dashboard_pending_requirement_hostel", data)
     .then((response) => {
       return response.data;
     })
@@ -644,9 +644,9 @@ export const getUserDashboardPendingRequirements = async () =>
       return "Error - " + error;
     });
 
-export const getUserDashboardCompletedRequirements = async () =>
+export const getUserDashboardCompletedRequirements = async (data) =>
   await axios
-    .post("/get_dashboard_completed_requirement_hostel")
+    .post("/get_dashboard_completed_requirement_hostel", data)
     .then((response) => {
       return response.data;
     })
@@ -654,9 +654,9 @@ export const getUserDashboardCompletedRequirements = async () =>
       return "Error - " + error;
     });
 
-export const getUserDashboardAllRequirements = async () =>
+export const getUserDashboardAllRequirements = async (data) =>
   await axios
-    .post("/get_dashboard_all_requirement_hostel")
+    .post("/get_dashboard_all_requirement_hostel", data)
     .then((response) => {
       return response.data;
     })

@@ -113,7 +113,7 @@ const AdminCharts = ({ data1, title, role }) => {
         setIsLoading(false);
       });
 
-      getDashboardCompletedRequirements()
+    getDashboardCompletedRequirements()
       .then((res) => {
         setCompletedReq(res.data[0].total);
         setIsLoading(false);
@@ -124,7 +124,7 @@ const AdminCharts = ({ data1, title, role }) => {
         setIsLoading(false);
       });
 
-      getDashboardAllRequirements()
+    getDashboardAllRequirements()
       .then((res) => {
         setAllReq(res.data[0].total);
         setIsLoading(false);
@@ -181,7 +181,7 @@ const AdminCharts = ({ data1, title, role }) => {
   const getUserCardsData = () => {
     getUserDashboardNewRequirements()
       .then((res) => {
-        setNewReq(res.data[0].total);
+        setNewReq(res.data.new_asset_query[0].total);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -190,9 +190,20 @@ const AdminCharts = ({ data1, title, role }) => {
         setIsLoading(false);
       });
 
-    getUserDashboardPendingRequirements()
+    // getUserDashboardPendingRequirements()
+    //   .then((res) => {
+    //     setPendingReq(res.data.new_asset_query[0].total);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //     toast.error(t("Something went wrong"));
+    //     setIsLoading(false);
+    //   });
+
+    getUserDashboardCompletedRequirements()
       .then((res) => {
-        setPendingReq(res.data[0].total);
+        setCompletedReq(res.data.new_asset_query[0].total);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -201,20 +212,9 @@ const AdminCharts = ({ data1, title, role }) => {
         setIsLoading(false);
       });
 
-      getUserDashboardCompletedRequirements()
+    getUserDashboardAllRequirements()
       .then((res) => {
-        setCompletedReq(res.data[0].total);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        toast.error(t("Something went wrong"));
-        setIsLoading(false);
-      });
-
-      getUserDashboardAllRequirements()
-      .then((res) => {
-        setAllReq(res.data[0].total);
+        setAllReq(res.data.new_asset_query[0].total);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -249,7 +249,7 @@ const AdminCharts = ({ data1, title, role }) => {
   const getDashboardData = () => {
     setIsLoading(true);
 
-    role === 1 ? getAdminCardsData() : getUserCardsData()
+    role === 1 ? getAdminCardsData() : getUserCardsData();
 
     if (selectedHostels !== "") {
       data.hostels = [];
