@@ -95,26 +95,27 @@ const TrackRequirements = ({ role, mainId }) => {
 
 
     // Fetch hostel data and update progress bar based on hostel ID
-    const fetchAndSetActiveStep = async () => {
-        try {
-            const res = await trackreq();
-            if (res.status === "success" && res.data.length > 0) {
-                const hostelId = res.data[0].hostel_id;
-                const approved = res.data[0].is_approve;
-                const received = res.data[0].is_received
-                setActiveStep(hostelId); // Update active step based on hostel ID
-                setapproveStep(approved); // Update active step based on hostel ID
-                setreceivedStep(received); // Update active step based on hostel ID
-            }
-        } catch (error) {
-            console.error('Error fetching track requirements data: ', error);
-        }
-    };
+    // const fetchAndSetActiveStep = async () => {
+    //     debugger
+    //     try {
+    //         const res = await trackreq();
+    //         if (res.status === "success" && res.data.length > 0) {
+    //             const hostelId = res.data[0].hostel_id;
+    //             const approved = res.data[0].is_approve;
+    //             const received = res.data[0].is_received
+    //             setActiveStep(hostelId); // Update active step based on hostel ID
+    //             setapproveStep(approved); // Update active step based on hostel ID
+    //             setreceivedStep(received); // Update active step based on hostel ID
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching track requirements data: ', error);
+    //     }
+    // };
 
-    // Fetch hostel data and set active step when the component mounts
-    useEffect(() => {
-        fetchAndSetActiveStep();
-    }, []);
+    // // Fetch hostel data and set active step when the component mounts
+    // useEffect(() => {
+    //     fetchAndSetActiveStep();
+    // }, []);
 
 
 
@@ -137,6 +138,12 @@ const TrackRequirements = ({ role, mainId }) => {
     };
 
     const handleUpdateClick = (row) => {
+        const hostelId = row.hostel_id;
+        const approved = row.is_approve;
+        const received = row.is_received
+        setActiveStep(hostelId); // Update active step based on hostel ID
+        setapproveStep(approved); // Update active step based on hostel ID
+        setreceivedStep(received); // Update active step based on hostel ID
         setSelectedRow(row);
         console.log("selectedRow", selectedRow);
         setModalOpen(true);

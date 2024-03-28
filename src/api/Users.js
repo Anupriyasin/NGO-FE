@@ -88,7 +88,7 @@ export const CompletedRequirements = async (data) =>
     });
 export const hostelrejectRequirements = async (data) =>
   await axios
-    .post("/completed_req_hostel", data, {
+    .post("/rejected_req_hostel", data, {
       headers: {
         "Content-Type": "application/json",
       },

@@ -83,7 +83,7 @@ const StaffDetails = ({ role }) => {
             <div className="my-4 col-12 d-flex justify-content-between align-items-center">
                     <h5 className=" mt-2">{t("Staff Details")}</h5>
                     <div>
-                    <button className='btn btn-primary' onClick={() => view()}><AddIcon/>Add Staff</button>
+                    <button className='btn btn-primary btn-sm' onClick={() => view()}><AddIcon/>Add Staff</button>
 
                     </div>
 
