@@ -89,28 +89,33 @@ const TrackRequirements = ({ role, mainId }) => {
 
 
 
-    const [activeStep, setActiveStep] = useState(1); // Assuming step 1 is the default active step
-    const [approveStep, setapproveStep] = useState(1); // Assuming step 1 is the default active step
+    const [activeStep, setActiveStep] = useState(); // Assuming step 1 is the default active step
+    const [approveStep, setapproveStep] = useState(); // Assuming step 1 is the default active step
+    const [receivedStep, setreceivedStep] = useState(); // Assuming step 1 is the default active step
+
 
     // Fetch hostel data and update progress bar based on hostel ID
-    const fetchAndSetActiveStep = async () => {
-        try {
-            const res = await trackreq();
-            if (res.status === "success" && res.data.length > 0) {
-                const hostelId = res.data[0].hostel_id;
-                const approved = res.data[0].is_approve;
-                setActiveStep(hostelId); // Update active step based on hostel ID
-                setapproveStep(approved); // Update active step based on hostel ID
-            }
-        } catch (error) {
-            console.error('Error fetching track requirements data: ', error);
-        }
-    };
+    // const fetchAndSetActiveStep = async () => {
+    //     debugger
+    //     try {
+    //         const res = await trackreq();
+    //         if (res.status === "success" && res.data.length > 0) {
+    //             const hostelId = res.data[0].hostel_id;
+    //             const approved = res.data[0].is_approve;
+    //             const received = res.data[0].is_received
+    //             setActiveStep(hostelId); // Update active step based on hostel ID
+    //             setapproveStep(approved); // Update active step based on hostel ID
+    //             setreceivedStep(received); // Update active step based on hostel ID
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching track requirements data: ', error);
+    //     }
+    // };
 
-    // Fetch hostel data and set active step when the component mounts
-    useEffect(() => {
-        fetchAndSetActiveStep();
-    }, []);
+    // // Fetch hostel data and set active step when the component mounts
+    // useEffect(() => {
+    //     fetchAndSetActiveStep();
+    // }, []);
 
 
 
@@ -133,6 +138,12 @@ const TrackRequirements = ({ role, mainId }) => {
     };
 
     const handleUpdateClick = (row) => {
+        const hostelId = row.hostel_id;
+        const approved = row.is_approve;
+        const received = row.is_received
+        setActiveStep(hostelId); // Update active step based on hostel ID
+        setapproveStep(approved); // Update active step based on hostel ID
+        setreceivedStep(received); // Update active step based on hostel ID
         setSelectedRow(row);
         console.log("selectedRow", selectedRow);
         setModalOpen(true);
@@ -283,7 +294,7 @@ const TrackRequirements = ({ role, mainId }) => {
                             <li className={`step0 text-center ${activeStep == 1 ? 'active' : ''}`} id="step1"></li>
                             <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step2"></li>
                             <li className={`step0 text-center ${approveStep == 1 ? 'active' : ''}`} id="step3"></li>
-                            <li className={`step0 text-center ${approveStep == 2 ? 'active' : ''}`} id="step4"></li>
+                            <li className={`step0 text-center ${receivedStep == 1 ? 'active' : ''}`} id="step4"></li>
                         </ul>
 
                         <div className="d-flex justify-content-between mb-5">
@@ -311,7 +322,6 @@ const TrackRequirements = ({ role, mainId }) => {
                             <div className="d-lg-flex align-items-center">
                                 <Home fas icon="home me-lg-4 mb-3 mb-lg-0" style={{ fontSize: "2.5rem" }} />
                                 <div className="ms-3">
-                                    {/* <p className="fw-bold mb-1">Request</p> */}
                                     <p className="fw-bold mb-0">Delivered</p>
                                 </div>
                             </div>

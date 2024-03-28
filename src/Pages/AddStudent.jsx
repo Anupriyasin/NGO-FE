@@ -94,6 +94,8 @@ console.log("rowData//////",rowData)
     navigate(`/student-details`);
   };
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />

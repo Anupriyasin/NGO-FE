@@ -59,7 +59,7 @@ const StudentDetails = ({ role, mainId }) => {
     setPage(0);
   };
 
-  
+
 
   return (
     <>
@@ -67,14 +67,10 @@ const StudentDetails = ({ role, mainId }) => {
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
           <h5 className="">{t("Student Details")}</h5>
-         <Button
-                variant="contained"
-                color="primary"
-                style={{ marginRight: 8 }}
-                onClick={() => view()}
-              >
-                <AddIcon/>Add Student
-              </Button>
+          <div>
+            <button className='btn btn-primary btn-sm' onClick={() => view()}><AddIcon />Add Student</button>
+
+          </div>
         </div>
         <div className="Table mb-6">
           <TableContainer

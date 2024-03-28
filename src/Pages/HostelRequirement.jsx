@@ -60,6 +60,11 @@ const HostelRequirement = () => {
   console.log("AssetsTypes.////", AssetsTypes);
   console.log("ExistAssetsType.////", ExistAssetsType);
 
+  useEffect(() => {
+    fetchLocation();
+  }, []);
+    
+
   const AssetTypehandle = async (e) => {
     debugger;
     const newAssetType = e.target.value;
@@ -114,7 +119,7 @@ const HostelRequirement = () => {
         ...prevRow,
         asset_sub_type: ExistAssetType,
       }));
-      const Assetstype = ExistAssetType
+      const Assetstype = AssetsType
   
       try {
         const response = await Assetnameinfo({ asset_id: Assetstype, asset_sub_type_id: ExistAssetType });
@@ -137,33 +142,9 @@ const HostelRequirement = () => {
 
    
   };
-  const handleSubmitForm = async (event) => {
-    debugger;
-    event.preventDefault();
-
-    const Postdata = {
-      category: CategoryHandle,
-      asset_type_id: AssetsType.asset_type,
-      asset_sub_type_id: AssetSubtype.asset_sub_type,
-      asset_name: ExistNameHandle.asset_sub_type,
-      asset_quantity: QuantityHandle,
-      description: DisHandle,
-     
-    };
-    AddHostelRequirement(Postdata)
-      .then((response) => {
-        toast.success(response.message);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error("Error rejecting requirement:", error);
-        toast.error(
-          error.response?.data?.message || "Failed to reject requirement"
-        );
-      });
-  };
 
   const fetchLocation = () => {
+    debugger
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -178,6 +159,47 @@ const HostelRequirement = () => {
       setError("Geolocation is not supported by this browser.");
     }
   };
+
+
+
+
+
+
+
+  const handleSubmitForm = async (event) => {
+    // debugger;
+    event.preventDefault();
+    console.log("quntity:",QuantityHandle)
+
+    const Postdata = {
+      category: CategoryHandle,
+      asset_type_id: AssetsType.asset_type,
+      asset_sub_type_id: AssetSubtype.asset_sub_type,
+      asset_name: ExistNameHandle.asset_sub_type,
+      quantity: QuantityHandle,
+      description: DisHandle,
+      lat: latitude,
+      long: longitude
+
+     
+    };
+
+
+
+    AddHostelRequirement(Postdata)
+      .then((response) => {
+        toast.success(response.message);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error rejecting requirement:", error);
+        toast.error(
+          error.response?.data?.message || "Failed to reject requirement"
+        );
+      });
+  };
+
+
 
   return (
     <>
@@ -297,11 +319,11 @@ const HostelRequirement = () => {
               ></textarea>
             </div>
 
-            <div className="col-md-4 mt-sm-4">
+            {/* <div className="col-md-4 mt-sm-4">
               <button type="button" className="btn me-2 text-white fw-bold border border-1" style={{backgroundColor: "green"}} onClick={fetchLocation}>
                 Save my Location
               </button>
-            </div>
+            </div> */}
           </div>
 
           <div className="row mt-sm-2 mt-md-5 mb-sm-4">

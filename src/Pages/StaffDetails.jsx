@@ -83,7 +83,7 @@ const StaffDetails = ({ role }) => {
             <div className="my-4 col-12 d-flex justify-content-between align-items-center">
                     <h5 className=" mt-2">{t("Staff Details")}</h5>
                     <div>
-                    <button className='btn btn-primary' onClick={() => view()}><AddIcon/>Add Staff</button>
+                    <button className='btn btn-primary btn-sm' onClick={() => view()}><AddIcon/>Add Staff</button>
 
                     </div>
 
@@ -125,11 +125,11 @@ const StaffDetails = ({ role }) => {
                                             <TableCell align="left">{row.first_name}</TableCell>
                                             <TableCell align="left">{row.last_name}</TableCell>
                                             <TableCell align="left">{row.date_of_birth}</TableCell>
-                                            <TableCell align="left">1</TableCell>
+                                            <TableCell align="left">{row.nationality}</TableCell>
                                             <TableCell align="left">{row.gender}</TableCell>
                                             <TableCell align="left">{row.address}</TableCell>
                                             <TableCell align="left">{row.email}</TableCell>
-                                            <TableCell align="left">1</TableCell>
+                                            <TableCell align="left">{row.employee_id}</TableCell>
                                             <TableCell align="left">{row.job_title}</TableCell>
                                             <TableCell align="left">{row.department}</TableCell>
                                             <TableCell align="left">{row.phone_number}</TableCell>

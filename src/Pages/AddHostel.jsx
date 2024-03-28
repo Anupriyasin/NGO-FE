@@ -65,17 +65,9 @@ const AddHostel = () => {
                             />
                         </div>
                         <div className="col-md-4 mb-3">
-                            <label htmlFor="address1" className="form-label">{t('Address Line 1')} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label htmlFor="address1" className="form-label">{t('Address Line')} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input type="text" name="address1" className="form-control" required />
                         </div>
-
-                        <div className="col-md-4 mb-3">
-                            <label htmlFor="address1" className="form-label">{t('Address Line 2')} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                            <input type="text" name="address1" className="form-control" required />
-                        </div>
-
-                    </div>
-                    <div className="row mt-3">
                         <div className="col-md-4">
                             <label className="form-label">Registration No. {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
@@ -85,6 +77,11 @@ const AddHostel = () => {
                                 required
                             />
                         </div>
+                      
+
+                    </div>
+                    <div className="row mt-3">
+                  
                         <div className="col-md-4">
                             <label className="form-label">Distric {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
