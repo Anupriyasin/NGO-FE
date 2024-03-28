@@ -122,7 +122,8 @@ const HostelRequirement = () => {
       const Assetstype = AssetsType
   
       try {
-        const response = await Assetnameinfo({ asset_id: Assetstype, asset_sub_type_id: ExistAssetType });
+        const response = await Assetnameinfo({ asset_id: Assetstype.asset_type
+          , asset_sub_type_id: ExistAssetType });
         if (response) {
           setExistNameHandle(response.data);
         } else {
