@@ -186,7 +186,40 @@ const Sidebars = (props) => {
               >
                 <Link to="/requirementreport">Requirements Report</Link>
               </MenuItem>
+             
+            
             </SubMenu>
+
+            <MenuItem
+                icon={<SupervisedUserCircleIcon />}
+                className={
+                  HostelActiveMenu === "/student-details"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                {" "}
+                <Link to="/student-details">Student Details </Link>
+              </MenuItem>
+              <MenuItem
+                icon={<AccountCircleIcon />}
+                className={
+                  HostelActiveMenu === "/staffdetails" ? "menuItem active " : "menuItem"
+                }
+              >
+                {" "}
+                <Link to="/staffdetails">Staff Details</Link>
+              </MenuItem>
+              <MenuItem
+                icon={<AccountCircleIcon />}
+                className={
+                  HostelActiveMenu === "/hosteldetails" ? "menuItem active " : "menuItem"
+                }
+              >
+                {" "}
+                <Link to="/hosteldetails">Hostel Details</Link>
+              </MenuItem>
+
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>
               {" "}
               Logout{" "}
@@ -226,6 +259,16 @@ const Sidebars = (props) => {
                 <Link to="/hostel-requirement">Raise Requirement</Link>
               </MenuItem>
               <MenuItem
+                icon={<DescriptionIcon />}
+                className={
+                  HostelActiveMenu === "/confirmdelivery"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                <Link to="/confirmdelivery">Confirm Delivery</Link>
+              </MenuItem>
+              <MenuItem
                 icon={<CheckCircleIcon/>}
                 className={
                   HostelActiveMenu === "/completereq"
@@ -245,16 +288,7 @@ const Sidebars = (props) => {
               >
                 <Link to="/rejectreq">Rejected Requirements</Link>
               </MenuItem>
-              <MenuItem
-                icon={<DescriptionIcon />}
-                className={
-                  HostelActiveMenu === "/confirmdelivery"
-                    ? "menuItem active "
-                    : "menuItem"
-                }
-              >
-                <Link to="/confirmdelivery">Confirm Delivery</Link>
-              </MenuItem>
+             
             </SubMenu>
            
               <MenuItem

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import user from "../images/userIcon.png";
+import userImage from "../images/userIcon.png";
 import "../components/Table/Table.css";
 import "../components/Card/Card.css";
 import "../Pages/Dashboard.css";
@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import TopLoader from "../components/Loader/TopLoader";
 import { getpincode } from "../api/Random";
 
-const AdminDetails = ({ role }) => {
+const UserDetails = ({ role }) => {
   const { id } = useParams();
 
   const strongPasswordRegex =
@@ -38,8 +38,9 @@ const AdminDetails = ({ role }) => {
   const [pinErr, setPinErr] = useState(false);
   const navigate = useNavigate();
 
-  const [admin, setAdmin] = useState({
+  const [user, setUser] = useState({
     img_path: "",
+    username: "",
     role_id: 0,
     name: "",
     address: "",
@@ -58,11 +59,11 @@ const AdminDetails = ({ role }) => {
     primary_contact,
     secondary_contact,
     role_id,
-  } = admin;
+  } = user;
 
   useEffect(() => {
     setIsLoading(false);
-    getAdminDetails();
+    getUserDetailsFunc();
   }, []);
 
   const handleChangeInput = async (e) => {
@@ -75,7 +76,7 @@ const AdminDetails = ({ role }) => {
         console.log("API Response:", response);
 
         if (response[0].Status === "Success") {
-          setAdmin((prevAdmin) => ({ ...prevAdmin, pin_no: value }));
+          setUser((prevUser) => ({ ...prevUser, pin_no: value }));
           setPinErr(false);
         } else {
           setPinErr(true);
@@ -85,24 +86,24 @@ const AdminDetails = ({ role }) => {
         toast.error("Error fetching pincode data. Please try again later.");
       }
     } else {
-      setAdmin((prevAdmin) => ({ ...prevAdmin, [name]: value }));
+      setUser((prevUser) => ({ ...prevUser, [name]: value }));
     }
   };
 
   const onSubmit = () => {
     setIsLoading(true);
-    console.log("User ID:", admin.name);
+    console.log("User ID:", user.name);
 
     const data = {
       user_id: "",
       role_id: "",
-      first_name: admin.name,
+      first_name: user.name,
       last_name: "",
-      phone_number: admin.primary_contact,
-      secondary_p_no: admin.secondary_contact,
-      pin_no: admin.pin_no,
-      address: admin.address,
-      email: admin.email,
+      phone_number: user.primary_contact,
+      secondary_p_no: user.secondary_contact,
+      pin_no: user.pin_no,
+      address: user.address,
+      email: user.email,
     };
 
     updateUserDetails(data)
@@ -111,7 +112,7 @@ const AdminDetails = ({ role }) => {
           setIsLoading(false);
           setLoading(100);
           toast.success(t(res.message));
-          getAdminDetails();
+          getUserDetailsFunc();
         } else {
           toast.error(t(res.message));
         }
@@ -121,15 +122,16 @@ const AdminDetails = ({ role }) => {
       });
   };
 
-  const getAdminDetails = () => {
+  const getUserDetailsFunc = () => {
     setIsLoading(true);
     getUserDetails()
       .then((res) => {
         if (res.status === "success") {
           setIsLoading(false);
           setLoading(100);
-          setAdmin({
+          setUser({
             img_path: "",
+            username: res.data.username,
             role_id: res.data.role_id,
             name: res.data.name,
             address: res.data.address,
@@ -150,7 +152,7 @@ const AdminDetails = ({ role }) => {
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
-      {admin && admin.length === 0 ? (
+      {user && user.length === 0 ? (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "70vh" }}
@@ -166,7 +168,7 @@ const AdminDetails = ({ role }) => {
             <button className="btn btn-white" onClick={() => navigate(-1)}>
               <UilArrowLeft size="32" />
             </button>
-            <h3 className="m-0">{admin.name}</h3>
+            <h3 className="m-0">{user.name}</h3>
           </div>
           <p className="my-3"></p>
           <>
@@ -189,7 +191,7 @@ const AdminDetails = ({ role }) => {
                                       className="userImage d-flex justify-content-center align-items-center"
                                       style={{
                                         backgroundImage: `url(${
-                                          img_path ? baseUrl() + img_path : user
+                                          img_path ? baseUrl() + img_path : userImage
                                         })`,
                                       }}
                                     ></div>
@@ -229,8 +231,8 @@ const AdminDetails = ({ role }) => {
                                       defaultValue={name || ""}
                                     />
                                     {/* <span className="error-text">
-                                                                                {firstNameError && <>{firstNameError}</>}
-                                                                            </span> */}
+                                                                              {firstNameError && <>{firstNameError}</>}
+                                                                          </span> */}
                                   </div>
                                 </div>
 
@@ -290,8 +292,8 @@ const AdminDetails = ({ role }) => {
                                       defaultValue={email || ""}
                                     />
                                     {/* <span className="error-text">
-                                                                                {firstNameError && <>{firstNameError}</>}
-                                                                            </span> */}
+                                                                              {firstNameError && <>{firstNameError}</>}
+                                                                          </span> */}
                                   </div>
                                 </div>
 
@@ -367,4 +369,4 @@ const AdminDetails = ({ role }) => {
   );
 };
 
-export default AdminDetails;
+export default UserDetails;

@@ -28,6 +28,9 @@ import AddStudent from '../Pages/AddStudent';
 import HostelDashboard from '../Pages/HostelDashboard';
 import AssetReport from '../Pages/AssetReport';
 import RequirementsReport from '../Pages/RequirementReport';
+import UserDetails from '../Pages/UserDetails';
+import HostelDetails from '../Pages/HostelDetails';
+import AddHostel from '../Pages/AddHostel';
 // import TrackRequirements from '../Pages/TrackRequirements';
 // import RejectedRequirements from '../Pages/RejectedRequirements';
 // import AddAssetType from '../Pages/AddAssetType';
@@ -142,6 +145,36 @@ const AppRoutes = () => {
             path: '/requirementreport',
             component: RequirementsReport,
             allowedRoles: [1]
+        },       
+        {
+            path: '/hosteldetails',
+            component: HostelDetails,
+            allowedRoles: [1]
+        },
+        {
+            path: '/student-details',
+            component: StudentDetails,
+            allowedRoles: [1]
+        },
+        {
+            path: '/add-student-details',
+            component: AddStudent,
+            allowedRoles: [1]
+        },
+        {
+            path: '/addstaff',
+            component: AddStaff,
+            allowedRoles: [1]
+        },
+        {
+            path: '/staffdetails',
+            component: StaffDetails,
+            allowedRoles: [1]
+        },
+        {
+            path: '/addhostel',
+            component: AddHostel,
+            allowedRoles: [1]
         }
       
        
@@ -149,6 +182,11 @@ const AppRoutes = () => {
         {
             path: '/hosteldashboard',
             component: HostelDashboard,
+            allowedRoles: [2]
+        },
+        {
+            path: '/profile',
+            component: UserDetails,
             allowedRoles: [2]
         },
         {

@@ -604,6 +604,66 @@ export const getDashboardAllRequirements = async () =>
       return "Error - " + error;
     });
 
+export const getUserAllStudents = async () =>
+  await axios
+    .get("/all_students")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getUserAllStaff = async () =>
+  await axios
+    .get("/all_staff")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getUserDashboardNewRequirements = async () =>
+  await axios
+    .post("/get_dashboard_new_requirement_hostel")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getUserDashboardPendingRequirements = async () =>
+  await axios
+    .post("/get_dashboard_pending_requirement_hostel")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getUserDashboardCompletedRequirements = async () =>
+  await axios
+    .post("/get_dashboard_completed_requirement_hostel")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getUserDashboardAllRequirements = async () =>
+  await axios
+    .post("/get_dashboard_all_requirement_hostel")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
 export const getPincode = async (data) => {
   try {
     const response = await axios.get(
