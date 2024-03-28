@@ -73,6 +73,46 @@ export const AddAssetsSubType = async (data) =>
       return "Error - " + error;
     });
 
+export const CompletedRequirements = async (data) =>
+  await axios
+    .post("/completed_req_hostel", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+export const hostelrejectRequirements = async (data) =>
+  await axios
+    .post("/completed_req_hostel", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+export const hostelconfirmRequirements = async (data) =>
+  await axios
+    .post("/track_req_hostel", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
 export const AddAsset = async (data) =>
   await axios
     .post("/new_inventory", data, {
@@ -89,6 +129,19 @@ export const AddAsset = async (data) =>
 export const AddHostelRequirement = async (data) =>
   await axios
     .post("/add_requirements", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+export const createhostellogin = async (data) =>
+  await axios
+    .post("/create_hostel_login", data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -194,6 +247,19 @@ export const RejectRequirement = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const received = async (data) =>
+  await axios
+    .post("/confirm_delivery", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 export const visitcheckout = async (data) =>
   await axios
     .post("/visit_check_out", data, {
@@ -288,15 +354,15 @@ export const staffdetails = async (data) =>
       return "Error - " + error;
     });
 
-// export const alldealers = async (data) =>
-//   await axios
-//     .get("/get_all_dealers", data)
-//     .then((response) => {
-//       return response.data;
-//     })
-//     .catch((error) => {
-//       return "Error - " + error;
-//     });
+export const allhostellogin = async (data) =>
+  await axios
+    .get("/hostel_wise_data", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 
 export const assigneddealerreport = async (data) =>
   await axios
@@ -524,6 +590,7 @@ export const getRejectedRequirements = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
+
 export const getstudentinfo = async () =>
   await axios
     .post("/get_student_info")
@@ -533,6 +600,7 @@ export const getstudentinfo = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
+
 
 export const getAllStudents = async () =>
   await axios

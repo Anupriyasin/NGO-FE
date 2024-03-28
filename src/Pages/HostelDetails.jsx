@@ -101,8 +101,7 @@ const HostelDetails = ({ role }) => {
                                     <TableCell align="left">{t("Hostel Name")}</TableCell>
                                     <TableCell align="left">{t("Email ID")}</TableCell>
                                     <TableCell align="left">{t("Registration No")}</TableCell>
-                                    <TableCell align="left">{t("Address 1")}</TableCell>
-                                    <TableCell align="left">{t("Address 2")}</TableCell>
+                                    <TableCell align="left">{t("Address")}</TableCell>
                                     <TableCell align="left">{t("Distric")}</TableCell>
                                     <TableCell align="left">{t("Block")}</TableCell>
                                     <TableCell align="left">{t('Action')}</TableCell>

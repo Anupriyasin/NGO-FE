@@ -238,5 +238,5 @@ th {
 
 #progressbar-2 li.active:before,
 #progressbar-2 li.active:after {
-  background: #6520ff;
+  background: #6520ff !important;
 }
