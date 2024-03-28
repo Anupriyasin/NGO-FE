@@ -44,7 +44,8 @@ function App() {
         />
         <GeoJSON data={orissaBoundary} style={geoJSONStyle} />
         {mapData.map((marker) => (
-          <Marker position={[marker.lat, marker.long]}>
+          marker.lat !== null || marker.longitude !== null
+          ? <Marker position={[marker.lat, marker.longitude]}>
             <Popup>
               <div className="d-flex row">
                 <h5 className="fw-bold">{marker.Hostel_Name}</h5>
@@ -63,6 +64,7 @@ function App() {
               </div>
             </Popup>
           </Marker>
+          : ""
         ))}
       </MapContainer>
     </div>
