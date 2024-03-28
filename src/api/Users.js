@@ -707,3 +707,14 @@ export const addStaff = async (data) => {
       return "Error - " + error;
     });
 };
+
+
+export const getMapData = async () =>
+  await axios
+    .get("/get_map_data")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });

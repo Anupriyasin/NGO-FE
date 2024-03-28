@@ -102,6 +102,8 @@ const AddStaff = () => {
     navigate(`/staffdetails`);
   };
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
@@ -186,6 +188,7 @@ const AddStaff = () => {
                 name="date_of_birth"
                 className="form-control"
                 onChange={handleChangeInput}
+                max={today}
                 required
               />
             </div>
@@ -315,6 +318,7 @@ const AddStaff = () => {
                 name="hire_date"
                 className="form-control"
                 onChange={handleChangeInput}
+                max={today}
                 required
               />
             </div>

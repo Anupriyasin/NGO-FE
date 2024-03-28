@@ -92,6 +92,8 @@ const AddStudent = () => {
     navigate(`/student-details`);
   };
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
@@ -166,6 +168,7 @@ const AddStudent = () => {
                 name="date_of_birth"
                 className="form-control"
                 onChange={handleChangeInput}
+                max={today}
                 // defaultValue={date_of_birth || ""}
                 required
               />
