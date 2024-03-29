@@ -116,7 +116,7 @@ function myfunction (e){
                   <select name="role" onClick={myfunction}  className='form-select' {...register("role", { required: true })}>
                     <option value=""  selected={true}>{t('Select Role')} </option>
                     <option value="admin">Head Office</option>
-                    <option value="hostel">Hostel</option>
+                    <option value="hostel">Ashram</option>
                   </select>
                   <span className='error-text'>
                     {errors.role?.type === "required" && t("Role is required")}

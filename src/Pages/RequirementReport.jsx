@@ -192,7 +192,7 @@ const RequirementsReport = ({ role, mainId }) => {
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
-        <h5 className="">{t("Requirements Report")}</h5>
+        <h5 className="mt-4">{t("Requirements Report")}</h5>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ marginRight: "12px" }}>
             <label htmlfor="title" className="form-label mt-4">
@@ -205,7 +205,7 @@ const RequirementsReport = ({ role, mainId }) => {
               className="common-input form-select"
             >
               <option value="all" selected={true}>
-                All
+                {t("All")}
               </option>
               {rows.map((row) => (
                 <>
@@ -308,7 +308,7 @@ const RequirementsReport = ({ role, mainId }) => {
           />
         </div>
       </div>
-      {selectedRow && (
+      {/* {selectedRow && (
         <Modal
           open={modalOpen}
           onClose={handleCloseModal}
@@ -531,7 +531,7 @@ const RequirementsReport = ({ role, mainId }) => {
             </div>
           </div>
         </Modal>
-      )}
+      )} */}
     </>
   );
 };

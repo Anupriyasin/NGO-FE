@@ -72,7 +72,7 @@ const HostelRejectRequirement = ({ role, mainId ,userData}) => {
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-          <h5 className="">{t("Rejected Requirments")}</h5>
+          <h5 className="">{t("Rejected Requirements")}</h5>
           <TextField
             label={t("Search")}
             variant="outlined"
@@ -93,7 +93,7 @@ const HostelRejectRequirement = ({ role, mainId ,userData}) => {
               <TableHead>
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
-                  <TableCell align="left">{t("Requirement Name")}</TableCell>
+                  <TableCell align="left">{t("Requirement")}</TableCell>
                   <TableCell align="left">{t("Description")}</TableCell>
                   <TableCell align="left">{t("Quantity")}</TableCell>
                   <TableCell align="left">{t("Rejected Date")}</TableCell>

@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import { orissaBoundary } from "./OrissaGeoJson";
 import { getMapData } from "../../api/Users";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function App() {
+  const { t } = useTranslation();
+  const handleClick = (e) => {
+    i18next.changeLanguage(e.target.value);
+  };
   const position = [20.2376, 84.27];
   const [mapData, setMapData] = useState([]);
 
@@ -27,7 +33,7 @@ function App() {
 
   return (
     <div className="App bg-transparent row d-flex justify-content-center">
-      <h1 className="text-dark m-2">Requirements Map</h1>
+      <h1 className="text-dark m-2">{t("Requirements Map")}</h1>
       <MapContainer
         center={position}
         zoom={7}
@@ -51,13 +57,13 @@ function App() {
                 <h5 className="fw-bold">{marker.Hostel_Name}</h5>
                 <span className="d-flex">
                   <p>
-                    <span className="fw-bold">Requirement:</span>{" "}
+                    <span className="fw-bold">{t("Requirement")}:</span>{" "}
                     {marker.Requirement_Name}
                   </p>
                 </span>
                 <span className="d-flex" style={{ marginTop: "-20px" }}>
                   <p>
-                    <span className="fw-bold">Quantity:</span>{" "}
+                    <span className="fw-bold">{t("Quantity")}:</span>{" "}
                     {marker.Quantity}
                   </p>
                 </span>

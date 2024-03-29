@@ -25,6 +25,22 @@
 #btn1:hover {
   background-color: #f9a908;
 }
+#btn2 {
+  background-color: #5cb85c;
+  color: white;
+}
+
+#btn2:hover {
+  background-color: #5cb85c;
+}
+#btn3 {
+  background-color: #d9534f;
+  color: white;
+}
+
+#btn3:hover {
+  background-color: #d9534f;
+}
 
 .vl {
     border-right: 2px solid #e2e2e2;

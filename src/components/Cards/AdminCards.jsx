@@ -102,7 +102,7 @@ const AdminCards = (props) => {
               className="card-body border"
               style={{ backgroundColor: "white" }}
             >
-              <h3 className="card-title text-dark">{t("Staff Members")}</h3>
+              <h3 className="card-title text-dark">{t("Staff")}</h3>
               <motion.div>
                 <div className="radialBar d-flex justify-content-end">
                   <span className="text-dark fs-2">{props.staff > 0 ? props.staff : 0}</span>
@@ -118,7 +118,7 @@ const AdminCards = (props) => {
                 className="card-body border"
                 style={{ backgroundColor: "white" }}
               >
-                <h3 className="card-title text-dark">{t("Total Hostels")}</h3>
+                <h3 className="card-title text-dark">{t("Total Ashram")}</h3>
                 <motion.div>
                   <div className="radialBar d-flex justify-content-end">
                     <span className="text-dark fs-2">{props.hostels > 0 ? props.hostels : 0}</span>

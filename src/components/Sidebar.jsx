@@ -23,8 +23,14 @@ import BusinessIcon from "@mui/icons-material/Business";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const Sidebars = (props) => {
+  const { t } = useTranslation();
+  const handleClick = (e) => {
+    i18next.changeLanguage(e.target.value);
+  };
   const navigate = useNavigate();
   const location = useLocation(); // Get the current location
   const [activeMenu, setActiveMenu] = useState("/dashboard");
@@ -83,14 +89,14 @@ const Sidebars = (props) => {
                 activeMenu === "/dashboard" ? "menuItem active " : "menuItem"
               }
             >
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard">{t("Dashboard")}</Link>
             </MenuItem>
             
-            <SubMenu label="Manage Login" icon={<WalletRoundedIcon  />} className='SubMenu'>
-            <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">Create Hostel Login</Link></MenuItem>
+            <SubMenu label={t("Manage Login")} icon={<WalletRoundedIcon  />} className='SubMenu'>
+            <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">{t("Create Hostel Login")}</Link></MenuItem>
           </SubMenu>
             <SubMenu
-              label="Requirement"
+              label={t("Requirement")}
               icon={<PlaylistAddCheckIcon />}
               className="SubMenu"
             >
@@ -102,7 +108,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/newrequirements">New Requirement</Link>
+                <Link to="/newrequirements">{t("New Requirements")}</Link>
               </MenuItem>
               <MenuItem
                 icon={<DescriptionIcon />}
@@ -112,7 +118,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/trackrequirements">Track Requirements</Link>
+                <Link to="/trackrequirements">{t("Track Requirements")}</Link>
               </MenuItem>
               <MenuItem
                 icon={<CancelIcon />}
@@ -122,11 +128,11 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/rejectedrequirements">Rejected Requirements</Link>
+                <Link to="/rejectedrequirements">{t("Rejected Requirements")}</Link>
               </MenuItem>
             </SubMenu>
             <SubMenu
-              label="Manage Asset"
+              label={t("Manage Inventory")}
               className="SubMenu"
               icon={<BusinessIcon />}
             >
@@ -139,7 +145,7 @@ const Sidebars = (props) => {
                 }
               >
                 {" "}
-                <Link to="/add-asset-type">Create Asset Master </Link>
+                <Link to="/add-asset-type">{t("Create Inventory Master")}</Link>
               </MenuItem>
               <MenuItem
                 icon={<BusinessCenterIcon ndedIcon />}
@@ -148,11 +154,11 @@ const Sidebars = (props) => {
                 }
               >
                 {" "}
-                <Link to="/add-assets">Add Asset-Inverntory</Link>
+                <Link to="/add-assets">{t("Add Inverntory")}</Link>
               </MenuItem>
             </SubMenu>
             <SubMenu
-              label="Reports"
+              label={t("Reports")}
               icon={<EqualizerIcon />}
               className="SubMenu"
             >
@@ -164,7 +170,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/hostel-report">Hostel Wise Report</Link>
+                <Link to="/hostel-report">{t("Hostel Wise Report")}</Link>
               </MenuItem>
               {/* <MenuItem
                 icon={<PieChartIcon />}
@@ -184,7 +190,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/requirementreport">Requirements Report</Link>
+                <Link to="/requirementreport">{t("Requirements Report")}</Link>
               </MenuItem>
              
             
@@ -222,7 +228,7 @@ const Sidebars = (props) => {
 
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>
               {" "}
-              Logout{" "}
+              {t("Logout")}{" "}
             </MenuItem>
           </Menu>
         ) : (
@@ -241,10 +247,10 @@ const Sidebars = (props) => {
                 HostelActiveMenu === "/hosteldashboard" ? "menuItem active " : "menuItem"
               }
             >
-              <Link to="/hosteldashboard">Dashboard</Link>
+              <Link to="/hosteldashboard">{t("Dashboard")}</Link>
             </MenuItem>
             <SubMenu
-              label="Requirement"
+              label={t("Requirement")}
               icon={<PlaylistAddCheckIcon />}
               className="SubMenu"
             >
@@ -256,7 +262,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/hostel-requirement">Raise Requirement</Link>
+                <Link to="/hostel-requirement">{t("Raise Requirement")}</Link>
               </MenuItem>
               <MenuItem
                 icon={<DescriptionIcon />}
@@ -266,7 +272,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/confirmdelivery">Confirm Delivery</Link>
+                <Link to="/confirmdelivery">{t("Confirm Delivery")}</Link>
               </MenuItem>
               <MenuItem
                 icon={<CheckCircleIcon/>}
@@ -276,7 +282,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/completereq">Completed Requirements</Link>
+                <Link to="/completereq">{t("Completed Requirements")}</Link>
               </MenuItem>
               <MenuItem
                 icon={<CancelIcon />}
@@ -286,7 +292,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/rejectreq">Rejected Requirements</Link>
+                <Link to="/rejectreq">{t("Rejected Requirements")}</Link>
               </MenuItem>
              
             </SubMenu>
@@ -300,7 +306,7 @@ const Sidebars = (props) => {
                 }
               >
                 {" "}
-                <Link to="/student-details">Student Details </Link>
+                <Link to="/student-details">{t("Student Details")} </Link>
               </MenuItem>
               <MenuItem
                 icon={<AccountCircleIcon />}
@@ -309,13 +315,13 @@ const Sidebars = (props) => {
                 }
               >
                 {" "}
-                <Link to="/staffdetails">Staff Details</Link>
+                <Link to="/staffdetails">{t("Staff Details")}</Link>
               </MenuItem>
             
               
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>
               {" "}
-              Logout{" "}
+              {t("Logout")}{" "}
             </MenuItem>
           </Menu>
         )}

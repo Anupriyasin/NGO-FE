@@ -46,7 +46,7 @@ const Navbar = ({ totalItems, role, userData }) => {
           setRoleName("Head Office");
         }
         else if (userData.data.role_id === 2) {
-          setRoleName("Hostel");
+          setRoleName("Ashram");
         }
         else if (userData.data.role_id === 3) {
           setRoleName("Management");
@@ -72,8 +72,8 @@ const Navbar = ({ totalItems, role, userData }) => {
           <p><strong id='fullName'>{fullName}</strong></p>
           <p className='smallText'>{roleName}</p>
         </div>
-        {/* <div className='d-flex align-items-center col-gap'> */}
-          {/* <div>
+        <div className='d-flex align-items-center col-gap'>
+          <div>
             <Languageoption onChange={(e) => handleClick(e)} />
           </div> 
 
@@ -90,14 +90,14 @@ const Navbar = ({ totalItems, role, userData }) => {
               </button>
             </motion.div>
             : ""
-          } */}
+          }
 
           <Link to={'/profile'}>
             <img src={imgPath} alt="User" className='img-42' style={{ cursor: "pointer" }} />
           </Link>
 
         </div>
-      {/* </div> */}
+      </div>
     </>
   )
 }

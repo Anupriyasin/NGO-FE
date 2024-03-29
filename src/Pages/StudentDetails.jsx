@@ -68,7 +68,7 @@ const StudentDetails = ({ role, mainId }) => {
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
           <h5 className="">{t("Student Details")}</h5>
           <div>
-            <button className='btn btn-primary btn-sm' onClick={() => view()}><AddIcon />Add Student</button>
+            <button className='btn btn-primary btn-sm' onClick={() => view()}><AddIcon />{t("Add Student")}</button>
 
           </div>
         </div>
@@ -82,9 +82,9 @@ const StudentDetails = ({ role, mainId }) => {
               <TableHead>
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
-                  <TableCell align="left">{t("First name")}</TableCell>
+                  <TableCell align="left">{t("First Name")}</TableCell>
                   <TableCell align="left">{t("Last Name")}</TableCell>
-                  <TableCell align="left">{t("DOB")}</TableCell>
+                  <TableCell align="left">{t("Date of Birth")}</TableCell>
                   <TableCell align="left">{t("Nationality")}</TableCell>
                   <TableCell align="left">{t("Gender")}</TableCell>
                   <TableCell align="left">{t("Address")}</TableCell>
@@ -93,7 +93,7 @@ const StudentDetails = ({ role, mainId }) => {
                   <TableCell align="left">{t("Emergency Contact")}</TableCell>
                   <TableCell align="left">{t("Guardian Contact")}</TableCell>
                   <TableCell align="left">{t("Phone Number")}</TableCell>
-                  <TableCell align="left">{t("Check In Date")}</TableCell>
+                  <TableCell align="left">{t("Date")}</TableCell>
                   <TableCell align="left">{t("Action")}</TableCell>
                 </TableRow>
               </TableHead>

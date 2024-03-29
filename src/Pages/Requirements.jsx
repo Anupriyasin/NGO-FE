@@ -239,34 +239,37 @@ const Requirements = ({ role, mainId }) => {
                         <TableCell align="left">{row.date}</TableCell>
                         <TableCell align="left">
                           {" "}
-                          <Button
-                            variant="contained"
-                            color="success"
-                            style={{ marginLeft: 8 }}
-                            onClick={() => handleAccept(row)} 
-                          >
-                            Accept
-                          </Button>
                           <Typography
                             variant="button"
-                            className="primary-btn btn"
-                            style={{ marginLeft: 8, marginRight: 8 }}
+                            className="primary-btn btn btn-sm"
+                            id="btn2"
+                            style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}
+                            onClick={() => handleAccept(row)} 
+                          >
+                            {t("Accept")}
+                          </Typography>
+                          <Typography
+                            variant="button"
+                            className="primary-btn btn btn-sm"
+                            style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}
                             id="btn1"
                             onClick={() => handleUpdateClick(row)}
                           >
-                            Modify
+                            {t("Modify")}
                           </Typography>
 
 
-                          <Button
-                            variant="contained"
+                          <Typography
+                            variant="button"
                             // color="secondary"
-                            style={{ marginRight: 8, backgroundColor: "red" }}
+                            style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}
+                            className="primary-btn btn btn-sm"
+                            id="btn3"
                             onClick={() => { handleRejectWithReason(); handlerejectClick(row);}}
 
                           >
-                            Reject
-                          </Button>
+                            {t("Reject")}
+                          </Typography>
 
                         </TableCell>
                       </TableRow>
@@ -318,11 +321,11 @@ const Requirements = ({ role, mainId }) => {
             }}
           >
             <Typography variant="h6" gutterBottom>
-              Update Status
+              {t("Update Requirement")}
             </Typography>
             <div className="row mb-3">
               <div className="col-md-6">
-                <label className="form-label">Requirement</label>
+                <label className="form-label">{t("Requirement")}</label>
                 <input
                   type="text"
                   name="requirement"
@@ -332,7 +335,7 @@ const Requirements = ({ role, mainId }) => {
                 />
               </div>
               <div className="col-md-6">
-                <label className="form-label">Hostel Name</label>
+                <label className="form-label">{t("Hostel Name")}</label>
                 <input
                   type="text"
                   name="hostel-name"
@@ -344,7 +347,7 @@ const Requirements = ({ role, mainId }) => {
             </div>
             <div className="row mb-3">
               <div className="col-md-6">
-                <label className="form-label">Hostel Address</label>
+                <label className="form-label">{t("Hostel Address")}</label>
                 <input
                   type="text"
                   name="hostel-address"
@@ -354,7 +357,7 @@ const Requirements = ({ role, mainId }) => {
                 />
               </div>
               <div className="col-md-6">
-                <label className="form-label">Quantity</label>
+                <label className="form-label">{t("Quantity")}</label>
                 <input
                   type="text"
                   name="quantity"
@@ -372,7 +375,7 @@ const Requirements = ({ role, mainId }) => {
             </div>
             {showRejectReason && (
               <div className="mb-3">
-                <label className="form-label">Reason for Rejection</label>
+                <label className="form-label">{t("Reason for Rejection")}</label>
                 <input
                   type="text"
                   name="rejectreason"
@@ -386,7 +389,7 @@ const Requirements = ({ role, mainId }) => {
                   }}
                   required
                 />
-                {rejectReasonError && <small className="text-danger">Reason for Rejection is required.</small>}
+                {rejectReasonError && <small className="text-danger">{t("Reason for Rejection is required")}.</small>}
               </div>
             )}
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -415,7 +418,7 @@ const Requirements = ({ role, mainId }) => {
                 style={{ marginRight: 8 }}
                onClick={()=>handlesave(selectedRow)}
               >
-                Save
+                {t("Update")}
               </Button>
             </div>
           </div>
@@ -443,11 +446,11 @@ const Requirements = ({ role, mainId }) => {
             }}
           >
             <Typography variant="h6" gutterBottom>
-              Update Status
+            {t("Update Requirement")}
             </Typography>
             <div className="row mb-3">
               <div className="col-md-6">
-                <label className="form-label">Requirement</label>
+                <label className="form-label">{t("Requirement")}</label>
                 <input
                   type="text"
                   name="requirement"
@@ -457,7 +460,7 @@ const Requirements = ({ role, mainId }) => {
                 />
               </div>
               <div className="col-md-6">
-                <label className="form-label">Hostel Name</label>
+                <label className="form-label">{t("Hostel Name")}</label>
                 <input
                   type="text"
                   name="hostel-name"
@@ -469,7 +472,7 @@ const Requirements = ({ role, mainId }) => {
             </div>
             <div className="row mb-3">
               <div className="col-md-6">
-                <label className="form-label">Hostel Address</label>
+                <label className="form-label">{t("Hostel Address")}</label>
                 <input
                   type="text"
                   name="hostel-address"
@@ -479,7 +482,7 @@ const Requirements = ({ role, mainId }) => {
                 />
               </div>
               <div className="col-md-6">
-                <label className="form-label">Quantity</label>
+                <label className="form-label">{t("Quantity")}</label>
                 <input
                   type="text"
                   name="quantity"
@@ -497,7 +500,7 @@ const Requirements = ({ role, mainId }) => {
             </div>
             {showRejectReason && (
               <div className="mb-3">
-                <label className="form-label">Reason for Rejection</label>
+                <label className="form-label">{t("Reason for Rejection")}</label>
                 <input
                   type="text"
                   name="rejectreason"
@@ -511,7 +514,7 @@ const Requirements = ({ role, mainId }) => {
                   }}
                   required
                 />
-                {rejectReasonError && <small className="text-danger">Reason for Rejection is required.</small>}
+                {rejectReasonError && <small className="text-danger">{t("Reason for Rejection is required")}.</small>}
               </div>
             )}
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -540,7 +543,7 @@ const Requirements = ({ role, mainId }) => {
                 style={{ marginRight: 8 }}
                onClick={()=>handleRejectWithReason(selectedRow)}
               >
-                Reject
+                {t("Reject")}
               </Button>
             </div>
           </div>

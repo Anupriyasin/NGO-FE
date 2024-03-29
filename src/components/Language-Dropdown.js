@@ -4,7 +4,7 @@ const Languageoption = (props) => {
         <div >
             <select className="form-select" onChange={props.onChange} >
                 <option value={'en'} selected={localStorage.getItem('selectedLanguage')==='en'?true:false}>English</option>
-                <option value={'hi'} selected={localStorage.getItem('selectedLanguage')==='hi'?true:false}>हिन्दी</option>
+                <option value={'odi'} selected={localStorage.getItem('selectedLanguage')==='odi'?true:false}>Odia</option>
             </select>
         </div>
     )

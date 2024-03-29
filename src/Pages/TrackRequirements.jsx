@@ -226,7 +226,7 @@ const TrackRequirements = ({ role, mainId }) => {
                                                     id="btn"
                                                     onClick={() => handleUpdateClick(row)}
                                                 >
-                                                    Track
+                                                    {t("Track")}
                                                 </Typography>
                                             </TableCell>
 

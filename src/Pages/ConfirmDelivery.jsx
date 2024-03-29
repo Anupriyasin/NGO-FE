@@ -263,7 +263,7 @@ const ConfirmDelivery = ({ role, mainId, userData }) => {
                                                         id="btn"
                                                         onClick={() => handleUpdateClick(row)}
                                                     >
-                                                        Track
+                                                        {t("Track")}
                                                     </Typography>
                                                     <Typography
                                                         // variant="button"
@@ -276,7 +276,7 @@ const ConfirmDelivery = ({ role, mainId, userData }) => {
                                                         style={{ marginRight: 8, backgroundColor: "green", color: "white" }}
                                                         disabled={approveStep === 0 ? true : false} // Ternary operator to conditionally disable the button
                                                     >
-                                                        Confirm Delivery
+                                                        {t("Confirm Delivery")}
                                                     </Typography>
                                                 </TableCell>
 
