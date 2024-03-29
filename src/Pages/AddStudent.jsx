@@ -48,7 +48,7 @@ const AddStudent = () => {
   useEffect(() => {
     setIsLoading(false);
   }, []);
-console.log("rowData//////",rowData)
+  console.log("rowData//////", rowData);
   const handleChangeInput = async (e) => {
     const { name, value } = e.target;
     setStudent((prevAdmin) => ({ ...prevAdmin, [name]: value }));
@@ -94,7 +94,7 @@ console.log("rowData//////",rowData)
     navigate(`/student-details`);
   };
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <>
@@ -120,179 +120,183 @@ console.log("rowData//////",rowData)
           style={{ marginTop: "12px" }}
         >
           <div className="row">
-    <div className="col-md-4">
-        <label className="form-label">
-            First Name {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="first_name"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.first_name : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Last Name {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="last_name"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.last_name : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Photo {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="file"
-            name="photo_file"
-            accept="image/*"
-            className="form-control"
-            onChange={handleChangeInput}
-            // required
-        />
-    </div>
-</div>
+            <div className="col-md-4">
+              <label className="form-label">
+                First Name {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                name="first_name"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.first_name : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Last Name {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                name="last_name"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.last_name : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Photo {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="file"
+                name="photo_file"
+                accept="image/*"
+                className="form-control"
+                onChange={handleChangeInput}
+                // required
+              />
+            </div>
+          </div>
 
-<div className="row" style={{ marginTop: "12px" }}>
-    <div className="col-md-4">
-        <label className="form-label">
-            Date of Birth {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="date"
-            name="date_of_birth"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.date_of_birth : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Nationality {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="nationality"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.nationality : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Gender {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <select
-            name="gender"
-            onChange={handleChangeInput}
-            className="common-input form-select"
-            required
-            value={rowData ? rowData.gender : ""}
-        >
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-        </select>
-    </div>
-</div>
+          <div className="row" style={{ marginTop: "12px" }}>
+            <div className="col-md-4">
+              <label className="form-label">
+                Date of Birth {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="date"
+                name="date_of_birth"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.date_of_birth : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Nationality {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                name="nationality"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.nationality : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Gender {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <select
+                name="gender"
+                onChange={handleChangeInput}
+                className="common-input form-select"
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
 
-<div className="row" style={{ marginTop: "12px" }}>
-    <div className="col-md-4">
-        <label className="form-label">
-            Address {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="address"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.address : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Email ID {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="email"
-            name="email"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.email : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            ID/Registration Number {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="registration_number"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.registration_number : ""}
-            required
-        />
-    </div>
-</div>
+          <div className="row" style={{ marginTop: "12px" }}>
+            <div className="col-md-4">
+              <label className="form-label">
+                Address {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                name="address"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.address : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Email ID {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.email : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                ID/Registration Number {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                name="registration_number"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.registration_number : ""}
+                required
+              />
+            </div>
+          </div>
 
-<div className="row" style={{ marginTop: "12px" }}>
-    <div className="col-md-4">
-        <label className="form-label">
-            Emergency Contact {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="emergency_contact"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.emergency_contact : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Parent/Guardian Phone Number{" "}
-            {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="guardian_ph_no"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.guardian_ph_no : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Phone Number {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            onChange={handleChangeInput}
-            type="text"
-            pattern="[0-9]*"
-            name="phone_number"
-            className="form-control"
-            defaultValue={rowData ? rowData.phone_number : ""}
-            required
-            maxLength={10}
-        />
-    </div>
-</div>
-
+          <div className="row" style={{ marginTop: "12px" }}>
+            <div className="col-md-4">
+              <label className="form-label">
+                Emergency Contact {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                pattern="[0-9]*"
+                maxLength={10}
+                minLength={10}
+                name="emergency_contact"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.emergency_contact : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Parent/Guardian Phone Number{" "}
+                {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                pattern="[0-9]*"
+                maxLength={10}
+                minLength={10}
+                name="guardian_ph_no"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.guardian_ph_no : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Phone Number {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                onChange={handleChangeInput}
+                type="text"
+                pattern="[0-9]*"
+                name="phone_number"
+                className="form-control"
+                defaultValue={rowData ? rowData.phone_number : ""}
+                required
+                maxLength={10}
+              />
+            </div>
+          </div>
 
           <div className="row mt-5">
             <div className="col-md-9"></div>
