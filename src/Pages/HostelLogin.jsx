@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
+import { IconButton } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { createhostellogin } from "../api/Users";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "../components/Table/Table.css";
 import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
-import { createhostellogin } from "../api/Users";
-import { toast } from 'react-toastify';
-import { useTranslation } from "react-i18next";
-import i18next from "i18next";
-
-
 
 const HostelLogin = () => {
     const { t } = useTranslation();
-    const handleClick = (e) => {
-        i18next.changeLanguage(e.target.value);
-    };
     const [isLoading, setIsLoading] = useState(true);
     const [markRequired, setMarkRequired] = useState(true);
     const [Hostelname, setHostelname] = useState('');
@@ -25,44 +21,92 @@ const HostelLogin = () => {
     const [Address, setAddress] = useState('');
     const [District, setDistrict] = useState('');
     const [Block, setBlock] = useState('');
+    const [number, setNumber] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const [passwordMismatchError, setPasswordMismatchError] = useState('');
+    const { register, formState: { errors } } = useForm();
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
-    const hostname = (event) => {
+    const toggleConfirmPasswordVisibility = () => {
+        setConfirmPasswordVisible(!confirmPasswordVisible);
+    };
+
+    const handleHostnameChange = (event) => {
         setHostelname(event.target.value);
     };
-    const emailid = (event) => {
+
+    const handleEmailChange = (event) => {
         setEmailid(event.target.value);
+        validateEmail(event.target.value);
     };
-    const password = (event) => {
+
+    const handleContactNoChange = (event) => {
+        setNumber(event.target.value);
+    };
+
+    const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+        if (ConfirmPassword && event.target.value !== ConfirmPassword) {
+            setPasswordMismatchError("Passwords do not match");
+        } else {
+            setPasswordMismatchError('');
+        }
     };
-    const confirmpassword = (event) => {
+
+    const handleConfirmPasswordChange = (event) => {
         setConfirmPassword(event.target.value);
+        if (Password && event.target.value !== Password) {
+            setPasswordMismatchError("Passwords do not match");
+        } else {
+            setPasswordMismatchError('');
+        }
     };
-    const address = (event) => {
+
+    const handleAddressChange = (event) => {
         setAddress(event.target.value);
     };
-    const district = (event) => {
+
+    const handleDistrictChange = (event) => {
         setDistrict(event.target.value);
     };
-    const block = (event) => {
+
+    const handleBlockChange = (event) => {
         setBlock(event.target.value);
     };
 
-    const handleSubmitForm = async (event) => {
-        debugger
-        event.preventDefault();
+    const validateEmail = (email) => {
+        if (!/^[a-zA-Z0-9._%+-]+@gmail.com$/.test(email)) {
+            setEmailError('Invalid email format');
+        } else {
+            setEmailError('');
+        }
+    };
 
-        const Postdata =
-        {
+    const handleSubmitForm = async (event) => {
+        event.preventDefault();
+        if (emailError) {
+            toast.error('Please provide a valid email address.');
+            return;
+        }
+        if (Password !== ConfirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+        }
+        const Postdata = {
             name: Hostelname,
             email: Emailid,
             district_code: District,
             block_code: Block,
             password: Password,
-            address: Address
-
-        }
+            address: Address,
+            mobile_no: number
+        };
         createhostellogin(Postdata)
             .then(response => {
                 toast.success(response.message);
@@ -81,93 +125,125 @@ const HostelLogin = () => {
                 <h5 className="my-4">{t("Create Hostel Login")}</h5>
                 <form id="myform1" onSubmit={(e) => handleSubmitForm(e)} style={{ marginTop: "12px" }}>
                     <div className="row">
+                        {/* Hostel Name */}
                         <div className="col-md-4">
-                            <label className="form-label">{t("Hostel Name")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">Hostel Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
                                 type="text"
                                 name="asset_name"
                                 className="form-control"
                                 value={Hostelname}
-                                onChange={hostname}
+                                onChange={handleHostnameChange}
                                 required
                             />
                         </div>
+                        {/* Email ID */}
                         <div className="col-md-4">
-                            <label className="form-label">{t("Email ID")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">Email ID {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
-                                type="text"
-                                name="asset_name"
+                                type="email"
+                                name="email"
                                 className="form-control"
                                 value={Emailid}
-                                onChange={emailid}
+                                onChange={handleEmailChange}
                                 required
                             />
+                            {emailError && <span className="text-danger">{emailError}</span>}
                         </div>
+                        {/* Mobile No. */}
                         <div className="col-md-4">
-                            <label className="form-label">{t("New Password")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">Mobile No. {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
                                 type="text"
-                                name="asset_name"
+                                pattern="[0-9]*"
+                                maxLength={10}
+                                minLength={10}
+                                name="mobile_no"
                                 className="form-control"
-                                value={Password}
-                                onChange={password}
+                                onChange={handleContactNoChange}
                                 required
                             />
                         </div>
                     </div>
+                    {/* New Password */}
                     <div className="row" style={{ marginTop: "12px" }}>
                         <div className="col-md-4">
-                            <label className="form-label">{t("Confirm Password")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                            <input
-                                type="text"
-                                name="asset_name"
-                                className="form-control"
-                                value={ConfirmPassword}
-                                onChange={confirmpassword}
-                                required
-                            />
+                            <label className="form-label">New Password {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <div className="input-group">
+                                <input
+                                    type={passwordVisible ? 'text' : 'password'}
+                                    name='password'
+                                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                                    {...register('password', {
+                                        required: t("Password is required"),
+                                        pattern: {
+                                            value: strongPasswordRegex,
+                                            message: t('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.'),
+                                        },
+                                    })}
+                                    onChange={handlePasswordChange}
+                                />
+                                <span className='input-group-text' onClick={togglePasswordVisibility}>
+                                    <IconButton size="small">
+                                        {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </span>
+                            </div>
+                            {errors.password && (
+                                <span className='error-text'>
+                                    {errors.password?.message}
+                                </span>
+                            )}
                         </div>
+                        {/* Confirm Password */}
+                        <div className="col-md-4">
+                            <label className="form-label">Confirm Password {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <div className="input-group">
+                                <input
+                                    type={confirmPasswordVisible ? 'text' : 'password'}
+                                    name='confirm_password'
+                                    className={`form-control ${passwordMismatchError ? 'is-invalid' : ''}`}
+                                    value={ConfirmPassword}
+                                    onChange={handleConfirmPasswordChange}
+                                    required
+                                />
+                                <span className='input-group-text' onClick={toggleConfirmPasswordVisibility}>
+                                    <IconButton size="small">
+                                        {confirmPasswordVisible ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </span>
+                            </div>
+                            {passwordMismatchError && (
+                                <span className='error-text'>
+                                    {passwordMismatchError}
+                                </span>
+                            )}
+                        </div>
+                        {/* Address */}
                         <div className="col-md-4 mb-3">
                             <label htmlFor="address1" className="form-label">{t('Address')} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                            <input type="text" name="address1" className="form-control" value={Address}
-                                onChange={address} required />
+                            <input type="text" name="address1" className="form-control" value={Address} onChange={handleAddressChange} required/>
                         </div>
-
-                        <div className="col-md-4">
-                            <label className="form-label">{t("District")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                            <input
-                                type="text"
-                                name="asset_name"
-                                className="form-control"
-                                value={District}
-                                onChange={district}
-                                required
-                            />
-                        </div>
-
                     </div>
                     <div className="row mt-3">
-
-
+                        {/* District */}
                         <div className="col-md-4">
-                            <label className="form-label">{t("Block")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
-                            <input
-                                type="text"
-                                name="asset_name"
-                                className="form-control"
-                                value={Block}
-                                onChange={block}
-                                required
-                            />
+                            <label className="form-label">District {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <input type="text" name="district" className="form-control" value={District} onChange={handleDistrictChange} required/>
+                        </div>
+                        {/* Block */}
+                        <div className="col-md-4">
+                            <label className="form-label">Block {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <input type="text" name="block" className="form-control" value={Block} onChange={handleBlockChange} required/>
                         </div>
                     </div>
                     <div className="row mt-5">
                         <div className="col-md-12">
                             <button type="submit" className="btn btn-primary me-2">
-                                {t("Submit")}
+                                Submit
                             </button>
                             <button type="button" className="btn btn-secondary">
-                                {t("Clear")}
+                                Clear
                             </button>
                         </div>
                     </div>
