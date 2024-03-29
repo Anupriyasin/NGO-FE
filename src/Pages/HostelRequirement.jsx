@@ -33,6 +33,7 @@ const HostelRequirement = () => {
   const [NameHandle, setNameHandle] = useState("");
   const [QuantityHandle, setQuantityHandle] = useState("");
   const [DisHandle, setDisHandle] = useState("");
+  const [TentativeAmount, setTentativeAmount] = useState("");
   const [DateHandle, setDateHandle] = useState("");
   const [UnitsHandle, setUnitsHandle] = useState("");
   const [GstHandle, setGstHandle] = useState("");
@@ -108,6 +109,9 @@ const HostelRequirement = () => {
   const disHandle = (event) => {
     setDisHandle(event.target.value);
   };
+  const TentativeAmountHandle = (event) => {
+    setTentativeAmount(event.target.value);
+  };
 
  
 
@@ -168,7 +172,7 @@ const HostelRequirement = () => {
 
 
   const handleSubmitForm = async (event) => {
-    // debugger;
+    debugger;
     event.preventDefault();
     console.log("quntity:",QuantityHandle)
 
@@ -180,7 +184,8 @@ const HostelRequirement = () => {
       quantity: QuantityHandle,
       description: DisHandle,
       lat: latitude,
-      long: longitude
+      longitude: longitude,
+      tentative_amount:TentativeAmount
 
      
     };
@@ -233,7 +238,7 @@ const HostelRequirement = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Asset Type{" "}
+                Inventory Type{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <select
@@ -243,7 +248,7 @@ const HostelRequirement = () => {
                 onChange={AssetTypehandle}
                 required
               >
-                <option value="">Select Asset Type</option>
+                <option value="">Select Inventory Type</option>
                 {/* Map assetOptions to generate option elements */}
                 {AssetsTypes.assets_name &&
                   AssetsTypes.assets_name.map((row) => (
@@ -255,7 +260,7 @@ const HostelRequirement = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Asset Sub Type{" "}
+              Inventory Sub Type{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <select
@@ -265,7 +270,7 @@ const HostelRequirement = () => {
                 className="common-input form-select"
                 required
               >
-                <option value="">Select Asset Sub Type</option>
+                <option value="">Select Inventory Sub Type</option>
 
                 {AssetsSubTypes.new_asset_query &&
                   AssetsSubTypes.new_asset_query.map((row) => (
@@ -279,7 +284,7 @@ const HostelRequirement = () => {
           <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-4">
               <label className="form-label">
-                Asset Name{" "}
+              Inventory Name{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <select
@@ -288,7 +293,7 @@ const HostelRequirement = () => {
                   onChange={ExistnameHandle}
                   className="common-input form-select"
                 >
-                  <option value="">Select Asset Name</option>
+                  <option value="">Select Inventory Name</option>
                   {ExistNameHandle.asset_name && ExistNameHandle.asset_name.map((row) => (
                     <option key={row.asset_name} value={row.asset_name}>{row.asset_name}</option>
                   ))}
@@ -297,7 +302,7 @@ const HostelRequirement = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Asset Quantity{" "}
+              Inventory Quantity{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <input
@@ -310,7 +315,30 @@ const HostelRequirement = () => {
               />
             </div>
             <div className="col-md-4">
-              <label className="form-label">Description</label>
+            <label className="form-label">
+              Tentative Amount{" "}
+                {markRequired && <span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                name="tentative_amount"
+                value={TentativeAmount}
+                className="form-control"
+                onChange={TentativeAmountHandle}
+                required
+              />
+             
+            </div>
+
+            {/* <div className="col-md-4 mt-sm-4">
+              <button type="button" className="btn me-2 text-white fw-bold border border-1" style={{backgroundColor: "green"}} onClick={fetchLocation}>
+                Save my Location
+              </button>
+            </div> */}
+          </div>
+          <div className="row" style={{ marginTop: "12px" }}>
+            <div className="col-md-4">
+            <label className="form-label">Description</label>
               <textarea
                 style={{ height: "100px", resize: "none" }}
                 className="form-control"
@@ -319,6 +347,7 @@ const HostelRequirement = () => {
                 onChange={disHandle}
               ></textarea>
             </div>
+           
 
             {/* <div className="col-md-4 mt-sm-4">
               <button type="button" className="btn me-2 text-white fw-bold border border-1" style={{backgroundColor: "green"}} onClick={fetchLocation}>

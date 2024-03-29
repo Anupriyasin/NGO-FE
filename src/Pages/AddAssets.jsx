@@ -454,7 +454,7 @@ const clearAssetsFields = () => {
                 </select>
               </div>
               <div className="col-md-4">
-                <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_type"
                   // value={AssetsType}
@@ -462,7 +462,7 @@ const clearAssetsFields = () => {
                   onChange={AssetTypehandle}
                   required
                 >
-                  <option value="">Select Asset Type</option>
+                  <option value="">Select Inventory Type</option>
                   {AssetsTypes.assets_name && AssetsTypes.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
                   ))}
@@ -472,7 +472,7 @@ const clearAssetsFields = () => {
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
-                <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
                   // value={AssetSubtype}
@@ -480,7 +480,7 @@ const clearAssetsFields = () => {
                   className="common-input form-select"
                   required
                 >
-                  <option value="">Select Asset Sub Type</option>
+                  <option value="">Select Inventory Sub Type</option>
 
                   {AssetsSubTypes.new_asset_query && AssetsSubTypes.new_asset_query.map((row) => (
                     <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
@@ -489,7 +489,7 @@ const clearAssetsFields = () => {
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Asset Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
                   type="text"
                   name="asset_name"
@@ -500,7 +500,7 @@ const clearAssetsFields = () => {
                 />
               </div>
               <div className="col-md-4">
-                <label className="form-label">Asset Quantity {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Quantity {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
                   type="text"
                   name="asset_quantity"
@@ -525,7 +525,7 @@ const clearAssetsFields = () => {
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Asset Added Date </label>
+                <label className="form-label">Inventory Added Date </label>
                 <input
                   type="Date"
                   name="asset_add_date"
@@ -633,14 +633,14 @@ const clearAssetsFields = () => {
                 </select>
               </div>
               <div className="col-md-4">
-                <label className="form-label">Asset Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_type"
                   className="common-input form-select"
                   onChange={ExistAssetTypehandle}
                   required
                 >
-                  <option value="">Select Asset Type</option>
+                  <option value="">Select Inventory Type</option>
                   {ExistAssetsType.assets_name && ExistAssetsType.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
                   ))}
@@ -650,14 +650,14 @@ const clearAssetsFields = () => {
             </div>
             <div className="row" style={{ marginTop: "12px" }}>
               <div className="col-md-4">
-                <label className="form-label">Asset Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Sub Type {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
                   // value={ExistAssetsSubTypes}
                   onChange={ExistAssetSubtypehandle}
                   className="common-input form-select"
                 >
-                  <option value="">Select Asset Sub Type</option>
+                  <option value="">Select Inventory Sub Type</option>
                   {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
                     <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
                   ))}
@@ -666,14 +666,14 @@ const clearAssetsFields = () => {
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Asset Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <select
                   name="asset_sub_type"
                   // value={ExistNameHandle}
                   onChange={ExistnameHandle}
                   className="common-input form-select"
                 >
-                  <option value="">Select Asset Name</option>
+                  <option value="">Select Inventory Name</option>
                   {ExistNameHandle.asset_name && ExistNameHandle.asset_name.map((row) => (
                     <option key={row.asset_name} value={row.asset_name}>{row.asset_name}</option>
                   ))}
@@ -710,7 +710,7 @@ const clearAssetsFields = () => {
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Asset Quantity {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                <label className="form-label">Inventory Quantity {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                 <input
                   type="text"
                   value={ExistQuantity}

@@ -53,7 +53,15 @@ console.log("rowData//////",rowData)
     const { name, value } = e.target;
     setStudent((prevAdmin) => ({ ...prevAdmin, [name]: value }));
   };
-
+  useEffect(() => {
+    // Set staff data from rowData when component mounts
+    if (rowData) {
+      setStudent((prevStaff) => ({
+            ...prevStaff,
+            ...rowData,
+        }));
+    }
+}, [rowData]);
   const onSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -189,21 +197,21 @@ console.log("rowData//////",rowData)
         />
     </div>
     <div className="col-md-4">
-        <label className="form-label">
-            Gender {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <select
-            name="gender"
-            onChange={handleChangeInput}
-            className="common-input form-select"
-            required
-            value={rowData ? rowData.gender : ""}
-        >
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-        </select>
-    </div>
+    <label className="form-label">
+        Gender {<span style={{ color: "red" }}>*</span>}
+    </label>
+    <select
+        name="gender"
+        onChange={handleChangeInput}
+        className="common-input form-select"
+        required
+        defaultValue={rowData ? rowData.gender : ""}
+    >
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+</div>
 </div>
 
 <div className="row" style={{ marginTop: "12px" }}>
@@ -295,11 +303,17 @@ console.log("rowData//////",rowData)
 
 
           <div className="row mt-5">
-            <div className="col-md-9"></div>
-            <div className="col-md-3">
-              <button type="submit" className="btn btn-primary me-2">
-                Save & Update
-              </button>
+            <div className="col-md-10"></div>
+            <div className="col-md-2">
+            {!rowData ?
+            <button type="submit" className="btn btn-primary me-2">
+                Save 
+              </button>:
+              <button type="button" className="btn btn-primary me-2" >
+              Update
+          </button>
+}
+           
               <button
                 type="button"
                 className="btn btn-secondary"

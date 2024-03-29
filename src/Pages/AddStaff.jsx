@@ -7,7 +7,7 @@ import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
 import { Modal, Button } from "@mui/material";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import { addStaff, getAssetsName } from "../api/Users";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
@@ -23,7 +23,7 @@ const AddStaff = () => {
     const file = event.target.files[0];
     setPhoto(file);
   };
-
+ 
   const {
     register,
     handleSubmit,
@@ -49,16 +49,26 @@ const AddStaff = () => {
     employment_status: "",
     nationality: "",
   });
-
+  const location = useLocation();
+  const rowData = location.state;
   useEffect(() => {
     setIsLoading(false);
   }, []);
 
+  useEffect(() => {
+    // Set staff data from rowData when component mounts
+    if (rowData) {
+        setStaff((prevStaff) => ({
+            ...prevStaff,
+            ...rowData,
+        }));
+    }
+}, [rowData]);
   const handleChangeInput = async (e) => {
     const { name, value } = e.target;
     setStaff((prevAdmin) => ({ ...prevAdmin, [name]: value }));
   };
-
+  console.log("rowDatastaff//////",rowData)
   const onSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -146,6 +156,7 @@ const AddStaff = () => {
                 type="text"
                 name="first_name"
                 className="form-control"
+                defaultValue={rowData ? rowData.first_name : ""}
                 onChange={handleChangeInput}
                 required
               />
@@ -158,6 +169,7 @@ const AddStaff = () => {
               <input
                 type="text"
                 name="last_name"
+                defaultValue={rowData ? rowData.last_name : ""}
                 className="form-control"
                 onChange={handleChangeInput}
                 required
@@ -187,6 +199,7 @@ const AddStaff = () => {
                 type="date"
                 name="date_of_birth"
                 className="form-control"
+                defaultValue={rowData ? rowData.date_of_birth : ""}
                 onChange={handleChangeInput}
                 max={today}
                 required
@@ -201,6 +214,7 @@ const AddStaff = () => {
               <input
                 type="text"
                 name="nationality"
+                defaultValue={rowData ? rowData.nationality : ""}
                 className="form-control"
                 onChange={handleChangeInput}
                 required
@@ -215,10 +229,11 @@ const AddStaff = () => {
                 onChange={handleChangeInput}
                 className="common-input form-select"
                 required
+                defaultValue={rowData ? rowData.gender : ""}
               >
                 <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
             </div>
           </div>
@@ -230,6 +245,7 @@ const AddStaff = () => {
                 className="form-control"
                 name="address"
                 onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.address : ""}
                 required
               ></textarea>
             </div>
@@ -244,6 +260,7 @@ const AddStaff = () => {
                 name="email"
                 className="form-control"
                 onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.email : ""}
                 required
               />
             </div>
@@ -260,6 +277,7 @@ const AddStaff = () => {
                 minLength={10}
                 name="phone_number"
                 className="form-control"
+                defaultValue={rowData ? rowData.phone_number : ""}
                 required
               />
             </div>
@@ -276,6 +294,7 @@ const AddStaff = () => {
                 name="staff_id"
                 className="form-control"
                 onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.employee_id : ""}
                 required
               />
             </div>
@@ -287,6 +306,7 @@ const AddStaff = () => {
               <input
                 type="text"
                 name="job_title"
+                defaultValue={rowData ? rowData.job_title : ""}
                 className="form-control"
                 onChange={handleChangeInput}
                 required
@@ -301,6 +321,7 @@ const AddStaff = () => {
                 type="text"
                 name="employment_status"
                 className="form-control"
+                defaultValue={rowData ? rowData.employment_status : ""}
                 onChange={handleChangeInput}
                 required
               />
@@ -318,6 +339,7 @@ const AddStaff = () => {
                 name="hire_date"
                 className="form-control"
                 onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.hire_date : ""}
                 max={today}
                 required
               />
@@ -332,6 +354,7 @@ const AddStaff = () => {
                 type="text"
                 name="department"
                 className="form-control"
+                defaultValue={rowData ? rowData.department : ""}
                 required
               />
             </div>
@@ -344,6 +367,7 @@ const AddStaff = () => {
                 onChange={handleChangeInput}
                 type="number"
                 name="salary"
+                defaultValue={rowData ? rowData.salary : ""}
                 className="form-control"
                 required
               />

@@ -75,6 +75,9 @@ const StaffDetails = ({ role }) => {
     const view = () => {
         navigate(`/addstaff`);
     }
+    const view1 = (row) => {
+        navigate(`/addstaff`,{ state: row });
+    }
 // console.log("filteredData.staff_data,",filteredData.staff_data)
     return (
         <>
@@ -134,7 +137,7 @@ const StaffDetails = ({ role }) => {
                                             <TableCell align="left">{row.department}</TableCell>
                                             <TableCell align="left">{row.phone_number}</TableCell>
                                             <TableCell align="left">{row.hire_date}</TableCell>
-                                            <TableCell align="left"><BorderColorOutlinedIcon style={{ color: "#4eb2e7" }} onClick={view} />
+                                            <TableCell align="left"><BorderColorOutlinedIcon style={{ color: "#4eb2e7" }} onClick={() => view1(row)} />
                                             </TableCell>
                                         </TableRow>
                                     ))}

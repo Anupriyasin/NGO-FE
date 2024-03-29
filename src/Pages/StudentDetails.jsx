@@ -122,9 +122,9 @@ const StudentDetails = ({ role, mainId }) => {
                         <TableCell align="left">{row.gender}</TableCell>
                         <TableCell align="left">{row.address}</TableCell>
                         <TableCell align="left">{row.email}</TableCell>
-                        <TableCell align="left">{row.registration_no}</TableCell>
-                        <TableCell align="left">{row.emccontact}</TableCell>
-                        <TableCell align="left">{row.gurardiancontact}</TableCell>
+                        <TableCell align="left">{row.registration_number}</TableCell>
+                        <TableCell align="left">{row.emergency_contact}</TableCell>
+                        <TableCell align="left">{row.guardian_ph_no}</TableCell>
                         <TableCell align="left">{row.phone_number}</TableCell>
                         <TableCell align="left">{row.created_at}</TableCell>
                         <TableCell align="left text-danger"><BorderColorOutlinedIcon style={{ color: "#4eb2e7" }} onClick={()=>view(row)} /></TableCell>

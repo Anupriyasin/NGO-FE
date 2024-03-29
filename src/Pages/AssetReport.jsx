@@ -336,10 +336,13 @@ const AssetReport = ({ role, mainId }) => {
                                                 <TableCell align="left" style={{ width: "15%" }}>
                                                     {row.category}
                                                 </TableCell>
+                                                <TableCell align="left">{row.asset_type}</TableCell>
+                                                <TableCell align="left">{row.asset_sub_type}</TableCell>
                                                 <TableCell align="left">{row.asset_name}</TableCell>
-                                                <TableCell align="left">{row.asset_sub_type_id}</TableCell>
-                                                <TableCell align="left">{row.asset_name}</TableCell>
-                                                <TableCell align="left text-danger">{"Rejected"}</TableCell>
+                                                <TableCell align="left">{row.asset_quantity}</TableCell>
+                                                <TableCell align="left">{row.description}</TableCell>
+                                                <TableCell align="left">{row.purchase_update_date}</TableCell>
+                                                <TableCell align="left">{row.donated_updated_date}</TableCell>
                                             </TableRow>
                                         ))}
                                 </TableBody>
