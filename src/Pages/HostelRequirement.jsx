@@ -16,7 +16,7 @@ import {
   AddHostelRequirement,
 } from "../api/Users";
 
-const HostelRequirement = () => {
+const HostelRequirement = (props) => {
   const { t } = useTranslation();
   const handleClick = (e) => {
     i18next.changeLanguage(e.target.value);
@@ -342,6 +342,20 @@ const HostelRequirement = () => {
             </div> */}
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
+          {/* {props.role === 1 ? ( */}
+             {props.role === 1  && (
+            <div className="col-md-4">
+            <label className="form-label">{t("Reason For Raising")} {markRequired && <span style={{ color: "red" }}>*</span>}</label>
+            <input
+                type="text"
+                name="reason"
+                // value={TentativeAmount}
+                className="form-control"
+                // onChange={TentativeAmountHandle}
+                required
+              />
+            </div>
+          )}
             <div className="col-md-4">
             <label className="form-label">{t("Description")}</label>
               <textarea
