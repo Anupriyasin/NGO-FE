@@ -9,11 +9,13 @@ import { BiMoney } from "react-icons/bi";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+// import Modal from "@mui/material/Modal";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 // import i18next from "i18next";
 
 const style = {
@@ -25,6 +27,8 @@ const style = {
 
 const AdminCards = (props) => {
   const { t } = useTranslation();
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
 
   const [modalHeader, setModalHeader] = useState("");
   const [modalData, setModalData] = useState([]);
@@ -46,7 +50,7 @@ const AdminCards = (props) => {
   return (
     <div className="row">
       <div>
-        <Modal
+        {/* <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
@@ -83,7 +87,7 @@ const AdminCards = (props) => {
               </ul>
             }
           </List>
-        </Modal>
+        </Modal> */}
       </div>
       <div className="row justify-content-between mb-3">
         <div className="col-md-3 mt-1">
@@ -153,7 +157,7 @@ const AdminCards = (props) => {
 
       <div className="row justify-content-between mb-3">
         <div className="col-md-4 mt-1 ">
-          <div onClick={() => handleOpen(0)} className="card ">
+          <div onClick={onOpenModal} className="card ">
             <div
               className="card-body border"
               style={{ backgroundColor: "white" }}
@@ -208,6 +212,27 @@ const AdminCards = (props) => {
         ) : (
           ""
         )}
+      </div>
+      <div>
+        <Modal open={open} onClose={onCloseModal} center>
+          <h5>Reason for Rejection</h5>
+          <textarea
+            // ref={textareaRef}
+            // value={transcription}
+            // onChange={(e) => setTranscription(e.target.value)}
+            name=""
+            id=""
+            cols="50"
+            rows="10"
+            placeholder="Reason for Rejection"
+            style={{ width: '100%', border: 'none', outline: 'none' }}
+            readOnly
+          ></textarea>
+        </Modal>
+
+
+
+
       </div>
     </div>
   );
