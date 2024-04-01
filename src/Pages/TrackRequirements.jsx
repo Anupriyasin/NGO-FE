@@ -190,8 +190,7 @@ const TrackRequirements = ({ role, mainId }) => {
                                 <TableRow>
                                     <TableCell>{t("Sr. No.")}</TableCell>
                                     <TableCell align="left">{t("Requirement")}</TableCell>
-                                    <TableCell align="left">{t("Hostel Name")}</TableCell>
-                                    <TableCell align="left">{t("Hostel Address")}</TableCell>
+                                    <TableCell align="left">{t("Ashram Name")}</TableCell>
                                     <TableCell align="left">{t("Quantity")}</TableCell>
                                     <TableCell align="left">{t("Action")}</TableCell>
 
@@ -217,7 +216,6 @@ const TrackRequirements = ({ role, mainId }) => {
                                             <TableCell align="left" style={{ width: "15%" }}>
                                                 {row.hostel_name}
                                             </TableCell>
-                                            <TableCell align="left">{row.address}</TableCell>
                                             <TableCell align="left">{row.quantity}</TableCell>
                                             <TableCell align="">
                                                 <Typography
