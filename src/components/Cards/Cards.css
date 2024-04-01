@@ -1,3 +1,15 @@
+/* .cardmodal {
+  visibility: collapse;
+} */
+
+.cardmodal:active { 
+  border: 0px !important;
+}
+/* 
+.card:hover .cardmodal{
+  visibility: visible;
+} */
+
 .Cards {
   display: flex;
   gap: 15px;

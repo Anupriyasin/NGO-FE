@@ -6,7 +6,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "../components/Table/Table.css";
 import TopLoader from "../components/Loader/TopLoader";
 import "react-responsive-modal/styles.css";
-import { Modal, Button } from "@mui/material";
+import { Modal, Button, Checkbox } from "@mui/material";
 import { toast } from "react-toastify";
 import {
   subassets,
@@ -48,6 +48,8 @@ const HostelRequirement = (props) => {
   const [error, setError] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+
+  const label = { inputProps: { "aria-label": "Urgent" } };
 
   useEffect(() => {
     debugger;
@@ -254,7 +256,7 @@ const HostelRequirement = (props) => {
                 required
               >
                   <option value="">{t("Select Inventory Type")}</option>
-                {/* Map assetOptions to generate option elements */}
+                {/ Map assetOptions to generate option elements /}
                 {AssetsTypes.assets_name &&
                   AssetsTypes.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>
@@ -342,7 +344,7 @@ const HostelRequirement = (props) => {
             </div> */}
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
-          {/* {props.role === 1 ? ( */}
+          {/* {/ {props.role === 1 ? ( /} */}
              {props.role === 1  && (
             <div className="col-md-4">
             <label className="form-label">{t("Reason For Raising")} {markRequired && <span style={{ color: "red" }}>*</span>}</label>
@@ -366,6 +368,14 @@ const HostelRequirement = (props) => {
                 onChange={disHandle}
               ></textarea>
             </div>
+
+            <div className="row" style={{ marginTop: "12px" }}>
+            <div className="col-md-4">
+              <label className="form-label">Mark as an <span className="fw-bold">Urgent Requirement</span></label>
+
+              <Checkbox {...label} />
+            </div>
+          </div>
            
 
             {/* <div className="col-md-4 mt-sm-4">

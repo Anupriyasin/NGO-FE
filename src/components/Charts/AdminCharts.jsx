@@ -30,6 +30,8 @@ import {
   getDashboardCompletedRequirements,
   getDashboardNewRequirements,
   getDashboardPendingRequirements,
+  getHostelwiseStaff,
+  getHostelwiseStudents,
   getUserAllStaff,
   getUserAllStudents,
   getUserDashboardAllRequirements,
@@ -38,6 +40,7 @@ import {
   getUserDashboardPendingRequirements,
 } from "../../api/Users";
 import Map from "../Map/Map";
+import { get } from "jquery";
 
 const AdminCharts = ({ data1, title, role }) => {
   const { t } = useTranslation();
@@ -61,6 +64,8 @@ const AdminCharts = ({ data1, title, role }) => {
   const [staff, setStaff] = useState(0);
   const [hostels, setHostels] = useState(0);
   const [allHostels, setAllHostels] = useState([]);
+  const [hostelWiseStudents, setHostelWiseStudents] = useState([]);
+  const [hostelWiseStaff, setHostelWiseStaff] = useState([]);
 
   const animatedComponents = makeAnimated();
 
@@ -91,6 +96,26 @@ const AdminCharts = ({ data1, title, role }) => {
   // }
 
   const getAdminCardsData = () => {
+    getHostelwiseStudents()
+      .then((res) => {
+        setHostelWiseStudents(res.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
+    getHostelwiseStaff()
+      .then((res) => {
+        setHostelWiseStaff(res.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(t("Something went wrong"));
+        setIsLoading(false);
+      });
+
     getDashboardNewRequirements()
       .then((res) => {
         setNewReq(res.data[0].total);
@@ -596,8 +621,10 @@ const AdminCharts = ({ data1, title, role }) => {
         students={students}
         staff={staff}
         hostels={hostels}
+        hostelWiseStaff={hostelWiseStaff}
+        hostelWiseStudents={hostelWiseStudents}
       />
-      {role === 1 ? <Map /> : ""}
+      <Map />
 
       {/* <div className="bg-white rounded col-sm-12 col-md-5 m-3">
         <Charts />

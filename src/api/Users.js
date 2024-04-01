@@ -580,30 +580,30 @@ export const getRequirements = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
-    export const getHostelWiseRequirements = async (requestData) => {
-      try {
-        const response = await axios.post("/hostel_wise_reqmnt_data", requestData);
-        return response.data;
-      } catch (error) {
-        throw new Error("Error - " + error);
-      }
-    };
-    // export const getAssetReport = async (requestData) => {
-    //   try {
-    //     const response = await axios.post("/get_asset_report", requestData);
-    //     return response.data;
-    //   } catch (error) {
-    //     throw new Error("Error - " + error);
-    //   }
-    // };
-    export const getAssetReport = async (requestData) => {
-      try {
-        const response = await axios.post("/get_asset_report", requestData);
-        return response.data;
-      } catch (error) {
-        throw new Error("Error - " + error);
-      }
-    };
+export const getHostelWiseRequirements = async (requestData) => {
+  try {
+    const response = await axios.post("/hostel_wise_reqmnt_data", requestData);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error - " + error);
+  }
+};
+// export const getAssetReport = async (requestData) => {
+//   try {
+//     const response = await axios.post("/get_asset_report", requestData);
+//     return response.data;
+//   } catch (error) {
+//     throw new Error("Error - " + error);
+//   }
+// };
+export const getAssetReport = async (requestData) => {
+  try {
+    const response = await axios.post("/get_asset_report", requestData);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error - " + error);
+  }
+};
 
 export const getRejectedRequirements = async () =>
   await axios
@@ -624,7 +624,6 @@ export const getstudentinfo = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
-
 
 export const getAllStudents = async () =>
   await axios
@@ -800,10 +799,29 @@ export const addStaff = async (data) => {
     });
 };
 
-
 export const getMapData = async () =>
   await axios
     .get("/get_map_data")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getHostelwiseStudents = async () =>
+  await axios
+    .get("/hostel_wise_students_count")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
+export const getHostelwiseStaff = async () =>
+  await axios
+    .get("/hostel_wise_staff_count")
     .then((response) => {
       return response.data;
     })

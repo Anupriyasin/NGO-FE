@@ -57,11 +57,11 @@ const AddStudent = () => {
     // Set staff data from rowData when component mounts
     if (rowData) {
       setStudent((prevStaff) => ({
-            ...prevStaff,
-            ...rowData,
-        }));
+        ...prevStaff,
+        ...rowData,
+      }));
     }
-}, [rowData]);
+  }, [rowData]);
   const onSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -82,19 +82,33 @@ const AddStudent = () => {
 
     console.log(data);
 
-    addStudent(data)
-      .then((res) => {
-        if (res.status === "success") {
-          setIsLoading(false);
-          setLoading(100);
-          toast.success(t(res.message));
-        } else {
-          toast.error(t(res.message));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    rowData
+    ? addStudent(data)
+    .then((res) => {
+      if (res.status === "success") {
+        setIsLoading(false);
+        setLoading(100);
+        toast.success(t(res.message));
+      } else {
+        toast.error(t(res.message));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    : addStudent(data)
+    .then((res) => {
+      if (res.status === "success") {
+        setIsLoading(false);
+        setLoading(100);
+        toast.success(t(res.message));
+      } else {
+        toast.error(t(res.message));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   let navigate = useNavigate();
@@ -169,50 +183,51 @@ const AddStudent = () => {
             </div>
           </div>
 
-<div className="row" style={{ marginTop: "12px" }}>
-    <div className="col-md-4">
-        <label className="form-label">
-            Date of Birth {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="date"
-            name="date_of_birth"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.date_of_birth : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-        <label className="form-label">
-            Nationality {<span style={{ color: "red" }}>*</span>}
-        </label>
-        <input
-            type="text"
-            name="nationality"
-            className="form-control"
-            onChange={handleChangeInput}
-            defaultValue={rowData ? rowData.nationality : ""}
-            required
-        />
-    </div>
-    <div className="col-md-4">
-    <label className="form-label">
-        Gender {<span style={{ color: "red" }}>*</span>}
-    </label>
-    <select
-        name="gender"
-        onChange={handleChangeInput}
-        className="common-input form-select"
-        required
-        defaultValue={rowData ? rowData.gender : ""}
-    >
-        <option value="">Select Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-    </select>
-</div>
-</div>
+          <div className="row" style={{ marginTop: "12px" }}>
+            <div className="col-md-4">
+              <label className="form-label">
+                Date of Birth {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="date"
+                name="date_of_birth"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.date_of_birth : ""}
+                required
+                max={today}
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Nationality {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <input
+                type="text"
+                name="nationality"
+                className="form-control"
+                onChange={handleChangeInput}
+                defaultValue={rowData ? rowData.nationality : ""}
+                required
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label">
+                Gender {<span style={{ color: "red" }}>*</span>}
+              </label>
+              <select
+                name="gender"
+                onChange={handleChangeInput}
+                className="common-input form-select"
+                required
+                defaultValue={rowData ? rowData.gender : ""}
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
 
           <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-4">
@@ -310,15 +325,16 @@ const AddStudent = () => {
           <div className="row mt-5">
             <div className="col-md-10"></div>
             <div className="col-md-2">
-            {!rowData ?
-            <button type="submit" className="btn btn-primary me-2">
-                Save 
-              </button>:
-              <button type="button" className="btn btn-primary me-2" >
-              Update
-          </button>
-}
-           
+              {!rowData ? (
+                <button type="submit" className="btn btn-primary me-2">
+                  Save
+                </button>
+              ) : (
+                <button type="button" className="btn btn-primary me-2">
+                  Update
+                </button>
+              )}
+
               <button
                 type="button"
                 className="btn btn-secondary"

@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="App bg-transparent row d-flex justify-content-center">
-      <h1 className="text-dark m-2">{t("Requirements Map")}</h1>
+      <h1 className="text-dark m-2">{t("Pending Requirements Map")}</h1>
       <MapContainer
         center={position}
         zoom={7}
