@@ -589,7 +589,15 @@ export const getallDistricts = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
-
+    export const getdistictName = async (data) =>
+    await axios
+      .get("/get_all_districts")
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return "Error - " + error;
+      });
 export const getHostelWiseRequirements = async (requestData) => {
   try {
     const response = await axios.post("/hostel_wise_reqmnt_data", requestData);

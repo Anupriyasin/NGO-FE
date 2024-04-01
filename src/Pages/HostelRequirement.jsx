@@ -15,6 +15,7 @@ import {
   Assetnameinfo,
   AddHostelRequirement,
   getdistrictName,
+  getallDistricts,
 } from "../api/Users";
 
 const HostelRequirement = (props) => {
@@ -69,7 +70,7 @@ const HostelRequirement = (props) => {
   }, []);
   useEffect(() => {
     debugger;
-    getdistrictName()
+    getallDistricts()
       .then((res) => {
         if (res.status === "success") {
           console.log("Assets data:", res.data);
