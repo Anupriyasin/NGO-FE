@@ -22,9 +22,12 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import BusinessIcon from "@mui/icons-material/Business";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+
+
 
 const Sidebars = (props) => {
   const { t } = useTranslation();
@@ -103,6 +106,16 @@ const Sidebars = (props) => {
               <MenuItem
                 icon={<AddCircleIcon />}
                 className={
+                  HostelActiveMenu === "/hostel-requirement"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                <Link to="/hostel-requirement">{t("Raise Requirement")}</Link>
+              </MenuItem>
+              <MenuItem
+                icon={<AssignmentIcon   />}
+                className={
                   activeMenu === "/newrequirements"
                     ? "menuItem active "
                     : "menuItem"
@@ -130,6 +143,7 @@ const Sidebars = (props) => {
               >
                 <Link to="/rejectedrequirements">{t("Rejected Requirements")}</Link>
               </MenuItem>
+             
             </SubMenu>
             <SubMenu
               label={t("Manage Inventory")}
@@ -296,7 +310,15 @@ const Sidebars = (props) => {
               </MenuItem>
              
             </SubMenu>
-           
+            <MenuItem
+                icon={<BusinessCenterIcon ndedIcon />}
+                className={
+                  activeMenu === "/add-assets" ? "menuItem active " : "menuItem"
+                }
+              >
+                {" "}
+                <Link to="/add-assets">{t("Add Inverntory")}</Link>
+              </MenuItem>
               <MenuItem
                 icon={<SupervisedUserCircleIcon />}
                 className={

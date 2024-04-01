@@ -167,6 +167,11 @@ const AppRoutes = () => {
             allowedRoles: [1]
         },
         {
+            path: '/hostel-requirement',
+            component: HostelRequirement,
+            allowedRoles: [1]
+        },
+        {
             path: '/staffdetails',
             component: StaffDetails,
             allowedRoles: [1]
@@ -230,7 +235,12 @@ const AppRoutes = () => {
             path: '/add-student-details',
             component: AddStudent,
             allowedRoles: [2]
-        }
+        },
+        {
+            path: '/add-assets',
+            component: AddAssets,
+            allowedRoles: [2]
+        },
     ];
 
     return (
