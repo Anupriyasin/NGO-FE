@@ -42,7 +42,7 @@ const AdminCards = (props) => {
     }
     setOpen(true);
   };
-  
+
   const onCloseModal = () => setOpen(false);
 
   return (
@@ -172,21 +172,21 @@ const AdminCards = (props) => {
         )}
       </div>
       <div>
-        <Modal
-          open={open}
-          onClose={onCloseModal}
-          center
-        >
-          <h5 style={{width: '500px'}} className="fs-3 fw-bold p-3">{modalHeader}</h5>
+        <Modal open={open} onClose={onCloseModal} center>
+          <h5 style={{ width: "500px" }} className="fs-3 fw-bold p-3">
+            {modalHeader}
+          </h5>
+          <p class="list-group-item col-12 d-flex justtify-content-around p-2">
+            <p className="col-6 fs-5 fw-bold">Hostel Name</p>
+            <p className="col-6 fs-5 text-end fw-bold">Count</p>
+          </p>
           <ul class="list-group list-group-flush">
-            {
-              modalData.map(item => (
-                <li class="list-group-item col-12 d-flex justtify-content-around">
-                  <p className="col-6 fs-5">{item.name}</p>
-                  <p className="col-6 fs-5 text-end">{item.count}</p>
-                </li>
-              ))
-            }
+            {modalData.map((item) => (
+              <li class="list-group-item col-12 d-flex justtify-content-around">
+                <p className="col-6 fs-5">{item.name}</p>
+                <p className="col-6 fs-5 text-end">{item.count}</p>
+              </li>
+            ))}
           </ul>
         </Modal>
       </div>
