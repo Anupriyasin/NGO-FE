@@ -136,11 +136,11 @@ const VendorReport = ({ role, mainId }) => {
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
                   <TableCell align="left">{t("Vendor Type")}</TableCell>
-                  <TableCell align="center">{t("Vendor Name")}</TableCell>
-                  <TableCell align="center">{t("GST No.")}</TableCell>
+                  <TableCell align="left">{t("Vendor Name")}</TableCell>
+                  <TableCell align="left">{t("GST No.")}</TableCell>
                   <TableCell align="left">{t("Inventory Name")}</TableCell>
                   <TableCell align="left">{t("Quantity")}</TableCell>
-                  <TableCell align="left">{t("Invoice Name")}</TableCell>
+                  <TableCell align="left">{t("Invoice Number")}</TableCell>
                 </TableRow>
               </TableHead>
               {!isLoading && filteredData && filteredData.length > 0 && (
@@ -154,7 +154,7 @@ const VendorReport = ({ role, mainId }) => {
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <TableCell component="th" scope="row">
+                        {/* <TableCell component="th" scope="row">
                           {index + 1}
                         </TableCell>
                         <TableCell align="left">
@@ -170,7 +170,7 @@ const VendorReport = ({ role, mainId }) => {
                           {row.hostel_name}
                         </TableCell>
                         <TableCell align="left">{row.quantity}</TableCell>
-                        <TableCell align="left text-danger" onClick={onOpenModal}>{t("Rejected")} </TableCell>
+                        <TableCell align="left text-danger" onClick={onOpenModal}>{t("Rejected")} </TableCell> */}
                       </TableRow>
                     ))}
                 </TableBody>
