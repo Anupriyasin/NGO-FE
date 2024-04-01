@@ -186,6 +186,7 @@ const Requirements = ({ role, mainId }) => {
       <div className="px-0 px-md-3">
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
           <h5 className="">{t("New Requirements")}</h5>
+        
           <TextField
             label={t("Search")}
             variant="outlined"
@@ -195,6 +196,24 @@ const Requirements = ({ role, mainId }) => {
               endAdornment: <SearchIcon />,
             }}
           />
+        </div> 
+        <div className="row">
+        <div className="col-sm-3">
+                        <label htmlfor="title" className="form-label mt-4">{t('District')}</label>
+                        <select
+                  name="asset_sub_type"
+                  // value={ExistAssetsSubTypes}
+                  // onChange={ExistAssetSubtypehandle}
+                  className="common-input form-select"
+                >
+                  <option value="">Select District</option>
+                  {/* {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
+                    <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
+                  ))} */}
+
+                </select>
+
+                    </div>
         </div>
         <div className="Table mb-6">
           <TableContainer
@@ -206,75 +225,72 @@ const Requirements = ({ role, mainId }) => {
               <TableHead>
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
-                  <TableCell align="left">{t("Requirement")}</TableCell>
-                  <TableCell align="left">{t("Ashram Name")}</TableCell>
-                  <TableCell align="left">{t("Ashram Address")}</TableCell>
-                  <TableCell align="left">{t("Quantity")}</TableCell>
-                  <TableCell align="left">{t("Raised On")}</TableCell>
-                  <TableCell align="left">{t("Status")}</TableCell>
+                  <TableCell align="center">{t("Requirement")}</TableCell>
+                  <TableCell align="center">{t("Ashram Name")}</TableCell>
+                  <TableCell align="center">{t("Block")}</TableCell>
+                  <TableCell align="center">{t("District")}</TableCell>
+                  <TableCell align="center">{t("Quantity")}</TableCell>
+                  <TableCell align="center">{t("Tentative Amount")}</TableCell>
+                  <TableCell align="center">{t("Raised On")}</TableCell>
+                  <TableCell align="center">{t("Pending Date Count")}</TableCell>
+                  <TableCell align="center">{t("Action")}</TableCell>
                 </TableRow>
               </TableHead>
               {!isLoading && filteredData && filteredData.length > 0 && (
-                <TableBody style={{ color: "white" }}>
-                  {filteredData
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => (
-                      <TableRow
-                        key={index}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
+              <TableBody style={{ color: "white" }}>
+              {filteredData
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                  <TableRow
+                    key={index}
+                    sx={{
+                      "&:last-child td, &:last-child th": { border: 0 },
+                    }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {index + 1}
+                    </TableCell>
+                    <TableCell align="center">{row.requirement_name}</TableCell>
+                    <TableCell align="center" style={{ width: "15%" }}>{row.hostel_name}</TableCell>
+                    <TableCell align="center">{row.address}</TableCell>
+                    <TableCell align="center">{row.district}</TableCell>
+                    <TableCell align="center">{row.quantity}</TableCell>
+                    <TableCell align="center">{row.tentative}</TableCell>
+                    <TableCell align="center">{row.date}</TableCell>
+                    <TableCell align="center">{row.pendingdate}</TableCell>
+                    <TableCell align="center" style={{ display: "flex", alignItems: "center" }}>
+                      <Typography
+                        variant="button"
+                        className="primary-btn btn btn-sm"
+                        id="btn2"
+                        style={{ margin: "8px" }}
+                        onClick={() => handleAccept(row)}
                       >
-                        <TableCell component="th" scope="row">
-                          {index + 1}
-                        </TableCell>
-                        <TableCell align="left">
-                          {row.requirement_name}
-                        </TableCell>
-                        <TableCell align="left" style={{ width: "15%" }}>
-                          {row.hostel_name}
-                        </TableCell>
-                        <TableCell align="left">{row.address}</TableCell>
-                        <TableCell align="left">{row.quantity}</TableCell>
-                        <TableCell align="left">{row.date}</TableCell>
-                        <TableCell align="left">
-                          {" "}
-                          <Typography
-                            variant="button"
-                            className="primary-btn btn btn-sm"
-                            id="btn2"
-                            style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}
-                            onClick={() => handleAccept(row)} 
-                          >
-                            {t("Accept")}
-                          </Typography>
-                          <Typography
-                            variant="button"
-                            className="primary-btn btn btn-sm"
-                            style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}
-                            id="btn1"
-                            onClick={() => handleUpdateClick(row)}
-                          >
-                            {t("Modify")}
-                          </Typography>
-
-
-                          <Typography
-                            variant="button"
-                            // color="secondary"
-                            style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}
-                            className="primary-btn btn btn-sm"
-                            id="btn3"
-                            onClick={() => { handleRejectWithReason(); handlerejectClick(row);}}
-
-                          >
-                            {t("Reject")}
-                          </Typography>
-
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
+                        {t("Accept")}
+                      </Typography>
+                      <Typography
+                        variant="button"
+                        className="primary-btn btn btn-sm"
+                        style={{ margin: "8px" }}
+                        id="btn1"
+                        onClick={() => handleUpdateClick(row)}
+                      >
+                        {t("Modify")}
+                      </Typography>
+                      <Typography
+                        variant="button"
+                        style={{ margin: "8px" }}
+                        className="primary-btn btn btn-sm"
+                        id="btn3"
+                        onClick={() => { handleRejectWithReason(); handlerejectClick(row);}}
+                      >
+                        {t("Reject")}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+            
               )}
               {!isLoading && (!filteredData || filteredData.length === 0) && (
                 <TableRow>
@@ -309,7 +325,7 @@ const Requirements = ({ role, mainId }) => {
           <div
             style={{
               position: "absolute",
-              top: "30%",
+              top: "32%",
               left: "52%",
               transform: "translate(-50%, -50%)",
               maxWidth: "90vw",
@@ -357,7 +373,26 @@ const Requirements = ({ role, mainId }) => {
                 />
               </div>
               <div className="col-md-6">
-                <label className="form-label">{t("Quantity")}</label>
+                <label className="form-label">{t("Actual Quantity")}</label>
+                <input
+                  type="text"
+                  name="quantity"
+                  readOnly
+                  defaultValue={selectedRow.quantity}
+                  className="form-control"
+                  onChange={(e) => {
+                    setSelectedRow((prevRow) => ({
+                      ...prevRow,
+                      quantity: e.target.value,
+                    }));
+                  }}
+                  required
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+            <div className="col-md-6">
+                <label className="form-label">{t("Proposed  Quantity")}</label>
                 <input
                   type="text"
                   name="quantity"
@@ -372,6 +407,7 @@ const Requirements = ({ role, mainId }) => {
                   required
                 />
               </div>
+              
             </div>
             {showRejectReason && (
               <div className="mb-3">
@@ -416,7 +452,7 @@ const Requirements = ({ role, mainId }) => {
                 variant="contained"
                 color="primary"
                 style={{ marginRight: 8 }}
-               onClick={()=>handlesave(selectedRow)}
+               onClick={()=>handleAccept(selectedRow)}
               >
                 {t("Update")}
               </Button>
