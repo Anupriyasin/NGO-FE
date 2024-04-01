@@ -11,15 +11,6 @@ export const getAssetsName = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
-export const getdistictName = async (data) =>
-  await axios
-    .get("/get_all_districts")
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return "Error - " + error;
-    });
 export const getUserDetails = async (data) =>
   await axios
     .get("/get_user_details")
@@ -589,6 +580,16 @@ export const getRequirements = async () =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const getallDistricts = async () =>
+  await axios
+    .get("/get_all_districts")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+
 export const getHostelWiseRequirements = async (requestData) => {
   try {
     const response = await axios.post("/hostel_wise_reqmnt_data", requestData);
@@ -792,10 +793,38 @@ export const addStudent = async (data) => {
       return "Error - " + error;
     });
 };
+export const updateStudent = async (data) => {
+  return await axios
+    .post("/update_student_info", data, {
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+};
 
 export const addStaff = async (data) => {
   return await axios
     .post("/new_staff_info", data, {
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+};
+export const updateStaff = async (data) => {
+  return await axios
+    .post("/update_staff_info", data, {
       // headers: {
       //   "Content-Type": "multipart/form-data",
       // },
