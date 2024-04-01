@@ -196,7 +196,7 @@ const RequirementsReport = ({ role, mainId }) => {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ marginRight: "12px" }}>
             <label htmlfor="title" className="form-label mt-4">
-              {t("Hostel Name")}
+              {t("Ashram Name")}
             </label>
             <select
               name="hostelname"
@@ -240,8 +240,8 @@ const RequirementsReport = ({ role, mainId }) => {
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
                   <TableCell align="left">{t("Requirement")}</TableCell>
-                  <TableCell align="left">{t("Hostel Name")}</TableCell>
-                  <TableCell align="left">{t("Hostel Address")}</TableCell>
+                  <TableCell align="left">{t("Ashram Name")}</TableCell>
+                  <TableCell align="left">{t("Ashram Address")}</TableCell>
                   <TableCell align="left">{t("Quantity")}</TableCell>
                   <TableCell align="left">{t("Raised On")}</TableCell>
                   <TableCell align="left">{t("Status")}</TableCell>

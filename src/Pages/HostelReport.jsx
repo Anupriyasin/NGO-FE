@@ -75,7 +75,7 @@ const HostelReport = ({ role }) => {
       <TopLoader loading={isLoading ? '50' : '100'} />
       <div className='px-0 px-md-3' >
       <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-                    <h5 className=" mt-2">{t("Hostel Login Report")}</h5>
+                    <h5 className=" mt-2">{t("Ashram Login Report")}</h5>
                     <div className=''>
                         <TextField
                             label={t('Search')}
@@ -101,10 +101,10 @@ const HostelReport = ({ role }) => {
               <TableHead>
                 <TableRow>
                 <TableCell>{t("Sr. No.")}</TableCell>
-                  <TableCell align="left">{t("Hostel Name")}</TableCell>
+                  <TableCell align="left">{t("Ashram Name")}</TableCell>
                   <TableCell align="left">{t("Email ID")}</TableCell>
                   <TableCell align="left">{t("Address")}</TableCell>
-                  <TableCell align="left">{t("Distric")}</TableCell>
+                  <TableCell align="left">{t("District")}</TableCell>
                   <TableCell align="left">{t("Block")}</TableCell>
                   <TableCell align="left">{t("Action")}</TableCell>
                 </TableRow>

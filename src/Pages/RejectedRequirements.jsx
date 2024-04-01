@@ -78,8 +78,25 @@ const RejectedRequirements = ({ role, mainId }) => {
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
-        <div className="my-4 col-12 d-flex justify-content-between align-items-center">
-          <h5 className="">{t("Rejected Requirements")}</h5>
+      <h5 className="my-4">{t("Rejected Requirements")}</h5>
+
+        <div className="my-3 col-12 d-flex justify-content-between align-items-center">
+        <div className="col-sm-3">
+            <label htmlfor="title" className="form-label mt-4">{t('District')}</label>
+            <select
+              name="asset_sub_type"
+              // value={ExistAssetsSubTypes}
+              // onChange={ExistAssetSubtypehandle}
+              className="common-input form-select"
+            >
+              <option value="">Select District</option>
+              {/* {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
+                    <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
+                  ))} */}
+
+            </select>
+
+          </div>
           <TextField
             label={t("Search")}
             variant="outlined"
@@ -89,6 +106,7 @@ const RejectedRequirements = ({ role, mainId }) => {
               endAdornment: <SearchIcon />,
             }}
           />
+
         </div>
         <div className="Table mb-6">
           <TableContainer
@@ -101,8 +119,9 @@ const RejectedRequirements = ({ role, mainId }) => {
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
                   <TableCell align="left">{t("Requirement")}</TableCell>
-                  <TableCell align="left">{t("Hostel Name")}</TableCell>
-                  <TableCell align="left">{t("Hostel Address")}</TableCell>
+                  <TableCell align="center">{t("District")}</TableCell>
+                  <TableCell align="center">{t("Block")}</TableCell>
+                  <TableCell align="left">{t("Ashram Name")}</TableCell>
                   <TableCell align="left">{t("Quantity")}</TableCell>
                   <TableCell align="left">{t("Status")}</TableCell>
                 </TableRow>
@@ -124,10 +143,15 @@ const RejectedRequirements = ({ role, mainId }) => {
                         <TableCell align="left">
                           {row.requirement_name}
                         </TableCell>
+                        <TableCell align="left">
+                          dis
+                        </TableCell>
+                        <TableCell align="left">
+                          block
+                        </TableCell>
                         <TableCell align="left" style={{ width: "15%" }}>
                           {row.hostel_name}
                         </TableCell>
-                        <TableCell align="left">{row.address}</TableCell>
                         <TableCell align="left">{row.quantity}</TableCell>
                         <TableCell align="left text-danger">{t("Rejected")}</TableCell>
                       </TableRow>
