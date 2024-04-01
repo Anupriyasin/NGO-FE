@@ -31,6 +31,7 @@ import RequirementsReport from '../Pages/RequirementReport';
 import UserDetails from '../Pages/UserDetails';
 import HostelDetails from '../Pages/HostelDetails';
 import AddHostel from '../Pages/AddHostel';
+import VendorReport from '../Pages/VendorReport';
 // import TrackRequirements from '../Pages/TrackRequirements';
 // import RejectedRequirements from '../Pages/RejectedRequirements';
 // import AddAssetType from '../Pages/AddAssetType';
@@ -179,6 +180,12 @@ const AppRoutes = () => {
         {
             path: '/addhostel',
             component: AddHostel,
+            allowedRoles: [1]
+        }
+        ,
+        {
+            path: '/vendorreport',
+            component: VendorReport,
             allowedRoles: [1]
         }
       

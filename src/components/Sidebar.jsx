@@ -186,7 +186,7 @@ const Sidebars = (props) => {
               >
                 <Link to="/hostel-report">{t("Ashram Wise Report")}</Link>
               </MenuItem>
-              {/* <MenuItem
+              <MenuItem
                 icon={<PieChartIcon />}
                 className={
                   activeMenu === "/assetreport"
@@ -194,8 +194,8 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/assetreport">Inventory Report</Link>
-              </MenuItem> */}
+                <Link to="/assetreport">{t("Inventory Report")}</Link>
+              </MenuItem>
               <MenuItem
                 icon={<PieChartIcon />}
                 className={
@@ -205,6 +205,16 @@ const Sidebars = (props) => {
                 }
               >
                 <Link to="/requirementreport">{t("Requirements Report")}</Link>
+              </MenuItem>
+              <MenuItem
+                icon={<PieChartIcon />}
+                className={
+                  activeMenu === "/vendorreport"
+                    ? "menuItem active "
+                    : "menuItem"
+                }
+              >
+                <Link to="/vendorreport">{t("Vendor Report")}</Link>
               </MenuItem>
              
             

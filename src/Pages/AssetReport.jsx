@@ -184,7 +184,7 @@ const AssetReport = ({ role, mainId }) => {
         <>
             <TopLoader loading={isLoading ? "50" : "100"} />
             <div className="px-0 px-md-3">
-                <h5 className="">{t("Asset Report")}</h5>
+                <h5 className="mt-4">{t("Inventory Report")}</h5>
 
                 <div className="row">
                     <div className="col-sm-4" >
@@ -196,7 +196,7 @@ const AssetReport = ({ role, mainId }) => {
                   required
                   className="common-input form-select"
                 >
-                  <option value="">Select Intake Time</option>
+                  <option value="">{t("Select Intake Time")}</option>
                   <option value="Purchased">Purchased</option>
                   <option value="Donated">Donated</option>
                 </select>
@@ -206,7 +206,7 @@ const AssetReport = ({ role, mainId }) => {
                     <div className="col-sm-4"  >
                         <label htmlfor="title" className="form-label mt-4">{t('Category')}</label>
                         <select name="category" onChange={categoryHandle} value={CategoryHandle} className="common-input form-select" required>
-                  <option value="" >Select Category</option>
+                        <option value="" >{t("Select Category")}</option>
                   <option value="consumable" >Consumable</option>
                   <option value="non-consumable" >Non Consumable</option>
                 </select>
@@ -221,7 +221,7 @@ const AssetReport = ({ role, mainId }) => {
                   onChange={ExistAssetTypehandle}
                   required
                 >
-                  <option value="">Select Asset Type</option>
+                  <option value="">{t("Select Inventory Type")}</option>
                   {ExistAssetsType.assets_name && ExistAssetsType.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>{row.asset_name}</option>
                   ))}
@@ -241,7 +241,7 @@ const AssetReport = ({ role, mainId }) => {
                   onChange={ExistAssetSubtypehandle}
                   className="common-input form-select"
                 >
-                  <option value="">Select Asset Sub Type</option>
+                  <option value="">{t("Select Inventory Sub Type")}</option>
                   {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
                     <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
                   ))}
@@ -257,7 +257,7 @@ const AssetReport = ({ role, mainId }) => {
                   onChange={ExistnameHandle}
                   className="common-input form-select"
                 >
-                  <option value="">Select Asset Name</option>
+                  <option value="">{t("Select Inventory Name")}</option>
                   {ExistNameHandle.asset_name && ExistNameHandle.asset_name.map((row) => (
                     <option key={row.asset_name} value={row.asset_name}>{row.asset_name}</option>
                   ))}
@@ -265,16 +265,16 @@ const AssetReport = ({ role, mainId }) => {
                 </select>
 
                     </div>
-                    <div className="col-sm-3">
-                    
-                        <Button
-                            variant="contained"
-                            color="success"
-                            style={{ marginLeft: 8 }}
+                    <div className="col-sm-4 mt-5">
+                          <Typography
+                            variant="button"
+                            className="primary-btn btn btn-sm"
+                            id="btn2"
+                            style={{ margin: "8px" }}
                             onClick={() => SearchHandle()}    
                           >
-                            Search
-                          </Button>
+                            {t("Search")}
+                          </Typography>
 
                     </div>
                 </div>
@@ -306,9 +306,9 @@ const AssetReport = ({ role, mainId }) => {
                                     <TableCell>{t("Sr. No.")}</TableCell>
                                     <TableCell align="left">{t("Intake Type")}</TableCell>
                                     <TableCell align="left">{t("Category")}</TableCell>
-                                    <TableCell align="left">{t("Asset Type")}</TableCell>
-                                    <TableCell align="left">{t("Asset Sub Type")}</TableCell>
-                                    <TableCell align="left">{t("Asset Name")}</TableCell>
+                                    <TableCell align="left">{t("Inventory Type")}</TableCell>
+                                    <TableCell align="left">{t("Inventory Sub Type")}</TableCell>
+                                    <TableCell align="left">{t("Inventory Name")}</TableCell>
                                     <TableCell align="left">{t("Quantity")}</TableCell>
                                     <TableCell align="left">{t("Description")}</TableCell>
                                     <TableCell align="left">{t("Last Purchased Date")}</TableCell>

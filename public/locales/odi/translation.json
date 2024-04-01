@@ -45,8 +45,8 @@
     "Add Inventory Data" : "ଭଣ୍ଡାର ତଥ୍ୟ ଯୋଡନ୍ତୁ",
     "New Inventory" : "ନୂତନ ଭଣ୍ଡାର",
     "Add Existing Inventory" : "ବିଦ୍ୟମାନ ଭଣ୍ଡାର ଯୋଡନ୍ତୁ",
-    "Intake Time" : "ଭୋଜନ ସମୟ",
-    "Select Intake Time" : "ଭୋଜନ ସମୟ ଚୟନ କରନ୍ତୁ",
+    "Intake Type" : "ଭୋଜନ ସମୟ",
+    "Select Intake Type" : "ଭୋଜନ ସମୟ ଚୟନ କରନ୍ତୁ",
     "Purchased" : "କିଣାଯାଇଛି",
     "Donated" : "ଦାନ କରାଯାଇଛି",
     "Select Inventory Type" : "ଭଣ୍ଡାର ପ୍ରକାର ଚୟନ କରନ୍ତୁ",
@@ -91,7 +91,13 @@
     "Add Student" : "ଛାତ୍ର ଯୋଡନ୍ତୁ",
     "Add Staff" : "କର୍ମଚାରୀ ଯୋଡନ୍ତୁ",
     "Add Student Details" : "ଛାତ୍ର ବିବରଣୀ ଯୋଡନ୍ତୁ",
-    "Mobile Number" : "ମୋବାଇଲ୍ ନମ୍ବର"
+    "Mobile Number" : "ମୋବାଇଲ୍ ନମ୍ବର",
+    "Inventory Report" : "ଭଣ୍ଡାର ରିପୋର୍ଟ",
+    "Last Purchased Date" : "ଶେଷ କ୍ରୟ ତାରିଖ",
+    "Donated Date" : "ଦାନ ତାରିଖ",
+    "Invoice Name" : "ଇନଭଏସ୍ ନାମ",
+    "Vendor Type" : "ବିକ୍ରେତା ପ୍ରକାର",
+    "Vendor Name" : "ବିକ୍ରେତା ନାମ"
 
     
     

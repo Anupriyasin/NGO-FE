@@ -18,7 +18,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
 
-const RejectedRequirements = ({ role, mainId }) => {
+const VendorReport = ({ role, mainId }) => {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -93,7 +93,7 @@ const RejectedRequirements = ({ role, mainId }) => {
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
-        <h5 className="my-3">{t("Rejected Requirements")}</h5>
+        <h5 className="my-3">{t("Vendor Report")}</h5>
 
         <div className=""  style={{ display: "flex", justifyContent: "space-between" }}>
           <div className='col-md-2' style={{ marginRight: "12px" }}>
@@ -135,12 +135,12 @@ const RejectedRequirements = ({ role, mainId }) => {
               <TableHead>
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
-                  <TableCell align="left">{t("Requirement")}</TableCell>
-                  <TableCell align="center">{t("District")}</TableCell>
-                  <TableCell align="center">{t("Block")}</TableCell>
-                  <TableCell align="left">{t("Ashram Name")}</TableCell>
+                  <TableCell align="left">{t("Vendor Type")}</TableCell>
+                  <TableCell align="center">{t("Vendor Name")}</TableCell>
+                  <TableCell align="center">{t("GST No.")}</TableCell>
+                  <TableCell align="left">{t("Inventory Name")}</TableCell>
                   <TableCell align="left">{t("Quantity")}</TableCell>
-                  <TableCell align="left">{t("Status")}</TableCell>
+                  <TableCell align="left">{t("Invoice Name")}</TableCell>
                 </TableRow>
               </TableHead>
               {!isLoading && filteredData && filteredData.length > 0 && (
@@ -223,4 +223,4 @@ const RejectedRequirements = ({ role, mainId }) => {
   );
 };
 
-export default RejectedRequirements;
+export default VendorReport;
