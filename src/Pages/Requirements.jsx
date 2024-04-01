@@ -10,7 +10,7 @@ import "../components/Table/Table.css";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import TopLoader from "../components/Loader/TopLoader";
-import { RejectRequirement, getRequirements, updateRequirement, modifydetails } from "../api/Users";
+import { RejectRequirement, getRequirements, updateRequirement, modifydetails,getdistictName } from "../api/Users";
 import { toast } from "react-toastify";
 import { TextField, TablePagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -33,9 +33,40 @@ const Requirements = ({ role, mainId }) => {
   const [rejectReason, setRejectReason] = useState('');
   const [showRejectReason, setShowRejectReason] = useState(false);
   const [rejectReasonError, setRejectReasonError] = useState(false); // Change initial state to false
+  const [DistrictName, setDistrictName] = useState([]);
 
-  const getAllrequirements = () => {
+  const getDistictNames = () => {
+    getdistictName()
+      .then((res) => {
+        if (res.status === "success") {
+          console.log("dis data:", res.data);
+          setDistrictName(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching assets:", err);
+      });
+  };
+  useEffect(() => {
+    getDistictNames();
+  }, []);
+
+  const districtHandle = (e) => {
+    // debugger;
+    const selectedDistrictId = e.target.value;
+    const selectedDistrict = DistrictName.find(district => district.id === selectedDistrictId);
+    if (selectedDistrict) {
+        setDistrictName(selectedDistrict);
+        getAllrequirements(selectedDistrict)
+    } else {
+        // Handle the case where the selected district is not found
+        console.error("Selected district not found");
+    }
+};
+
+  const getAllrequirements = (selectedDistrict) => {
     setIsLoading(true);
+    const dis = selectedDistrict ? selectedDistrict : " ";
     getRequirements().then((res) => {
       if (res.status === "success") {
         console.log(res);
@@ -192,13 +223,13 @@ const Requirements = ({ role, mainId }) => {
             <select
               name="asset_sub_type"
               // value={ExistAssetsSubTypes}
-              // onChange={ExistAssetSubtypehandle}
+              onChange={districtHandle}
               className="common-input form-select"
             >
-              <option value="">Select District</option>
-              {/* {ExistAssetsSubTypes.new_asset_query && ExistAssetsSubTypes.new_asset_query.map((row) => (
-                    <option key={row.id} value={row.id}>{row.asset_sub_type_name}</option>
-                  ))} */}
+              <option value="">All</option>
+              {DistrictName && DistrictName.map((row) => (
+                    <option key={row.id} value={row.id}>{row.district_name}</option>
+                  ))}
 
             </select>
 
@@ -253,10 +284,10 @@ const Requirements = ({ role, mainId }) => {
                         </TableCell>
                         <TableCell align="center">{row.requirement_name}</TableCell>
                         <TableCell align="center" style={{ width: "15%" }}>{row.hostel_name}</TableCell>
-                        <TableCell align="center">{row.address}</TableCell>
                         <TableCell align="center">{row.district}</TableCell>
+                        <TableCell align="center">{row.block}</TableCell>
                         <TableCell align="center">{row.quantity}</TableCell>
-                        <TableCell align="center">{row.tentative}</TableCell>
+                        <TableCell align="center">{row.tentative_amount}</TableCell>
                         <TableCell align="center">{row.date}</TableCell>
                         <TableCell align="center">{row.pendingdate}</TableCell>
                         <TableCell align="center" style={{ display: "flex", alignItems: "center" }}>

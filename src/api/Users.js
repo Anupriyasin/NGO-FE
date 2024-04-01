@@ -11,6 +11,15 @@ export const getAssetsName = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const getdistictName = async (data) =>
+  await axios
+    .get("/get_all_districts")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 export const getUserDetails = async (data) =>
   await axios
     .get("/get_user_details")
