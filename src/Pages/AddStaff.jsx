@@ -8,7 +8,7 @@ import "react-responsive-modal/styles.css";
 import { Modal, Button } from "@mui/material";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addStaff, getAssetsName } from "../api/Users";
+import { addStaff, getAssetsName, updateStaff } from "../api/Users";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const AddStaff = () => {
@@ -87,6 +87,7 @@ const AddStaff = () => {
       salary: staff.salary,
       staff_id: staff.staff_id,
       employment_status: staff.employment_status,
+      employee_id: staff.employee_id,
       nationality: staff.nationality,
     };
 
@@ -111,7 +112,43 @@ const AddStaff = () => {
   const back = () => {
     navigate(`/staffdetails`);
   };
+  const updateHandle = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
+    const data = {
+      id: rowData.id,
+      first_name: staff.first_name,
+      last_name: staff.last_name,
+      date_of_birth: staff.date_of_birth,
+      gender: staff.gender,
+      email: staff.email,
+      phone_number: staff.phone_number,
+      address: staff.address,
+      job_title: staff.job_title,
+      department: staff.department,
+      hire_date: staff.hire_date,
+      salary: staff.salary,
+      staff_id: staff.staff_id,
+      employment_status: staff.employment_status,
+      employee_id: staff.employee_id,
+      nationality: staff.nationality,
+    };
+
+    updateStaff(data)
+      .then((res) => {
+        if (res.status === "success") {
+          setIsLoading(false);
+          toast.success(t(res.message));
+          navigate(`/staffdetails`);
+        } else {
+          toast.error(t(res.message));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const today = new Date().toISOString().split('T')[0];
 
   return (
@@ -201,7 +238,7 @@ const AddStaff = () => {
                 className="form-control"
                 defaultValue={rowData ? rowData.date_of_birth : ""}
                 onChange={handleChangeInput}
-                max={today}
+                // max={today}
                 required
               />
             </div>
@@ -240,14 +277,14 @@ const AddStaff = () => {
           <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-4">
               <label className="form-label">Address</label>
-              <textarea
-                style={{ height: "100px", resize: "none" }}
+              <input
+                // style={{ height: "100px", resize: "none" }}
                 className="form-control"
                 name="address"
                 onChange={handleChangeInput}
                 defaultValue={rowData ? rowData.address : ""}
                 required
-              ></textarea>
+              ></input>
             </div>
 
             <div className="col-md-4">
@@ -291,7 +328,7 @@ const AddStaff = () => {
               </label>
               <input
                 type="text"
-                name="staff_id"
+                name="employee_id"
                 className="form-control"
                 onChange={handleChangeInput}
                 defaultValue={rowData ? rowData.employee_id : ""}
@@ -340,7 +377,7 @@ const AddStaff = () => {
                 className="form-control"
                 onChange={handleChangeInput}
                 defaultValue={rowData ? rowData.hire_date : ""}
-                max={today}
+                // max={today}
                 required
               />
             </div>
@@ -376,9 +413,14 @@ const AddStaff = () => {
 
           <div className="row mt-5 mb-5">
             <div className="col-md-12 d-flex justify-content-end">
-              <button type="submit" className="btn btn-primary me-2">
-                Submit
-              </button>
+            {!rowData ?
+            <button type="submit" className="btn btn-primary me-2">
+                {t("Save")} 
+              </button>:
+              <button type="button" className="btn btn-primary me-2" onClick={(e)=>updateHandle(e)}>
+              {t("Update")}
+          </button>
+}
               <button
                 type="button"
                 className="btn btn-secondary"

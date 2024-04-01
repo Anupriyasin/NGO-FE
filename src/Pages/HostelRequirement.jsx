@@ -14,14 +14,15 @@ import {
   AddAsset,
   Assetnameinfo,
   AddHostelRequirement,
+  getdistrictName,
 } from "../api/Users";
 
-const HostelRequirement = () => {
+const HostelRequirement = (props) => {
   const { t } = useTranslation();
   const handleClick = (e) => {
     i18next.changeLanguage(e.target.value);
   };
-  
+
   const [open, setOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -31,6 +32,7 @@ const HostelRequirement = () => {
   const [ExistAssetsType, setExistAssetsType] = useState([]);
   const [AssetsType, setAssetsType] = useState([]);
   const [AssetsTypes, setAssetsTypes] = useState([]);
+  const [DistrictData, setDistrictData] = useState([]);
   const [AssetsSubTypes, setAssetsSubTypes] = useState([]);
   const [CategoryHandle, setCategoryHandle] = useState([]);
   const [AssetSubtype, setAssetSubtype] = useState([]);
@@ -44,7 +46,7 @@ const HostelRequirement = () => {
   const [GstHandle, setGstHandle] = useState("");
   const [TotalAmountHandle, setTotalAmountHandle] = useState("");
   const [markRequired, setMarkRequired] = useState(true);
-  const [ExistNameHandle, setExistNameHandle] = useState('');
+  const [ExistNameHandle, setExistNameHandle] = useState("");
   const [error, setError] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -65,13 +67,26 @@ const HostelRequirement = () => {
         console.error("Error fetching assets:", err);
       });
   }, []);
+  useEffect(() => {
+    debugger;
+    getdistrictName()
+      .then((res) => {
+        if (res.status === "success") {
+          console.log("Assets data:", res.data);
+          setDistrictData(res.data);
+          // setExistAssetsType(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching assets:", err);
+      });
+  }, []);
   console.log("AssetsTypes.////", AssetsTypes);
   console.log("ExistAssetsType.////", ExistAssetsType);
 
   useEffect(() => {
     fetchLocation();
   }, []);
-    
 
   const AssetTypehandle = async (e) => {
     debugger;
@@ -120,43 +135,53 @@ const HostelRequirement = () => {
     setTentativeAmount(event.target.value);
   };
 
- 
+  const AssetSubtypehandle = async (e) => {
+    debugger;
+    // setExistAssetsSubTypes(e.target.value);
+    const ExistAssetType = e.target.value;
+    setAssetSubtype((prevRow) => ({
+      ...prevRow,
+      asset_sub_type: ExistAssetType,
+    }));
+    const Assetstype = AssetsType;
 
-  const AssetSubtypehandle = async(e) => {
-      debugger
-      // setExistAssetsSubTypes(e.target.value);
-      const ExistAssetType = e.target.value;
-      setAssetSubtype((prevRow) => ({
-        ...prevRow,
-        asset_sub_type: ExistAssetType,
-      }));
-      const Assetstype = AssetsType
-  
-      try {
-        const response = await Assetnameinfo({ asset_id: Assetstype.asset_type
-          , asset_sub_type_id: ExistAssetType });
-        if (response) {
-          setExistNameHandle(response.data);
-        } else {
-          console.error("Invalid response format for subassets:", response);
-        }
-      } catch (error) {
-        console.error("Error fetching subassets:", error);
+    try {
+      const response = await Assetnameinfo({
+        asset_id: Assetstype.asset_type,
+        asset_sub_type_id: ExistAssetType,
+      });
+      if (response) {
+        setExistNameHandle(response.data);
+      } else {
+        console.error("Invalid response format for subassets:", response);
       }
+    } catch (error) {
+      console.error("Error fetching subassets:", error);
+    }
   };
-  const ExistnameHandle = async(e) => {
-    debugger
+  const ExistnameHandle = async (e) => {
+    debugger;
     const ExistAssetname = e.target.value;
     setExistNameHandle((prevRow) => ({
       ...prevRow,
       asset_sub_type: ExistAssetname,
     }));
-
-   
   };
+  const districtHandle = (e) => {
+    debugger;
+    const selectedDistrictId = e.target.value;
+    const selectedDistrict = DistrictData.find(district => district.id === selectedDistrictId);
+    if (selectedDistrict) {
+        setDistrictData(selectedDistrict);
+    } else {
+        // Handle the case where the selected district is not found
+        console.error("Selected district not found");
+    }
+};
+
 
   const fetchLocation = () => {
-    debugger
+    debugger;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -172,16 +197,10 @@ const HostelRequirement = () => {
     }
   };
 
-
-
-
-
-
-
   const handleSubmitForm = async (event) => {
     debugger;
     event.preventDefault();
-    console.log("quntity:",QuantityHandle)
+    console.log("quntity:", QuantityHandle);
 
     const Postdata = {
       category: CategoryHandle,
@@ -192,12 +211,8 @@ const HostelRequirement = () => {
       description: DisHandle,
       lat: latitude,
       longitude: longitude,
-      tentative_amount:TentativeAmount
-
-     
+      tentative_amount: TentativeAmount,
     };
-
-
 
     AddHostelRequirement(Postdata)
       .then((response) => {
@@ -211,8 +226,6 @@ const HostelRequirement = () => {
         );
       });
   };
-
-
 
   return (
     <>
@@ -238,7 +251,7 @@ const HostelRequirement = () => {
                 className="common-input form-select"
                 required
               >
-                  <option value="" >{t("Select Category")}</option>
+                <option value="">{t("Select Category")}</option>
                 <option value="consumable">Consumable</option>
                 <option value="non-consumable">Non Consumable</option>
               </select>
@@ -255,7 +268,7 @@ const HostelRequirement = () => {
                 onChange={AssetTypehandle}
                 required
               >
-                  <option value="">{t("Select Inventory Type")}</option>
+                <option value="">{t("Select Inventory Type")}</option>
                 {/* Map assetOptions to generate option elements */}
                 {AssetsTypes.assets_name &&
                   AssetsTypes.assets_name.map((row) => (
@@ -267,7 +280,7 @@ const HostelRequirement = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-              {t("Inventory Sub Type")}{" "}
+                {t("Inventory Sub Type")}{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <select
@@ -277,7 +290,7 @@ const HostelRequirement = () => {
                 className="common-input form-select"
                 required
               >
-                  <option value="">{t("Select Inventory Sub Type")}</option>
+                <option value="">{t("Select Inventory Sub Type")}</option>
 
                 {AssetsSubTypes.new_asset_query &&
                   AssetsSubTypes.new_asset_query.map((row) => (
@@ -291,25 +304,27 @@ const HostelRequirement = () => {
           <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-4">
               <label className="form-label">
-              {t("Inventory Name")}{" "}
+                {t("Inventory Name")}{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <select
-                  name="asset_name"
-                  // value={ExistNameHandle}
-                  onChange={ExistnameHandle}
-                  className="common-input form-select"
-                >
-                  <option value="">{t("Select Inventory Name")}</option>
-                  {ExistNameHandle.asset_name && ExistNameHandle.asset_name.map((row) => (
-                    <option key={row.asset_name} value={row.asset_name}>{row.asset_name}</option>
+                name="asset_name"
+                // value={ExistNameHandle}
+                onChange={ExistnameHandle}
+                className="common-input form-select"
+              >
+                <option value="">{t("Select Inventory Name")}</option>
+                {ExistNameHandle.asset_name &&
+                  ExistNameHandle.asset_name.map((row) => (
+                    <option key={row.asset_name} value={row.asset_name}>
+                      {row.asset_name}
+                    </option>
                   ))}
-
-                </select>
+              </select>
             </div>
             <div className="col-md-4">
               <label className="form-label">
-              {t("Inventory Quantity")}{" "}
+                {t("Inventory Quantity")}{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <input
@@ -322,8 +337,8 @@ const HostelRequirement = () => {
               />
             </div>
             <div className="col-md-4">
-            <label className="form-label">
-              {t("Tentative Amount")}{" "}
+              <label className="form-label">
+                {t("Tentative Amount")}{" "}
                 {markRequired && <span style={{ color: "red" }}>*</span>}
               </label>
               <input
@@ -334,7 +349,6 @@ const HostelRequirement = () => {
                 onChange={TentativeAmountHandle}
                 required
               />
-             
             </div>
 
             {/* <div className="col-md-4 mt-sm-4">
@@ -345,7 +359,7 @@ const HostelRequirement = () => {
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-4">
-            <label className="form-label">{t("Description")}</label>
+              <label className="form-label">{t("Description")}</label>
               <textarea
                 style={{ height: "100px", resize: "none" }}
                 className="form-control"
@@ -354,16 +368,37 @@ const HostelRequirement = () => {
                 onChange={disHandle}
               ></textarea>
             </div>
-
-            <div className="row" style={{ marginTop: "12px" }}>
-              <div className="col-md-4">
-                <label className="form-label">
-                  Mark as an <span className="fw-bold">Urgent Requirement</span>
-                </label>
-                <Checkbox {...label} />
-              </div>
+            <div className="col-md-4">
+              <label className="form-label">{t("District")}</label>
+              <select
+                name="district_name"
+                // value={ExistNameHandle}
+                onChange={districtHandle}
+                className="common-input form-select"
+              >
+                <option value="">{t("Select District")}</option>
+                {DistrictData &&
+                  DistrictData.map((district) => (
+                    <option key={district.id} value={district.id}>
+                      {district.district_name}
+                    </option>
+                  ))}
+              </select>
             </div>
-           
+            <div className="col-md-4">
+              <label className="form-label">{t("Block")}</label>
+              <select
+                name="block"
+                // value={ExistNameHandle}
+                // onChange={ExistnameHandle}
+                className="common-input form-select"
+              >
+                <option value="">{t("Select Block")}</option>
+                {/* {ExistNameHandle.asset_name && ExistNameHandle.asset_name.map((row) => (
+                    <option key={row.asset_name} value={row.asset_name}>{row.asset_name}</option>
+                  ))} */}
+              </select>
+            </div>
 
             {/* <div className="col-md-4 mt-sm-4">
               <button type="button" className="btn me-2 text-white fw-bold border border-1" style={{backgroundColor: "green"}} onClick={fetchLocation}>
@@ -371,7 +406,32 @@ const HostelRequirement = () => {
               </button>
             </div> */}
           </div>
-
+          <div className="row" style={{ marginTop: "12px" }}>
+            {props.role === 1 && (
+              <div className="col-md-4">
+                <label className="form-label">
+                  {t("Reason For Raising")}{" "}
+                  {markRequired && <span style={{ color: "red" }}>*</span>}
+                </label>
+                <input
+                  type="text"
+                  name="reason"
+                  // value={TentativeAmount}
+                  className="form-control"
+                  // onChange={TentativeAmountHandle}
+                  required
+                />
+              </div>
+            )}
+          </div>
+          <div className="row" style={{ marginTop: "12px" }}>
+            <div className="col-md-4">
+              <label className="form-label">
+                Mark as an <span className="fw-bold">Urgent Requirement</span>
+              </label>
+              <Checkbox {...label} />
+            </div>
+          </div>
           <div className="row mt-sm-2 mt-md-5 mb-sm-4">
             <div className="col-md-8"></div>
             <div className="col-md-4 d-flex justify-content-end">

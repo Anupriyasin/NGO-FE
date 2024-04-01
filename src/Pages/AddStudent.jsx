@@ -13,6 +13,7 @@ import {
   AddAsset,
   Assetnameinfo,
   addStudent,
+  updateStudent,
 } from "../api/Users";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -48,11 +49,18 @@ const AddStudent = () => {
   useEffect(() => {
     setIsLoading(false);
   }, []);
-  console.log("rowData//////", rowData);
-  const handleChangeInput = async (e) => {
+
+  const [photo, setPhoto] = useState(null);
+  const handlePhotoChange = (event) => {
+    const file = event.target.files[0];
+    setPhoto(file);
+  };
+
+  const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setStudent((prevAdmin) => ({ ...prevAdmin, [name]: value }));
   };
+
   useEffect(() => {
     // Set staff data from rowData when component mounts
     if (rowData) {
@@ -62,6 +70,9 @@ const AddStudent = () => {
       }));
     }
   }, [rowData]);
+
+  const navigate = useNavigate(); // Initialize navigate function
+
   const onSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -80,38 +91,56 @@ const AddStudent = () => {
       emergency_contact: student.emergency_contact,
     };
 
-    console.log(data);
-
-    rowData
-    ? addStudent(data)
-    .then((res) => {
-      if (res.status === "success") {
-        setIsLoading(false);
-        setLoading(100);
-        toast.success(t(res.message));
-      } else {
-        toast.error(t(res.message));
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    : addStudent(data)
-    .then((res) => {
-      if (res.status === "success") {
-        setIsLoading(false);
-        setLoading(100);
-        toast.success(t(res.message));
-      } else {
-        toast.error(t(res.message));
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    addStudent(data)
+      .then((res) => {
+        if (res.status === "success") {
+          setIsLoading(false);
+          setLoading(100);
+          toast.success(t(res.message));
+          navigate(`/add-student-details`);
+        } else {
+          toast.error(t(res.message));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  let navigate = useNavigate();
+  const updateHandle = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const data = {
+      id: rowData.id,
+      first_name: student.first_name,
+      last_name: student.last_name,
+      date_of_birth: student.date_of_birth,
+      gender: student.gender,
+      email: student.email,
+      phone_number: student.phone_number,
+      address: student.address,
+      nationality: student.nationality,
+      registration_number: student.registration_number,
+      guardian_ph_no: student.guardian_ph_no,
+      emergency_contact: student.emergency_contact,
+    };
+
+    updateStudent(data)
+      .then((res) => {
+        if (res.status === "success") {
+          setIsLoading(false);
+          toast.success(t(res.message));
+          navigate(`/student-details`);
+        } else {
+          toast.error(t(res.message));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const back = () => {
     navigate(`/student-details`);
   };
@@ -125,15 +154,25 @@ const AddStudent = () => {
         <div className="my-4 col-12 d-flex justify-content-between align-items-center">
           <h5 className="">{t("Add Student Details")}</h5>
 
-          <AccountCircleIcon
-            style={{
-              width: 100,
-              height: 100,
-              marginRight: 4,
-              background: "#fff",
-              color: "whitesmoke",
-            }}
-          />
+          {photo ? (
+            <img
+              src={URL.createObjectURL(photo)}
+              alt="Uploaded Photo"
+              width={100}
+              height={100}
+              className="mr-4"
+            />
+          ) : (
+            <AccountCircleIcon
+              style={{
+                width: 100,
+                height: 100,
+                marginRight: 4,
+                background: "#fff",
+                color: "whitesmoke",
+              }}
+            />
+          )}
         </div>
 
         <form
@@ -144,7 +183,7 @@ const AddStudent = () => {
           <div className="row">
             <div className="col-md-4">
               <label className="form-label">
-                First Name {<span style={{ color: "red" }}>*</span>}
+                {t("First Name")} {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 type="text"
@@ -157,7 +196,7 @@ const AddStudent = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Last Name {<span style={{ color: "red" }}>*</span>}
+                {t("Last Name ")}{<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 type="text"
@@ -170,69 +209,68 @@ const AddStudent = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Photo {<span style={{ color: "red" }}>*</span>}
+                {t("Photo")} {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 type="file"
                 name="photo_file"
                 accept="image/*"
                 className="form-control"
-                onChange={handleChangeInput}
+                onChange={handlePhotoChange}
                 // required
               />
             </div>
           </div>
 
-          <div className="row" style={{ marginTop: "12px" }}>
-            <div className="col-md-4">
-              <label className="form-label">
-                Date of Birth {<span style={{ color: "red" }}>*</span>}
-              </label>
-              <input
-                type="date"
-                name="date_of_birth"
-                className="form-control"
-                onChange={handleChangeInput}
-                defaultValue={rowData ? rowData.date_of_birth : ""}
-                required
-                max={today}
-              />
-            </div>
-            <div className="col-md-4">
-              <label className="form-label">
-                Nationality {<span style={{ color: "red" }}>*</span>}
-              </label>
-              <input
-                type="text"
-                name="nationality"
-                className="form-control"
-                onChange={handleChangeInput}
-                defaultValue={rowData ? rowData.nationality : ""}
-                required
-              />
-            </div>
-            <div className="col-md-4">
-              <label className="form-label">
-                Gender {<span style={{ color: "red" }}>*</span>}
-              </label>
-              <select
-                name="gender"
-                onChange={handleChangeInput}
-                className="common-input form-select"
-                required
-                defaultValue={rowData ? rowData.gender : ""}
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
-          </div>
+<div className="row" style={{ marginTop: "12px" }}>
+    <div className="col-md-4">
+        <label className="form-label">
+           {t(" Date of Birth")} {<span style={{ color: "red" }}>*</span>}
+        </label>
+        <input
+            type="date"
+            name="date_of_birth"
+            className="form-control"
+            onChange={handleChangeInput}
+            defaultValue={rowData ? rowData.date_of_birth : ""}
+            required
+        />
+    </div>
+    <div className="col-md-4">
+        <label className="form-label">
+            {t("Nationality")} {<span style={{ color: "red" }}>*</span>}
+        </label>
+        <input
+            type="text"
+            name="nationality"
+            className="form-control"
+            onChange={handleChangeInput}
+            defaultValue={rowData ? rowData.nationality : ""}
+            required
+        />
+    </div>
+    <div className="col-md-4">
+    <label className="form-label">
+        {t("Gender")} {<span style={{ color: "red" }}>*</span>}
+    </label>
+    <select
+        name="gender"
+        onChange={handleChangeInput}
+        className="common-input form-select"
+        required
+        defaultValue={rowData ? rowData.gender : ""}
+    >
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+</div>
+</div>
 
           <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-4">
               <label className="form-label">
-                Address {<span style={{ color: "red" }}>*</span>}
+                {t("Address")} {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 type="text"
@@ -245,7 +283,7 @@ const AddStudent = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Email ID {<span style={{ color: "red" }}>*</span>}
+                {t("Email ID")} {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 type="email"
@@ -258,7 +296,7 @@ const AddStudent = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                ID/Registration Number {<span style={{ color: "red" }}>*</span>}
+                {t("ID/Registration Number")} {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 type="text"
@@ -274,7 +312,7 @@ const AddStudent = () => {
           <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-4">
               <label className="form-label">
-                Emergency Contact {<span style={{ color: "red" }}>*</span>}
+                {t("Emergency Contact")} {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 type="text"
@@ -290,7 +328,7 @@ const AddStudent = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Parent/Guardian Phone Number{" "}
+                {t("Parent/Guardian Phone Number")}{" "}
                 {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
@@ -307,7 +345,7 @@ const AddStudent = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">
-                Phone Number {<span style={{ color: "red" }}>*</span>}
+                {t("Phone Number")} {<span style={{ color: "red" }}>*</span>}
               </label>
               <input
                 onChange={handleChangeInput}
@@ -325,22 +363,21 @@ const AddStudent = () => {
           <div className="row mt-5">
             <div className="col-md-10"></div>
             <div className="col-md-2">
-              {!rowData ? (
-                <button type="submit" className="btn btn-primary me-2">
-                  Save
-                </button>
-              ) : (
-                <button type="button" className="btn btn-primary me-2">
-                  Update
-                </button>
-              )}
-
+            {!rowData ?
+            <button type="submit" className="btn btn-primary me-2">
+                {t("Save")} 
+              </button>:
+              <button type="button" className="btn btn-primary me-2" onClick={(e)=>updateHandle(e)}>
+              {t("Update")}
+          </button>
+}
+           
               <button
                 type="button"
                 className="btn btn-secondary"
                 onClick={() => back()}
               >
-                Back
+                {t("Back")}
               </button>
             </div>
           </div>
