@@ -93,7 +93,7 @@ const Sidebars = (props) => {
             </MenuItem>
             
             <SubMenu label={t("Manage Login")} icon={<WalletRoundedIcon  />} className='SubMenu'>
-            <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">{t("Create Hostel Login")}</Link></MenuItem>
+            <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">{t("Create Ashram Login")}</Link></MenuItem>
           </SubMenu>
             <SubMenu
               label={t("Requirement")}
@@ -170,7 +170,7 @@ const Sidebars = (props) => {
                     : "menuItem"
                 }
               >
-                <Link to="/hostel-report">{t("Hostel Wise Report")}</Link>
+                <Link to="/hostel-report">{t("Ashram Wise Report")}</Link>
               </MenuItem>
               {/* <MenuItem
                 icon={<PieChartIcon />}

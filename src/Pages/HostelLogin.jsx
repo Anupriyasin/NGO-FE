@@ -122,12 +122,12 @@ const HostelLogin = () => {
         <>
             <TopLoader loading={isLoading ? "50" : "100"} />
             <div className="px-2 px-md-4">
-                <h5 className="my-4">{t("Create Hostel Login")}</h5>
+                <h5 className="my-4">{t("Create Ashram Login")}</h5>
                 <form id="myform1" onSubmit={(e) => handleSubmitForm(e)} style={{ marginTop: "12px" }}>
                     <div className="row">
                         {/* Hostel Name */}
                         <div className="col-md-4">
-                            <label className="form-label">Hostel Name {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">{t("Ashram Name")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
                                 type="text"
                                 name="asset_name"
@@ -139,7 +139,7 @@ const HostelLogin = () => {
                         </div>
                         {/* Email ID */}
                         <div className="col-md-4">
-                            <label className="form-label">Email ID {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">{t("Email ID")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
                                 type="email"
                                 name="email"
@@ -152,7 +152,7 @@ const HostelLogin = () => {
                         </div>
                         {/* Mobile No. */}
                         <div className="col-md-4">
-                            <label className="form-label">Mobile No. {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">{t("Mobile Number")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input
                                 type="text"
                                 pattern="[0-9]*"
@@ -168,7 +168,7 @@ const HostelLogin = () => {
                     {/* New Password */}
                     <div className="row" style={{ marginTop: "12px" }}>
                         <div className="col-md-4">
-                            <label className="form-label">New Password {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">{t("New Password")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <div className="input-group">
                                 <input
                                     type={passwordVisible ? 'text' : 'password'}
@@ -197,7 +197,7 @@ const HostelLogin = () => {
                         </div>
                         {/* Confirm Password */}
                         <div className="col-md-4">
-                            <label className="form-label">Confirm Password {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">{t("Confirm Password")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <div className="input-group">
                                 <input
                                     type={confirmPasswordVisible ? 'text' : 'password'}
@@ -228,22 +228,22 @@ const HostelLogin = () => {
                     <div className="row mt-3">
                         {/* District */}
                         <div className="col-md-4">
-                            <label className="form-label">District {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">{t("District")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input type="text" name="district" className="form-control" value={District} onChange={handleDistrictChange} required/>
                         </div>
                         {/* Block */}
                         <div className="col-md-4">
-                            <label className="form-label">Block {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
+                            <label className="form-label">{t("Block")} {markRequired && <span style={{ color: 'red' }}>*</span>}</label>
                             <input type="text" name="block" className="form-control" value={Block} onChange={handleBlockChange} required/>
                         </div>
                     </div>
                     <div className="row mt-5">
                         <div className="col-md-12">
                             <button type="submit" className="btn btn-primary me-2">
-                                Submit
+                                {t("Submit")}
                             </button>
                             <button type="button" className="btn btn-secondary">
-                                Clear
+                                {t("Clear")}
                             </button>
                         </div>
                     </div>

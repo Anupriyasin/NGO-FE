@@ -207,8 +207,8 @@ const Requirements = ({ role, mainId }) => {
                 <TableRow>
                   <TableCell>{t("Sr. No.")}</TableCell>
                   <TableCell align="left">{t("Requirement")}</TableCell>
-                  <TableCell align="left">{t("Hostel Name")}</TableCell>
-                  <TableCell align="left">{t("Hostel Address")}</TableCell>
+                  <TableCell align="left">{t("Ashram Name")}</TableCell>
+                  <TableCell align="left">{t("Ashram Address")}</TableCell>
                   <TableCell align="left">{t("Quantity")}</TableCell>
                   <TableCell align="left">{t("Raised On")}</TableCell>
                   <TableCell align="left">{t("Status")}</TableCell>
