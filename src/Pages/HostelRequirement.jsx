@@ -16,7 +16,7 @@ import {
   AddHostelRequirement,
 } from "../api/Users";
 
-const HostelRequirement = (props) => {
+const HostelRequirement = () => {
   const { t } = useTranslation();
   const handleClick = (e) => {
     i18next.changeLanguage(e.target.value);
@@ -256,7 +256,7 @@ const HostelRequirement = (props) => {
                 required
               >
                   <option value="">{t("Select Inventory Type")}</option>
-                {/ Map assetOptions to generate option elements /}
+                {/* Map assetOptions to generate option elements */}
                 {AssetsTypes.assets_name &&
                   AssetsTypes.assets_name.map((row) => (
                     <option key={row.asset_id} value={row.asset_id}>
@@ -344,20 +344,6 @@ const HostelRequirement = (props) => {
             </div> */}
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
-          {/* {/ {props.role === 1 ? ( /} */}
-             {props.role === 1  && (
-            <div className="col-md-4">
-            <label className="form-label">{t("Reason For Raising")} {markRequired && <span style={{ color: "red" }}>*</span>}</label>
-            <input
-                type="text"
-                name="reason"
-                // value={TentativeAmount}
-                className="form-control"
-                // onChange={TentativeAmountHandle}
-                required
-              />
-            </div>
-          )}
             <div className="col-md-4">
             <label className="form-label">{t("Description")}</label>
               <textarea
@@ -370,12 +356,13 @@ const HostelRequirement = (props) => {
             </div>
 
             <div className="row" style={{ marginTop: "12px" }}>
-            <div className="col-md-4">
-              <label className="form-label">Mark as an <span className="fw-bold">Urgent Requirement</span></label>
-
-              <Checkbox {...label} />
+              <div className="col-md-4">
+                <label className="form-label">
+                  Mark as an <span className="fw-bold">Urgent Requirement</span>
+                </label>
+                <Checkbox {...label} />
+              </div>
             </div>
-          </div>
            
 
             {/* <div className="col-md-4 mt-sm-4">
