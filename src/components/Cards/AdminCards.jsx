@@ -9,11 +9,13 @@ import { BiMoney } from "react-icons/bi";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+// import Modal from "@mui/material/Modal";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 // import i18next from "i18next";
 
 const style = {
@@ -30,61 +32,21 @@ const AdminCards = (props) => {
   const [modalData, setModalData] = useState([]);
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = (data) => {
+  const onOpenModal = (data) => {
     if (data === 0) {
-      setModalHeader('Total Students')
+      setModalHeader("Total Students");
       setModalData(props.hostelWiseStudents);
     } else if (data === 1) {
-      setModalHeader('Total Staff')
+      setModalHeader("Total Staff");
       setModalData(props.hostelWiseStaff);
     }
     setOpen(true);
   };
 
-  const handleClose = () => setOpen(false);
+  const onCloseModal = () => setOpen(false);
 
   return (
     <div className="row">
-      <div>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          className="cardmodal"
-          style={style}
-        >
-          <List
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "50vw",
-              // maxWidth: 360,
-              bgcolor: "background.paper",
-              overflow: "auto",
-              maxHeight: 300,
-              "& ul": { padding: 0 },
-            }}
-            subheader={<li />}
-          >
-            {
-              <ul className="card">
-                <ListSubheader className="fs-3 text-dark">{modalHeader}</ListSubheader>
-                {modalData.map((item) => (
-                  <ListItem key={`item-${modalData}-${item}`}>
-                    <div className="d-flex justify-content-between col-12 p-2 btn btn-light">
-                      <ListItemText className="col-6 fs-3 fw-bold" primary={item.name} />
-                      <ListItemText className="col-6 text-end" primary={item.count} />
-                    </div>
-                  </ListItem>
-                ))}
-              </ul>
-            }
-          </List>
-        </Modal>
-      </div>
       <div className="row justify-content-between mb-3">
         <div className="col-md-3 mt-1">
           <div className="card card1">
@@ -153,7 +115,7 @@ const AdminCards = (props) => {
 
       <div className="row justify-content-between mb-3">
         <div className="col-md-4 mt-1 ">
-          <div onClick={() => handleOpen(0)} className="card ">
+          <div onClick={() => onOpenModal(0)} className="card ">
             <div
               className="card-body border"
               style={{ backgroundColor: "white" }}
@@ -171,7 +133,7 @@ const AdminCards = (props) => {
         </div>
 
         <div className="col-md-4 mt-1 ">
-          <div onClick={() => handleOpen(1)} className="card ">
+          <div onClick={() => onOpenModal(1)} className="card ">
             <div
               className="card-body border"
               style={{ backgroundColor: "white" }}
@@ -208,6 +170,25 @@ const AdminCards = (props) => {
         ) : (
           ""
         )}
+      </div>
+      <div>
+        <Modal open={open} onClose={onCloseModal} center>
+          <h5 style={{ width: "500px" }} className="fs-3 fw-bold p-3">
+            {modalHeader}
+          </h5>
+          <p class="list-group-item col-12 d-flex justtify-content-around p-2">
+            <p className="col-6 fs-5 fw-bold">Hostel Name</p>
+            <p className="col-6 fs-5 text-end fw-bold">Count</p>
+          </p>
+          <ul class="list-group list-group-flush">
+            {modalData.map((item) => (
+              <li class="list-group-item col-12 d-flex justtify-content-around">
+                <p className="col-6 fs-5">{item.name}</p>
+                <p className="col-6 fs-5 text-end">{item.count}</p>
+              </li>
+            ))}
+          </ul>
+        </Modal>
       </div>
     </div>
   );
