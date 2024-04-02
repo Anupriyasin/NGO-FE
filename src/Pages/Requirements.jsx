@@ -10,7 +10,7 @@ import "../components/Table/Table.css";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import TopLoader from "../components/Loader/TopLoader";
-import { RejectRequirement, getRequirements, updateRequirement, modifydetails,getdistictName } from "../api/Users";
+import { RejectRequirement, getRequirements, updateRequirement, modifydetails, getdistictName } from "../api/Users";
 import { toast } from "react-toastify";
 import { TextField, TablePagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -52,17 +52,15 @@ const Requirements = ({ role, mainId }) => {
   }, []);
 
   const districtHandle = (e) => {
-    // debugger;
     const selectedDistrictId = e.target.value;
     const selectedDistrict = DistrictName.find(district => district.id === selectedDistrictId);
     if (selectedDistrict) {
-        setDistrictName(selectedDistrict);
-        getAllrequirements(selectedDistrict)
+      setDistrictName(selectedDistrict);
+      getAllrequirements(selectedDistrict)
     } else {
-        // Handle the case where the selected district is not found
-        console.error("Selected district not found");
+      console.error("Selected district not found");
     }
-};
+  };
 
   const getAllrequirements = (selectedDistrict) => {
     setIsLoading(true);
@@ -124,17 +122,14 @@ const Requirements = ({ role, mainId }) => {
   };
 
   const handleCloseModal = () => {
-    // Logic to close modal
     setShowRejectReason(false);
     setModalOpen(false);
   };
   const handleCloseModal1 = () => {
-    // Logic to close modal
     setShowRejectReason(false);
     setModalOpen1(false);
   };
   const handleAccept = (selectedRow) => {
-    // debugger
     const postData = {
       requirement_name: selectedRow.requirement_name,
       quantity: selectedRow.quantity,
@@ -157,7 +152,6 @@ const Requirements = ({ role, mainId }) => {
       });
   };
   const handlesave = (selectedRow) => {
-    debugger
     const postData = {
       requirement_name: selectedRow.requirement_name,
       quantity: selectedRow.quantity,
@@ -181,18 +175,17 @@ const Requirements = ({ role, mainId }) => {
 
 
   const handleRejectWithReason = () => {
-    debugger
     setShowRejectReason(true);
     if (rejectReason.trim() === '') {
-      setRejectReasonError(true); // Show error message if reject reason is empty
+      setRejectReasonError(true);
       return;
     }
 
     const postData = {
       hostel_id: selectedRow.id,
       requirement_id: selectedRow.requirement_id,
-      is_reject: true, // Set to true to indicate rejection
-      remarks: rejectReason // Pass the reject reason
+      is_reject: true,
+      remarks: rejectReason
     };
 
     RejectRequirement(postData)
@@ -208,45 +201,72 @@ const Requirements = ({ role, mainId }) => {
   };
 
   const handleClearRejectReason = () => {
-    setRejectReason(''); // Clear the reject reason field
-    setRejectReasonError(false); // Reset the error state
+    setRejectReason('');
+    setRejectReasonError(false);
   };
+  useEffect(() => {
+    debugger
+    const filtered = rows.map(row => ({
+      ...row,
+      days: calculateDays(row.date, new Date())
+    })).filter(item => 
+      (item?.requirement_name &&
+      item.requirement_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (item?.hostel_id &&
+      item.hostel_id.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+  
+    setFilteredData(filtered);
+    setPage(0);
+  }, [searchQuery, rows]);
+
+  const calculateDays = (startDateStr, endDate) => {
+    // Parse start date string into a Date object
+    const startDateParts = startDateStr.split('-');
+    const startDate = new Date(startDateParts[2], startDateParts[1] - 1, startDateParts[0]); // Year, Month (0-indexed), Day
+  
+    // Convert endDate to a Date object if it's not already
+    const endDateObj = endDate instanceof Date ? endDate : new Date(endDate);
+  
+    // Calculate difference in days
+    const diffTime = Math.abs(endDateObj - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+  
   return (
     <>
       <TopLoader loading={isLoading ? "50" : "100"} />
       <div className="px-0 px-md-3">
-      <h5 className="my-4">{t("New Requirements")}</h5>
+        <h5 className="my-4">{t("New Requirements")}</h5>
 
         <div className="my-3 col-12 d-flex justify-content-between align-items-center">
-        <div className="col-sm-3">
-            <label htmlfor="title" className="form-label mt-4">{t('District')}</label>
+          <div className="col-sm-3">
+            <label htmlFor="title" className="form-label mt-4">{t('District')}</label>
             <select
               name="asset_sub_type"
-              // value={ExistAssetsSubTypes}
               onChange={districtHandle}
               className="common-input form-select"
             >
               <option value="">All</option>
               {DistrictName && DistrictName.map((row) => (
-                    <option key={row.id} value={row.id}>{row.district_name}</option>
-                  ))}
-
+                <option key={row.id} value={row.id}>{row.district_name}</option>
+              ))}
             </select>
-
           </div>
           <div>
-          <TextField
-            label={t("Search")}
-            variant="outlined"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            InputProps={{
-              endAdornment: <SearchIcon />,
-            }}
-          />
+            <TextField
+              label={t("Search")}
+              variant="outlined"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              InputProps={{
+                endAdornment: <SearchIcon />,
+              }}
+            />
           </div>
         </div>
-     
+
         <div className="Table mb-6">
           <TableContainer
             component={Paper}
@@ -289,7 +309,7 @@ const Requirements = ({ role, mainId }) => {
                         <TableCell align="center">{row.quantity}</TableCell>
                         <TableCell align="center">{row.tentative_amount}</TableCell>
                         <TableCell align="center">{row.date}</TableCell>
-                        <TableCell align="center">{row.pendingdate}</TableCell>
+                        <TableCell align="center">{row.days}</TableCell>
                         <TableCell align="center" style={{ display: "flex", alignItems: "center" }}>
                           <Typography
                             variant="button"
