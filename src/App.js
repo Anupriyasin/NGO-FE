@@ -9,7 +9,7 @@ import './offline.css';
 function App() {
 
   const { t } = useTranslation();
-  document.title = t('SC-ST Department, Orissa');
+  document.title = t('NGO');
 
   useEffect(() => {
     i18next.changeLanguage(localStorage.getItem('selectedLanguage'));

@@ -135,19 +135,19 @@ const AddStaff = () => {
       nationality: staff.nationality,
     };
 
-    updateStaff(data)
-      .then((res) => {
-        if (res.status === "success") {
-          setIsLoading(false);
-          toast.success(t(res.message));
-          navigate(`/staffdetails`);
-        } else {
-          toast.error(t(res.message));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // updateStaff(data)
+    //   .then((res) => {
+    //     if (res.status === "success") {
+    //       setIsLoading(false);
+    //       toast.success(t(res.message));
+    //       navigate(`/staffdetails`);
+    //     } else {
+    //       toast.error(t(res.message));
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
   const today = new Date().toISOString().split('T')[0];
 

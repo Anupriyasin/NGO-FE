@@ -73,9 +73,9 @@ const Navbar = ({ totalItems, role, userData }) => {
           <p className='smallText'>{roleName}</p>
         </div>
         <div className='d-flex align-items-center col-gap'>
-          <div>
+          {/* <div>
             <Languageoption onChange={(e) => handleClick(e)} />
-          </div> 
+          </div>  */}
 
            {cartIcon ?
             <motion.div className="notification" animate={totalItems ? { x: [-5, 5, -5, 5, 0], rotate: [0, 5, -5, 5, 0] } : ""} >

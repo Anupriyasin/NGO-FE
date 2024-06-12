@@ -10,7 +10,7 @@ import '../components/Table/Table.css';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import TopLoader from '../components/Loader/TopLoader';
-import { allhostellogin } from '../api/Users';
+import { allInputer } from '../api/Users';
 import { toast } from 'react-toastify';
 import { TextField, TablePagination } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -30,7 +30,7 @@ const HostelReport = ({ role }) => {
 
   useEffect(() => {
       setIsLoading(true);
-      allhostellogin().then(res => {
+      allInputer().then(res => {
           if (res.status === "success") {
               setRows(res.data.result);
               setFilteredData(res.data.result);

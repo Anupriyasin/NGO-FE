@@ -4,7 +4,11 @@ import axios from "./constant";
 
 export const loginApi = async (data) =>
   await axios
-    .post("/login", data)
+    .post("/login", data,{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
     .then((response) => {
       return response.data;
     })

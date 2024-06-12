@@ -15,7 +15,7 @@ import RejectedRequirements from '../Pages/RejectedRequirements'
 import AddAssetType from '../Pages/AddAssetType'
 import AddAssets from '../Pages/AddAssets'
 import AdminDetails from '../Pages/AdminDetails'
-import HostelLogin from '../Pages/HostelLogin'
+import Inputer from '../Pages/Inputer'
 import HostelReport from '../Pages/HostelReport'
 import CompleteRequirement from '../Pages/HostelCompleteRequirment'
 import HostelRejectRequirement from '../Pages/HostelRejectedRequirment'
@@ -23,8 +23,8 @@ import ConfirmDelivery from '../Pages/ConfirmDelivery'
 import StaffDetails from '../Pages/StaffDetails'
 import AddStaff from '../Pages/AddStaff'
 import HostelRequirement from '../Pages/HostelRequirement';
-import StudentDetails from '../Pages/StudentDetails';
-import AddStudent from '../Pages/AddStudent';
+import AlreadyExistUser from '../Pages/AlreadyExistUser';
+import AddStudent from '../Pages/Viewdetails';
 import HostelDashboard from '../Pages/HostelDashboard';
 import AssetReport from '../Pages/AssetReport';
 import RequirementsReport from '../Pages/RequirementReport';
@@ -32,12 +32,16 @@ import UserDetails from '../Pages/UserDetails';
 import HostelDetails from '../Pages/HostelDetails';
 import AddHostel from '../Pages/AddHostel';
 import VendorReport from '../Pages/VendorReport';
+import Checker from '../Pages/Checker';
+import GroundInputer from '../Pages/GroundInputer';
+import EmployeeList from '../Pages/EmployeeList';
+import ExistingUserRegistered from '../Pages/ExistingUserRegistered';
 // import TrackRequirements from '../Pages/TrackRequirements';
 // import RejectedRequirements from '../Pages/RejectedRequirements';
 // import AddAssetType from '../Pages/AddAssetType';
 // import AddAssets from '../Pages/AddAssets';
 // import AdminDetails from '../Pages/AdminDetails';
-// import HostelLogin from '../Pages/HostelLogin';
+// import Inputer from '../Pages/Inputer';
 // import HostelReport from '../Pages/HostelReport';
 
 const AppRoutes = () => {
@@ -47,6 +51,8 @@ const AppRoutes = () => {
     const [userData, setUserData] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [mainId, setMainId] = useState("");
+    const [isRoleFetched, setIsRoleFetched] = useState(false);
+
 
     const handleChildData = (data) => {
         setChildData(data);
@@ -63,15 +69,27 @@ const AppRoutes = () => {
     };
 
     async function fetchRole() {
-        setIsLoading(true);
-        await getUserDetails().then(res => {
-            setRole(res.data.role_id);
-            setMainId(res.data.user_id);
-            setUserData(res);
-        }).catch(err => {
-            console.log(err);
-        })
-        setIsLoading(false);
+        try {
+            const storedRole = await localStorage.getItem("role");
+            const role =  parseInt(storedRole) 
+            setRole(role);
+            setIsRoleFetched(true);
+        } catch (error) {
+            console.error("Error fetching role:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    
+    
+    //     setIsLoading(true);
+    //     await getUserDetails().then(res => {
+    //         setRole(res.data.role_id);
+    //         setMainId(res.data.user_id);
+    //         setUserData(res);
+    //     }).catch(err => {
+    //         console.log(err);
+    //     })
+    //     setIsLoading(false);
     }
 
     useEffect(() => {
@@ -85,7 +103,8 @@ const AppRoutes = () => {
         }
     }, [childData, role]);
 
-    const PrivateRoutesData = role === 1 ? [
+    const PrivateRoutesData = role == 1 ?
+     [
         {
             path: '/dashboard',
             component: Dashboard,
@@ -127,8 +146,18 @@ const AppRoutes = () => {
             allowedRoles: [1]
         },
         {
-            path: '/create-hostel-login',
-            component: HostelLogin,
+            path: '/create-data',
+            component: Inputer,
+            allowedRoles: [1]
+        },
+        {
+            path: '/employee-data',
+            component: EmployeeList,
+            allowedRoles: [1]
+        },
+        {
+            path: '/checker-data',
+            component: Checker,
             allowedRoles: [1]
         },
         {
@@ -153,12 +182,12 @@ const AppRoutes = () => {
             allowedRoles: [1]
         },
         {
-            path: '/student-details',
-            component: StudentDetails,
+            path: '/already-exist-user',
+            component: AlreadyExistUser,
             allowedRoles: [1]
         },
         {
-            path: '/add-student-details',
+            path: '/Viewdetails',
             component: AddStudent,
             allowedRoles: [1]
         },
@@ -190,10 +219,25 @@ const AppRoutes = () => {
         }
       
        
-    ] : [
+    ] : role == 2 ? [
         {
             path: '/hosteldashboard',
             component: HostelDashboard,
+            allowedRoles: [2]
+        },
+        {
+            path: '/create-ground-data',
+            component: GroundInputer,
+            allowedRoles: [2]
+        },
+        {
+            path: '/already-exist-user',
+            component: AlreadyExistUser,
+            allowedRoles: [2]
+        },
+        {
+            path: '/checker-data',
+            component: Checker,
             allowedRoles: [2]
         },
         {
@@ -235,11 +279,11 @@ const AppRoutes = () => {
       
         {
             path: '/student-details',
-            component: StudentDetails,
+            component: AlreadyExistUser,
             allowedRoles: [2]
         },
         {
-            path: '/add-student-details',
+            path: '/Viewdetails',
             component: AddStudent,
             allowedRoles: [2]
         },
@@ -248,11 +292,58 @@ const AppRoutes = () => {
             component: AddAssets,
             allowedRoles: [2]
         },
-    ];
+    ]: role == 3 ? [
+        {
+            path: '/create-data',
+            component: Inputer,
+            allowedRoles: [3]
+        },
+        {
+            path: '/Viewdetails',
+            component: AddStudent,
+            allowedRoles: [3]
+        },
+        {
+            path: '/employee-data',
+            component: EmployeeList,
+            allowedRoles: [3]
+        },
+        {
+            path: '/checker-data',
+            component: Checker,
+            allowedRoles: [3]
+        },
+    ] : role == 4 ? [
+        {
+            path: '/create-ground-data',
+            component: GroundInputer,
+            allowedRoles: [4]
+        },
+        {
+            path: '/existing-user',
+            component: ExistingUserRegistered,
+            allowedRoles: [4]
+        },
+        {
+            path: '/Viewdetails',
+            component: AddStudent,
+            allowedRoles: [4]
+        },
+        {
+            path: '/already-exist-user',
+            component: AlreadyExistUser,
+            allowedRoles: [4]
+        },
+        {
+            path: '/checker-data',
+            component: Checker,
+            allowedRoles: [4]
+        },
+    ] : [];
 
     return (
         <>
-            {isLoading ?
+            {isLoading || !isRoleFetched ?
                 <FullPageSpinner />
                 :
                 <Router>
@@ -261,18 +352,20 @@ const AppRoutes = () => {
                         <Route path='/login' element={<Login onChildData={fetchRole} role={role} />} />
                         <Route path='/forgotpassword' element={<ForgetPassword />} />
                         <Route path='*' element={<PageNotFound role={role} />} />
-                        {PrivateRoutesData&&PrivateRoutesData.map((data) => (
-                            <Route key={data.path} path={data.path} element={
-                                <ProtectedRoute
-                                    component={data.component}
-                                    totalItems={totalItems}
-                                    role={role}
-                                    userData={userData}
-                                    allowedRoles={data.allowedRoles}
-                                    onChildData={handleChildData}
-                                    mainId={mainId}
-                                />
-                            } />
+                        {PrivateRoutesData && PrivateRoutesData.map((data) => (
+                            data.allowedRoles.includes(role) && (
+                                <Route key={data.path} path={data.path} element={
+                                    <ProtectedRoute
+                                        component={data.component}
+                                        totalItems={totalItems}
+                                        role={role}
+                                        userData={userData}
+                                        allowedRoles={data.allowedRoles}
+                                        onChildData={handleChildData}
+                                        mainId={mainId}
+                                    />
+                                } />
+                            )
                         ))}
                     </Routes>
                 </Router>

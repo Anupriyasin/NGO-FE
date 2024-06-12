@@ -20,6 +20,15 @@ export const getUserDetails = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const getEmployeeData = async (data) =>
+  await axios
+    .get(`/getEmployeeData/${data}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 
 export const trackreq = async (data) =>
   await axios
@@ -139,7 +148,7 @@ export const AddHostelRequirement = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
-export const createhostellogin = async (data) =>
+export const createInputer = async (data) =>
   await axios
     .post("/create_hostel_login", data, {
       headers: {
@@ -353,8 +362,26 @@ export const staffdetails = async (data) =>
     .catch((error) => {
       return "Error - " + error;
     });
+export const getAllEmpDetails = async (data) =>
+  await axios
+    .get("/getAllEmpDetails", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+export const getAllUserDetails = async (data) =>
+  await axios
+    .get("/getAllUserDetails", data)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
 
-export const allhostellogin = async (data) =>
+export const allInputer = async (data) =>
   await axios
     .get("/hostel_wise_data", data)
     .then((response) => {
@@ -830,9 +857,9 @@ export const addStaff = async (data) => {
       return "Error - " + error;
     });
 };
-export const updateStaff = async (data) => {
+export const registerNewUser = async (data) => {
   return await axios
-    .post("/update_staff_info", data, {
+    .post("/registerUser/false", data, {
       // headers: {
       //   "Content-Type": "multipart/form-data",
       // },
@@ -844,6 +871,47 @@ export const updateStaff = async (data) => {
       return "Error - " + error;
     });
 };
+export const registerExistingUser = async (data) => {
+  return await axios
+    .post("/registerUser/true", data, {
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return "Error - " + error;
+    });
+};
+export const RegisterEmp = async (data) => {
+  try {
+    const response = await axios.post("/registerEmployee", data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      console.log('Response data:', error.response.data);
+      console.log('Response status:', error.response.status);
+      console.log('Response headers:', error.response.headers);
+      return "Error - " + error.response.data; // Return specific error message from the server
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.log('Request:', error.request);
+      return "Error - No response from the server";
+    } else {
+      // Something else happened while setting up the request
+      console.log('Error:', error.message);
+      return "Error - " + error.message;
+    }
+  }
+};
+
 
 export const getMapData = async () =>
   await axios

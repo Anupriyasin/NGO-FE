@@ -26,6 +26,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import title1 from '../images/NGO-Logo.jpg'
 
 
 
@@ -48,19 +49,23 @@ const Sidebars = (props) => {
 
   function logout() {
     logoutApi().then((res) => {});
+    localStorage.removeItem("role"); // Remove the role from local storage
     localStorage.setItem("alert", "Logged out");
     setTimeout(() => {
-      sessionStorage.clear();
-      Cookies.remove("userId");
-      navigate("/login");
+        sessionStorage.clear();
+        Cookies.remove("userId");
+        navigate("/login");
     }, 500);
-  }
+}
+
 
   const [expanded, setExpaned] = useState(true);
 
   function toggleSidebar() {
     setExpaned(!expanded);
   }
+  const storedRole =  localStorage.getItem("role");
+
   return (
     <div className="maindiv" style={{ display: "flex", overflow: "none" }}>
       <div
@@ -76,29 +81,39 @@ const Sidebars = (props) => {
         collapsed={!expanded} // Ensure the sidebar collapses when not expanded
         style={{ left: expanded ? "0" : "-250px" }} // Adjust the position based on 'expanded' state
       >
-        {props.role === 1 ? (
+        {storedRole == 3 ? (
           <Menu>
             {/* <MenuItem className="menu1" icon={<MenuRoundedIcon />}> */}
 
             <div className="logo">
               <span>
-                <img src={title} alt="title" />
+                {/* <img src={title1} alt="title" height={100} /> */}
+                <h2 style={{color:"black"}}>NGOs</h2>
               </span>
             </div>
             {/* </MenuItem> */}
-            <MenuItem
+            {/* <MenuItem
               icon={<GridViewRoundedIcon />}
               className={
                 activeMenu === "/dashboard" ? "menuItem active " : "menuItem"
               }
             >
               <Link to="/dashboard">{t("Dashboard")}</Link>
-            </MenuItem>
+            </MenuItem> */}
             
-            <SubMenu label={t("Manage Login")} icon={<WalletRoundedIcon  />} className='SubMenu'>
-            <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-hostel-login' ? 'menuItem active ' : 'menuItem'}><Link to="/create-hostel-login">{t("Create Ashram Login")}</Link></MenuItem>
-          </SubMenu>
-            <SubMenu
+            {/* <SubMenu label={t("Manage Login")} icon={<WalletRoundedIcon  />} className='SubMenu'> */}
+            <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-data' ? 'menuItem active ' : 'menuItem'}><Link to="/create-data">{t("Registration")}</Link></MenuItem>
+            <MenuItem icon={<DescriptionIcon  />} className={activeMenu === '/employee-data' ? 'menuItem active ' : 'menuItem'}><Link to="/employee-data">{t("Employee List")}</Link></MenuItem>
+            <MenuItem
+              icon={<GridViewRoundedIcon />}
+              className={
+                HostelActiveMenu === "/checker-data" ? "menuItem active " : "menuItem"
+              }
+            >
+              <Link to="/checker-data">{t("Users List")}</Link>
+            </MenuItem>
+          {/* </SubMenu> */}
+            {/* <SubMenu
               label={t("Requirement")}
               icon={<PlaylistAddCheckIcon />}
               className="SubMenu"
@@ -218,7 +233,7 @@ const Sidebars = (props) => {
               </MenuItem>
              
             
-            </SubMenu>
+            </SubMenu> */}
 
             {/* <MenuItem
                 icon={<SupervisedUserCircleIcon />}
@@ -255,25 +270,29 @@ const Sidebars = (props) => {
               {t("Logout")}{" "}
             </MenuItem>
           </Menu>
-        ) : (
+        ) :storedRole == 4 ? (
           <Menu>
             {/* <MenuItem className="menu1" icon={<MenuRoundedIcon />}> */}
 
             <div className="logo">
               <span>
-                <img src={title} alt="title" />
+                {/* <img src={title} alt="title" /> */}
+                <h2 style={{color:"black"}}>NGOs</h2>
+
               </span>
             </div>
             {/* </MenuItem> */}
-            <MenuItem
+            <MenuItem icon={<PersonAddIcon  />} className={activeMenu === '/create-ground-data' ? 'menuItem active ' : 'menuItem'}><Link to="/create-ground-data">{t("Registration")}</Link></MenuItem>
+
+            {/* <MenuItem
               icon={<GridViewRoundedIcon />}
               className={
-                HostelActiveMenu === "/hosteldashboard" ? "menuItem active " : "menuItem"
+                HostelActiveMenu === "/checker-data" ? "menuItem active " : "menuItem"
               }
             >
-              <Link to="/hosteldashboard">{t("Dashboard")}</Link>
-            </MenuItem>
-            <SubMenu
+              <Link to="/checker-data">{t("Checker")}</Link>
+            </MenuItem> */}
+            {/* <SubMenu
               label={t("Requirement")}
               icon={<PlaylistAddCheckIcon />}
               className="SubMenu"
@@ -348,7 +367,7 @@ const Sidebars = (props) => {
               >
                 {" "}
                 <Link to="/staffdetails">{t("Staff Details")}</Link>
-              </MenuItem>
+              </MenuItem> */}
             
               
             <MenuItem icon={<LogoutRoundedIcon />} onClick={logout}>
@@ -356,7 +375,7 @@ const Sidebars = (props) => {
               {t("Logout")}{" "}
             </MenuItem>
           </Menu>
-        )}
+        ):null}
       </Sidebar>
     </div>
   );
